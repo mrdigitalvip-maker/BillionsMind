@@ -4,18 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BillionMind AI – Pré-lançamento</title>
-
   <style>
     :root {
-      --bg-main: #050608;
-      --bg-card: #101117;
-      --bg-soft: #171a21;
-      --gold: #f4c86c;
-      --gold-soft: rgba(244, 200, 108, 0.18);
-      --white: #fdfdfd;
-      --text-soft: #c2c6d6;
-      --danger: #ff4d6a;
-      --accent: #28e0a6;
+      --bg-main: #050509;
+      --bg-card: #101017;
+      --bg-card-alt: #0b0b12;
+      --gold: #f6d46f;
+      --gold-soft: #f3c96a;
+      --gold-strong: #ffbf3f;
+      --green: #35f27c;
+      --text-main: #f5f5f5;
+      --text-soft: #c4c4cf;
+      --text-muted: #9a9ab0;
+      --chip-bg: rgba(246, 212, 111, 0.12);
+      --border-soft: rgba(255, 255, 255, 0.06);
+      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.75);
+      --radius-xl: 22px;
+      --radius-pill: 999px;
     }
 
     * {
@@ -25,963 +30,747 @@
     }
 
     body {
+      margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #141623 0, #050608 55%);
-      color: var(--white);
-      min-height: 100vh;
+        Roboto, sans-serif;
+      background: radial-gradient(circle at top, #161622 0, #050509 55%, #000 100%);
+      color: var(--text-main);
       display: flex;
-      flex-direction: column;
+      justify-content: center;
+      min-height: 100vh;
     }
 
     .app-shell {
+      width: 100%;
       max-width: 480px;
-      margin: 0 auto;
       min-height: 100vh;
+      background: radial-gradient(circle at top, #151520 0, #050509 55%, #000 100%);
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.02);
       display: flex;
       flex-direction: column;
-      position: relative;
-      padding-bottom: 76px;
+      padding-bottom: 90px; /* espaço pro banner fixo */
     }
 
-    header.app-header {
+    /* BARRA DO CONTADOR */
+    .launch-banner {
       position: sticky;
       top: 0;
-      z-index: 20;
-      background: linear-gradient(to bottom, #050608, rgba(5, 6, 8, 0.9), transparent);
-      padding: 14px 18px 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(244, 200, 108, 0.1);
+      z-index: 30;
+      background: linear-gradient(145deg, #1a141e, #0d0c12);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.9);
     }
 
-    .top-row {
+    .launch-banner-inner {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-soft);
+      font-size: 0.8rem;
+    }
+
+    .launch-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: radial-gradient(circle at left, #ff5b5b, #f6d46f);
+      color: #0a0808;
+      font-weight: 600;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+    }
+
+    .launch-pill span {
+      font-size: 0.9rem;
+    }
+
+    .launch-text {
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .launch-text strong {
+      color: var(--gold);
+    }
+
+    /* HEADER PRINCIPAL */
+    .hero-header {
+      padding: 18px 16px 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .hero-title {
+      text-align: left;
+      font-size: 1.2rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold-soft);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero-logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #ffffff, #f6d46f 35%, #c89c3b 70%, #51381a 100%);
+      box-shadow: 0 0 28px rgba(246, 212, 111, 0.8);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-logo-inner {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #0b0907, #15120c);
+      box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.9);
+    }
+
+    .hero-title-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .hero-title-text span:first-child {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 0.22em;
+    }
+
+    .hero-title-text span:last-child {
+      font-size: 1.15rem;
+      font-weight: 650;
+      letter-spacing: 0.2em;
+    }
+
+    /* CARD PRINCIPAL */
+    .hero-card {
+      margin: 0 16px;
+      margin-top: 10px;
+      padding: 16px 14px 16px;
+      border-radius: 26px;
+      background: radial-gradient(circle at top left, #19141c 0, #0b0b12 50%, #050509 100%);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .hero-card-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-bottom: 10px;
     }
 
-    .brand-title {
-      font-size: 1.35rem;
-      font-weight: 700;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
+    .hero-chip-row {
       display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .status-chip {
+      display: inline-flex;
       align-items: center;
-      gap: 8px;
-    }
-
-    .brand-orb {
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 25%, #ffffff 0, #f9e29a 25%, #f4c86c 55%, #b88925 100%);
-      box-shadow: 0 0 18px rgba(244, 200, 108, 0.9);
-    }
-
-    .brand-title span {
-      color: var(--gold);
-    }
-
-    .launch-badge {
-      padding: 6px 12px;
+      gap: 6px;
+      padding: 4px 10px;
       border-radius: 999px;
-      border: 1px solid rgba(244, 200, 108, 0.6);
-      background: radial-gradient(circle at top, rgba(244, 200, 108, 0.28), rgba(5, 6, 8, 0.96));
+      background: var(--chip-bg);
+      border: 1px solid rgba(246, 212, 111, 0.3);
+      color: var(--gold-soft);
       font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 0.12em;
-      color: var(--gold);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #34ff8b, #1bb866);
+      box-shadow: 0 0 10px rgba(52, 255, 139, 0.9);
+    }
+
+    .launch-meta {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-pill {
+      padding: 8px 14px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      background: transparent;
+      color: var(--text-main);
+    }
+
+    .btn-pill.primary {
+      background: linear-gradient(135deg, #f3c96a, #ffbf3f);
+      color: #231708;
+      border-color: transparent;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.7);
+    }
+
+    .btn-pill.disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    .hero-copy {
+      margin-top: 10px;
+    }
+
+    .hero-headline {
+      font-size: 1.22rem;
+      line-height: 1.33;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .hero-headline span.highlight {
+      color: var(--gold-strong);
+    }
+
+    .hero-sub {
+      font-size: 0.86rem;
+      color: var(--text-soft);
+      line-height: 1.5;
+    }
+
+    .hero-sub strong {
+      color: var(--gold-soft);
+      font-weight: 500;
+    }
+
+    .hero-note {
+      margin-top: 10px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .hero-note strong {
+      color: var(--gold-soft);
+    }
+
+    /* CONTEÚDO PRINCIPAL */
+    main {
+      flex: 1;
+      padding: 10px 16px 0;
+      overflow-y: auto;
+    }
+
+    .section-card {
+      border-radius: 26px;
+      padding: 14px 14px 14px;
+      margin-bottom: 10px;
+      background: radial-gradient(circle at top, #171521 0, #0b0b12 50%, #050509 100%);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      gap: 6px;
+    }
+
+    .section-header-left {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .section-title {
+      font-size: 0.90rem;
+      font-weight: 550;
+    }
+
+    .section-subtitle {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .badge-pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      font-size: 0.72rem;
+      color: var(--gold-soft);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .pill-green {
+      border-color: rgba(53, 242, 124, 0.6);
+      color: var(--green);
+    }
+
+    .main-goal {
+      margin-top: 4px;
+    }
+
+    .main-goal-title {
+      font-size: 0.80rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .main-goal-body {
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: var(--gold-soft);
+    }
+
+    .tag-row {
+      margin-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      font-size: 0.70rem;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-soft);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .tag.dot::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold-soft);
+      margin-right: 6px;
+      display: inline-block;
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.05fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .mini-card {
+      border-radius: 20px;
+      padding: 10px 10px 10px;
+      background: radial-gradient(circle at top, #161522 0, #0a0a10 50%, #040407 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.78rem;
+    }
+
+    .mini-label {
+      font-size: 0.70rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .mini-value {
+      font-size: 0.9rem;
+      font-weight: 550;
+    }
+
+    .mini-pill {
+      margin-top: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.7rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.6);
+      color: var(--text-soft);
+    }
+
+    .mini-dot-green {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--green);
+      box-shadow: 0 0 8px rgba(53, 242, 124, 0.9);
+    }
+
+    /* CHAT PREVIEW */
+    .chat-preview {
+      margin-top: 8px;
+      border-radius: 24px;
+      padding: 12px 10px 12px;
+      background: radial-gradient(circle at top left, #141420 0, #07070d 60%, #030307 100%);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      font-size: 0.78rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chat-bubbles {
+      max-height: 190px;
+      overflow: hidden;
+      padding-right: 4px;
+    }
+
+    .bubble {
+      padding: 8px 10px;
+      border-radius: 14px;
+      margin-bottom: 8px;
+      max-width: 92%;
+      line-height: 1.45;
+    }
+
+    .bubble.user {
+      background: linear-gradient(135deg, #2175ff, #36a4ff);
+      margin-left: auto;
+      color: #f4f6ff;
+      border-bottom-right-radius: 4px;
+    }
+
+    .bubble.ai {
+      background: rgba(0, 0, 0, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-soft);
+      border-bottom-left-radius: 4px;
+    }
+
+    .bubble.ai strong {
+      color: var(--gold-soft);
+    }
+
+    .chat-input-preview {
+      margin-top: 10px;
+      border-radius: 999px;
+      padding: 7px 11px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px dashed rgba(255, 255, 255, 0.14);
+      color: var(--text-muted);
+      font-size: 0.76rem;
+    }
+
+    .chat-input-preview span {
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .chat-input-preview .fake-btn {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #f3c96a, #ffbf3f);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.86rem;
+      color: #231708;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.8);
+      opacity: 0.6;
+    }
+
+    .preview-label {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      background: rgba(0, 0, 0, 0.7);
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    /* CTA FIXO INFERIOR */
+    .bottom-cta {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 40;
+      display: flex;
+      justify-content: center;
+      padding: 10px 12px 16px;
+      pointer-events: none;
+    }
+
+    .bottom-cta-inner {
+      max-width: 480px;
+      width: 100%;
+      background: linear-gradient(135deg, rgba(251, 222, 144, 0.95), rgba(255, 191, 63, 0.98));
+      border-radius: 999px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.95);
+      pointer-events: auto;
+    }
+
+    .bottom-cta-text {
+      font-size: 0.76rem;
+      color: #3c2609;
+    }
+
+    .bottom-cta-btn {
+      margin-left: auto;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: none;
+      background: #151014;
+      color: #fbe6c0;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
       display: inline-flex;
       align-items: center;
       gap: 6px;
     }
 
-    .launch-badge span.rocket {
-      font-size: 0.95rem;
-    }
-
-    .countdown-strip {
-      margin-top: 4px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(244, 200, 108, 0.4);
-      background: linear-gradient(
-        90deg,
-        rgba(244, 200, 108, 0.25),
-        rgba(244, 200, 108, 0.02)
-      );
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.75rem;
-      color: var(--text-soft);
-    }
-
-    .countdown-label {
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-weight: 600;
-    }
-
-    .countdown-timer {
-      font-variant-numeric: tabular-nums;
-      font-weight: 700;
-      color: var(--gold);
-    }
-
-    main {
-      flex: 1;
-    }
-
-    .screen {
-      padding: 16px 16px 20px;
-      display: none;
-      animation: fadeIn 0.25s ease-out;
-    }
-
-    .screen.active {
-      display: block;
-    }
-
-    .cards-column {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .hero-card {
-      border-radius: 22px;
-      padding: 16px 16px 18px;
-      background: radial-gradient(circle at top left, #202331, #0b0c10);
-      border: 1px solid rgba(244, 200, 108, 0.35);
-      box-shadow:
-        0 0 40px rgba(244, 200, 108, 0.3),
-        0 24px 60px rgba(0, 0, 0, 0.95);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-pill-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-      font-size: 0.7rem;
-      color: var(--text-soft);
-    }
-
-    .hero-pill-row span.dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #2df8a1;
-      box-shadow: 0 0 10px rgba(45, 248, 161, 0.7);
-      margin-right: 6px;
-      display: inline-block;
-    }
-
-    .hero-sub-pill {
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(244, 200, 108, 0.4);
-      background: rgba(5, 6, 8, 0.4);
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-size: 0.65rem;
-      color: var(--gold);
-    }
-
-    .hero-title {
-      font-size: 1.25rem;
-      line-height: 1.25;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .hero-title span.highlight {
-      color: var(--gold);
-    }
-
-    .hero-body {
-      font-size: 0.86rem;
-      color: var(--text-soft);
-      margin-bottom: 12px;
-    }
-
-    .hero-footnote {
-      font-size: 0.76rem;
-      color: var(--text-soft);
-    }
-
-    .hero-footnote span {
-      color: var(--gold);
-      font-weight: 600;
-    }
-
-    .cta-bottom-banner {
-      position: fixed;
-      z-index: 40;
-      left: 50%;
-      bottom: 76px;
-      transform: translateX(-50%);
-      width: 100%;
-      max-width: 480px;
-      padding: 0 14px;
-      pointer-events: none;
-    }
-
-    .cta-inner {
-      pointer-events: auto;
-      border-radius: 999px;
-      background: linear-gradient(90deg, #f4c86c, #f49b3d);
-      padding: 10px 12px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.9);
-    }
-
-    .cta-text {
-      flex: 1;
-      font-size: 0.78rem;
-      color: #1a1202;
-      font-weight: 500;
-    }
-
-    .cta-button {
-      border: none;
-      outline: none;
-      border-radius: 999px;
-      padding: 8px 14px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      background: #1b1404;
-      color: var(--gold);
-      cursor: pointer;
-    }
-
-    .section-card {
-      border-radius: 20px;
-      background: radial-gradient(circle at top left, #181a24, #07080c);
-      border: 1px solid rgba(244, 200, 108, 0.18);
-      padding: 14px 14px 16px;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.75);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .section-title-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 8px;
-    }
-
-    .section-title-row h2 {
-      font-size: 1rem;
-      font-weight: 650;
-    }
-
-    .section-tag {
-      font-size: 0.68rem;
-      padding: 4px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(244, 200, 108, 0.35);
-      color: var(--gold);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
-
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 10px;
-    }
-
-    .pill {
-      font-size: 0.72rem;
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: rgba(12, 14, 22, 0.9);
-      border: 1px solid rgba(244, 200, 108, 0.18);
-      color: var(--text-soft);
-    }
-
-    .pill.gold {
-      color: var(--gold);
-      border-color: rgba(244, 200, 108, 0.45);
-      background: rgba(244, 200, 108, 0.08);
-    }
-
-    .home-grid {
-      display: grid;
-      grid-template-columns: 1.25fr 1.1fr;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .home-mini-card {
-      padding: 10px 10px 12px;
-      border-radius: 16px;
-      background: #05070c;
-      border: 1px solid rgba(244, 200, 108, 0.22);
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      font-size: 0.8rem;
-    }
-
-    .home-mini-card span.label {
-      font-size: 0.68rem;
-      color: var(--text-soft);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
-
-    .home-mini-card span.value {
-      font-weight: 650;
-    }
-
-    .home-mini-card span.value.gold {
-      color: var(--gold);
-    }
-
-    .home-mini-card span.value.green {
-      color: var(--accent);
-    }
-
-    .screen-title {
+    .bottom-cta-btn span {
       font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--text-soft);
-      margin-bottom: 10px;
     }
 
-    .chat-preview-card {
-      border-radius: 20px;
-      padding: 12px 12px 6px;
-      background: radial-gradient(circle at top, #151722, #05060b);
-      border: 1px solid rgba(244, 200, 108, 0.25);
-      max-height: 360px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
+    .bottom-cta-btn.disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
 
-    .bubble {
-      border-radius: 16px;
-      padding: 10px 11px;
-      font-size: 0.82rem;
-      max-width: 100%;
-      line-height: 1.35;
-    }
-
-    .bubble.user {
-      align-self: flex-end;
-      background: linear-gradient(135deg, #3f86ff, #6c5bff);
-      color: #fefefe;
-      border-bottom-right-radius: 4px;
-    }
-
-    .bubble.ai {
-      align-self: flex-start;
-      background: #060712;
-      border: 1px solid rgba(88, 96, 140, 0.7);
-      border-bottom-left-radius: 4px;
-      color: var(--text-soft);
-    }
-
-    .chat-locked-note {
-      margin-top: 8px;
-      padding: 8px 10px;
-      border-radius: 12px;
-      font-size: 0.78rem;
-      background: rgba(244, 200, 108, 0.06);
-      border: 1px dashed rgba(244, 200, 108, 0.4);
-      color: var(--gold);
-    }
-
-    .text-strong {
-      font-weight: 600;
-      color: var(--gold);
-    }
-
-    .tabbed-row {
-      display: flex;
-      gap: 6px;
-      margin-bottom: 10px;
-    }
-
-    .tabbed-row button {
-      flex: 1;
-      border-radius: 999px;
-      border: 1px solid rgba(244, 200, 108, 0.3);
-      background: transparent;
-      color: var(--text-soft);
-      padding: 7px 10px;
-      font-size: 0.78rem;
-      cursor: pointer;
-    }
-
-    .tabbed-row button.active {
-      background: rgba(244, 200, 108, 0.14);
-      color: var(--gold);
-    }
-
-    .image-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 8px;
-      margin-top: 6px;
-    }
-
-    .image-card {
-      border-radius: 16px;
-      padding: 8px;
-      background: #06070f;
-      border: 1px solid rgba(244, 200, 108, 0.24);
-      font-size: 0.76rem;
-      color: var(--text-soft);
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .image-thumb {
-      height: 80px;
-      border-radius: 12px;
-      background: radial-gradient(circle at top, #262b41, #060710);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.85rem;
-      color: rgba(244, 200, 108, 0.6);
-      border: 1px dashed rgba(244, 200, 108, 0.3);
-    }
-
-    .image-tag {
-      font-size: 0.66rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--gold);
-    }
-
-    .image-caption {
-      font-size: 0.74rem;
-    }
-
-    .history-empty {
-      border-radius: 18px;
-      padding: 18px 14px;
-      background: #070811;
-      border: 1px dashed rgba(244, 200, 108, 0.35);
-      color: var(--text-soft);
-      font-size: 0.82rem;
-    }
-
-    .history-empty strong {
-      color: var(--gold);
-    }
-
-    .profile-card {
-      border-radius: 20px;
-      background: radial-gradient(circle at top left, #181a25, #05070c);
-      padding: 16px 14px;
-      border: 1px solid rgba(244, 200, 108, 0.25);
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .profile-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .avatar-circle {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 25%, #ffe8b5, #f4c86c, #b57b1f);
-      box-shadow: 0 0 20px rgba(244, 200, 108, 0.7);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      color: #1c1203;
-      font-size: 1.1rem;
-    }
-
-    .profile-name {
-      font-size: 0.98rem;
-      font-weight: 600;
-    }
-
-    .profile-tagline {
-      font-size: 0.8rem;
-      color: var(--text-soft);
-    }
-
-    .badge-chip {
-      font-size: 0.72rem;
-      padding: 4px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(244, 200, 108, 0.5);
-      color: var(--gold);
-    }
-
-    .plan-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.85rem;
-      margin-top: 6px;
-    }
-
-    .plan-row span.plan-name {
-      font-weight: 600;
-      color: var(--gold);
-    }
-
-    .plan-row span.plan-status {
-      font-size: 0.74rem;
-      color: var(--text-soft);
-    }
-
-    .locked-banner {
-      margin-top: 10px;
-      padding: 10px 12px;
-      border-radius: 14px;
-      background: rgba(244, 200, 108, 0.06);
-      border: 1px dashed rgba(244, 200, 108, 0.5);
-      font-size: 0.78rem;
-      color: var(--gold);
-    }
-
-    .locked-banner span {
-      font-weight: 600;
-    }
-
-    .bottom-nav {
-      position: fixed;
-      left: 50%;
-      transform: translateX(-50%);
-      bottom: 0;
-      width: 100%;
-      max-width: 480px;
-      background: rgba(5, 6, 8, 0.97);
-      border-top: 1px solid rgba(244, 200, 108, 0.2);
-      backdrop-filter: blur(22px);
-      padding: 6px 8px 8px;
-      display: flex;
-      justify-content: space-around;
-      z-index: 50;
-    }
-
-    .nav-item {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2px;
-      font-size: 0.72rem;
-      color: var(--text-soft);
-      cursor: pointer;
-      padding: 4px 4px 2px;
-      border-radius: 999px;
-    }
-
-    .nav-item span.icon {
-      font-size: 1.15rem;
-    }
-
-    .nav-item.active {
-      color: var(--gold);
-      background: rgba(244, 200, 108, 0.12);
-    }
-
-    .nav-indicator {
-      width: 32px;
-      height: 3px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, var(--gold), #ffb36a);
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      opacity: 0.5;
-    }
-
-    .toast {
-      position: fixed;
-      left: 50%;
-      bottom: 144px;
-      transform: translateX(-50%);
-      max-width: 440px;
-      width: calc(100% - 32px);
-      padding: 10px 12px;
-      border-radius: 12px;
-      background: #101219;
-      border: 1px solid rgba(244, 200, 108, 0.6);
-      color: var(--gold);
-      font-size: 0.8rem;
-      text-align: center;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.9);
-      display: none;
-      z-index: 60;
-    }
-
-    .toast.show {
-      display: block;
-      animation: fadeIn 0.18s ease-out;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(8px);
+    @media (max-width: 380px) {
+      .hero-headline {
+        font-size: 1.08rem;
       }
-      to {
-        opacity: 1;
-        transform: translateY(0);
+      .hero-title-text span:last-child {
+        font-size: 1rem;
       }
-    }
-
-    @media (min-width: 481px) {
-      body {
-        justify-content: center;
+      .two-column {
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 <body>
   <div class="app-shell">
-    <header class="app-header">
-      <div class="top-row">
-        <div class="brand-title">
-          <div class="brand-orb"></div>
-          <span>BillionMind AI</span>
+    <!-- Barra com contador -->
+    <header class="launch-banner">
+      <div class="launch-banner-inner">
+        <div class="launch-pill">
+          🚀 <span>APP EM LANÇAMENTO</span>
         </div>
-        <div class="launch-badge">
-          <span class="rocket">🚀</span>
-          <span>App em lançamento</span>
+        <div class="launch-text">
+          <strong>ESTREIA EM</strong> <span id="countdownTimer">--h --m --s</span>
         </div>
-      </div>
-      <div class="countdown-strip">
-        <span class="countdown-label">Estreia em</span>
-        <span id="countdownTimer" class="countdown-timer">--h --m --s</span>
       </div>
     </header>
 
+    <!-- Header principal com logo e nome -->
+    <div class="hero-header">
+      <div class="hero-title">
+        <div class="hero-logo">
+          <div class="hero-logo-inner"></div>
+        </div>
+        <div class="hero-title-text">
+          <span>BILLIONMIND</span>
+          <span>AI</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card principal de lançamento -->
+    <section class="hero-card">
+      <div class="hero-card-header">
+        <div class="hero-chip-row">
+          <div class="status-chip">
+            <span class="status-dot"></span>
+            PRÉ-LANÇAMENTO
+          </div>
+          <div class="launch-meta">
+            De hoje a 2 dias · lançamento global
+          </div>
+        </div>
+        <div class="hero-actions">
+          <button class="btn-pill disabled" id="btnPreLancamento" type="button">
+            Pré-lançamento
+          </button>
+          <button class="btn-pill disabled" id="btnEntrar" type="button">
+            Entrar
+          </button>
+          <button class="btn-pill primary disabled" id="btnComecar" type="button">
+            Começar
+          </button>
+        </div>
+      </div>
+
+      <div class="hero-copy">
+        <div class="hero-headline">
+          Organize disciplina, dinheiro e lifestyle em um único chat de alta <span class="highlight">performance.</span>
+        </div>
+        <p class="hero-sub">
+          BillionMind AI está em fase final de lançamento. Esta tela mostra exatamente como será a experiência que você vai usar para guiar seus próximos
+          <strong>30 dias</strong>.
+        </p>
+        <p class="hero-note">
+          Quando o contador zerar, o chat estará liberado para criar rotinas, planos e imagens de lifestyle personalizadas.
+        </p>
+      </div>
+    </section>
+
+    <!-- Conteúdo principal -->
     <main>
-      <!-- HOME -->
-      <section id="screen-home" class="screen active">
-        <div class="cards-column">
-          <article class="hero-card">
-            <div class="hero-pill-row">
-              <span><span class="dot"></span>Sessão preview ativa</span>
-              <span class="hero-sub-pill">Pré-lançamento • global</span>
+      <!-- Sessão BillionMind · Preview -->
+      <section class="section-card">
+        <div class="section-header">
+          <div class="section-header-left">
+            <div class="section-title">Sessão BillionMind · Preview ativa</div>
+            <div class="section-subtitle">
+              Modo demonstração antes do lançamento.
             </div>
-            <h1 class="hero-title">
-              Organize disciplina, dinheiro e lifestyle em um único chat de alta
-              <span class="highlight">performance.</span>
-            </h1>
-            <p class="hero-body">
-              Esta é a tela de pré-lançamento da BillionMind AI. Ela mostra como
-              será o fluxo diário que você vai usar para guiar seus próximos
-              30 dias de foco e construção de riqueza.
-            </p>
-            <p class="hero-footnote">
-              Quando o contador zerar, o chat será liberado para criar rotinas,
-              planos de renda extra e imagens de lifestyle personalizadas.
-              <span>Até lá, tudo está em modo demonstração.</span>
-            </p>
-          </article>
-
-          <article class="section-card">
-            <div class="section-title-row">
-              <h2>Plano disciplinado de hoje</h2>
-              <span class="section-tag">Preview</span>
-            </div>
-            <p style="font-size:0.84rem;color:var(--text-soft);margin-bottom:8px;">
-              Veja um exemplo de como a BillionMind AI vai organizar seu dia:
-            </p>
-            <div class="home-grid">
-              <div class="home-mini-card">
-                <span class="label">Meta principal</span>
-                <span class="value gold">Trabalhar 90 min em 1 objetivo importante.</span>
-              </div>
-              <div class="home-mini-card">
-                <span class="label">Sequência</span>
-                <span class="value green">30 dias guiados</span>
-                <span style="font-size:0.7rem;color:var(--text-soft);">
-                  Rotina, renda extra e mentalidade.
-                </span>
-              </div>
-            </div>
-            <div class="pill-row">
-              <div class="pill gold">Disciplina diária</div>
-              <div class="pill gold">Renda extra</div>
-              <div class="pill">Rotina de foco</div>
-              <div class="pill">Tempo livre sem culpa</div>
-            </div>
-          </article>
-
-          <article class="section-card">
-            <div class="section-title-row">
-              <h2>Recursos que serão liberados</h2>
-              <span class="section-tag">Em breve</span>
-            </div>
-            <ul style="font-size:0.84rem;color:var(--text-soft);margin-left:16px;margin-top:4px;display:flex;flex-direction:column;gap:6px;">
-              <li><span class="text-strong">Chat de estratégia diária</span> com foco em disciplina, dinheiro e lifestyle.</li>
-              <li><span class="text-strong">Painel de histórico</span> para acompanhar tudo o que você construiu no mês.</li>
-              <li><span class="text-strong">Gerador de imagens</span> de lifestyle para visualizar a vida que você está construindo.</li>
-              <li><span class="text-strong">Planos Free, Pro e Premium</span> com níveis diferentes de intensidade e funções.</li>
-            </ul>
-          </article>
+          </div>
+          <div class="badge-pill pill-green">Alta performance</div>
         </div>
-      </section>
 
-      <!-- CHAT -->
-      <section id="screen-chat" class="screen">
-        <div class="screen-title">Preview do chat</div>
-
-        <div class="chat-preview-card">
-          <div class="bubble user">
-            Quero organizar minha vida para ter disciplina, renda extra e um
-            lifestyle de luxo sem bagunça mental.
+        <div class="main-goal">
+          <div class="main-goal-title">Meta principal de hoje</div>
+          <div class="main-goal-body">
+            Trabalhar 90 min em um objetivo importante.
           </div>
-          <div class="bubble ai">
-            Perfeito. No lançamento, vou transformar isso em um plano de 30 dias
-            com rotina diária de foco, ações simples para gerar renda extra,
-            metas semanais e lembretes inteligentes para você não se perder.
-          </div>
-          <div class="bubble ai">
-            Até lá, você pode salvar este link, acompanhar a contagem regressiva
-            e já pensar qual será seu <strong>objetivo principal dos 30 dias</strong>.
+          <div class="tag-row">
+            <div class="tag dot">Disciplina</div>
+            <div class="tag dot">Renda extra</div>
           </div>
         </div>
 
-        <div class="chat-locked-note">
-          <span>Chat bloqueado até o lançamento.</span><br />
-          No dia da estreia, o campo de mensagem será liberado e você vai
-          conversar com a BillionMind AI em tempo real.
+        <div class="two-column">
+          <div class="mini-card">
+            <div class="mini-label">Sequência disciplinada prevista</div>
+            <div class="mini-value" style="color: var(--green);">
+              30 dias guiados
+            </div>
+            <div class="mini-pill">
+              <span class="mini-dot-green"></span>
+              BillionMind monta os passos para você seguir.
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-label">Modo de uso</div>
+            <div class="mini-value">Chat orientado por metas</div>
+            <div class="mini-pill">
+              <span class="mini-dot-green"></span>
+              Foco em rotina, dinheiro e lifestyle.
+            </div>
+          </div>
         </div>
-      </section>
 
-      <!-- HISTÓRICO -->
-      <section id="screen-history" class="screen">
-        <div class="screen-title">Histórico</div>
-
-        <div class="history-empty">
-          <strong>Nenhuma sessão registrada ainda.</strong><br /><br />
-          O histórico de rotinas, planos e imagens será criado automaticamente
-          quando o app estiver no ar. Tudo o que você fizer com a BillionMind AI
-          ficará salvo aqui para você acompanhar sua evolução diária.
-        </div>
-      </section>
-
-      <!-- PERFIL -->
-      <section id="screen-profile" class="screen">
-        <div class="screen-title">Conta & plano</div>
-
-        <div class="cards-column">
-          <article class="profile-card">
-            <div class="profile-row">
-              <div class="avatar-circle">BM</div>
-              <div>
-                <div class="profile-name">BillionMind AI</div>
-                <div class="profile-tagline">
-                  Mente disciplinada, dinheiro organizado e lifestyle de alto nível.
-                </div>
-              </div>
+        <!-- Chat preview estático -->
+        <div class="chat-preview">
+          <div class="preview-label">Preview do chat</div>
+          <div class="chat-bubbles">
+            <div class="bubble user">
+              Quero organizar minha vida para ter disciplina, renda extra e um lifestyle de luxo sem bagunça mental.
             </div>
-
-            <div class="plan-row">
-              <div>
-                <span class="plan-name">Plano atual:</span>
-                <span class="plan-status">Pré-lançamento (modo demo)</span>
-              </div>
+            <div class="bubble ai">
+              Claro! Aqui está um plano inicial inspirado em <strong>30 dias guiados</strong>:
+              <br /><br />
+              • Rotina diária de foco, descanso e tempo livre.<br />
+              • Ações simples para gerar renda extra todas as semanas.<br />
+              • Momentos de lifestyle para você manter a mente leve enquanto cresce.
+              <br /><br />
+              No lançamento, vou transformar isso em um roteiro detalhado para você seguir dia a dia.
             </div>
-
-            <div class="pill-row" style="margin-top:6px;">
-              <span class="badge-chip">Login com Google</span>
-              <span class="badge-chip">Sincronização com Supabase</span>
-              <span class="badge-chip">Histórico seguro</span>
-            </div>
-
-            <div class="locked-banner">
-              <span>Todas as funções reais estão travadas.</span><br />
-              A partir do lançamento, o login será liberado, o seu plano será
-              ativado e os recursos de chat, histórico e imagens vão começar a
-              registrar tudo automaticamente.
-            </div>
-          </article>
+          </div>
+          <div class="chat-input-preview">
+            <span>No lançamento, você vai escrever sua própria meta aqui…</span>
+            <div class="fake-btn">➤</div>
+          </div>
         </div>
       </section>
     </main>
 
-    <!-- CTA fixo -->
-    <div class="cta-bottom-banner">
-      <div class="cta-inner">
-        <div class="cta-text">
-          Salve este link. A BillionMind AI entra no ar assim que o contador
-          zerar.
+    <!-- CTA fixo inferior -->
+    <div class="bottom-cta">
+      <div class="bottom-cta-inner">
+        <div class="bottom-cta-text">
+          Salve esse link. A BillionMind AI entra no ar assim que o contador zerar.
         </div>
-        <button id="ctaNotify" class="cta-button">Quero ser avisado</button>
+        <button class="bottom-cta-btn disabled" id="btnQueroAviso" type="button">
+          <span>•</span> Quero ser avisado
+        </button>
       </div>
     </div>
-
-    <!-- Navegação inferior -->
-    <nav class="bottom-nav">
-      <div class="nav-indicator"></div>
-      <div class="nav-item active" data-screen="home">
-        <span class="icon">🏠</span>
-        <span>Home</span>
-      </div>
-      <div class="nav-item" data-screen="chat">
-        <span class="icon">💬</span>
-        <span>Chat</span>
-      </div>
-      <div class="nav-item" data-screen="history">
-        <span class="icon">📜</span>
-        <span>Histórico</span>
-      </div>
-      <div class="nav-item" data-screen="profile">
-        <span class="icon">👤</span>
-        <span>Perfil</span>
-      </div>
-    </nav>
-
-    <div id="toast" class="toast"></div>
   </div>
 
   <script>
-    // === CONFIGURAÇÃO DE PRÉ-LANÇAMENTO ===
-    const IS_LAUNCHED = false; // quando o app estiver no ar, mudar para true
+    // Ajuste a data de lançamento aqui (horário de Brasília se quiser)
+    const LAUNCH_DATE = new Date("2025-11-24T19:30:00"); // segunda, 19:30
 
-    // Ajuste a data/hora exata do lançamento (fuso -03:00 Brasil)
-    const LAUNCH_DATE = new Date("2025-11-24T19:30:00-03:00");
-
-    const countdownEl = document.getElementById("countdownTimer");
-    const toastEl = document.getElementById("toast");
-
-    function showToast(message) {
-      toastEl.textContent = message;
-      toastEl.classList.add("show");
-      setTimeout(() => {
-        toastEl.classList.remove("show");
-      }, 2800);
-    }
-
-    // Contagem regressiva
     function updateCountdown() {
-      const now = new Date().getTime();
-      const target = LAUNCH_DATE.getTime();
-      const diff = target - now;
+      const now = new Date();
+      const diff = LAUNCH_DATE - now;
+      const timerEl = document.getElementById("countdownTimer");
+
+      const buttonsToLock = [
+        document.getElementById("btnPreLancamento"),
+        document.getElementById("btnEntrar"),
+        document.getElementById("btnComecar"),
+        document.getElementById("btnQueroAviso"),
+      ];
 
       if (diff <= 0) {
-        countdownEl.textContent = "AO VIVO";
-        if (!IS_LAUNCHED) {
-          countdownEl.textContent = "Pronto pra lançar";
-        }
+        timerEl.textContent = "AGORA";
+        buttonsToLock.forEach((btn) => {
+          if (!btn) return;
+          btn.classList.remove("disabled");
+        });
         return;
       }
 
-      const secTotal = Math.floor(diff / 1000);
-      const days = Math.floor(secTotal / (60 * 60 * 24));
-      const hours = Math.floor((secTotal % (60 * 60 * 24)) / 3600);
-      const minutes = Math.floor((secTotal % 3600) / 60);
-      const seconds = secTotal % 60;
+      const totalSeconds = Math.floor(diff / 1000);
+      const hours = Math.floor(totalSeconds / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
 
-      if (days > 0) {
-        countdownEl.textContent =
-          days + "d " +
-          String(hours).padStart(2, "0") +
-          "h " +
-          String(minutes).padStart(2, "0") +
-          "m";
-      } else {
-        countdownEl.textContent =
-          String(hours).padStart(2, "0") +
-          "h " +
-          String(minutes).padStart(2, "0") +
-          "m " +
-          String(seconds).padStart(2, "0") +
-          "s";
-      }
+      timerEl.textContent =
+        String(hours).padStart(2, "0") +
+        "h " +
+        String(minutes).padStart(2, "0") +
+        "m " +
+        String(seconds).padStart(2, "0") +
+        "s";
+
+      // Mantém todos os botões travados até o lançamento.
+      buttonsToLock.forEach((btn) => {
+        if (!btn) return;
+        btn.classList.add("disabled");
+      });
     }
+
     updateCountdown();
     setInterval(updateCountdown, 1000);
-
-    // Navegação entre telas
-    const screens = {
-      home: document.getElementById("screen-home"),
-      chat: document.getElementById("screen-chat"),
-      history: document.getElementById("screen-history"),
-      profile: document.getElementById("screen-profile"),
-    };
-
-    const navItems = document.querySelectorAll(".nav-item");
-
-    navItems.forEach((item) => {
-      item.addEventListener("click", () => {
-        const target = item.getAttribute("data-screen");
-
-        Object.values(screens).forEach((el) => el.classList.remove("active"));
-        screens[target].classList.add("active");
-
-        navItems.forEach((n) => n.classList.remove("active"));
-        item.classList.add("active");
-      });
-    });
-
-    // CTA "Quero ser avisado" → WhatsApp
-    document.getElementById("ctaNotify").addEventListener("click", () => {
-      const msg =
-        "Quero ser avisado quando a BillionMind AI entrar no ar. Me manda o link do app no lançamento.";
-      const encoded = encodeURIComponent(msg);
-      const phone = "5577981485840"; // número com DDI +55
-      const url = `https://wa.me/${phone}?text=${encoded}`;
-      window.open(url, "_blank");
-    });
-
-    // Guardas para funções ainda travadas (para uso futuro)
-    function ensureLaunched(featureName) {
-      if (!IS_LAUNCHED) {
-        showToast(
-          featureName +
-            " será liberado(a) automaticamente no dia do lançamento."
-        );
-        return false;
-      }
-      return true;
-    }
-
-    // Exemplos de uso dos guards (para quando ligar de verdade depois)
-    window.__billionmind = {
-      sendChatMessage: function () {
-        if (!ensureLaunched("O chat diário")) return;
-        // Aqui entra o fetch real para /api/chat.js quando for lançar.
-      },
-      generateImage: function () {
-        if (!ensureLaunched("O gerador de imagens")) return;
-        // Aqui entra o fetch real para /api/image.js quando for lançar.
-      },
-      openLogin: function () {
-        if (!ensureLaunched("O login")) return;
-        // Aqui entra o fluxo real de login.
-      },
-    };
   </script>
 </body>
 </html>
