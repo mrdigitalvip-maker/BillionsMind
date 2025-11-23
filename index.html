@@ -48,7 +48,7 @@
       box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.02);
       display: flex;
       flex-direction: column;
-      padding-bottom: 90px; /* espaço pro banner fixo */
+      padding-bottom: 90px;
     }
 
     /* BARRA DO CONTADOR */
@@ -717,7 +717,7 @@
         <div class="bottom-cta-text">
           Salve esse link. A BillionMind AI entra no ar assim que o contador zerar.
         </div>
-        <button class="bottom-cta-btn disabled" id="btnQueroAviso" type="button">
+        <button class="bottom-cta-btn" id="btnQueroAviso" type="button">
           <span>•</span> Quero ser avisado
         </button>
       </div>
@@ -725,7 +725,7 @@
   </div>
 
   <script>
-    // Ajuste a data de lançamento aqui (horário de Brasília se quiser)
+    // Data de lançamento (ajuste se quiser outro horário)
     const LAUNCH_DATE = new Date("2025-11-24T19:30:00"); // segunda, 19:30
 
     function updateCountdown() {
@@ -733,16 +733,16 @@
       const diff = LAUNCH_DATE - now;
       const timerEl = document.getElementById("countdownTimer");
 
-      const buttonsToLock = [
+      // Esses botões ficam travados até o lançamento
+      const lockedButtons = [
         document.getElementById("btnPreLancamento"),
         document.getElementById("btnEntrar"),
         document.getElementById("btnComecar"),
-        document.getElementById("btnQueroAviso"),
       ];
 
       if (diff <= 0) {
         timerEl.textContent = "AGORA";
-        buttonsToLock.forEach((btn) => {
+        lockedButtons.forEach((btn) => {
           if (!btn) return;
           btn.classList.remove("disabled");
         });
@@ -762,8 +762,7 @@
         String(seconds).padStart(2, "0") +
         "s";
 
-      // Mantém todos os botões travados até o lançamento.
-      buttonsToLock.forEach((btn) => {
+      lockedButtons.forEach((btn) => {
         if (!btn) return;
         btn.classList.add("disabled");
       });
@@ -771,6 +770,20 @@
 
     updateCountdown();
     setInterval(updateCountdown, 1000);
+
+    // Botão "Quero ser avisado" -> abre WhatsApp
+    const whatsappNumber = "5577981485840";
+    const btnQueroAviso = document.getElementById("btnQueroAviso");
+
+    if (btnQueroAviso) {
+      btnQueroAviso.addEventListener("click", () => {
+        const msg = encodeURIComponent(
+          "Quero ser avisado quando o BillionMind AI for lançado."
+        );
+        const url = `https://wa.me/${whatsappNumber}?text=${msg}`;
+        window.open(url, "_blank");
+      });
+    }
   </script>
 </body>
 </html>
