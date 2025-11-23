@@ -5,6 +5,13 @@
   <title>BillionMind AI – Disciplina, Luxo e Liberdade em um Único Chat</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+  <!-- PWA: tornar instalável pelo navegador -->
+  <meta name="theme-color" content="#05060a" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="/icons/billionmind-192.svg" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
   <meta name="description" content="BillionMind AI é um chat de alta performance para organizar rotina, disciplina, dinheiro e lifestyle em uma experiência simples, direto no navegador." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -977,6 +984,17 @@
     }
 
     subscribeButton.addEventListener("click", createCheckout);
+
+    // PWA: registro do Service Worker (para tornar instalável)
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker
+          .register("/sw.js")
+          .catch((err) => {
+            console.log("Falha ao registrar o Service Worker:", err);
+          });
+      });
+    }
   </script>
 </body>
 </html>
