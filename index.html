@@ -1,328 +1,987 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BillionMind AI</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BillionMind AI – Pré-lançamento</title>
 
   <style>
     :root {
       --bg-main: #050608;
-      --bg-card: #14141b;
+      --bg-card: #101117;
+      --bg-soft: #171a21;
       --gold: #f4c86c;
-      --text-main: #ffffff;
-      --text-soft: #c2c5d3;
+      --gold-soft: rgba(244, 200, 108, 0.18);
+      --white: #fdfdfd;
+      --text-soft: #c2c6d6;
+      --danger: #ff4d6a;
+      --accent: #28e0a6;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      margin: 0;
-      padding: 0;
-      background: radial-gradient(circle at top, #151723 0, #050608 55%);
-      font-family: system-ui, sans-serif;
-      color: var(--text-main);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #141623 0, #050608 55%);
+      color: var(--white);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
-    .app-wrap {
-      max-width: 520px;
+    .app-shell {
+      max-width: 480px;
       margin: 0 auto;
-      padding-bottom: 80px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      padding-bottom: 76px;
     }
 
-    /* HEADER */
-    .app-header {
-      padding: 14px 16px;
+    header.app-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: linear-gradient(to bottom, #050608, rgba(5, 6, 8, 0.9), transparent);
+      padding: 14px 18px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(244, 200, 108, 0.1);
+    }
+
+    .top-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(0,0,0,0.4);
-      backdrop-filter: blur(12px);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
     }
 
     .brand-title {
-      font-size: 1.2rem;
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-orb {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 25%, #ffffff 0, #f9e29a 25%, #f4c86c 55%, #b88925 100%);
+      box-shadow: 0 0 18px rgba(244, 200, 108, 0.9);
+    }
+
+    .brand-title span {
+      color: var(--gold);
+    }
+
+    .launch-badge {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(244, 200, 108, 0.6);
+      background: radial-gradient(circle at top, rgba(244, 200, 108, 0.28), rgba(5, 6, 8, 0.96));
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .launch-badge span.rocket {
+      font-size: 0.95rem;
+    }
+
+    .countdown-strip {
+      margin-top: 4px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(244, 200, 108, 0.4);
+      background: linear-gradient(
+        90deg,
+        rgba(244, 200, 108, 0.25),
+        rgba(244, 200, 108, 0.02)
+      );
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      color: var(--text-soft);
+    }
+
+    .countdown-label {
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-weight: 600;
+    }
+
+    .countdown-timer {
+      font-variant-numeric: tabular-nums;
       font-weight: 700;
       color: var(--gold);
     }
 
-    .brand-sub {
-      font-size: 0.75rem;
-      color: var(--text-soft);
-      margin-top: 3px;
+    main {
+      flex: 1;
     }
 
-    .header-login-btn {
-      background: var(--gold);
-      border: none;
-      padding: 8px 14px;
-      border-radius: 10px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: #1a1304;
-      cursor: pointer;
-    }
-
-    /* SCREENS */
     .screen {
+      padding: 16px 16px 20px;
       display: none;
-      padding: 20px 15px;
+      animation: fadeIn 0.25s ease-out;
     }
+
     .screen.active {
       display: block;
     }
 
-    /* CARDS */
-    .card, .hero-card {
-      padding: 18px;
-      border-radius: 18px;
-      margin-bottom: 14px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(20,20,30,0.9);
+    .cards-column {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .hero-card {
+      border-radius: 22px;
+      padding: 16px 16px 18px;
+      background: radial-gradient(circle at top left, #202331, #0b0c10);
+      border: 1px solid rgba(244, 200, 108, 0.35);
+      box-shadow:
+        0 0 40px rgba(244, 200, 108, 0.3),
+        0 24px 60px rgba(0, 0, 0, 0.95);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-pill-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 0.7rem;
+      color: var(--text-soft);
+    }
+
+    .hero-pill-row span.dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #2df8a1;
+      box-shadow: 0 0 10px rgba(45, 248, 161, 0.7);
+      margin-right: 6px;
+      display: inline-block;
+    }
+
+    .hero-sub-pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(244, 200, 108, 0.4);
+      background: rgba(5, 6, 8, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.65rem;
+      color: var(--gold);
     }
 
     .hero-title {
-      font-size: 1.5rem;
-      margin-bottom: 10px;
+      font-size: 1.25rem;
+      line-height: 1.25;
+      font-weight: 700;
+      margin-bottom: 8px;
     }
-    .hero-title span {
+
+    .hero-title span.highlight {
       color: var(--gold);
     }
 
-    .hero-btn {
-      width: 100%;
-      padding: 13px;
-      border: none;
-      border-radius: 14px;
-      background: linear-gradient(90deg, #f4c86c, #c99b32);
-      color: #1a1304;
-      font-weight: 700;
-      cursor: pointer;
-      margin-top: 12px;
+    .hero-body {
+      font-size: 0.86rem;
+      color: var(--text-soft);
+      margin-bottom: 12px;
     }
 
-    /* NAVBAR */
-    .bottom-nav {
+    .hero-footnote {
+      font-size: 0.76rem;
+      color: var(--text-soft);
+    }
+
+    .hero-footnote span {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .cta-bottom-banner {
       position: fixed;
-      bottom: 0;
+      z-index: 40;
       left: 50%;
+      bottom: 76px;
       transform: translateX(-50%);
       width: 100%;
-      max-width: 520px;
+      max-width: 480px;
+      padding: 0 14px;
+      pointer-events: none;
+    }
+
+    .cta-inner {
+      pointer-events: auto;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #f4c86c, #f49b3d);
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.9);
+    }
+
+    .cta-text {
+      flex: 1;
+      font-size: 0.78rem;
+      color: #1a1202;
+      font-weight: 500;
+    }
+
+    .cta-button {
+      border: none;
+      outline: none;
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: #1b1404;
+      color: var(--gold);
+      cursor: pointer;
+    }
+
+    .section-card {
+      border-radius: 20px;
+      background: radial-gradient(circle at top left, #181a24, #07080c);
+      border: 1px solid rgba(244, 200, 108, 0.18);
+      padding: 14px 14px 16px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.75);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .section-title-row h2 {
+      font-size: 1rem;
+      font-weight: 650;
+    }
+
+    .section-tag {
+      font-size: 0.68rem;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(244, 200, 108, 0.35);
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .pill {
+      font-size: 0.72rem;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(12, 14, 22, 0.9);
+      border: 1px solid rgba(244, 200, 108, 0.18);
+      color: var(--text-soft);
+    }
+
+    .pill.gold {
+      color: var(--gold);
+      border-color: rgba(244, 200, 108, 0.45);
+      background: rgba(244, 200, 108, 0.08);
+    }
+
+    .home-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 1.1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .home-mini-card {
+      padding: 10px 10px 12px;
+      border-radius: 16px;
+      background: #05070c;
+      border: 1px solid rgba(244, 200, 108, 0.22);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.8rem;
+    }
+
+    .home-mini-card span.label {
+      font-size: 0.68rem;
+      color: var(--text-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .home-mini-card span.value {
+      font-weight: 650;
+    }
+
+    .home-mini-card span.value.gold {
+      color: var(--gold);
+    }
+
+    .home-mini-card span.value.green {
+      color: var(--accent);
+    }
+
+    .screen-title {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-soft);
+      margin-bottom: 10px;
+    }
+
+    .chat-preview-card {
+      border-radius: 20px;
+      padding: 12px 12px 6px;
+      background: radial-gradient(circle at top, #151722, #05060b);
+      border: 1px solid rgba(244, 200, 108, 0.25);
+      max-height: 360px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .bubble {
+      border-radius: 16px;
+      padding: 10px 11px;
+      font-size: 0.82rem;
+      max-width: 100%;
+      line-height: 1.35;
+    }
+
+    .bubble.user {
+      align-self: flex-end;
+      background: linear-gradient(135deg, #3f86ff, #6c5bff);
+      color: #fefefe;
+      border-bottom-right-radius: 4px;
+    }
+
+    .bubble.ai {
+      align-self: flex-start;
+      background: #060712;
+      border: 1px solid rgba(88, 96, 140, 0.7);
+      border-bottom-left-radius: 4px;
+      color: var(--text-soft);
+    }
+
+    .chat-locked-note {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      font-size: 0.78rem;
+      background: rgba(244, 200, 108, 0.06);
+      border: 1px dashed rgba(244, 200, 108, 0.4);
+      color: var(--gold);
+    }
+
+    .text-strong {
+      font-weight: 600;
+      color: var(--gold);
+    }
+
+    .tabbed-row {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .tabbed-row button {
+      flex: 1;
+      border-radius: 999px;
+      border: 1px solid rgba(244, 200, 108, 0.3);
+      background: transparent;
+      color: var(--text-soft);
+      padding: 7px 10px;
+      font-size: 0.78rem;
+      cursor: pointer;
+    }
+
+    .tabbed-row button.active {
+      background: rgba(244, 200, 108, 0.14);
+      color: var(--gold);
+    }
+
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .image-card {
+      border-radius: 16px;
+      padding: 8px;
+      background: #06070f;
+      border: 1px solid rgba(244, 200, 108, 0.24);
+      font-size: 0.76rem;
+      color: var(--text-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .image-thumb {
+      height: 80px;
+      border-radius: 12px;
+      background: radial-gradient(circle at top, #262b41, #060710);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      color: rgba(244, 200, 108, 0.6);
+      border: 1px dashed rgba(244, 200, 108, 0.3);
+    }
+
+    .image-tag {
+      font-size: 0.66rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+    }
+
+    .image-caption {
+      font-size: 0.74rem;
+    }
+
+    .history-empty {
+      border-radius: 18px;
+      padding: 18px 14px;
+      background: #070811;
+      border: 1px dashed rgba(244, 200, 108, 0.35);
+      color: var(--text-soft);
+      font-size: 0.82rem;
+    }
+
+    .history-empty strong {
+      color: var(--gold);
+    }
+
+    .profile-card {
+      border-radius: 20px;
+      background: radial-gradient(circle at top left, #181a25, #05070c);
+      padding: 16px 14px;
+      border: 1px solid rgba(244, 200, 108, 0.25);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .profile-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .avatar-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 25%, #ffe8b5, #f4c86c, #b57b1f);
+      box-shadow: 0 0 20px rgba(244, 200, 108, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #1c1203;
+      font-size: 1.1rem;
+    }
+
+    .profile-name {
+      font-size: 0.98rem;
+      font-weight: 600;
+    }
+
+    .profile-tagline {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .badge-chip {
+      font-size: 0.72rem;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(244, 200, 108, 0.5);
+      color: var(--gold);
+    }
+
+    .plan-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      margin-top: 6px;
+    }
+
+    .plan-row span.plan-name {
+      font-weight: 600;
+      color: var(--gold);
+    }
+
+    .plan-row span.plan-status {
+      font-size: 0.74rem;
+      color: var(--text-soft);
+    }
+
+    .locked-banner {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(244, 200, 108, 0.06);
+      border: 1px dashed rgba(244, 200, 108, 0.5);
+      font-size: 0.78rem;
+      color: var(--gold);
+    }
+
+    .locked-banner span {
+      font-weight: 600;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 0;
+      width: 100%;
+      max-width: 480px;
+      background: rgba(5, 6, 8, 0.97);
+      border-top: 1px solid rgba(244, 200, 108, 0.2);
+      backdrop-filter: blur(22px);
+      padding: 6px 8px 8px;
       display: flex;
       justify-content: space-around;
-      padding: 8px 0;
-      background: rgba(0,0,0,0.85);
-      backdrop-filter: blur(12px);
-      border-top: 1px solid rgba(255,255,255,0.08);
+      z-index: 50;
     }
 
     .nav-item {
-      color: var(--text-soft);
-      text-align: center;
       flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      font-size: 0.72rem;
+      color: var(--text-soft);
       cursor: pointer;
-      font-size: 0.75rem;
+      padding: 4px 4px 2px;
+      border-radius: 999px;
     }
+
+    .nav-item span.icon {
+      font-size: 1.15rem;
+    }
+
     .nav-item.active {
       color: var(--gold);
+      background: rgba(244, 200, 108, 0.12);
     }
 
+    .nav-indicator {
+      width: 32px;
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--gold), #ffb36a);
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0.5;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 144px;
+      transform: translateX(-50%);
+      max-width: 440px;
+      width: calc(100% - 32px);
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: #101219;
+      border: 1px solid rgba(244, 200, 108, 0.6);
+      color: var(--gold);
+      font-size: 0.8rem;
+      text-align: center;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.9);
+      display: none;
+      z-index: 60;
+    }
+
+    .toast.show {
+      display: block;
+      animation: fadeIn 0.18s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (min-width: 481px) {
+      body {
+        justify-content: center;
+      }
+    }
   </style>
 </head>
-
 <body>
-  <div class="app-wrap">
-
-    <!-- HEADER -->
+  <div class="app-shell">
     <header class="app-header">
-      <div>
-        <div class="brand-title">BillionMind AI</div>
-        <div class="brand-sub">Disciplina • Lifestyle • Performance</div>
+      <div class="top-row">
+        <div class="brand-title">
+          <div class="brand-orb"></div>
+          <span>BillionMind AI</span>
+        </div>
+        <div class="launch-badge">
+          <span class="rocket">🚀</span>
+          <span>App em lançamento</span>
+        </div>
       </div>
-      <button class="header-login-btn" onclick="loginUser()">Login</button>
+      <div class="countdown-strip">
+        <span class="countdown-label">Estreia em</span>
+        <span id="countdownTimer" class="countdown-timer">--h --m --s</span>
+      </div>
     </header>
 
-    <!-- PLANO DO USUÁRIO -->
-    <p id="userPlanDisplay" style="text-align:center; font-size:14px; color:var(--gold); margin-top:12px;">
-      Carregando plano...
-    </p>
+    <main>
+      <!-- HOME -->
+      <section id="screen-home" class="screen active">
+        <div class="cards-column">
+          <article class="hero-card">
+            <div class="hero-pill-row">
+              <span><span class="dot"></span>Sessão preview ativa</span>
+              <span class="hero-sub-pill">Pré-lançamento • global</span>
+            </div>
+            <h1 class="hero-title">
+              Organize disciplina, dinheiro e lifestyle em um único chat de alta
+              <span class="highlight">performance.</span>
+            </h1>
+            <p class="hero-body">
+              Esta é a tela de pré-lançamento da BillionMind AI. Ela mostra como
+              será o fluxo diário que você vai usar para guiar seus próximos
+              30 dias de foco e construção de riqueza.
+            </p>
+            <p class="hero-footnote">
+              Quando o contador zerar, o chat será liberado para criar rotinas,
+              planos de renda extra e imagens de lifestyle personalizadas.
+              <span>Até lá, tudo está em modo demonstração.</span>
+            </p>
+          </article>
 
-    <!-- HOME -->
-    <main id="homeScreen" class="screen active">
-      <section class="hero-card">
-        <h1 class="hero-title">Construa sua <span>Nova Mente</span></h1>
-        <p style="opacity:0.8;">Transforme disciplina, rotina e foco em resultados reais com o BillionMind.</p>
-        <button class="hero-btn" onclick="if(checkFeatureAccess('chat-basico')) goToScreen('chatScreen')">
-          Iniciar Sessão de Alta Performance
-        </button>
+          <article class="section-card">
+            <div class="section-title-row">
+              <h2>Plano disciplinado de hoje</h2>
+              <span class="section-tag">Preview</span>
+            </div>
+            <p style="font-size:0.84rem;color:var(--text-soft);margin-bottom:8px;">
+              Veja um exemplo de como a BillionMind AI vai organizar seu dia:
+            </p>
+            <div class="home-grid">
+              <div class="home-mini-card">
+                <span class="label">Meta principal</span>
+                <span class="value gold">Trabalhar 90 min em 1 objetivo importante.</span>
+              </div>
+              <div class="home-mini-card">
+                <span class="label">Sequência</span>
+                <span class="value green">30 dias guiados</span>
+                <span style="font-size:0.7rem;color:var(--text-soft);">
+                  Rotina, renda extra e mentalidade.
+                </span>
+              </div>
+            </div>
+            <div class="pill-row">
+              <div class="pill gold">Disciplina diária</div>
+              <div class="pill gold">Renda extra</div>
+              <div class="pill">Rotina de foco</div>
+              <div class="pill">Tempo livre sem culpa</div>
+            </div>
+          </article>
+
+          <article class="section-card">
+            <div class="section-title-row">
+              <h2>Recursos que serão liberados</h2>
+              <span class="section-tag">Em breve</span>
+            </div>
+            <ul style="font-size:0.84rem;color:var(--text-soft);margin-left:16px;margin-top:4px;display:flex;flex-direction:column;gap:6px;">
+              <li><span class="text-strong">Chat de estratégia diária</span> com foco em disciplina, dinheiro e lifestyle.</li>
+              <li><span class="text-strong">Painel de histórico</span> para acompanhar tudo o que você construiu no mês.</li>
+              <li><span class="text-strong">Gerador de imagens</span> de lifestyle para visualizar a vida que você está construindo.</li>
+              <li><span class="text-strong">Planos Free, Pro e Premium</span> com níveis diferentes de intensidade e funções.</li>
+            </ul>
+          </article>
+        </div>
       </section>
 
-      <section class="card">
-        <h2 style="color:var(--gold);">Meta do Dia</h2>
-        <p style="opacity:0.8;">Foque 90 minutos no seu objetivo principal.</p>
+      <!-- CHAT -->
+      <section id="screen-chat" class="screen">
+        <div class="screen-title">Preview do chat</div>
+
+        <div class="chat-preview-card">
+          <div class="bubble user">
+            Quero organizar minha vida para ter disciplina, renda extra e um
+            lifestyle de luxo sem bagunça mental.
+          </div>
+          <div class="bubble ai">
+            Perfeito. No lançamento, vou transformar isso em um plano de 30 dias
+            com rotina diária de foco, ações simples para gerar renda extra,
+            metas semanais e lembretes inteligentes para você não se perder.
+          </div>
+          <div class="bubble ai">
+            Até lá, você pode salvar este link, acompanhar a contagem regressiva
+            e já pensar qual será seu <strong>objetivo principal dos 30 dias</strong>.
+          </div>
+        </div>
+
+        <div class="chat-locked-note">
+          <span>Chat bloqueado até o lançamento.</span><br />
+          No dia da estreia, o campo de mensagem será liberado e você vai
+          conversar com a BillionMind AI em tempo real.
+        </div>
       </section>
 
-      <section class="card">
-        <h2 style="color:var(--gold);">Seu Progresso</h2>
-        <p style="opacity:0.8;">Histórico disponível apenas para assinantes PRO e PREMIUM.</p>
+      <!-- HISTÓRICO -->
+      <section id="screen-history" class="screen">
+        <div class="screen-title">Histórico</div>
+
+        <div class="history-empty">
+          <strong>Nenhuma sessão registrada ainda.</strong><br /><br />
+          O histórico de rotinas, planos e imagens será criado automaticamente
+          quando o app estiver no ar. Tudo o que você fizer com a BillionMind AI
+          ficará salvo aqui para você acompanhar sua evolução diária.
+        </div>
+      </section>
+
+      <!-- PERFIL -->
+      <section id="screen-profile" class="screen">
+        <div class="screen-title">Conta & plano</div>
+
+        <div class="cards-column">
+          <article class="profile-card">
+            <div class="profile-row">
+              <div class="avatar-circle">BM</div>
+              <div>
+                <div class="profile-name">BillionMind AI</div>
+                <div class="profile-tagline">
+                  Mente disciplinada, dinheiro organizado e lifestyle de alto nível.
+                </div>
+              </div>
+            </div>
+
+            <div class="plan-row">
+              <div>
+                <span class="plan-name">Plano atual:</span>
+                <span class="plan-status">Pré-lançamento (modo demo)</span>
+              </div>
+            </div>
+
+            <div class="pill-row" style="margin-top:6px;">
+              <span class="badge-chip">Login com Google</span>
+              <span class="badge-chip">Sincronização com Supabase</span>
+              <span class="badge-chip">Histórico seguro</span>
+            </div>
+
+            <div class="locked-banner">
+              <span>Todas as funções reais estão travadas.</span><br />
+              A partir do lançamento, o login será liberado, o seu plano será
+              ativado e os recursos de chat, histórico e imagens vão começar a
+              registrar tudo automaticamente.
+            </div>
+          </article>
+        </div>
       </section>
     </main>
 
-    <!-- CHAT -->
-    <section id="chatScreen" class="screen">
-      <h2 style="color:var(--gold);">Chat de Alta Performance</h2>
-      <p style="opacity:0.75;">Área do chat — liberada para todos os planos.</p>
-    </section>
-
-    <!-- HISTÓRICO -->
-    <section id="historyScreen" class="screen">
-      <h2 style="color:var(--gold);">Histórico</h2>
-      <p style="opacity:0.75;">Liberado somente para PRO e PREMIUM.</p>
-    </section>
-
-    <!-- PERFIL -->
-    <section id="profileScreen" class="screen">
-      <h2 style="color:var(--gold);">Perfil</h2>
-      <p style="opacity:0.75;">Veja seus dados e plano atual.</p>
-
-      <button class="hero-btn" onclick="goToScreen('plansScreen')">
-        Gerenciar Assinatura
-      </button>
-    </section>
-
-    <!-- PLANOS -->
-    <section id="plansScreen" class="screen">
-      <h2 style="color:var(--gold); font-size:1.4rem;">Assinaturas</h2>
-      <p style="opacity:0.8;">Escolha seu plano e libere todo o poder do BillionMind AI.</p>
-
-      <div class="card">
-        <h3 style="color:var(--gold);">Plano PRO — R$ 24,90/mês</h3>
-        <p>Acesso ao histórico, imagens e desempenho avançado.</p>
-        <button class="hero-btn" onclick="upgradePlan('pro')">Assinar PRO</button>
+    <!-- CTA fixo -->
+    <div class="cta-bottom-banner">
+      <div class="cta-inner">
+        <div class="cta-text">
+          Salve este link. A BillionMind AI entra no ar assim que o contador
+          zerar.
+        </div>
+        <button id="ctaNotify" class="cta-button">Quero ser avisado</button>
       </div>
+    </div>
 
-      <div class="card">
-        <h3 style="color:var(--gold);">Plano PREMIUM — R$ 39,90/mês</h3>
-        <p>Desbloqueie tudo: lifestyle, disciplina avançada e IA ilimitada.</p>
-        <button class="hero-btn" onclick="upgradePlan('premium')">Assinar PREMIUM</button>
+    <!-- Navegação inferior -->
+    <nav class="bottom-nav">
+      <div class="nav-indicator"></div>
+      <div class="nav-item active" data-screen="home">
+        <span class="icon">🏠</span>
+        <span>Home</span>
       </div>
-    </section>
+      <div class="nav-item" data-screen="chat">
+        <span class="icon">💬</span>
+        <span>Chat</span>
+      </div>
+      <div class="nav-item" data-screen="history">
+        <span class="icon">📜</span>
+        <span>Histórico</span>
+      </div>
+      <div class="nav-item" data-screen="profile">
+        <span class="icon">👤</span>
+        <span>Perfil</span>
+      </div>
+    </nav>
+
+    <div id="toast" class="toast"></div>
   </div>
 
-  <!-- NAVBAR -->
-  <nav class="bottom-nav">
-    <div id="navHome" class="nav-item active" onclick="goToScreen('homeScreen')">🏠 Home</div>
-    <div id="navChat" class="nav-item" onclick="goToScreen('chatScreen')">💬 Chat</div>
-    <div id="navHist" class="nav-item" onclick="goToScreen('historyScreen')">📜 Histórico</div>
-    <div id="navPerfil" class="nav-item" onclick="goToScreen('profileScreen')">👤 Perfil</div>
-    <div id="navPlanos" class="nav-item" onclick="goToScreen('plansScreen')">⭐ Planos</div>
-  </nav>
+  <script>
+    // === CONFIGURAÇÃO DE PRÉ-LANÇAMENTO ===
+    const IS_LAUNCHED = false; // quando o app estiver no ar, mudar para true
 
-<script>
-/* TROCA DE TELAS */
-function goToScreen(id) {
-  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
+    // Ajuste a data/hora exata do lançamento (fuso -03:00 Brasil)
+    const LAUNCH_DATE = new Date("2025-11-24T19:30:00-03:00");
 
-  document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
-  if(id==="homeScreen") navHome.classList.add("active");
-  if(id==="chatScreen") navChat.classList.add("active");
-  if(id==="historyScreen") navHist.classList.add("active");
-  if(id==="profileScreen") navPerfil.classList.add("active");
-  if(id==="plansScreen") navPlanos.classList.add("active");
-}
+    const countdownEl = document.getElementById("countdownTimer");
+    const toastEl = document.getElementById("toast");
 
-/* LOGIN */
-async function loginUser() {
-  const email = prompt("Digite seu e-mail:");
-  const password = prompt("Digite sua senha:");
+    function showToast(message) {
+      toastEl.textContent = message;
+      toastEl.classList.add("show");
+      setTimeout(() => {
+        toastEl.classList.remove("show");
+      }, 2800);
+    }
 
-  if (!email || !password)
-    return alert("Digite os dados corretamente.");
+    // Contagem regressiva
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const target = LAUNCH_DATE.getTime();
+      const diff = target - now;
 
-  const res = await fetch("/api/login", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password })
-  });
+      if (diff <= 0) {
+        countdownEl.textContent = "AO VIVO";
+        if (!IS_LAUNCHED) {
+          countdownEl.textContent = "Pronto pra lançar";
+        }
+        return;
+      }
 
-  const data = await res.json();
+      const secTotal = Math.floor(diff / 1000);
+      const days = Math.floor(secTotal / (60 * 60 * 24));
+      const hours = Math.floor((secTotal % (60 * 60 * 24)) / 3600);
+      const minutes = Math.floor((secTotal % 3600) / 60);
+      const seconds = secTotal % 60;
 
-  if (data.error) {
-    alert("Erro: " + data.error);
-    return;
-  }
+      if (days > 0) {
+        countdownEl.textContent =
+          days + "d " +
+          String(hours).padStart(2, "0") +
+          "h " +
+          String(minutes).padStart(2, "0") +
+          "m";
+      } else {
+        countdownEl.textContent =
+          String(hours).padStart(2, "0") +
+          "h " +
+          String(minutes).padStart(2, "0") +
+          "m " +
+          String(seconds).padStart(2, "0") +
+          "s";
+      }
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
 
-  localStorage.setItem("user_id", data.user.id);
-  localStorage.setItem("email", data.user.email);
-  localStorage.setItem("plano", data.plano.plano);
+    // Navegação entre telas
+    const screens = {
+      home: document.getElementById("screen-home"),
+      chat: document.getElementById("screen-chat"),
+      history: document.getElementById("screen-history"),
+      profile: document.getElementById("screen-profile"),
+    };
 
-  alert("Login realizado!\nPlano: " + data.plano.plano.toUpperCase());
-  location.reload();
-}
+    const navItems = document.querySelectorAll(".nav-item");
 
-/* MOSTRAR PLANO DO USUÁRIO */
-document.addEventListener("DOMContentLoaded", () => {
-  const plano = localStorage.getItem("plano");
-  if (plano) {
-    userPlanDisplay.innerText = "Plano atual: " + plano.toUpperCase();
-  } else {
-    userPlanDisplay.innerText = "Faça login para liberar funções.";
-  }
-});
+    navItems.forEach((item) => {
+      item.addEventListener("click", () => {
+        const target = item.getAttribute("data-screen");
 
-/* CONTROLE DE FUNÇÕES */
-function checkFeatureAccess(feature) {
-  const plano = localStorage.getItem("plano");
+        Object.values(screens).forEach((el) => el.classList.remove("active"));
+        screens[target].classList.add("active");
 
-  if (!plano) {
-    alert("Faça login para usar esta função.");
-    return false;
-  }
+        navItems.forEach((n) => n.classList.remove("active"));
+        item.classList.add("active");
+      });
+    });
 
-  const permissao = {
-    "free": ["chat-basico"],
-    "pro": ["chat-basico", "historico", "imagens"],
-    "premium": ["chat-basico", "historico", "imagens", "lifestyle"]
-  };
+    // CTA "Quero ser avisado" → WhatsApp
+    document.getElementById("ctaNotify").addEventListener("click", () => {
+      const msg =
+        "Quero ser avisado quando a BillionMind AI entrar no ar. Me manda o link do app no lançamento.";
+      const encoded = encodeURIComponent(msg);
+      const phone = "5577981485840"; // número com DDI +55
+      const url = `https://wa.me/${phone}?text=${encoded}`;
+      window.open(url, "_blank");
+    });
 
-  if (permissao[plano].includes(feature)) {
-    return true;
-  }
+    // Guardas para funções ainda travadas (para uso futuro)
+    function ensureLaunched(featureName) {
+      if (!IS_LAUNCHED) {
+        showToast(
+          featureName +
+            " será liberado(a) automaticamente no dia do lançamento."
+        );
+        return false;
+      }
+      return true;
+    }
 
-  alert("Função disponível apenas para assinantes.");
-  return false;
-}
-
-/* UPGRADE DE PLANO */
-async function upgradePlan(tipo) {
-  const user_id = localStorage.getItem("user_id");
-
-  if (!user_id) {
-    alert("Faça login antes de assinar.");
-    return;
-  }
-
-  const res = await fetch("/api/upgrade", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ user_id, plano: tipo })
-  });
-
-  const data = await res.json();
-
-  if (data.success) {
-    localStorage.setItem("plano", tipo);
-    alert("Plano atualizado para: " + tipo.toUpperCase());
-    location.reload();
-  } else {
-    alert("Erro ao atualizar plano.");
-  }
-}
-</script>
-
+    // Exemplos de uso dos guards (para quando ligar de verdade depois)
+    window.__billionmind = {
+      sendChatMessage: function () {
+        if (!ensureLaunched("O chat diário")) return;
+        // Aqui entra o fetch real para /api/chat.js quando for lançar.
+      },
+      generateImage: function () {
+        if (!ensureLaunched("O gerador de imagens")) return;
+        // Aqui entra o fetch real para /api/image.js quando for lançar.
+      },
+      openLogin: function () {
+        if (!ensureLaunched("O login")) return;
+        // Aqui entra o fluxo real de login.
+      },
+    };
+  </script>
 </body>
 </html>
