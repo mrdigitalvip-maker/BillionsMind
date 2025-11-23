@@ -1,221 +1,982 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BillionMind AI</title>
+  <meta charset="UTF-8" />
+  <title>BillionMind AI – Disciplina, Luxo e Liberdade em um Único Chat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<style>
+  <meta name="description" content="BillionMind AI é um chat de alta performance para organizar rotina, disciplina, dinheiro e lifestyle em uma experiência simples, direto no navegador." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-main: #05060a;
+      --bg-hero: #12131a;
+      --bg-card: #0e1018;
+      --bg-card-soft: #101622;
+      --bg-pill: #171b27;
+      --accent-gold: #f5b848;
+      --accent-gold-strong: #ffb640;
+      --accent-gold-soft: rgba(245, 184, 72, 0.35);
+      --accent-green: #32d27b;
+      --accent-blue: #1b5dff;
+      --text-main: #f9fafb;
+      --text-soft: #c2c7d5;
+      --text-muted: #8a90a3;
+      --border-soft: #222633;
+      --shadow-hero: 0 18px 40px rgba(0, 0, 0, 0.95);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      scroll-behavior: smooth;
+    }
+
     body {
-        margin: 0;
-        background: #000;
-        font-family: 'Poppins', sans-serif;
-        color: white;
-        overflow-x: hidden;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top, #151827 0, #05060a 46%, #020308 100%);
+      color: var(--text-main);
     }
 
-    /* HEADER */
-    .header {
-        width: 100%;
-        padding: 18px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: linear-gradient(90deg, #0a0a0a, #111);
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 10;
-        border-bottom: 1px solid rgba(255,255,255,0.1);
+    .page {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 16px 40px;
     }
 
-    .logo {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 20px;
-        font-weight: 600;
-        letter-spacing: 2px;
+    /* NAVBAR */
+
+    .navbar-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: linear-gradient(to bottom,
+        rgba(5, 6, 10, 0.98),
+        rgba(5, 6, 10, 0.96),
+        rgba(5, 6, 10, 0.9),
+        transparent);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
     }
 
-    .logo-icon {
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        background: radial-gradient(circle, #FFD26A, #A66C00);
-        box-shadow: 0 0 8px #F9C75B;
+    .navbar {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 10px 16px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
-    .profile-icon {
-        width: 38px;
-        height: 38px;
-        border-radius: 50%;
-        background: linear-gradient(45deg, #444, #777);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 18px;
-        cursor: pointer;
-        box-shadow: 0 0 8px rgba(255,255,255,0.3);
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    /* CONTEÚDO */
-    .content {
-        padding-top: 90px;
-        padding-bottom: 120px;
+    .logo-circle {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #ffeec3, #f5b848 48%, #7d4b16 100%);
+      box-shadow: 0 0 22px rgba(245, 184, 72, 0.7);
+      position: relative;
     }
 
-    section {
-        display: none;
-        padding: 20px;
-        animation: fade 0.3s ease;
+    .logo-circle::after {
+      content: "";
+      position: absolute;
+      inset: 24%;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #111111, #050608 60%, #000);
     }
 
-    section.active {
-        display: block;
+    .nav-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
     }
 
-    @keyframes fade {
-        from {opacity: 0;}
-        to {opacity: 1;}
+    .nav-title {
+      letter-spacing: 0.4em;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      color: #f3f4fd;
     }
 
-    /* HOME */
-    .home-title {
-        font-size: 24px;
-        font-weight: 600;
-        line-height: 32px;
-        margin-bottom: 15px;
-        color: #FFD26A;
+    .nav-sub {
+      font-size: 0.72rem;
+      color: var(--text-muted);
     }
 
-    .home-box {
-        padding: 15px;
-        border-radius: 14px;
-        background: rgba(255,255,255,0.05);
-        border: 1px solid rgba(255,255,255,0.08);
-        margin-bottom: 20px;
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    .btn-primary {
-        width: 100%;
-        padding: 14px;
-        margin-top: 15px;
-        background: linear-gradient(90deg, #FFB300, #FF8900);
-        border: none;
-        color: #000;
-        font-weight: 700;
-        font-size: 18px;
-        border-radius: 50px;
-        box-shadow: 0 0 10px #FFB300;
+    .nav-btn {
+      border-radius: 999px;
+      padding: 7px 16px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: transparent;
+      color: var(--text-main);
     }
 
-    /* NAVBAR LATERAL */
-    .nav {
-        position: fixed;
-        left: 0;
-        top: 78px;
-        width: 75px;
-        height: 100%;
-        background: #0b0b0b;
-        border-right: 1px solid rgba(255,255,255,0.08);
-        display: flex;
-        flex-direction: column;
-        padding-top: 20px;
-        gap: 25px;
-        z-index: 9;
+    .nav-btn-primary {
+      border-color: rgba(245, 184, 72, 0.7);
+      background: radial-gradient(circle at 30% 0, #ffeec3, #f5b848 42%, #ff8b1b 100%);
+      color: #1d1306;
+      box-shadow: 0 12px 26px rgba(177, 117, 26, 0.7);
     }
 
-    .nav-item {
-        text-align: center;
-        cursor: pointer;
-        padding: 12px 0;
-        border-radius: 10px;
-        color: #aaa;
-        font-size: 12px;
-        transition: 0.2s ease;
+    /* HERO */
+
+    .section {
+      margin-top: 26px;
     }
 
-    .nav-item.active {
-        background: rgba(255,255,255,0.08);
-        color: #FFD26A;
-        box-shadow: 0 0 6px #FFD26A;
+    .hero {
+      border-radius: 26px;
+      padding: 22px 18px 22px;
+      background:
+        radial-gradient(circle at top left, rgba(245, 184, 72, 0.33), rgba(26, 18, 4, 0.9) 26%, #07070a 60%, #05060a 100%);
+      box-shadow: var(--shadow-hero);
+      border: 1px solid rgba(250, 205, 130, 0.15);
     }
 
-    /* AJUSTE DO CONTEÚDO COM NAV LATERAL */
-    .content {
-        margin-left: 80px;
+    .hero-kicker {
+      font-size: 0.86rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 8px;
+      color: rgba(255,255,255,0.78);
     }
-</style>
 
+    .hero-title {
+      font-size: 1.6rem;
+      line-height: 1.22;
+      margin-bottom: 12px;
+    }
+
+    .hero-title span {
+      color: var(--accent-gold-strong);
+    }
+
+    .hero-sub {
+      font-size: 0.95rem;
+      color: var(--text-soft);
+      margin-bottom: 18px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .btn-primary-large {
+      flex: 1 1 180px;
+      border-radius: 999px;
+      border: none;
+      padding: 12px 18px;
+      font-size: 0.96rem;
+      font-weight: 600;
+      color: #221406;
+      background: radial-gradient(circle at 30% 0, #ffeec3, #f5b848 42%, #ff8b1b 100%);
+      box-shadow:
+        0 14px 30px rgba(180, 117, 30, 0.8),
+        0 0 0 1px rgba(252, 211, 146, 0.5);
+    }
+
+    .btn-secondary-outline {
+      flex: 1 1 150px;
+      border-radius: 999px;
+      padding: 11px 18px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(6, 6, 10, 0.3);
+      color: var(--text-main);
+    }
+
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .hero-pill {
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(8, 9, 15, 0.85);
+      color: var(--text-soft);
+    }
+
+    .hero-pill-dot::before {
+      content: "• ";
+      color: var(--accent-gold-strong);
+    }
+
+    /* COMO FUNCIONA */
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .section-sub {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      margin-bottom: 14px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 12px;
+    }
+
+    .feature-card {
+      border-radius: 20px;
+      padding: 14px 14px 12px;
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.75);
+    }
+
+    .feature-title {
+      font-size: 0.96rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .feature-desc {
+      font-size: 0.86rem;
+      color: var(--text-soft);
+    }
+
+    /* PRÉVIA DO CHAT */
+
+    .session-card {
+      border-radius: 24px;
+      padding: 18px 16px 15px;
+      background: radial-gradient(circle at top, #202434, #05060b 78%);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 16px 32px rgba(0,0,0,0.85);
+      margin-top: 8px;
+    }
+
+    .session-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      gap: 10px;
+    }
+
+    .session-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .session-pill {
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      background: rgba(11, 13, 22, 0.9);
+    }
+
+    .session-content-top {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .session-box {
+      border-radius: 16px;
+      padding: 10px 10px 9px;
+      background: #05060b;
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .session-box-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+
+    .session-box-main {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .session-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .session-chip {
+      font-size: 0.78rem;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: #101527;
+      color: var(--text-soft);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .session-messages {
+      margin-top: 8px;
+      border-radius: 16px;
+      padding: 10px 11px 9px;
+      background: linear-gradient(to bottom, #05060a, #0b1020);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .msg-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .msg-bubble {
+      border-radius: 12px;
+      padding: 8px 10px;
+      font-size: 0.86rem;
+      margin-bottom: 6px;
+      line-height: 1.35;
+    }
+
+    .msg-ai {
+      background: #111626;
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #e8edf8;
+    }
+
+    .msg-user {
+      background: #09203a;
+      border: 1px solid rgba(27, 93, 255, 0.7);
+      color: #d1e1ff;
+    }
+
+    .session-input-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .session-input {
+      flex: 1;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: #05060a;
+      color: var(--text-main);
+      padding: 8px 12px;
+      font-size: 0.84rem;
+    }
+
+    .session-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .session-send {
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      border: none;
+      background: radial-gradient(circle at 30% 0, #ffeec3, #f5b848 45%, #ff8b1b 100%);
+      color: #1d1406;
+      font-size: 1.02rem;
+      box-shadow: 0 12px 24px rgba(180, 117, 30, 0.75);
+    }
+
+    .session-footer-pill {
+      margin-top: 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 6px 11px;
+      font-size: 0.78rem;
+      color: var(--text-soft);
+      background: rgba(7, 9, 15, 0.9);
+      display: inline-block;
+    }
+
+    /* JORNADAS */
+
+    .journey-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .journey-card {
+      border-radius: 18px;
+      padding: 12px 13px 11px;
+      background: #080b14;
+      border: 1px solid rgba(255,255,255,0.10);
+      box-shadow: 0 16px 30px rgba(0,0,0,0.75);
+    }
+
+    .journey-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+
+    .journey-title {
+      font-size: 0.94rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .journey-desc {
+      font-size: 0.84rem;
+      color: var(--text-soft);
+      margin-bottom: 6px;
+    }
+
+    .journey-list {
+      padding-left: 16px;
+      font-size: 0.82rem;
+      color: var(--text-soft);
+    }
+
+    /* PLANOS */
+
+    .plans-header {
+      margin-bottom: 14px;
+    }
+
+    .plans-toggle {
+      display: inline-flex;
+      border-radius: 999px;
+      padding: 3px;
+      background: #05060a;
+      border: 1px solid rgba(255,255,255,0.18);
+      margin-bottom: 10px;
+      font-size: 0.8rem;
+    }
+
+    .plans-toggle button {
+      border-radius: 999px;
+      border: none;
+      padding: 5px 14px;
+      background: transparent;
+      color: var(--text-soft);
+    }
+
+    .plans-toggle button.active {
+      background: radial-gradient(circle at 30% 0, #ffeec3, #f5b848 45%, #ff8b1b 100%);
+      color: #1f1508;
+      font-weight: 600;
+    }
+
+    .plans-note {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .pricing-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .price-card {
+      border-radius: 24px;
+      padding: 16px 16px 13px;
+      background: radial-gradient(circle at top, rgba(244, 186, 87, 0.16), #05060a 40%, #05060a 100%);
+      border: 1px solid rgba(244, 186, 87, 0.36);
+      box-shadow: 0 18px 38px rgba(0,0,0,0.9);
+    }
+
+    .price-card.basic {
+      background: #080b13;
+      border-color: rgba(255,255,255,0.12);
+      box-shadow: 0 18px 30px rgba(0,0,0,0.8);
+    }
+
+    .price-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .price-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .price-tag {
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.22);
+      padding: 4px 10px;
+      font-size: 0.78rem;
+      color: var(--accent-gold-strong);
+      background: rgba(8, 8, 12, 0.9);
+    }
+
+    .price-sub {
+      font-size: 0.86rem;
+      color: var(--text-soft);
+      margin-bottom: 8px;
+    }
+
+    .price-value {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .price-value span {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--text-soft);
+    }
+
+    .price-list {
+      font-size: 0.84rem;
+      color: var(--text-soft);
+      margin: 8px 0 10px;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .price-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .price-list li::before {
+      content: "✓";
+      color: var(--accent-green);
+      margin-top: 0;
+      font-size: 0.86rem;
+    }
+
+    .price-footer {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .price-btn {
+      width: 100%;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.22);
+      padding: 10px 14px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      background: transparent;
+      color: var(--text-main);
+    }
+
+    .price-btn-primary {
+      border: none;
+      background: radial-gradient(circle at 30% 0, #ffeec3, #f5b848 45%, #ff8b1b 100%);
+      color: #1e1408;
+      box-shadow: 0 14px 32px rgba(180,117,30,0.85);
+    }
+
+    .price-btn[disabled] {
+      opacity: 0.6;
+    }
+
+    .plan-error {
+      margin-top: 4px;
+      font-size: 0.8rem;
+      color: #ff6767;
+      display: none;
+    }
+
+    /* FOOTER */
+
+    .footer {
+      margin-top: 26px;
+      padding: 14px 0 6px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .footer-pill-row {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .footer-pill {
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(7,9,14,0.9);
+    }
+
+    @media (min-width: 600px) {
+      .hero-title {
+        font-size: 2.1rem;
+      }
+      .hero-sub {
+        font-size: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
-
-<!-- HEADER -->
-<div class="header">
-    <div class="logo">
-        <div class="logo-icon"></div>
-        BILLIONMIND AI
-    </div>
-    <div class="profile-icon">👤</div>
-</div>
-
-<!-- NAVBAR LATERAL -->
-<div class="nav">
-    <div class="nav-item active" onclick="show('home')">Home</div>
-    <div class="nav-item" onclick="show('chat')">Chat</div>
-    <div class="nav-item" onclick="show('history')">Histórico</div>
-    <div class="nav-item" onclick="show('images')">Imagens</div>
-    <div class="nav-item" onclick="show('plans')">Planos</div>
-</div>
-
-<!-- ÁREAS -->
-<div class="content">
-
-    <!-- HOME -->
-    <section id="home" class="active">
-        <div class="home-title">Um único chat para transformar disciplina, dinheiro e lifestyle.</div>
-        <div class="home-box">
-            <p>Você descreve como quer viver. A IA monta planos automáticos de 30 dias, metas diárias e ideias de renda extra.</p>
+  <div class="navbar-wrap">
+    <header class="navbar">
+      <div class="nav-left">
+        <div class="logo-circle"></div>
+        <div class="nav-brand">
+          <div class="nav-title">BILLIONMIND</div>
+          <div class="nav-sub">AI · disciplina · dinheiro · lifestyle</div>
         </div>
-        <button class="btn-primary">Começar Agora</button>
+      </div>
+      <div class="nav-right">
+        <button class="nav-btn" onclick="document.getElementById('sec-planos').scrollIntoView({behavior:'smooth'})">
+          Entrar
+        </button>
+        <button class="nav-btn nav-btn-primary" onclick="document.getElementById('sec-planos').scrollIntoView({behavior:'smooth'})">
+          Começar agora
+        </button>
+      </div>
+    </header>
+  </div>
+
+  <main class="page">
+
+    <!-- HERO -->
+    <section class="section">
+      <div class="hero">
+        <div class="hero-kicker">Seu chat de alta performance para rotina, dinheiro e lifestyle</div>
+        <h1 class="hero-title">
+          Transforme sua mente em uma <span>BillionMind</span>: disciplina, luxo e liberdade em um único chat.
+        </h1>
+        <p class="hero-sub">
+          BillionMind AI foi criado para qualquer pessoa que queira organizar rotina, riqueza, hábitos e mentalidade em uma experiência simples de chat, direto no navegador – sem cursos infinitos, sem apps confusos.
+        </p>
+
+        <div class="hero-actions">
+          <button class="btn-primary-large" onclick="document.getElementById('sec-planos').scrollIntoView({behavior:'smooth'})">
+            Criar minha conta PRO
+          </button>
+          <button class="btn-secondary-outline" onclick="document.getElementById('sec-como-funciona').scrollIntoView({behavior:'smooth'})">
+            Ver como funciona
+          </button>
+        </div>
+
+        <div class="hero-pills">
+          <div class="hero-pill hero-pill-dot">Rotinas diárias prontas para executar.</div>
+          <div class="hero-pill hero-pill-dot">Mensagens motivacionais personalizadas.</div>
+          <div class="hero-pill hero-pill-dot">Prompts de imagens de lifestyle e riqueza via IA.</div>
+        </div>
+      </div>
     </section>
 
-    <!-- CHAT -->
-    <section id="chat">
-        <h2>Chat BillionMind</h2>
-        <p>Aqui ficará o chat integrado com IA.</p>
+    <!-- SESSÃO / PRÉVIA DO CHAT -->
+    <section class="section" id="sec-preview">
+      <div class="session-card">
+        <div class="session-header">
+          <div>
+            <div class="session-title">Sessão BillionMind · Ativa</div>
+            <div style="font-size:0.8rem;color:var(--text-soft);">
+              Foco: rotina, metas e mentalidade hoje.
+            </div>
+          </div>
+          <div class="session-pill">Modo · Alta performance</div>
+        </div>
+
+        <div class="session-content-top">
+          <div class="session-box">
+            <div class="session-box-label">Meta principal de hoje</div>
+            <div class="session-box-main" style="color:var(--accent-gold-strong);">
+              Trabalhar 90 min em um objetivo importante.
+            </div>
+            <div class="session-chip-row">
+              <div class="session-chip">Disciplina</div>
+              <div class="session-chip">Renda extra</div>
+            </div>
+          </div>
+          <div class="session-box">
+            <div class="session-box-label">Sequência de dias disciplinados</div>
+            <div class="session-box-main" style="color:var(--accent-green);">
+              12 dias seguidos
+            </div>
+            <div style="font-size:0.8rem;color:var(--text-soft);">
+              Você está construindo consistência.
+            </div>
+          </div>
+        </div>
+
+        <div class="session-messages">
+          <div class="msg-label">Preview do chat</div>
+          <div class="msg-bubble msg-user">
+            Quero um plano de 30 dias de disciplina à noite + ideias de renda extra e imagens de luxo para me motivar.
+          </div>
+          <div class="msg-bubble msg-ai">
+            Fechado. Eu vou:<br>
+            1) Criar seu plano de disciplina de 30 dias.<br>
+            2) Definir 3 tarefas diárias simples.<br>
+            3) Sugerir ideias de imagens de lifestyle (carros, viagens, cidades, escritório) para você visualizar e postar.<br><br>
+            Escreva agora: <strong>como você quer se ver em 1 ano?</strong>
+          </div>
+        </div>
+
+        <div class="session-input-row">
+          <input class="session-input" placeholder="Digite sua próxima meta, dúvida ou pedido (ex: Quero quitar dívidas e começar renda extra)" />
+          <button class="session-send">➤</button>
+        </div>
+
+        <div class="session-footer-pill">
+          Seu chat de alta performance, estilo de vida e disciplina – em uma única página.
+        </div>
+      </div>
     </section>
 
-    <!-- HISTÓRICO -->
-    <section id="history">
-        <h2>Histórico</h2>
-        <p>Tudo que você já criou estará listado aqui.</p>
+    <!-- COMO FUNCIONA -->
+    <section class="section" id="sec-como-funciona">
+      <h2 class="section-title">Como BillionMind AI funciona na prática.</h2>
+      <p class="section-sub">
+        O app foi pensado para qualquer pessoa no mundo: você abre, escreve o que quer mudar e o chat monta rotinas, tarefas, frases e imagens para apoiar sua nova mentalidade – tudo em uma única página.
+      </p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-title">Chat de alta performance</div>
+          <p class="feature-desc">
+            Você conversa com a IA como se falasse com um mentor: fala da sua rotina, da sua vida e dos seus objetivos, e recebe respostas diretas, práticas e aplicáveis no mesmo dia.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-title">Planos diários e tarefas</div>
+          <p class="feature-desc">
+            O app cria planos estruturados de 7, 21 ou 30 dias com tarefas diárias, metas de foco e checagens simples, para você seguir sem se perder no excesso de informação.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-title">Imagens de lifestyle via IA</div>
+          <p class="feature-desc">
+            Você pede e a IA sugere prompts de imagens de carros, cidades, viagens, escritórios e cenas de luxo para gerar em qualquer gerador de imagem e usar como motivação ou conteúdo.
+          </p>
+        </div>
+      </div>
     </section>
 
-    <!-- IMAGENS -->
-    <section id="images">
-        <h2>Gerador de Imagens</h2>
-        <p>Interface para criar imagens com IA.</p>
+    <!-- JORNADAS -->
+    <section class="section">
+      <h2 class="section-title">Jornadas guiadas que qualquer pessoa pode seguir.</h2>
+      <p class="section-sub">
+        Em vez de só responder perguntas, BillionMind AI organiza sua evolução em “caminhos” claros. Você escolhe a jornada e o chat mostra o que fazer hoje, amanhã e nas próximas semanas.
+      </p>
+
+      <div class="journey-grid">
+        <article class="journey-card">
+          <div class="journey-label">Jornada 01</div>
+          <div class="journey-title">30 dias de disciplina absoluta</div>
+          <p class="journey-desc">
+            Foco em construir consistência. Ideal para quem sente que sempre começa e para.
+          </p>
+          <ul class="journey-list">
+            <li>Despertar com propósito e horários definidos.</li>
+            <li>Blocos de foco para trabalho, estudo ou projeto.</li>
+            <li>Rituais noturnos para encerrar o dia com consciência.</li>
+          </ul>
+        </article>
+
+        <article class="journey-card">
+          <div class="journey-label">Jornada 02</div>
+          <div class="journey-title">Renda extra e mentalidade de dono</div>
+          <p class="journey-desc">
+            Direcionada para quem quer sair do “só sobreviver” e começar a construir renda a partir do que já sabe.
+          </p>
+          <ul class="journey-list">
+            <li>Mapeamento de habilidades e oportunidades.</li>
+            <li>Uma ação de dinheiro por dia (simples e objetiva).</li>
+            <li>Revisão semanal de ganhos, erros e ajustes.</li>
+          </ul>
+        </article>
+
+        <article class="journey-card">
+          <div class="journey-label">Jornada 03</div>
+          <div class="journey-title">Lifestyle de luxo consciente</div>
+          <p class="journey-desc">
+            Para quem gosta de carro, viagem, roupa e cidade bonita, mas quer fazer isso com estrutura e responsabilidade.
+          </p>
+          <ul class="journey-list">
+            <li>Planejamento de metas de lifestyle (viagem, carro, casa).</li>
+            <li>Conexão entre imagem, trabalho e disciplina.</li>
+            <li>Prompts de imagens para visualizar sua vida futura.</li>
+          </ul>
+        </article>
+      </div>
     </section>
 
     <!-- PLANOS -->
-    <section id="plans">
-        <h2>Planos & Assinaturas</h2>
-        <p>Benefícios, níveis, vantagens e botões de upgrade.</p>
+    <section class="section" id="sec-planos">
+      <div class="plans-header">
+        <h2 class="section-title">Planos simples para qualquer realidade.</h2>
+        <p class="section-sub">
+          Você pode oferecer acesso gratuito para o mundo inteiro e um plano pago para quem quer ir mais fundo com rotinas avançadas, imagens extras e suporte prioritário.
+        </p>
+
+        <div class="plans-toggle" aria-label="Tipo de cobrança">
+          <button type="button" class="active">Mensal</button>
+          <button type="button" disabled>Anual em breve</button>
+        </div>
+
+        <p class="plans-note">
+          Abaixo já está tudo pronto para conectar seu checkout (Stripe). O botão do plano PRO usa a integração que configuramos.
+        </p>
+      </div>
+
+      <div class="pricing-grid">
+
+        <!-- FREE -->
+        <article class="price-card basic">
+          <div class="price-header">
+            <div class="price-name">FREE · Começar hoje</div>
+          </div>
+          <div class="price-sub">
+            Para qualquer pessoa dar o primeiro passo sem pagar nada.
+          </div>
+          <div class="price-value">
+            R$ 0 <span>/ mês</span>
+          </div>
+          <ul class="price-list">
+            <li>Acesso ao chat com respostas básicas.</li>
+            <li>1 jornada liberada (30 dias de disciplina).</li>
+            <li>Ideias limitadas de prompts para imagens.</li>
+            <li>Resumo semanal simples de progresso.</li>
+          </ul>
+          <div class="price-footer">
+            Ideal para atrair muita gente do TikTok, Instagram e YouTube.
+          </div>
+          <button class="price-btn" disabled>
+            Começar de graça
+          </button>
+        </article>
+
+        <!-- PRO (INTEGRADO AO STRIPE – R$ 29,90) -->
+        <article class="price-card">
+          <div class="price-header">
+            <div class="price-name">PRO · Rotina e Renda</div>
+            <div class="price-tag">Recomendado</div>
+          </div>
+          <div class="price-sub">
+            Para quem quer viver na prática o que a BillionMind AI sugere todos os dias.
+          </div>
+          <div class="price-value">
+            R$ 29,90 <span>/ mês</span>
+          </div>
+          <ul class="price-list">
+            <li>Acesso completo ao chat de alta performance.</li>
+            <li>Jornadas completas de disciplina, renda e lifestyle.</li>
+            <li>Rotinas personalizadas a partir da realidade do usuário.</li>
+            <li>Mais prompts e ideias de imagens de luxo via IA.</li>
+            <li>Exportar planos em PDF ou copiar para notas.</li>
+          </ul>
+          <div class="price-footer">
+            Onde a maioria das pessoas fica: preço acessível com impacto alto.
+          </div>
+          <button id="subscribeButton" class="price-btn price-btn-primary">
+            Assinar plano PRO
+          </button>
+          <div id="planError" class="plan-error"></div>
+        </article>
+
+      </div>
     </section>
 
-</div>
+    <!-- CHAMADA FINAL -->
+    <section class="section">
+      <div class="hero" style="padding:18px 16px 16px;border-radius:22px;">
+        <h2 class="section-title" style="margin-bottom:6px;">
+          Pronto para colocar uma BillionMind na palma da mão das pessoas?
+        </h2>
+        <p class="section-sub">
+          Esta página única pode ser a base do seu produto de assinatura global. Você conecta o checkout, adiciona login e transforma o seu nome em referência de disciplina, dinheiro e lifestyle pelo mundo.
+        </p>
+        <button class="btn-primary-large" onclick="document.getElementById('sec-planos').scrollIntoView({behavior:'smooth'})">
+          Ativar meu plano e lançar
+        </button>
+      </div>
+    </section>
 
-<script>
-function show(id) {
-    document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
-    document.getElementById(id).classList.add("active");
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div>© 2025 BillionMind AI. Todos os direitos reservados.</div>
+      <div class="footer-pill-row">
+        <div class="footer-pill">Feito para criadores e pessoas comuns.</div>
+        <div class="footer-pill">Uso global · Página única · Alta performance.</div>
+      </div>
+    </footer>
+  </main>
 
-    document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
-    event.target.classList.add("active");
-}
-</script>
+  <script>
+    // Botão do plano PRO -> Stripe Checkout via /api/createPlan
+    const subscribeButton = document.getElementById("subscribeButton");
+    const planError = document.getElementById("planError");
 
+    async function createCheckout() {
+      planError.style.display = "none";
+      subscribeButton.disabled = true;
+      subscribeButton.textContent = "Criando pagamento...";
+
+      try {
+        const res = await fetch("/api/createPlan", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ plan: "pro" })
+        });
+
+        if (!res.ok) {
+          throw new Error("Erro ao criar pagamento.");
+        }
+
+        const data = await res.json();
+        if (data && data.url) {
+          window.location.href = data.url;
+        } else {
+          throw new Error("Resposta sem URL de checkout.");
+        }
+      } catch (err) {
+        planError.textContent = "Erro de conexão ao criar o pagamento.";
+        planError.style.display = "block";
+        subscribeButton.disabled = false;
+        subscribeButton.textContent = "Assinar plano PRO";
+      }
+    }
+
+    subscribeButton.addEventListener("click", createCheckout);
+  </script>
 </body>
 </html>
