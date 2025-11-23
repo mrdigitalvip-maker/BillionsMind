@@ -2,362 +2,324 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>BillionMind AI • Chat de Alta Performance</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BillionMind AI – Disciplina, dinheiro e lifestyle</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Um único chat de alta performance para disciplina, dinheiro e lifestyle. Monte rotinas de 30 dias, planos diários e ideias de renda extra guiadas pela IA."
+  />
+
+  <!-- Open Graph / Social preview -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="BillionMind AI – Disciplina, dinheiro e lifestyle" />
+  <meta
+    property="og:description"
+    content="Organize disciplina, dinheiro e lifestyle em um único chat de alta performance. Teste a conta Free com 3 sessões por dia."
+  />
+  <!-- Ajuste o caminho se usar outro nome/pasta -->
+  <meta property="og:image" content="https://billions-mind.vercel.app/billionmind-icon.png" />
+  <meta property="og:url" content="https://billions-mind.vercel.app" />
+
+  <!-- Icones do app / favicon -->
+  <link rel="icon" type="image/png" href="/billionmind-icon.png" />
+  <link rel="apple-touch-icon" href="/billionmind-icon.png" />
 
   <style>
     :root {
-      --bg: #050712;
-      --bg-elevated: #090c18;
-      --bg-soft: #0f1421;
-      --border-soft: rgba(148, 163, 184, 0.4);
-      --primary: #f5c352;
-      --primary-soft: rgba(245, 195, 82, 0.18);
-      --accent: #4ade80;
-      --text-main: #f9fafb;
-      --text-soft: #a5b4cf;
-      --text-muted: #6b7280;
-      --shadow: 0 20px 50px rgba(0, 0, 0, 0.65);
-      --radius-lg: 24px;
-      --radius-pill: 999px;
+      --bg: #05070b;
+      --bg-card: radial-gradient(circle at top left, #24293b 0, #05070b 55%, #000000 100%);
+      --bg-page-light: #f4f5f9;
+      --bg-page-dark: #05070b;
+
+      --text-main: #f7f8ff;
+      --text-soft: #c0c4d8;
+      --text-muted: #8b91a7;
+
+      --accent: #ffd54a;
+      --accent-soft: #ffe27b;
+      --accent-strong: #ffb300;
+
+      --chip-bg: rgba(255, 255, 255, 0.03);
+      --chip-border: rgba(255, 255, 255, 0.12);
+
+      --border-soft: rgba(255, 255, 255, 0.16);
+      --shadow-soft: 0 24px 60px rgba(0, 0, 0, 0.6);
+
+      --nav-bg: #05070b;
+      --nav-pill: #060910;
+
+      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Roboto", "Segoe UI", sans-serif;
     }
 
     @media (prefers-color-scheme: light) {
       :root {
-        --bg: #f5f5f9;
-        --bg-elevated: #ffffff;
-        --bg-soft: #eef1f9;
-        --border-soft: rgba(15, 23, 42, 0.12);
-        --text-main: #020617;
-        --text-soft: #4b5563;
-        --text-muted: #6b7280;
-        --shadow: 0 10px 30px rgba(15, 23, 42, 0.18);
+        --bg-page-light: #f4f5f9;
+        --bg: #0c101a;
+        --bg-card: radial-gradient(circle at top left, #1b2133 0, #05070b 60%, #000000 100%);
+        --text-main: #fdfdff;
+        --text-soft: #d6daeb;
+        --text-muted: #a0a5bc;
+        --nav-bg: #f4f5f9;
+        --nav-pill: #0c101a;
       }
     }
 
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #111827 0, var(--bg) 40%);
+      font-family: var(--font-main);
+      background: linear-gradient(to bottom, var(--bg-page-dark), var(--bg-page-light));
       color: var(--text-main);
       min-height: 100vh;
       display: flex;
       justify-content: center;
-      padding: 16px 10px 86px;
     }
 
     .app-shell {
       width: 100%;
-      max-width: 480px;
+      max-width: 520px;
+      min-height: 100vh;
+      padding: 12px 12px 80px;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 16px;
     }
 
-    /* HEADER PRINCIPAL */
-    .hero-header {
-      border-radius: var(--radius-lg);
-      padding: 14px 14px 16px;
-      background: radial-gradient(circle at top left, rgba(245,195,82,0.24), transparent 55%),
-                  linear-gradient(145deg, #020617, #020617);
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      box-shadow: var(--shadow);
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
+    /* HERO / HOME */
+
+    .hero-card {
+      background: var(--bg-card);
+      border-radius: 28px;
+      padding: 18px 18px 20px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+      overflow: hidden;
     }
 
-    .logo-circle {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 20%, #fff7de, #f5c352 50%, #7c4e17 80%, #000 100%);
-      box-shadow: 0 0 20px rgba(245,195,82,0.9);
-      flex-shrink: 0;
-    }
-
-    .hero-texts {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .hero-title-row {
+    .hero-top {
       display: flex;
       justify-content: space-between;
-      gap: 10px;
       align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #ffffff 0, #ffe27b 16%, #ffb300 48%, #5f4300 100%);
+      box-shadow: 0 0 30px rgba(255, 204, 0, 0.45);
+      position: relative;
+    }
+
+    .brand-icon::after {
+      content: "";
+      position: absolute;
+      inset: 28%;
+      border-radius: 50%;
+      background: #05070b;
+    }
+
+    .brand-text-line1 {
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      color: var(--text-soft);
+      margin-bottom: 2px;
+    }
+
+    .brand-text-line2 {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .status-pill {
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(0, 255, 120, 0.12);
+      border: 1px solid rgba(0, 255, 120, 0.8);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #bfffd7;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #00ff7b;
+      box-shadow: 0 0 10px rgba(0, 255, 123, 0.8);
     }
 
     .hero-title {
-      font-size: 15px;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--text-soft);
+      margin-top: 12px;
+      font-size: 1.1rem;
+      line-height: 1.3;
+      font-weight: 600;
+      color: var(--text-main);
     }
 
-    .hero-status-pill {
-      font-size: 10px;
-      padding: 4px 10px;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(74, 222, 128, 0.7);
-      color: var(--accent);
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-    }
-
-    .hero-status-pill span.dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #22c55e;
-      box-shadow: 0 0 8px rgba(34,197,94,0.9);
-    }
-
-    .hero-headline {
-      margin-top: 4px;
-      font-size: 19px;
-      line-height: 1.35;
-    }
-
-    .hero-headline span {
-      color: var(--primary);
+    .hero-title span.highlight {
+      color: var(--accent-soft);
     }
 
     .hero-sub {
-      font-size: 12px;
+      margin-top: 8px;
+      font-size: 0.84rem;
+      line-height: 1.5;
       color: var(--text-soft);
-      margin-top: 4px;
     }
 
-    .hero-ctas {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 10px;
-    }
-
-    .btn-main {
-      border-radius: var(--radius-pill);
-      padding: 7px 14px;
-      font-size: 12px;
-      border: none;
-      background: linear-gradient(120deg, #f97316, #facc15);
-      color: #111827;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 12px 24px rgba(248, 181, 0, 0.45);
-    }
-
-    .btn-ghost {
-      border-radius: var(--radius-pill);
-      padding: 6px 12px;
-      font-size: 11px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      background: rgba(15, 23, 42, 0.8);
-      color: var(--text-soft);
-      cursor: pointer;
-    }
-
-    .hero-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 10px;
-      font-size: 10px;
-    }
-
-    .hero-badge {
-      padding: 3px 10px;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-    }
-
-    .hero-badge.primary {
-      border-color: rgba(245,195,82,0.85);
-      background: var(--primary-soft);
-      color: var(--primary);
-    }
-
-    /* TELAS (UMA POR VEZ) */
-    .screen {
-      display: none;
-    }
-
-    .screen.active {
-      display: block;
-    }
-
-    /* HOME – BÔNUS DE IDEIAS */
-    .home-grid {
-      margin-top: 4px;
+    .hero-cta-row {
+      margin-top: 16px;
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
 
-    .home-card {
-      padding: 14px 14px 12px;
-      border-radius: var(--radius-lg);
-      background: linear-gradient(155deg, var(--bg-elevated), var(--bg-soft));
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-soft), var(--accent-strong));
+      border: none;
+      color: #181001;
+      font-weight: 600;
+      border-radius: 999px;
+      padding: 11px 16px;
+      width: 100%;
+      font-size: 0.9rem;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .btn-primary:active {
+      transform: translateY(1px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.7);
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 999px;
+      padding: 9px 14px;
       border: 1px solid var(--border-soft);
-      box-shadow: var(--shadow);
-      font-size: 13px;
       color: var(--text-soft);
+      font-size: 0.8rem;
+      cursor: pointer;
     }
 
-    .home-card-title {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-    }
-
-    .home-card-main {
-      font-size: 15px;
-      color: var(--text-main);
-      margin-bottom: 4px;
-    }
-
-    .pill-row {
+    .chip-row {
+      margin-top: 14px;
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
-      margin-top: 6px;
     }
 
-    .pill {
-      font-size: 11px;
-      padding: 4px 9px;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      color: var(--text-muted);
+    .chip {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--chip-border);
+      background: var(--chip-bg);
+      color: var(--text-soft);
+      white-space: nowrap;
     }
 
-    .pill.gold {
-      border-color: rgba(245,195,82,0.85);
-      background: var(--primary-soft);
-      color: var(--primary);
+    .chip.chip-accent {
+      border-color: rgba(255, 213, 74, 0.8);
+      color: #ffe27b;
+      background: linear-gradient(
+        135deg,
+        rgba(255, 213, 74, 0.12),
+        rgba(0, 0, 0, 0.3)
+      );
     }
 
-    .idea-list {
-      margin-top: 6px;
-      list-style: none;
+    /* CHAT SECTION */
+
+    .chat-card {
+      margin-top: 10px;
+      background: linear-gradient(to bottom, #111525, #05070b);
+      border-radius: 26px;
+      padding: 16px 14px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.75);
       display: flex;
       flex-direction: column;
-      gap: 4px;
-      font-size: 12px;
+      gap: 10px;
+      flex: 1;
     }
 
-    .idea-list li::before {
-      content: "• ";
-      color: var(--primary);
-    }
-
-    /* CHAT – TELA DEDICADA */
-    .chat-wrapper {
-      margin-top: 4px;
-      padding: 14px 12px 12px;
-      background: linear-gradient(160deg, var(--bg-elevated), #020617);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border-soft);
-      box-shadow: var(--shadow);
-      display: flex;
-      flex-direction: column;
-      height: calc(100vh - 170px);
-      max-height: 520px;
-      min-height: 360px;
-    }
-
-    .chat-header {
+    .chat-header-mini {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-bottom: 6px;
+      font-size: 0.75rem;
+      color: var(--text-soft);
     }
 
-    .chat-header span strong {
-      color: var(--primary);
-    }
-
-    .chat-mode-pill {
-      padding: 3px 10px;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      font-size: 10px;
+    .chat-header-mini .plan-pill {
+      border-radius: 999px;
+      padding: 5px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.03);
+      font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 0.16em;
       color: var(--text-soft);
     }
 
-    .chat-messages {
-      flex: 1;
-      overflow-y: auto;
-      padding: 4px 2px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      scrollbar-width: thin;
-      scrollbar-color: rgba(148,163,184,0.7) transparent;
-    }
-
-    .chat-msg {
-      max-width: 92%;
-      padding: 8px 11px;
-      border-radius: 16px;
-      font-size: 13px;
-      line-height: 1.4;
-    }
-
-    .chat-msg.user {
-      align-self: flex-end;
-      background: linear-gradient(135deg, #2563eb, #22c55e);
-      color: #f9fafb;
-      border-bottom-right-radius: 4px;
-    }
-
-    .chat-msg.bot {
-      align-self: flex-start;
-      background: #020617;
-      border: 1px solid rgba(148, 163, 184, 0.7);
+    .chat-bubble {
+      background: #05070b;
+      border-radius: 18px;
+      padding: 12px 12px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      font-size: 0.82rem;
+      line-height: 1.55;
       color: var(--text-soft);
-      border-bottom-left-radius: 4px;
     }
 
-    .chat-msg.bot strong {
-      color: var(--primary);
+    .chat-bubble strong {
+      color: var(--accent-soft);
     }
 
-    .chat-footer {
+    .chat-input-row {
+      margin-top: 6px;
       display: flex;
       gap: 8px;
-      margin-top: 6px;
+      align-items: center;
+    }
+
+    .chat-input-wrapper {
+      flex: 1;
+      position: relative;
     }
 
     .chat-input {
-      flex: 1;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      padding: 8px 12px;
-      background: rgba(15, 23, 42, 0.96);
+      width: 100%;
+      padding: 11px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: radial-gradient(circle at top left, #1c2232 0, #05070b 60%);
       color: var(--text-main);
-      font-size: 13px;
+      font-size: 0.82rem;
       outline: none;
     }
 
@@ -366,573 +328,423 @@
     }
 
     .chat-send-btn {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
       border: none;
-      background: radial-gradient(circle at 30% 20%, #fff7e5, #f5c352 45%, #7c4e17 80%);
+      cursor: pointer;
+      background: radial-gradient(circle at 30% 20%, #ffffff 0, #ffe27b 24%, #ffb300 60%, #5f4300 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 12px 26px rgba(245,195,82,0.75);
-      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.8);
+      color: #1b1200;
+      font-size: 1.1rem;
     }
 
-    .chat-send-btn svg {
-      width: 18px;
-      height: 18px;
-      fill: #111827;
-    }
-
-    .chat-hint {
-      font-size: 11px;
+    .chat-helper {
+      margin-top: 4px;
+      font-size: 0.7rem;
       color: var(--text-muted);
-      margin-top: 4px;
     }
 
-    /* HISTÓRICO */
-    .screen-card {
-      margin-top: 4px;
-      padding: 14px 14px 12px;
-      border-radius: var(--radius-lg);
-      background: linear-gradient(150deg, var(--bg-elevated), var(--bg-soft));
-      border: 1px solid var(--border-soft);
-      box-shadow: var(--shadow);
-      font-size: 13px;
-      color: var(--text-soft);
+    .messages-area {
+      max-height: 220px;
+      overflow-y: auto;
+      padding-right: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
 
-    .screen-title {
-      font-size: 15px;
-      margin-bottom: 4px;
+    .msg {
+      font-size: 0.8rem;
+      line-height: 1.5;
+      padding: 8px 10px;
+      border-radius: 14px;
+    }
+
+    .msg.user {
+      background: rgba(255, 255, 255, 0.06);
+      align-self: flex-end;
       color: var(--text-main);
     }
 
-    .history-list {
-      margin-top: 8px;
+    .msg.ai {
+      background: rgba(0, 0, 0, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      align-self: flex-start;
+      color: var(--text-soft);
+    }
+
+    /* NAV BOTTOM */
+
+    .nav-shell {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 10px;
       display: flex;
-      flex-direction: column;
-      gap: 8px;
-      font-size: 12px;
+      justify-content: center;
+      pointer-events: none;
     }
 
-    .history-item {
-      padding: 8px 10px;
-      border-radius: 14px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      background: rgba(15, 23, 42, 0.9);
-    }
-
-    .history-item-header {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-bottom: 2px;
-    }
-
-    .history-item-main {
-      color: var(--primary);
-    }
-
-    /* IMAGENS */
-    .image-form {
-      margin-top: 8px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .image-textarea {
+    .nav-inner {
+      pointer-events: auto;
       width: 100%;
-      min-height: 70px;
-      border-radius: 14px;
-      border: 1px solid rgba(148,163,184,0.7);
-      padding: 8px 10px;
-      background: rgba(15,23,42,0.96);
-      color: var(--text-main);
-      font-size: 13px;
-      resize: vertical;
+      max-width: 520px;
+      padding: 0 12px;
     }
 
-    .image-textarea::placeholder {
-      color: var(--text-muted);
-    }
-
-    .image-actions {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .btn-small {
-      border-radius: var(--radius-pill);
-      padding: 6px 12px;
-      border: none;
-      font-size: 12px;
-      cursor: pointer;
-    }
-
-    .btn-gold {
-      background: linear-gradient(120deg, #f59e0b, #facc15);
-      color: #111827;
-      box-shadow: 0 8px 20px rgba(248, 181, 0, 0.45);
-    }
-
-    .btn-outline {
-      background: transparent;
-      border: 1px solid rgba(148,163,184,0.7);
-      color: var(--text-soft);
-    }
-
-    .image-preview {
-      margin-top: 8px;
-      border-radius: 16px;
-      border: 1px dashed rgba(148,163,184,0.7);
-      background: radial-gradient(circle at top, rgba(245,195,82,0.16), rgba(15,23,42,0.96));
-      min-height: 140px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px;
-      font-size: 12px;
-      text-align: center;
-      color: var(--text-soft);
-    }
-
-    .image-preview img {
-      max-width: 100%;
-      border-radius: 14px;
-    }
-
-    /* PLANOS / ASSINATURA */
-    .plans-grid {
-      margin-top: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .plan-card {
-      padding: 12px 12px 10px;
-      border-radius: 18px;
-      background: radial-gradient(circle at top left, rgba(245,195,82,0.15), var(--bg-elevated));
-      border: 1px solid rgba(148,163,184,0.65);
-      box-shadow: var(--shadow);
-      font-size: 13px;
-    }
-
-    .plan-header {
+    .nav-pill-bar {
+      background: var(--nav-pill);
+      border-radius: 999px;
+      padding: 4px;
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
-      gap: 6px;
-    }
-
-    .plan-name {
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    .plan-price {
-      font-size: 13px;
-      color: var(--primary);
-    }
-
-    .plan-tag {
-      font-size: 10px;
-      padding: 3px 8px;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(148,163,184,0.7);
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-    }
-
-    .plan-features {
-      margin-top: 6px;
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-      font-size: 12px;
-      color: var(--text-soft);
-    }
-
-    .plan-features li::before {
-      content: "✓ ";
-      color: var(--accent);
-    }
-
-    .plan-btn {
-      margin-top: 8px;
-      width: 100%;
-      border-radius: var(--radius-pill);
-      padding: 7px 0;
-      border: none;
-      font-size: 12px;
-      cursor: pointer;
-    }
-
-    .plan-btn.primary {
-      background: linear-gradient(120deg, #f97316, #facc15);
-      color: #111827;
-    }
-
-    .plan-btn.ghost {
-      background: rgba(15,23,42,0.9);
-      color: var(--text-soft);
-      border: 1px solid rgba(148,163,184,0.7);
-    }
-
-    .plans-note {
-      margin-top: 6px;
-      font-size: 11px;
-      color: var(--text-muted);
-      text-align: center;
-    }
-
-    /* NAV INFERIOR */
-    .bottom-nav {
-      position: fixed;
-      left: 50%;
-      bottom: 8px;
-      transform: translateX(-50%);
-      width: 100%;
-      max-width: 480px;
-      padding: 0 10px;
-      z-index: 40;
-    }
-
-    .bottom-nav-inner {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
       gap: 4px;
-      padding: 6px;
-      border-radius: var(--radius-pill);
-      background: rgba(2,6,23,0.96);
-      border: 1px solid rgba(148,163,184,0.5);
-      box-shadow: 0 20px 45px rgba(0,0,0,0.9);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.8);
     }
 
     .nav-item {
-      border-radius: var(--radius-pill);
-      padding: 6px 2px;
-      font-size: 10px;
-      color: var(--text-muted);
+      flex: 1;
+      border-radius: 999px;
+      padding: 6px 4px 4px;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 2px;
+      font-size: 0.7rem;
+      color: var(--text-soft);
       cursor: pointer;
-      border: 1px solid transparent;
     }
 
     .nav-item span.icon {
-      font-size: 16px;
-      line-height: 1;
+      font-size: 1.15rem;
     }
 
     .nav-item.active {
-      background: rgba(245,195,82,0.16);
-      border-color: rgba(245,195,82,0.9);
-      color: var(--primary);
+      background: radial-gradient(circle at top, rgba(255, 213, 74, 0.26), transparent 55%);
+      color: var(--accent-soft);
+      border: 1px solid rgba(255, 213, 74, 0.65);
     }
 
-    @media (min-width: 768px) {
-      body {
-        padding-top: 24px;
-      }
+    /* SEÇÕES (para outras abas) */
+
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .section-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--text-main);
+    }
+
+    .section-text {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      line-height: 1.6;
+    }
+
+    .plans-list {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .plan-card {
+      border-radius: 18px;
+      padding: 10px 12px;
+      border: 1px solid var(--border-soft);
+      background: rgba(0, 0, 0, 0.55);
+      font-size: 0.78rem;
+      color: var(--text-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .plan-card strong {
+      color: var(--accent-soft);
+    }
+
+    .history-placeholder,
+    .images-placeholder {
+      margin-top: 6px;
+      border-radius: 18px;
+      border: 1px dashed rgba(255, 255, 255, 0.18);
+      padding: 10px 12px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .images-placeholder button {
+      margin-top: 8px;
+      border-radius: 999px;
+      border: 1px solid var(--accent-soft);
+      background: transparent;
+      color: var(--accent-soft);
+      padding: 6px 10px;
+      font-size: 0.78rem;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <div class="app-shell">
-    <!-- HERO / CABEÇALHO PERSUASIVO -->
-    <header class="hero-header">
-      <div class="logo-circle"></div>
-      <div class="hero-texts">
-        <div class="hero-title-row">
-          <div class="hero-title">BILLIONMIND AI</div>
-          <div class="hero-status-pill">
-            <span class="dot"></span>
-            Chat liberado
+  <div class="app-shell" id="app">
+    <!-- HOME / HERO -->
+    <div class="section section-home active" id="section-home">
+      <div class="hero-card">
+        <div class="hero-top">
+          <div class="brand">
+            <div class="brand-icon"></div>
+            <div>
+              <div class="brand-text-line1">BILLIONMIND</div>
+              <div class="brand-text-line2">AI · DISCIPLINA · RENDA EXTRA</div>
+            </div>
+          </div>
+          <div class="status-pill">
+            <span class="status-dot"></span>
+            <span>CHAT LIBERADO</span>
           </div>
         </div>
-        <h1 class="hero-headline">
-          Um único chat para organizar <span>disciplina, dinheiro e lifestyle</span>.
+
+        <h1 class="hero-title">
+          Um único chat para organizar
+          <span class="highlight">disciplina, dinheiro e lifestyle</span>.
         </h1>
+
         <p class="hero-sub">
-          Escreva como você quer viver e deixe a IA montar metas diárias, planos de 30 dias e ideias de renda extra.
+          Escreva como você quer viver e deixe a IA montar metas diárias,
+          planos de 30 dias e ideias de renda extra, sem bagunçar sua mente.
         </p>
-        <div class="hero-ctas">
-          <button class="btn-main" onclick="goToScreen('chat')">
+
+        <div class="hero-cta-row">
+          <button class="btn-primary" onclick="navigateTo('chat')">
             Começar sessão agora
           </button>
-          <button class="btn-ghost" onclick="goToScreen('plans')">
+          <button class="btn-ghost" onclick="navigateTo('plans')">
             Ver planos e benefícios
           </button>
         </div>
-        <div class="hero-badges">
-          <div class="hero-badge primary">Bônus · ideias de renda extra guiadas</div>
-          <div class="hero-badge">Plano de 30 dias automático</div>
-          <div class="hero-badge">Estilo de vida sem bagunça mental</div>
+
+        <div class="chip-row">
+          <div class="chip chip-accent">Bônus · ideias de renda extra guiadas</div>
+          <div class="chip">Plano de 30 dias automático</div>
+          <div class="chip">Estilo de vida sem bagunça mental</div>
         </div>
       </div>
-    </header>
 
-    <!-- TELA HOME -->
-    <section id="screen-home" class="screen active">
-      <div class="home-grid">
-        <article class="home-card">
-          <div class="home-card-title">BÔNUS EXCLUSIVO · IDEIAS PRONTAS</div>
-          <div class="home-card-main">
-            Comece hoje com 3 ideias simples de renda extra que cabem na sua rotina.
-          </div>
-          <ul class="idea-list">
-            <li>Transformar conhecimento em roteiro de conteúdo (Reels/TikTok) para vender seu app ou produto.</li>
-            <li>Usar o BillionMind para montar 30 posts de autoridade sobre disciplina e liberdade financeira.</li>
-            <li>Criar um mini-produto digital “Plano de 7 dias” com as rotinas sugeridas pelo chat.</li>
-          </ul>
-          <div class="pill-row">
-            <span class="pill gold">Use o chat para transformar cada ideia em passo a passo.</span>
-          </div>
-        </article>
+      <!-- BLOCO DE CHAT PRÉVIA -->
+      <div class="chat-card">
+        <div class="chat-header-mini">
+          <span>BillionMind AI · modo disciplina + renda extra</span>
+          <span class="plan-pill">Conta Free · 3 testes por dia</span>
+        </div>
 
-        <article class="home-card">
-          <div class="home-card-title">COMO O APP TRABALHA POR VOCÊ</div>
-          <p class="home-card-main">
-            1. Você envia sua meta. 2. O chat monta o foco do dia. 3. O histórico registra. 4. As imagens mostram o lifestyle que você está construindo.
-          </p>
-          <div class="pill-row">
-            <span class="pill">Chat de alta performance</span>
-            <span class="pill">Histórico de sessões</span>
-            <span class="pill">Imagens de lifestyle</span>
-            <span class="pill">Planos Free / Pro / Premium</span>
+        <div class="chat-bubble">
+          <strong>BillionMind:</strong>
+          me conte em uma frase como você quer estar em 30 dias
+          (disciplina, dinheiro e lifestyle). Eu vou montar o foco de hoje e
+          os próximos passos.
+        </div>
+
+        <div class="chat-input-row">
+          <div class="chat-input-wrapper">
+            <input
+              id="preview-input"
+              class="chat-input"
+              type="text"
+              placeholder="Ex.: Quero 30 dias de disciplina e renda extra à noite."
+            />
           </div>
-        </article>
+          <button class="chat-send-btn" onclick="navigateTo('chat')">➤</button>
+        </div>
+        <div class="chat-helper">
+          Dica: quanto mais específico você for (horário, objetivo, valor em
+          dinheiro), mais forte será a sessão.
+        </div>
       </div>
-    </section>
+    </div>
 
-    <!-- TELA CHAT -->
-    <section id="screen-chat" class="screen">
-      <div class="chat-wrapper">
-        <div class="chat-header">
-          <span><strong>BillionMind AI</strong> · modo disciplina + renda extra</span>
-          <span class="chat-mode-pill">Conta Free · 3 testes por dia</span>
+    <!-- CHAT COMPLETO -->
+    <div class="section" id="section-chat">
+      <div class="chat-card">
+        <div class="chat-header-mini">
+          <span>Chat BillionMind · metas, rotinas e lifestyle</span>
+          <span class="plan-pill">Free · até 3 sessões por dia</span>
         </div>
 
-        <div id="chatMessages" class="chat-messages">
-          <div class="chat-msg bot">
-            <strong>BillionMind:</strong> me conte em uma frase como você quer estar em 30 dias (disciplina, dinheiro e lifestyle).
-            Eu vou montar o foco de hoje e os próximos passos.
+        <div class="messages-area" id="messages">
+          <div class="msg ai">
+            <strong>BillionMind:</strong>
+            me diga qual é a sua meta principal agora (disciplina, dinheiro ou lifestyle)
+            e em quantos dias você quer ver resultado. Eu vou montar o foco de hoje.
           </div>
         </div>
 
-        <div class="chat-footer">
-          <input
-            id="chatInput"
-            class="chat-input"
-            type="text"
-            placeholder="Ex.: Quero 30 dias de disciplina e renda extra à noite..."
-          />
-          <button class="chat-send-btn" id="sendBtn" aria-label="Enviar mensagem">
-            <svg viewBox="0 0 24 24">
-              <path d="M3.4 20.6L21 12 3.4 3.4 3 10.2 13 12 3 13.8z" />
-            </svg>
+        <div class="chat-input-row">
+          <div class="chat-input-wrapper">
+            <input
+              id="chat-input"
+              class="chat-input"
+              type="text"
+              placeholder="Ex.: Quero aumentar minha renda em R$ 2.000 em 30 dias."
+            />
+          </div>
+          <button class="chat-send-btn" onclick="sendMessage()">➤</button>
+        </div>
+        <div class="chat-helper">
+          Cada envio conta como 1 sessão. Use para destravar o seu próximo passo importante.
+        </div>
+      </div>
+    </div>
+
+    <!-- HISTÓRICO -->
+    <div class="section" id="section-history">
+      <div class="chat-card">
+        <div class="section-title">Histórico de sessões</div>
+        <p class="section-text">
+          Aqui você verá um resumo das suas últimas conversas com a BillionMind AI:
+          metas definidas, tarefas do dia e ideias de renda extra.
+        </p>
+        <div class="history-placeholder" id="history-placeholder">
+          Histórico real será carregado quando a integração com o banco estiver ativa.
+          Por enquanto, esta área é um preview visual.
+        </div>
+      </div>
+    </div>
+
+    <!-- IMAGENS -->
+    <div class="section" id="section-images">
+      <div class="chat-card">
+        <div class="section-title">Criação de imagens de lifestyle</div>
+        <p class="section-text">
+          Descreva uma cena que represente o seu estilo de vida desejado
+          (carro, cidade, momento do dia, sensação). A IA pode transformar isso
+          em uma imagem para usar como motivação.
+        </p>
+        <div class="images-placeholder">
+          <div>Área de geração de imagens conectada à rota <code>/api/image</code>.</div>
+          <button onclick="alert('Integração visual apenas. Conecte /api/image para gerar de verdade.')">
+            Entendi · apenas visual por enquanto
           </button>
         </div>
-        <p class="chat-hint">
-          Dica: quanto mais específico você for (horário, objetivo, valor em dinheiro), mais forte será a sessão.
+      </div>
+    </div>
+
+    <!-- PLANOS -->
+    <div class="section" id="section-plans">
+      <div class="chat-card">
+        <div class="section-title">Planos e benefícios</div>
+        <p class="section-text">
+          Você pode começar na conta Free para sentir o fluxo do app, e depois
+          fazer upgrade para mais sessões diárias, histórico completo e
+          planos guiados de 30 dias.
         </p>
-      </div>
-    </section>
 
-    <!-- TELA HISTÓRICO -->
-    <section id="screen-history" class="screen">
-      <div class="screen-card">
-        <h2 class="screen-title">Histórico das suas sessões</h2>
-        <p>Veja como sua disciplina e sua renda extra evoluem dia após dia.</p>
-        <div id="historyList" class="history-list">
-          <div class="history-item">
-            <div class="history-item-header">Pré-visualização</div>
-            <div class="history-item-main">Dia 01 · Trabalhar 90 min em um objetivo importante.</div>
-            <div>Quando o Supabase estiver conectado, cada sessão real aparecerá aqui.</div>
+        <div class="plans-list">
+          <div class="plan-card">
+            <strong>Conta Free</strong> · 3 testes por dia  
+            Ideal para conhecer o app, testar metas diferentes e ver como a IA
+            organiza seu dia.
+          </div>
+          <div class="plan-card">
+            <strong>Plano Pro</strong> · mais sessões diárias  
+            Libera mais conversas por dia, histórico estendido e acesso
+            antecipado a novos modos de disciplina e renda extra.
+          </div>
+          <div class="plan-card">
+            <strong>Plano Premium</strong> · experiência completa  
+            Sessões praticamente ilimitadas, histórico completo, imagens de
+            lifestyle e prioridades em novas funções.
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- TELA IMAGENS -->
-    <section id="screen-images" class="screen">
-      <div class="screen-card">
-        <h2 class="screen-title">Criação de Imagens · Lifestyle guiado</h2>
-        <p>Gere imagens que representem o estilo de vida que você está construindo com o BillionMind.</p>
-
-        <div class="image-form">
-          <textarea
-            id="imagePrompt"
-            class="image-textarea"
-            placeholder="Ex.: garagem escura com carro de luxo, computador ligado mostrando gráfico de lucros, luzes douradas, vibe de vitória silenciosa..."
-          ></textarea>
-          <div class="image-actions">
-            <button class="btn-small btn-gold" onclick="generateImage()">
-              Gerar imagem agora
-            </button>
-            <button class="btn-small btn-outline" onclick="clearImage()">
-              Limpar
-            </button>
-          </div>
-          <div id="imagePreview" class="image-preview">
-            Nenhuma imagem gerada ainda. Envie um prompt para ver o lifestyle na tela.
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- TELA PLANOS / ASSINATURA -->
-    <section id="screen-plans" class="screen">
-      <div class="screen-card">
-        <h2 class="screen-title">Planos BillionMind · escolha seu nível</h2>
-        <p>Todos começam no Free. Quando quiser acelerar, os planos pagos desbloqueiam mais poder de foco.</p>
-
-        <div class="plans-grid">
-          <div class="plan-card">
-            <div class="plan-header">
-              <div>
-                <div class="plan-name">Free</div>
-                <div class="plan-price">R$ 0 / mês</div>
-              </div>
-              <div class="plan-tag">Comece agora</div>
-            </div>
-            <ul class="plan-features">
-              <li>3 sessões guiadas por dia no chat.</li>
-              <li>Histórico básico das últimas sessões.</li>
-              <li>Acesso ao gerador de ideias de renda extra.</li>
-            </ul>
-            <button class="plan-btn ghost" onclick="selectPlan('free')">Plano atual</button>
-          </div>
-
-          <div class="plan-card">
-            <div class="plan-header">
-              <div>
-                <div class="plan-name">Pro</div>
-                <div class="plan-price">R$ 29 / mês</div>
-              </div>
-              <div class="plan-tag">Mais foco</div>
-            </div>
-            <ul class="plan-features">
-              <li>Sessões ilimitadas no chat de alta performance.</li>
-              <li>Histórico completo com progresso de 30 dias.</li>
-              <li>Imagens de lifestyle em alta qualidade salvas no app.</li>
-            </ul>
-            <button class="plan-btn primary" onclick="selectPlan('pro')">Quero o Pro</button>
-          </div>
-
-          <div class="plan-card">
-            <div class="plan-header">
-              <div>
-                <div class="plan-name">Premium</div>
-                <div class="plan-price">R$ 59 / mês</div>
-              </div>
-              <div class="plan-tag">Modo milionário</div>
-            </div>
-            <ul class="plan-features">
-              <li>Todos os benefícios do Pro.</li>
-              <li>Protocolos avançados de disciplina, renda extra e lifestyle.</li>
-              <li>Rotinas especiais de fim de semana e revisão mensal guiada.</li>
-            </ul>
-            <button class="plan-btn primary" onclick="selectPlan('premium')">Ativar modo Premium</button>
-          </div>
-        </div>
-
-        <p class="plans-note">
-          Ao clicar em um plano, o app pode abrir a sua página de checkout (Kiwify / Stripe) usando a API do BillionMind.
-        </p>
-      </div>
-    </section>
+    </div>
   </div>
 
   <!-- NAV INFERIOR -->
-  <nav class="bottom-nav">
-    <div class="bottom-nav-inner">
-      <button class="nav-item active" data-target="home">
-        <span class="icon">🏠</span>
-        <span>Home</span>
-      </button>
-      <button class="nav-item" data-target="chat">
-        <span class="icon">💬</span>
-        <span>Chat</span>
-      </button>
-      <button class="nav-item" data-target="history">
-        <span class="icon">📜</span>
-        <span>Histórico</span>
-      </button>
-      <button class="nav-item" data-target="images">
-        <span class="icon">🖼️</span>
-        <span>Imagens</span>
-      </button>
-      <button class="nav-item" data-target="plans">
-        <span class="icon">💳</span>
-        <span>Planos</span>
-      </button>
+  <div class="nav-shell">
+    <div class="nav-inner">
+      <div class="nav-pill-bar">
+        <div class="nav-item active" data-target="home" onclick="navigateTo('home')">
+          <span class="icon">🏠</span>
+          <span>Home</span>
+        </div>
+        <div class="nav-item" data-target="chat" onclick="navigateTo('chat')">
+          <span class="icon">💬</span>
+          <span>Chat</span>
+        </div>
+        <div class="nav-item" data-target="history" onclick="navigateTo('history')">
+          <span class="icon">📜</span>
+          <span>Histórico</span>
+        </div>
+        <div class="nav-item" data-target="images" onclick="navigateTo('images')">
+          <span class="icon">🖼️</span>
+          <span>Imagens</span>
+        </div>
+        <div class="nav-item" data-target="plans" onclick="navigateTo('plans')">
+          <span class="icon">💳</span>
+          <span>Planos</span>
+        </div>
+      </div>
     </div>
-  </nav>
+  </div>
 
   <script>
-    /* NAV / TROCA DE TELAS */
-    const navItems = document.querySelectorAll(".nav-item");
-    const screens = {
-      home: document.getElementById("screen-home"),
-      chat: document.getElementById("screen-chat"),
-      history: document.getElementById("screen-history"),
-      images: document.getElementById("screen-images"),
-      plans: document.getElementById("screen-plans"),
-    };
+    function navigateTo(section) {
+      const sections = document.querySelectorAll(".section");
+      sections.forEach((sec) => sec.classList.remove("active"));
 
-    function setActiveScreen(target) {
-      Object.values(screens).forEach((s) => s.classList.remove("active"));
-      screens[target].classList.add("active");
-      navItems.forEach((btn) =>
-        btn.classList.toggle("active", btn.dataset.target === target)
-      );
-      if (target === "history") loadHistory();
-    }
-
-    navItems.forEach((btn) => {
-      btn.addEventListener("click", () => setActiveScreen(btn.dataset.target));
-    });
-
-    function goToScreen(target) {
-      setActiveScreen(target);
-      if (target === "chat") {
-        document.getElementById("chatInput").focus();
+      if (section === "home") {
+        document.getElementById("section-home").classList.add("active");
+      } else if (section === "chat") {
+        document.getElementById("section-chat").classList.add("active");
+      } else if (section === "history") {
+        document.getElementById("section-history").classList.add("active");
+      } else if (section === "images") {
+        document.getElementById("section-images").classList.add("active");
+      } else if (section === "plans") {
+        document.getElementById("section-plans").classList.add("active");
       }
-    }
 
-    /* CHAT – INTEGRAÇÃO COM /api/chat */
-    const chatInput = document.getElementById("chatInput");
-    const sendBtn = document.getElementById("sendBtn");
-    const chatMessages = document.getElementById("chatMessages");
-
-    function appendMsg(text, role) {
-      const div = document.createElement("div");
-      div.className = "chat-msg " + role;
-      div.textContent = text;
-      chatMessages.appendChild(div);
-      chatMessages.scrollTop = chatMessages.scrollHeight;
+      const navItems = document.querySelectorAll(".nav-item");
+      navItems.forEach((item) => item.classList.remove("active"));
+      const activeItem = document.querySelector(
+        `.nav-item[data-target="${section}"]`
+      );
+      if (activeItem) activeItem.classList.add("active");
     }
 
     async function sendMessage() {
-      const text = chatInput.value.trim();
+      const input = document.getElementById("chat-input");
+      const text = input.value.trim();
       if (!text) return;
-      appendMsg(text, "user");
-      chatInput.value = "";
 
-      const thinking = document.createElement("div");
-      thinking.className = "chat-msg bot";
-      thinking.textContent = "BillionMind está montando sua sessão de foco...";
-      chatMessages.appendChild(thinking);
-      chatMessages.scrollTop = chatMessages.scrollHeight;
+      const messagesEl = document.getElementById("messages");
+
+      const userMsg = document.createElement("div");
+      userMsg.className = "msg user";
+      userMsg.textContent = text;
+      messagesEl.appendChild(userMsg);
+
+      input.value = "";
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+
+      const aiMsg = document.createElement("div");
+      aiMsg.className = "msg ai";
+      aiMsg.textContent = "Pensando...";
+      messagesEl.appendChild(aiMsg);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
 
       try {
         const res = await fetch("/api/chat", {
@@ -941,142 +753,18 @@
           body: JSON.stringify({ message: text }),
         });
 
-        chatMessages.removeChild(thinking);
-
         if (!res.ok) {
-          appendMsg(
-            "Modo demonstração: hoje, foque em 90 minutos de trabalho profundo em uma tarefa que aproxima você da sua meta.",
-            "bot"
-          );
-          return;
+          throw new Error("Erro na API");
         }
 
         const data = await res.json();
-        appendMsg(
-          data.reply ||
-            "Sessão criada. Quando a API estiver 100%, o detalhamento virá daqui.",
-          "bot"
-        );
+        aiMsg.textContent = data.reply || data.message || JSON.stringify(data);
       } catch (err) {
-        chatMessages.removeChild(thinking);
-        appendMsg(
-          "Não consegui falar com o servidor agora. Use essa prévia: separe 3 blocos de 30 min hoje para agir em silêncio na sua meta principal.",
-          "bot"
-        );
-      }
-    }
-
-    sendBtn.addEventListener("click", sendMessage);
-    chatInput.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") sendMessage();
-    });
-
-    /* HISTÓRICO – /api/history */
-    let historyLoaded = false;
-    async function loadHistory() {
-      if (historyLoaded) return;
-      historyLoaded = true;
-      const list = document.getElementById("historyList");
-
-      try {
-        const res = await fetch("/api/history");
-        if (!res.ok) return;
-        const data = await res.json();
-        if (!Array.isArray(data.items) || !data.items.length) return;
-
-        list.innerHTML = "";
-        data.items.forEach((item) => {
-          const div = document.createElement("div");
-          div.className = "history-item";
-          div.innerHTML =
-            '<div class="history-item-header">' +
-            (item.date || "Sessão") +
-            "</div>" +
-            '<div class="history-item-main">' +
-            (item.title || "") +
-            "</div>" +
-            "<div>" +
-            (item.summary || "") +
-            "</div>";
-          list.appendChild(div);
-        });
-      } catch (err) {
-        // mantém exemplo padrão
-      }
-    }
-
-    /* IMAGENS – /api/image */
-    async function generateImage() {
-      const prompt = document.getElementById("imagePrompt").value.trim();
-      const preview = document.getElementById("imagePreview");
-      if (!prompt) {
-        preview.textContent = "Escreva um prompt antes de gerar a imagem.";
-        return;
+        aiMsg.textContent =
+          "Modo demonstração: mensagem enviada. Quando a API estiver totalmente configurada, a resposta da IA aparecerá aqui.";
       }
 
-      preview.textContent = "Gerando imagem de lifestyle...";
-
-      try {
-        const res = await fetch("/api/image", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ prompt }),
-        });
-
-        if (!res.ok) {
-          preview.textContent =
-            "Modo demonstração: quando a API estiver ativa, a imagem aparecerá aqui.";
-          return;
-        }
-
-        const data = await res.json();
-        if (data.url) {
-          preview.innerHTML = '<img src="' + data.url + '" alt="Imagem gerada" />';
-        } else {
-          preview.textContent =
-            "Imagem criada, mas o servidor não retornou a URL corretamente.";
-        }
-      } catch (err) {
-        preview.textContent =
-          "Não consegui falar com o servidor agora. Use esse espaço para visualizar as imagens que o app vai gerar.";
-      }
-    }
-
-    function clearImage() {
-      document.getElementById("imagePrompt").value = "";
-      document.getElementById("imagePreview").textContent =
-        "Nenhuma imagem gerada ainda. Envie um prompt para ver o lifestyle na tela.";
-    }
-
-    /* PLANOS – /api/checkout */
-    async function selectPlan(plan) {
-      try {
-        const res = await fetch("/api/checkout", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ plan }),
-        });
-
-        if (!res.ok) {
-          alert(
-            "Modo demonstração: conecte este botão à sua página de checkout (Kiwify / Stripe) assim que estiver pronta."
-          );
-          return;
-        }
-
-        const data = await res.json();
-        if (data.url) {
-          window.location.href = data.url;
-        } else {
-          alert(
-            "Plano enviado. Quando a integração estiver pronta, você será redirecionado automaticamente."
-          );
-        }
-      } catch (err) {
-        alert(
-          "Não consegui abrir o checkout agora. Use este botão como teste até conectar a sua página real."
-        );
-      }
+      messagesEl.scrollTop = messagesEl.scrollHeight;
     }
   </script>
 </body>
