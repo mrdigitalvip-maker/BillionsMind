@@ -2,25 +2,26 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
+  <title>BillionMind AI — Versão Completa</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BillionMind AI — Pré-lançamento</title>
 
   <style>
     :root {
-      --bg-main: #050509;
-      --bg-card: #101017;
-      --bg-card-alt: #0b0b12;
-      --gold: #f6d46f;
-      --gold-soft: #f3c96a;
-      --gold-strong: #ffbf3f;
-      --green: #35f27c;
-      --text-main: #f5f5f5;
-      --text-soft: #c4c4cf;
-      --text-muted: #9a9ab0;
-      --chip-bg: rgba(246, 212, 111, 0.12);
-      --border-soft: rgba(255, 255, 255, 0.06);
-      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.75);
+      --bg-main: #05060a;
+      --bg-card: #10131b;
+      --bg-card-soft: #141824;
+      --bg-input: #151822;
+      --accent-gold: #ffc857;
+      --accent-gold-soft: #f5b63c;
+      --accent-green: #2ddf7c;
+      --accent-blue: #3aa9ff;
+      --text-main: #f9fafb;
+      --text-soft: #c7c9d3;
+      --text-muted: #8a8ea0;
+      --border-soft: rgba(255,255,255,0.06);
+      --shadow-soft: 0 22px 60px rgba(0,0,0,0.7);
       --radius-xl: 22px;
+      --radius-lg: 16px;
       --radius-pill: 999px;
     }
 
@@ -31,787 +32,1014 @@
     }
 
     body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        Roboto, sans-serif;
-      background: radial-gradient(circle at top, #161622 0, #050509 55%, #000 100%);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #141824 0, #05060a 55%, #000 100%);
       color: var(--text-main);
+      min-height: 100vh;
       display: flex;
       justify-content: center;
-      min-height: 100vh;
+      padding: 18px 10px 80px;
     }
 
     .app-shell {
       width: 100%;
-      max-width: 480px;
-      min-height: 100vh;
-      background: radial-gradient(circle at top, #151520 0, #050509 55%, #000 100%);
-      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.02);
+      max-width: 430px;
       display: flex;
       flex-direction: column;
-      padding-bottom: 90px;
+      gap: 12px;
     }
 
-    /* BARRA DO CONTADOR / LANÇAMENTO */
-    .launch-banner {
-      position: sticky;
-      top: 0;
-      z-index: 30;
-      background: linear-gradient(145deg, #1a141e, #0d0c12);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.9);
-    }
+    /* BARRA DE STATUS SUPERIOR */
 
-    .launch-banner-inner {
-      max-width: 480px;
-      margin: 0 auto;
-      padding: 10px 16px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--text-soft);
-      font-size: 0.8rem;
-    }
-
-    .launch-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 5px 11px;
-      border-radius: 999px;
-      background: radial-gradient(circle at left, #ff5b5b, #f6d46f);
-      color: #0a0808;
-      font-weight: 650;
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      white-space: nowrap;
-    }
-
-    .launch-pill span {
-      font-size: 0.9rem;
-    }
-
-    .launch-text {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      min-width: 0;
-    }
-
-    .launch-text-main {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--gold-soft);
-      font-weight: 600;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .launch-text-sub {
-      font-size: 0.76rem;
-      color: var(--text-soft);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .launch-text-sub strong {
-      color: var(--gold);
-    }
-
-    /* HEADER PRINCIPAL */
-    .hero-header {
-      padding: 18px 16px 10px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-    }
-
-    .hero-title {
-      text-align: left;
-      font-size: 1.2rem;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #c7c7c7;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .hero-logo {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 20%, #ffffff, #f6d46f 35%, #c89c3b 70%, #51381a 100%);
-      box-shadow: 0 0 28px rgba(246, 212, 111, 0.8);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .hero-logo-inner {
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      background: radial-gradient(circle, #050507, #15120c);
-      box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.9);
-    }
-
-    .hero-title-text {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .hero-title-text span:first-child {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      letter-spacing: 0.22em;
-    }
-
-    .hero-title-text span:last-child {
-      font-size: 1.18rem;
-      font-weight: 650;
-      letter-spacing: 0.22em;
-      color: var(--gold-soft);
-    }
-
-    /* CARD PRINCIPAL */
-    .hero-card {
-      margin: 0 16px;
-      margin-top: 10px;
-      padding: 16px 14px 16px;
-      border-radius: 26px;
-      background: radial-gradient(circle at top left, #19141c 0, #0b0b12 50%, #050509 100%);
-      box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .hero-card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-      gap: 8px;
-    }
-
-    .hero-chip-row {
+    .status-banner {
       display: flex;
       flex-direction: column;
       gap: 4px;
-    }
-
-    .status-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: var(--chip-bg);
-      border: 1px solid rgba(246, 212, 111, 0.3);
-      color: var(--gold-soft);
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: radial-gradient(circle, #34ff8b, #1bb866);
-      box-shadow: 0 0 10px rgba(52, 255, 139, 0.9);
-    }
-
-    .launch-meta {
-      font-size: 0.74rem;
-      color: var(--text-muted);
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 8px;
-      flex-wrap: nowrap;
-    }
-
-    .btn-pill {
-      padding: 8px 13px;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      font-size: 0.8rem;
-      font-weight: 500;
-      cursor: pointer;
-      background: transparent;
-      color: var(--text-main);
-      white-space: nowrap;
-    }
-
-    .btn-pill.primary {
-      background: linear-gradient(135deg, #f3c96a, #ffbf3f);
-      color: #231708;
-      border-color: transparent;
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.7);
-    }
-
-    .btn-pill.disabled {
-      opacity: 0.55;
-      cursor: not-allowed;
-    }
-
-    .hero-copy {
-      margin-top: 10px;
-    }
-
-    .hero-headline {
-      font-size: 1.22rem;
-      line-height: 1.33;
+      border-radius: 24px;
+      padding: 10px 14px;
+      background: linear-gradient(90deg, #ff6a3c, #ffb347);
+      color: #1b1208;
+      font-size: 11px;
       font-weight: 600;
-      margin-bottom: 6px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.75);
     }
 
-    .hero-headline span.highlight {
-      color: var(--gold-strong);
-    }
-
-    .hero-sub {
-      font-size: 0.86rem;
-      color: var(--text-soft);
-      line-height: 1.5;
-    }
-
-    .hero-sub strong {
-      color: var(--gold-soft);
-      font-weight: 500;
-    }
-
-    .hero-note {
-      margin-top: 10px;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-    }
-
-    .hero-note strong {
-      color: var(--gold-soft);
-    }
-
-    /* CONTEÚDO PRINCIPAL */
-    main {
-      flex: 1;
-      padding: 10px 16px 0;
-      overflow-y: auto;
-    }
-
-    .section-card {
-      border-radius: 26px;
-      padding: 14px 14px 14px;
-      margin-bottom: 10px;
-      background: radial-gradient(circle at top, #171521 0, #0b0b12 50%, #050509 100%);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .section-header {
+    .status-banner-main {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
-      gap: 6px;
+      gap: 10px;
     }
 
-    .section-header-left {
+    .status-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 0 10px rgba(255,255,255,0.8);
+    }
+
+    .status-pill {
+      border-radius: 999px;
+      padding: 3px 9px;
+      background: rgba(0,0,0,0.14);
+      font-size: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+    }
+
+    .status-sub {
+      font-size: 10px;
+      opacity: 0.9;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .status-sub span {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* HEADER */
+
+    .header-card {
+      margin-top: 4px;
+      background: radial-gradient(circle at top left, rgba(255,200,87,0.14), transparent 55%),
+                  linear-gradient(145deg, #0b0d15, #05060a);
+      border-radius: 26px;
+      padding: 18px 16px 14px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255,255,255,0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .brand-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 20%, #ffffff 0, rgba(255,255,255,0.25) 18%, transparent 45%),
+        radial-gradient(circle at 50% 55%, rgba(0,0,0,0.9) 0, #000 40%, #05060a 70%),
+        conic-gradient(from 210deg, #ffe3a0, #f2c35b, #f5b63c, #ffc857, #ffe3a0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow:
+        0 0 18px rgba(255,200,87,0.7),
+        0 16px 30px rgba(0,0,0,0.9);
+      position: relative;
+    }
+
+    .logo-circle::after {
+      content: "";
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.09);
+      position: absolute;
+      inset: -4px;
+      opacity: 0.45;
+    }
+
+    .brand-text {
       display: flex;
       flex-direction: column;
       gap: 2px;
     }
 
-    .section-title {
-      font-size: 0.90rem;
-      font-weight: 550;
-    }
-
-    .section-subtitle {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-    }
-
-    .badge-pill {
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      font-size: 0.72rem;
-      color: var(--gold-soft);
-      background: rgba(255, 255, 255, 0.02);
-      white-space: nowrap;
-    }
-
-    .pill-green {
-      border-color: rgba(53, 242, 124, 0.6);
-      color: var(--green);
-    }
-
-    .main-goal {
-      margin-top: 4px;
-    }
-
-    .main-goal-title {
-      font-size: 0.80rem;
-      color: var(--text-muted);
-      margin-bottom: 4px;
-    }
-
-    .main-goal-body {
-      font-size: 0.98rem;
+    .brand-name {
+      font-size: 15px;
       font-weight: 600;
-      color: var(--gold-soft);
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: #e3e4f1;
     }
 
-    .tag-row {
-      margin-top: 8px;
+    .brand-subtitle {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      color: var(--text-muted);
+    }
+
+    .status-chip {
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.16);
+      color: #bbf7d0;
+      border: 1px solid rgba(74,222,128,0.4);
+      box-shadow: 0 0 16px rgba(16,185,129,0.45);
+    }
+
+    .status-chip-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-green);
+      box-shadow: 0 0 10px rgba(34,197,94,0.8);
+    }
+
+    .header-main-text {
+      margin-top: 6px;
+    }
+
+    .header-title {
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .header-title span {
+      color: var(--accent-gold);
+    }
+
+    .header-description {
+      margin-top: 6px;
+      font-size: 12px;
+      line-height: 1.6;
+      color: var(--text-soft);
+    }
+
+    .header-chips {
+      margin-top: 10px;
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
     }
 
-    .tag {
-      font-size: 0.70rem;
-      padding: 4px 10px;
+    .pill-chip {
       border-radius: var(--radius-pill);
-      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 4px 9px;
+      font-size: 10px;
       color: var(--text-soft);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    .tag.dot::before {
-      content: "";
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--gold-soft);
-      margin-right: 6px;
-      display: inline-block;
-    }
-
-    .two-column {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.05fr);
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .mini-card {
-      border-radius: 20px;
-      padding: 10px 10px 10px;
-      background: radial-gradient(circle at top, #161522 0, #0a0a10 50%, #040407 100%);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      font-size: 0.78rem;
-    }
-
-    .mini-label {
-      font-size: 0.70rem;
-      color: var(--text-muted);
-      margin-bottom: 4px;
-    }
-
-    .mini-value {
-      font-size: 0.9rem;
-      font-weight: 550;
-    }
-
-    .mini-pill {
-      margin-top: 6px;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      font-size: 0.7rem;
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: rgba(0, 0, 0, 0.6);
-      color: var(--text-soft);
+      background: rgba(10,12,20,0.9);
+      backdrop-filter: blur(14px);
     }
 
-    .mini-dot-green {
+    .pill-dot {
       width: 6px;
       height: 6px;
+      border-radius: 50%;
+      background: var(--accent-gold);
+      box-shadow: 0 0 10px rgba(255,200,87,0.9);
+    }
+
+    .session-strip {
+      margin-top: 12px;
+      border-radius: var(--radius-pill);
+      padding: 5px 9px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(90deg, rgba(148,163,253,0.18), rgba(20,184,166,0.18));
+      border: 1px solid rgba(129,140,248,0.4);
+      font-size: 10px;
+      color: #e5e7ff;
+    }
+
+    .session-strip span:first-child {
+      font-weight: 500;
+    }
+
+    .session-strip .badge-free {
       border-radius: 999px;
-      background: var(--green);
-      box-shadow: 0 0 8px rgba(53, 242, 124, 0.9);
+      padding: 3px 9px;
+      background: rgba(0,0,0,0.25);
+      border: 1px solid rgba(248,250,252,0.3);
+      font-size: 10px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
     }
 
-    /* CHAT PREVIEW */
-    .chat-preview {
-      margin-top: 8px;
+    /* ÁREA PRINCIPAL / CARTÕES */
+
+    .content {
+      margin-top: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .card {
+      background: radial-gradient(circle at top, rgba(255,255,255,0.05), transparent 55%),
+                  linear-gradient(145deg, #10131b, #05070f);
       border-radius: 24px;
-      padding: 12px 10px 12px;
-      background: radial-gradient(circle at top left, #141420 0, #07070d 60%, #030307 100%);
-      border: 1px solid rgba(255, 255, 255, 0.07);
-      font-size: 0.78rem;
-      position: relative;
-      overflow: hidden;
+      padding: 14px 14px 12px;
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
     }
 
-    .chat-bubbles {
-      max-height: 190px;
-      overflow: hidden;
+    .card-heading-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      color: #e5e7eb;
+    }
+
+    .badge-mode {
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(45,212,191,0.5);
+      color: #a7f3d0;
+      background: rgba(6,95,70,0.3);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge-mode-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-green);
+    }
+
+    .card-main-text {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .card-main-text span {
+      color: var(--accent-gold-soft);
+    }
+
+    .card-subtext {
+      font-size: 11px;
+      color: var(--text-soft);
+      line-height: 1.6;
+    }
+
+    .tag-row {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 11px;
+    }
+
+    .tag-pill {
+      border-radius: 999px;
+      padding: 3px 9px;
+      border: 1px solid rgba(148,163,253,0.5);
+      color: #c7d2fe;
+      background: rgba(17,24,39,0.9);
+    }
+
+    /* CHAT */
+
+    .chat-shell {
+      margin-top: 10px;
+      border-radius: 20px;
+      background: radial-gradient(circle at top left, rgba(148,163,253,0.08), transparent 60%),
+                  linear-gradient(160deg, #05060b, #05060a);
+      padding: 12px 10px 10px;
+      border: 1px solid rgba(148,163,253,0.35);
+      box-shadow: 0 18px 40px rgba(15,23,42,0.9);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 360px;
+      min-height: 260px;
+    }
+
+    .chat-header-small {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      color: var(--text-muted);
+    }
+
+    .chat-header-small span:last-child {
+      color: #c7d2fe;
+    }
+
+    .chat-window {
+      flex: 1;
+      overflow-y: auto;
       padding-right: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      scroll-behavior: smooth;
+    }
+
+    .bubble-row {
+      display: flex;
+      margin-bottom: 2px;
+    }
+
+    .bubble-row.user {
+      justify-content: flex-end;
+    }
+
+    .bubble-row.bot {
+      justify-content: flex-start;
     }
 
     .bubble {
+      max-width: 88%;
       padding: 8px 10px;
       border-radius: 14px;
-      margin-bottom: 8px;
-      max-width: 92%;
-      line-height: 1.45;
+      font-size: 12px;
+      line-height: 1.55;
     }
 
     .bubble.user {
-      background: linear-gradient(135deg, #2175ff, #36a4ff);
-      margin-left: auto;
-      color: #f4f6ff;
+      background: linear-gradient(135deg, #2563eb, #22c55e);
+      color: #f9fafb;
       border-bottom-right-radius: 4px;
     }
 
-    .bubble.ai {
-      background: rgba(0, 0, 0, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.05);
+    .bubble.bot {
+      background: rgba(15,23,42,0.95);
+      border: 1px solid rgba(148,163,253,0.3);
       color: var(--text-soft);
       border-bottom-left-radius: 4px;
     }
 
-    .bubble.ai strong {
-      color: var(--gold-soft);
-    }
-
-    .chat-input-preview {
-      margin-top: 10px;
-      border-radius: 999px;
-      padding: 7px 11px;
+    .chat-input-row {
       display: flex;
       align-items: center;
       gap: 8px;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px dashed rgba(255, 255, 255, 0.14);
-      color: var(--text-muted);
-      font-size: 0.76rem;
+      background: rgba(15,23,42,0.96);
+      border-radius: 999px;
+      padding: 6px 6px 6px 12px;
+      border: 1px solid rgba(148,163,253,0.45);
+      box-shadow: 0 10px 26px rgba(15,23,42,0.9);
     }
 
-    .chat-input-preview span {
+    .chat-input-row input {
+      border: none;
+      outline: none;
       flex: 1;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      background: transparent;
+      color: var(--text-main);
+      font-size: 12px;
     }
 
-    .chat-input-preview .fake-btn {
-      width: 26px;
-      height: 26px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, #f3c96a, #ffbf3f);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.86rem;
-      color: #231708;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.8);
-      opacity: 0.6;
-    }
-
-    .preview-label {
-      position: absolute;
-      top: 8px;
-      right: 10px;
-      font-size: 0.7rem;
+    .chat-input-row input::placeholder {
       color: var(--text-muted);
-      background: rgba(0, 0, 0, 0.7);
-      padding: 4px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
     }
 
-    /* CTA FIXO INFERIOR */
-    .bottom-cta {
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 40;
-      display: flex;
-      justify-content: center;
-      padding: 10px 12px 16px;
-      pointer-events: none;
-    }
-
-    .bottom-cta-inner {
-      max-width: 480px;
-      width: 100%;
-      background: linear-gradient(135deg, rgba(251, 222, 144, 0.95), rgba(255, 191, 63, 0.98));
+    .send-btn {
+      border: none;
+      outline: none;
       border-radius: 999px;
-      padding: 10px 12px;
+      width: 34px;
+      height: 34px;
+      background: radial-gradient(circle at 30% 0, #fff 0, #ffe6b3 30%, #f5b63c 65%, #bb7a13 100%);
       display: flex;
       align-items: center;
-      gap: 10px;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.95);
-      pointer-events: auto;
+      justify-content: center;
+      box-shadow: 0 0 18px rgba(245,182,60,0.9);
+      cursor: pointer;
     }
 
-    .bottom-cta-text {
-      font-size: 0.76rem;
-      color: #3c2609;
+    .send-icon {
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      border-top-right-radius: 2px;
+      background: #111827;
+      clip-path: polygon(18% 90%, 100% 50%, 18% 10%, 32% 50%);
     }
 
-    .bottom-cta-btn {
-      margin-left: auto;
-      padding: 7px 12px;
+    /* ABA HISTÓRICO / IMAGENS / PERFIL */
+
+    .tab-section {
+      display: none;
+      animation: fadeIn .25s ease-out;
+    }
+
+    .tab-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .history-list {
+      margin-top: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 12px;
+    }
+
+    .history-item {
+      padding: 8px 9px;
+      border-radius: 16px;
+      background: rgba(15,23,42,0.95);
+      border: 1px solid rgba(55,65,81,0.9);
+    }
+
+    .history-title {
+      font-size: 11px;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+
+    .history-meta {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .images-shell {
+      margin-top: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .images-input-row {
+      display: flex;
+      gap: 8px;
+      background: rgba(15,23,42,0.96);
+      padding: 7px 8px;
+      border-radius: 16px;
+      border: 1px solid rgba(148,163,253,0.35);
+    }
+
+    .images-input-row input {
+      border: none;
+      outline: none;
+      flex: 1;
+      background: transparent;
+      color: var(--text-main);
+      font-size: 12px;
+    }
+
+    .images-btn {
       border-radius: 999px;
       border: none;
-      background: #151014;
-      color: #fbe6c0;
-      font-size: 0.78rem;
-      font-weight: 600;
+      padding: 6px 10px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .09em;
+      background: linear-gradient(135deg, #f97316, #facc15);
+      color: #111827;
       cursor: pointer;
-      white-space: nowrap;
-      display: inline-flex;
-      align-items: center;
+      font-weight: 600;
+      box-shadow: 0 10px 22px rgba(248,181,36,0.6);
+    }
+
+    .images-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
       gap: 6px;
     }
 
-    .bottom-cta-btn span {
-      font-size: 0.9rem;
+    .image-card {
+      border-radius: 14px;
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+      background: radial-gradient(circle at top, rgba(148,163,253,0.18), #020617);
+      border: 1px solid rgba(148,163,253,0.3);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: var(--text-soft);
+      text-align: center;
+      padding: 6px;
     }
 
-    .bottom-cta-btn.disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
+    .image-card span {
+      opacity: .8;
     }
 
-    @media (max-width: 380px) {
-      .hero-headline {
-        font-size: 1.08rem;
+    .profile-shell {
+      margin-top: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 12px;
+    }
+
+    .profile-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 10px;
+      border-radius: 14px;
+      background: rgba(15,23,42,0.96);
+      border: 1px solid rgba(55,65,81,0.9);
+    }
+
+    .profile-row-label {
+      color: var(--text-soft);
+    }
+
+    .profile-tag {
+      border-radius: 999px;
+      padding: 4px 10px;
+      background: rgba(234,179,8,0.1);
+      color: #facc15;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    /* NAV INFERIOR */
+
+    .bottom-nav {
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 10px;
+      width: 100%;
+      max-width: 430px;
+      padding: 6px 12px 4px;
+      z-index: 40;
+    }
+
+    .bottom-nav-inner {
+      border-radius: 24px;
+      background: rgba(3,7,18,0.94);
+      border: 1px solid rgba(31,41,55,0.9);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.9);
+      display: flex;
+      justify-content: space-around;
+      padding: 4px 8px;
+    }
+
+    .nav-item {
+      flex: 1;
+      text-align: center;
+      font-size: 10px;
+      color: var(--text-muted);
+      padding: 5px 4px;
+      border-radius: 999px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .nav-icon {
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      border: 1px solid rgba(148,163,253,0.5);
+      opacity: .7;
+    }
+
+    .nav-item.active {
+      background: radial-gradient(circle at top, rgba(250,204,21,0.3), transparent 55%),
+                  linear-gradient(135deg, #facc15, #f97316);
+      color: #111827;
+      font-weight: 600;
+      box-shadow: 0 12px 26px rgba(248,181,36,0.65);
+    }
+
+    .nav-item.active .nav-icon {
+      border-color: rgba(17,24,39,0.9);
+      background: #111827;
+      opacity: 1;
+    }
+
+    @media (max-width: 360px) {
+      .header-title {
+        font-size: 16px;
       }
-      .hero-title-text span:last-child {
-        font-size: 1rem;
-      }
-      .two-column {
-        grid-template-columns: 1fr;
+      .header-card {
+        padding-inline: 12px;
       }
     }
   </style>
 </head>
-
 <body>
   <div class="app-shell">
-    <!-- Barra com contador + info fixa -->
-    <header class="launch-banner">
-      <div class="launch-banner-inner">
-        <div class="launch-pill">
-          🚀 <span>APP EM LANÇAMENTO</span>
-        </div>
-        <div class="launch-text">
-          <div class="launch-text-main">
-            🔔 ESTREIA AMANHÃ · 19:30
-          </div>
-          <div class="launch-text-sub">
-            25/11 • 19:30 (horário oficial) · Contagem: <strong id="countdownTimer">--h --m --s</strong>
-          </div>
-        </div>
-      </div>
-    </header>
 
-    <!-- Header principal com logo e nome -->
-    <div class="hero-header">
-      <div class="hero-title">
-        <div class="hero-logo">
-          <div class="hero-logo-inner"></div>
+    <!-- BANNER SUPERIOR -->
+    <section class="status-banner">
+      <div class="status-banner-main">
+        <div class="status-left">
+          <div class="status-dot"></div>
+          <div>LANÇAMENTO OFICIAL ATIVADO</div>
         </div>
-        <div class="hero-title-text">
-          <span>BILLIONMIND</span>
-          <span>AI</span>
-        </div>
+        <div class="status-pill">Chat liberado · versão completa</div>
       </div>
-    </div>
-
-    <!-- Card principal de lançamento -->
-    <section class="hero-card">
-      <div class="hero-card-header">
-        <div class="hero-chip-row">
-          <div class="status-chip">
-            <span class="status-dot"></span>
-            PRÉ-LANÇAMENTO
-          </div>
-          <div class="launch-meta">
-            Modo demonstração até o horário oficial · 25/11 às 19:30
-          </div>
-        </div>
-        <div class="hero-actions">
-          <button class="btn-pill disabled" id="btnPreLancamento" type="button">
-            Pré-lançamento
-          </button>
-          <button class="btn-pill disabled" id="btnEntrar" type="button">
-            Entrar
-          </button>
-          <button class="btn-pill primary disabled" id="btnComecar" type="button">
-            Começar
-          </button>
-        </div>
-      </div>
-
-      <div class="hero-copy">
-        <div class="hero-headline">
-          Organize disciplina, dinheiro e lifestyle em um único chat de alta <span class="highlight">performance.</span>
-        </div>
-        <p class="hero-sub">
-          BillionMind AI está em fase final de lançamento. Esta tela mostra exatamente como será a experiência que você vai usar para guiar seus próximos
-          <strong>30 dias</strong>.
-        </p>
-        <p class="hero-note">
-          Quando o contador zerar, o chat será liberado para criar rotinas, planos e imagens de lifestyle personalizadas.
-        </p>
+      <div class="status-sub">
+        <span>Conta atual: <strong>Free · 3 testes por dia</strong></span>
+        <span>Upgrade em breve</span>
       </div>
     </section>
 
-    <!-- Conteúdo principal -->
-    <main>
-      <section class="section-card">
-        <div class="section-header">
-          <div class="section-header-left">
-            <div class="section-title">Sessão BillionMind · Preview ativa</div>
-            <div class="section-subtitle">
-              Modo demonstração antes do lançamento.
-            </div>
-          </div>
-          <div class="badge-pill pill-green">Alta performance</div>
-        </div>
-
-        <div class="main-goal">
-          <div class="main-goal-title">Meta principal de hoje</div>
-          <div class="main-goal-body">
-            Trabalhar 90 min em um objetivo importante.
-          </div>
-          <div class="tag-row">
-            <div class="tag dot">Disciplina</div>
-            <div class="tag dot">Renda extra</div>
+    <!-- HEADER PRINCIPAL -->
+    <section class="header-card">
+      <div class="header-top">
+        <div class="brand-left">
+          <div class="logo-circle"></div>
+          <div class="brand-text">
+            <div class="brand-name">BILLIONMIND</div>
+            <div class="brand-subtitle">AI · disciplina · renda extra · lifestyle</div>
           </div>
         </div>
+        <div class="status-chip">
+          <span class="status-chip-dot"></span>
+          <span>Online</span>
+        </div>
+      </div>
 
-        <div class="two-column">
-          <div class="mini-card">
-            <div class="mini-label">Sequência disciplinada prevista</div>
-            <div class="mini-value" style="color: var(--green);">
-              30 dias guiados
-            </div>
-            <div class="mini-pill">
-              <span class="mini-dot-green"></span>
-              BillionMind monta os passos para você seguir.
+      <div class="header-main-text">
+        <h1 class="header-title">
+          Transforme disciplina em <span>resultado real</span> todos os dias.
+        </h1>
+        <p class="header-description">
+          Envie sua meta, rotina ou dúvida. O BillionMind monta seu foco do dia,
+          plano guiado de 30 dias e ideias de renda extra sem bagunçar sua mente.
+        </p>
+      </div>
+
+      <div class="header-chips">
+        <div class="pill-chip"><span class="pill-dot"></span> sessão guiada de 30 dias</div>
+        <div class="pill-chip">plano do dia em segundos</div>
+        <div class="pill-chip">renda extra inteligente</div>
+      </div>
+
+      <div class="session-strip">
+        <span>Hoje: Dia 01 · Sessão de foco ativa</span>
+        <span class="badge-free">Conta free · 3 testes diários</span>
+      </div>
+    </section>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="content">
+
+      <!-- CARTÃO SESSÃO DE HOJE -->
+      <section class="card">
+        <div class="card-heading-row">
+          <h2 class="card-title">Sessão de hoje</h2>
+          <div class="badge-mode">
+            <span class="badge-mode-dot"></span>
+            alta performance
+          </div>
+        </div>
+        <p class="card-main-text">Trabalhar 90 minutos em um objetivo importante.</p>
+        <p class="card-subtext">
+          Sugestão baseada na sua conta Free. Mantenha foco profundo em uma tarefa
+          que realmente empurra sua vida para frente.
+        </p>
+        <div class="tag-row">
+          <span class="tag-pill">Disciplina</span>
+          <span class="tag-pill">Organização mental</span>
+          <span class="tag-pill">Renda extra inteligente</span>
+        </div>
+
+        <!-- CHAT PRINCIPAL -->
+        <div class="chat-shell" id="chat-tab">
+          <div class="chat-header-small">
+            <span>Chat BillionMind · metas, rotinas e lifestyle</span>
+            <span>Chat liberado</span>
+          </div>
+
+          <div class="chat-window" id="chat-window">
+            <div class="bubble-row bot">
+              <div class="bubble bot">
+                Olá, eu sou o BillionMind AI. Envie sua meta, rotina de disciplina
+                ou dúvida sobre renda extra e lifestyle. Vou montar um foco de hoje
+                e próximos passos claros para você.
+              </div>
             </div>
           </div>
-          <div class="mini-card">
-            <div class="mini-label">Modo de uso</div>
-            <div class="mini-value">Chat orientado por metas</div>
-            <div class="mini-pill">
-              <span class="mini-dot-green"></span>
-              Foco em rotina, dinheiro e lifestyle.
+
+          <div class="chat-input-row">
+            <input id="chat-input"
+                   placeholder="Digite sua meta ou dúvida agora..." />
+            <button class="send-btn" id="send-btn" aria-label="Enviar mensagem">
+              <div class="send-icon"></div>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABA HISTÓRICO -->
+      <section class="card tab-section" id="history-tab">
+        <div class="card-heading-row">
+          <h2 class="card-title">Histórico</h2>
+          <div class="badge-mode">
+            jornada de 30 dias
+          </div>
+        </div>
+        <p class="card-subtext">
+          Aqui você vai ver as últimas sessões, metas concluídas e planos salvos.
+          Essa prévia está só ilustrando como ficará quando o histórico estiver
+          puxando seus dados do Supabase.
+        </p>
+
+        <div class="history-list">
+          <div class="history-item">
+            <div class="history-title">Foco em renda extra no sábado à noite</div>
+            <div class="history-meta">Sugestão: 60 min de criação + 30 min de estudo</div>
+          </div>
+          <div class="history-item">
+            <div class="history-title">Rotina de manhã focada em disciplina</div>
+            <div class="history-meta">Sugestão: acordar 05h30 · treinar · revisar metas</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABA IMAGENS -->
+      <section class="card tab-section" id="images-tab">
+        <div class="card-heading-row">
+          <h2 class="card-title">Imagens de lifestyle</h2>
+          <div class="badge-mode">
+            modo visual
+          </div>
+        </div>
+        <p class="card-subtext">
+          Essa área é para você gerar imagens de lifestyle que representem sua
+          nova realidade: carros, viagens, ambientes de foco, telas de resultado.
+          No app final, cada imagem será salva e ligada ao seu perfil.
+        </p>
+
+        <div class="images-shell">
+          <div class="images-input-row">
+            <input id="image-prompt"
+                   placeholder="Descreva a cena (ex: escritório minimalista com tela de resultados crescendo)..." />
+            <button class="images-btn" id="image-btn">Gerar</button>
+          </div>
+
+          <div class="images-grid" id="images-grid">
+            <div class="image-card">
+              <span>
+                Suas imagens geradas vão aparecer aqui.<br />
+                Essa é só uma prévia visual.
+              </span>
+            </div>
+            <div class="image-card">
+              <span>Ambiente de foco com telas de lucro e metas concluídas.</span>
             </div>
           </div>
         </div>
+      </section>
 
-        <!-- Chat preview estático -->
-        <div class="chat-preview">
-          <div class="preview-label">Preview do chat</div>
-          <div class="chat-bubbles">
-            <div class="bubble user">
-              Quero organizar minha vida para ter disciplina, renda extra e um lifestyle de luxo sem bagunça mental.
-            </div>
-            <div class="bubble ai">
-              Claro! Aqui está um plano inicial inspirado em <strong>30 dias guiados</strong>:
-              <br /><br />
-              • Rotina diária de foco, descanso e tempo livre.<br />
-              • Ações simples para gerar renda extra todas as semanas.<br />
-              • Momentos de lifestyle para você manter a mente leve enquanto cresce.
-              <br /><br />
-              No lançamento, vou transformar isso em um roteiro detalhado para você seguir dia a dia.
-            </div>
+      <!-- ABA PERFIL -->
+      <section class="card tab-section" id="profile-tab">
+        <div class="card-heading-row">
+          <h2 class="card-title">Seu perfil</h2>
+          <div class="badge-mode">
+            conta free
           </div>
-          <div class="chat-input-preview">
-            <span>No lançamento, você vai escrever sua própria meta aqui…</span>
-            <div class="fake-btn">➤</div>
+        </div>
+        <p class="card-subtext">
+          Aqui ficarão as informações da sua conta, plano ativo e limites diários.
+          Quando a área de planos estiver ativa, você poderá fazer upgrade direto
+          daqui para liberar mais sessões, histórico completo e mais imagens.
+        </p>
+
+        <div class="profile-shell">
+          <div class="profile-row">
+            <span class="profile-row-label">Plano atual</span>
+            <span class="profile-tag">Free · 3 testes/dia</span>
+          </div>
+          <div class="profile-row">
+            <span class="profile-row-label">Próximo plano</span>
+            <span class="profile-tag" style="background:rgba(59,130,246,0.12);color:#bfdbfe;">
+              BillionMind Pro
+            </span>
+          </div>
+          <div class="profile-row">
+            <span class="profile-row-label">Status da jornada</span>
+            <span class="profile-tag" style="background:rgba(16,185,129,0.12);color:#a7f3d0;">
+              Dia 01 · Em construção
+            </span>
           </div>
         </div>
       </section>
     </main>
 
-    <!-- CTA fixo inferior -->
-    <div class="bottom-cta">
-      <div class="bottom-cta-inner">
-        <div class="bottom-cta-text">
-          Entre no canal e seja avisado quando a BillionMind AI entrar no ar.
+    <!-- NAV INFERIOR -->
+    <nav class="bottom-nav">
+      <div class="bottom-nav-inner">
+        <div class="nav-item active" data-tab="chat-tab">
+          <div class="nav-icon"></div>
+          Chat
         </div>
-        <button class="bottom-cta-btn" id="btnQueroAviso" type="button">
-          <span>•</span> Quero ser avisado
-        </button>
+        <div class="nav-item" data-tab="history-tab">
+          <div class="nav-icon"></div>
+          Histórico
+        </div>
+        <div class="nav-item" data-tab="images-tab">
+          <div class="nav-icon"></div>
+          Imagens
+        </div>
+        <div class="nav-item" data-tab="profile-tab">
+          <div class="nav-icon"></div>
+          Perfil
+        </div>
       </div>
-    </div>
+    </nav>
   </div>
 
   <script>
-    // Data/hora exata do lançamento (amanhã 25/11 às 19:30)
-    const LAUNCH_DATE = new Date("2025-11-25T19:30:00");
+    // Alternância de abas (Chat / Histórico / Imagens / Perfil)
+    const navItems = document.querySelectorAll(".nav-item");
+    const tabSections = document.querySelectorAll(".tab-section");
+    const chatShell = document.getElementById("chat-tab");
 
-    function updateCountdown() {
-      const now = new Date();
-      const diff = LAUNCH_DATE - now;
-      const timerEl = document.getElementById("countdownTimer");
+    function activateTab(id) {
+      tabSections.forEach(sec => {
+        sec.classList.toggle("active", sec.id === id);
+      });
+      // Chat principal fica sempre visível dentro do primeiro card,
+      // então só garantimos que ele aparece quando aba "Chat" está ativa.
+      chatShell.style.display = id === "chat-tab" ? "flex" : "none";
 
-      const lockedButtons = [
-        document.getElementById("btnPreLancamento"),
-        document.getElementById("btnEntrar"),
-        document.getElementById("btnComecar"),
-      ];
+      navItems.forEach(item => {
+        item.classList.toggle("active", item.dataset.tab === id);
+      });
+    }
 
-      if (!timerEl) return;
+    navItems.forEach(item => {
+      item.addEventListener("click", () => {
+        activateTab(item.dataset.tab);
+      });
+    });
 
-      if (diff <= 0) {
-        timerEl.textContent = "AGORA";
-        lockedButtons.forEach((btn) => {
-          if (!btn) return;
-          btn.classList.remove("disabled");
+    // Começa na aba Chat
+    activateTab("chat-tab");
+
+    // Função de envio de mensagem para o endpoint /api/chat (quando estiver configurado)
+    const chatInput = document.getElementById("chat-input");
+    const sendBtn = document.getElementById("send-btn");
+    const chatWindow = document.getElementById("chat-window");
+
+    function appendBubble(text, from = "bot") {
+      const row = document.createElement("div");
+      row.className = "bubble-row " + from;
+      const bubble = document.createElement("div");
+      bubble.className = "bubble " + from;
+      bubble.textContent = text;
+      row.appendChild(bubble);
+      chatWindow.appendChild(row);
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+    }
+
+    async function sendMessage() {
+      const msg = chatInput.value.trim();
+      if (!msg) return;
+      chatInput.value = "";
+      appendBubble(msg, "user");
+      appendBubble("Estou pensando na melhor estratégia para você...", "bot");
+
+      try {
+        const res = await fetch("/api/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: msg })
         });
-        return;
+
+        if (!res.ok) {
+          throw new Error("Erro ao falar com o BillionMind AI.");
+        }
+        const data = await res.json();
+        const reply = data.reply || data.message || "Pronto. Meta registrada e plano preparado.";
+        // remove último "pensando..."
+        const bubbles = chatWindow.querySelectorAll(".bubble-row.bot");
+        if (bubbles.length) {
+          const last = bubbles[bubbles.length - 1];
+          if (last.textContent.includes("pensando")) {
+            chatWindow.removeChild(last);
+          }
+        }
+        appendBubble(reply, "bot");
+      } catch (e) {
+        appendBubble("Não consegui responder agora. Tente novamente em alguns instantes.", "bot");
       }
-
-      const totalSeconds = Math.floor(diff / 1000);
-      const hours = Math.floor(totalSeconds / 3600);
-      const minutes = Math.floor((totalSeconds % 3600) / 60);
-      const seconds = totalSeconds % 60;
-
-      timerEl.textContent =
-        String(hours).padStart(2, "0") +
-        "h " +
-        String(minutes).padStart(2, "0") +
-        "m " +
-        String(seconds).padStart(2, "0") +
-        "s";
-
-      lockedButtons.forEach((btn) => {
-        if (!btn) return;
-        btn.classList.add("disabled");
-      });
     }
 
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
+    sendBtn.addEventListener("click", sendMessage);
+    chatInput.addEventListener("keydown", e => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
 
-    // Botão "Quero ser avisado" -> abre canal do WhatsApp
-    const btnQueroAviso = document.getElementById("btnQueroAviso");
-    const channelUrl = "https://whatsapp.com/channel/0029VbBg2OxK0IBk3CURik35";
+    // Pré-visualização de geração de imagem
+    const imageBtn = document.getElementById("image-btn");
+    const imagePromptInput = document.getElementById("image-prompt");
+    const imagesGrid = document.getElementById("images-grid");
 
-    if (btnQueroAviso) {
-      btnQueroAviso.addEventListener("click", () => {
-        window.open(channelUrl, "_blank");
-      });
+    async function generateImagePreview() {
+      const prompt = imagePromptInput.value.trim();
+      if (!prompt) return;
+
+      const placeholder = document.createElement("div");
+      placeholder.className = "image-card";
+      placeholder.innerHTML = "<span>Gerando visual... Isso é só uma prévia. No app final, essa imagem será salva na sua galeria.</span>";
+      imagesGrid.prepend(placeholder);
+
+      try {
+        await fetch("/api/images", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ prompt })
+        });
+        // Aqui, depois que a API estiver completa, você pode atualizar o card com a imagem real.
+      } catch (e) {
+        placeholder.innerHTML = "<span>Não foi possível gerar agora. Tente novamente em alguns instantes.</span>";
+      }
     }
+
+    imageBtn.addEventListener("click", generateImagePreview);
   </script>
 </body>
 </html>
