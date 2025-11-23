@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BillionMind AI – Pré-lançamento</title>
+  <title>BillionMind AI — Pré-lançamento</title>
+
   <style>
     :root {
       --bg-main: #050509;
@@ -51,7 +52,7 @@
       padding-bottom: 90px;
     }
 
-    /* BARRA DO CONTADOR */
+    /* BARRA DO CONTADOR / LANÇAMENTO */
     .launch-banner {
       position: sticky;
       top: 0;
@@ -76,11 +77,11 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 4px 10px;
+      padding: 5px 11px;
       border-radius: 999px;
       background: radial-gradient(circle at left, #ff5b5b, #f6d46f);
       color: #0a0808;
-      font-weight: 600;
+      font-weight: 650;
       font-size: 0.72rem;
       text-transform: uppercase;
       letter-spacing: 0.06em;
@@ -93,12 +94,32 @@
 
     .launch-text {
       flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .launch-text-main {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--gold-soft);
+      font-weight: 600;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    .launch-text strong {
+    .launch-text-sub {
+      font-size: 0.76rem;
+      color: var(--text-soft);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .launch-text-sub strong {
       color: var(--gold);
     }
 
@@ -114,15 +135,15 @@
       font-weight: 600;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--gold-soft);
+      color: #c7c7c7;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 14px;
     }
 
     .hero-logo {
-      width: 42px;
-      height: 42px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
       background: radial-gradient(circle at 30% 20%, #ffffff, #f6d46f 35%, #c89c3b 70%, #51381a 100%);
       box-shadow: 0 0 28px rgba(246, 212, 111, 0.8);
@@ -132,10 +153,10 @@
     }
 
     .hero-logo-inner {
-      width: 22px;
-      height: 22px;
+      width: 26px;
+      height: 26px;
       border-radius: 50%;
-      background: radial-gradient(circle, #0b0907, #15120c);
+      background: radial-gradient(circle, #050507, #15120c);
       box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.9);
     }
 
@@ -153,9 +174,10 @@
     }
 
     .hero-title-text span:last-child {
-      font-size: 1.15rem;
+      font-size: 1.18rem;
       font-weight: 650;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.22em;
+      color: var(--gold-soft);
     }
 
     /* CARD PRINCIPAL */
@@ -174,6 +196,7 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 10px;
+      gap: 8px;
     }
 
     .hero-chip-row {
@@ -212,10 +235,11 @@
     .hero-actions {
       display: flex;
       gap: 8px;
+      flex-wrap: nowrap;
     }
 
     .btn-pill {
-      padding: 8px 14px;
+      padding: 8px 13px;
       border-radius: var(--radius-pill);
       border: 1px solid rgba(255, 255, 255, 0.08);
       font-size: 0.8rem;
@@ -223,6 +247,7 @@
       cursor: pointer;
       background: transparent;
       color: var(--text-main);
+      white-space: nowrap;
     }
 
     .btn-pill.primary {
@@ -320,6 +345,7 @@
       font-size: 0.72rem;
       color: var(--gold-soft);
       background: rgba(255, 255, 255, 0.02);
+      white-space: nowrap;
     }
 
     .pill-green {
@@ -574,16 +600,22 @@
     }
   </style>
 </head>
+
 <body>
   <div class="app-shell">
-    <!-- Barra com contador -->
+    <!-- Barra com contador + info fixa -->
     <header class="launch-banner">
       <div class="launch-banner-inner">
         <div class="launch-pill">
           🚀 <span>APP EM LANÇAMENTO</span>
         </div>
         <div class="launch-text">
-          <strong>ESTREIA EM</strong> <span id="countdownTimer">--h --m --s</span>
+          <div class="launch-text-main">
+            🔔 ESTREIA AMANHÃ · 19:30
+          </div>
+          <div class="launch-text-sub">
+            25/11 • 19:30 (horário oficial) · Contagem: <strong id="countdownTimer">--h --m --s</strong>
+          </div>
         </div>
       </div>
     </header>
@@ -610,7 +642,7 @@
             PRÉ-LANÇAMENTO
           </div>
           <div class="launch-meta">
-            De hoje a 2 dias · lançamento global
+            Modo demonstração até o horário oficial · 25/11 às 19:30
           </div>
         </div>
         <div class="hero-actions">
@@ -635,14 +667,13 @@
           <strong>30 dias</strong>.
         </p>
         <p class="hero-note">
-          Quando o contador zerar, o chat estará liberado para criar rotinas, planos e imagens de lifestyle personalizadas.
+          Quando o contador zerar, o chat será liberado para criar rotinas, planos e imagens de lifestyle personalizadas.
         </p>
       </div>
     </section>
 
     <!-- Conteúdo principal -->
     <main>
-      <!-- Sessão BillionMind · Preview -->
       <section class="section-card">
         <div class="section-header">
           <div class="section-header-left">
@@ -715,7 +746,7 @@
     <div class="bottom-cta">
       <div class="bottom-cta-inner">
         <div class="bottom-cta-text">
-          Salve esse link. A BillionMind AI entra no ar assim que o contador zerar.
+          Entre no canal e seja avisado quando a BillionMind AI entrar no ar.
         </div>
         <button class="bottom-cta-btn" id="btnQueroAviso" type="button">
           <span>•</span> Quero ser avisado
@@ -725,20 +756,21 @@
   </div>
 
   <script>
-    // Data de lançamento (ajuste se quiser outro horário)
-    const LAUNCH_DATE = new Date("2025-11-24T19:30:00"); // segunda, 19:30
+    // Data/hora exata do lançamento (amanhã 25/11 às 19:30)
+    const LAUNCH_DATE = new Date("2025-11-25T19:30:00");
 
     function updateCountdown() {
       const now = new Date();
       const diff = LAUNCH_DATE - now;
       const timerEl = document.getElementById("countdownTimer");
 
-      // Esses botões ficam travados até o lançamento
       const lockedButtons = [
         document.getElementById("btnPreLancamento"),
         document.getElementById("btnEntrar"),
         document.getElementById("btnComecar"),
       ];
+
+      if (!timerEl) return;
 
       if (diff <= 0) {
         timerEl.textContent = "AGORA";
@@ -771,17 +803,13 @@
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
-    // Botão "Quero ser avisado" -> abre WhatsApp
-    const whatsappNumber = "5577981485840";
+    // Botão "Quero ser avisado" -> abre canal do WhatsApp
     const btnQueroAviso = document.getElementById("btnQueroAviso");
+    const channelUrl = "https://whatsapp.com/channel/0029VbBg2OxK0IBk3CURik35";
 
     if (btnQueroAviso) {
       btnQueroAviso.addEventListener("click", () => {
-        const msg = encodeURIComponent(
-          "Quero ser avisado quando o BillionMind AI for lançado."
-        );
-        const url = `https://wa.me/${whatsappNumber}?text=${msg}`;
-        window.open(url, "_blank");
+        window.open(channelUrl, "_blank");
       });
     }
   </script>
