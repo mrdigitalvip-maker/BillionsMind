@@ -2,9 +2,8 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>BillionMind AI · Pré-lançamento</title>
+  <title>BillionMind AI</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <style>
     * {
       margin: 0;
@@ -14,446 +13,172 @@
     }
 
     body {
-      min-height: 100vh;
-      background: radial-gradient(circle at top, #3b3b5f 0, #050610 45%, #000 100%);
+      background: radial-gradient(circle at top, #1e1e2e 0, #050610 40%, #000 100%);
       color: #f9fafb;
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 20px 16px 32px;
     }
 
-    .launch-wrapper {
+    .launch, .app {
+      display: none;
       width: 100%;
       max-width: 480px;
-      background: linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0.9));
-      border-radius: 24px;
-      padding: 20px 18px 24px;
-      box-shadow:
-        0 0 0 1px rgba(255, 255, 255, 0.04),
-        0 18px 40px rgba(0, 0, 0, 0.9);
-      position: relative;
-      overflow: hidden;
+      padding: 20px;
+      text-align: center;
     }
 
-    .glow {
-      position: absolute;
-      inset: -40%;
-      background: radial-gradient(circle at 0 0, rgba(255, 191, 87, 0.16), transparent 55%);
-      pointer-events: none;
-      z-index: -1;
+    .launch.active {
+      display: block;
     }
 
-    .header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 20px;
-      gap: 12px;
+    .app.active {
+      display: block;
+      animation: fadeIn 1s ease-in-out;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
     }
 
-    .logo-circle {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #ffe9a8, #f6b544, #8a5b16);
-      box-shadow:
-        0 0 0 2px rgba(0, 0, 0, 0.9),
-        0 0 22px rgba(246, 181, 68, 0.7);
-    }
-
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.1;
-    }
-
-    .brand-title {
-      font-size: 0.95rem;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: #e5e7eb;
-      font-weight: 500;
-    }
-
-    .brand-sub {
-      font-size: 0.74rem;
-      color: #9ca3af;
-    }
-
-    .header-pill {
-      padding: 6px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(249, 180, 68, 0.55);
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: #fbbf24;
-      background: radial-gradient(circle at top, rgba(250, 204, 21, 0.22), rgba(0, 0, 0, 0.9));
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      white-space: nowrap;
-    }
-
-    .header-pill-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: #22c55e;
-      box-shadow: 0 0 10px rgba(34, 197, 94, 0.8);
-    }
-
-    .hero {
-      margin-bottom: 18px;
-    }
-
-    .hero-eyebrow {
-      font-size: 0.76rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: #9ca3af;
-      margin-bottom: 8px;
-    }
-
-    .hero-title {
-      font-size: 1.6rem;
-      font-weight: 700;
-      line-height: 1.15;
-      color: #f9fafb;
+    .title {
+      font-size: 1.8rem;
       margin-bottom: 10px;
-    }
-
-    .hero-title span {
       color: #fbbf24;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
     }
 
-    .hero-sub {
-      font-size: 0.9rem;
+    .subtitle {
+      font-size: 1rem;
       color: #d1d5db;
+      margin-bottom: 20px;
     }
 
-    .hero-sub span {
-      color: #f97316;
-      font-weight: 600;
-    }
-
-    .countdown-card {
-      margin: 18px 0 16px;
-      padding: 14px 12px 16px;
-      border-radius: 18px;
-      background: radial-gradient(circle at top left, rgba(248, 250, 252, 0.05), rgba(15, 23, 42, 0.95));
-      border: 1px solid rgba(148, 163, 184, 0.4);
-    }
-
-    .countdown-label {
-      font-size: 0.8rem;
-      color: #9ca3af;
-      margin-bottom: 4px;
-    }
-
-    .countdown-target {
-      font-size: 0.82rem;
-      color: #e5e7eb;
-      margin-bottom: 10px;
-    }
-
-    .countdown-row {
+    .countdown {
       display: flex;
-      justify-content: space-between;
-      gap: 6px;
+      justify-content: center;
+      gap: 10px;
+      margin: 20px 0;
     }
 
-    .cd-box {
-      flex: 1;
-      background: radial-gradient(circle at top, #020617, #020617);
-      border-radius: 14px;
-      padding: 8px 4px;
-      text-align: center;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      position: relative;
-      overflow: hidden;
+    .count-box {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 10px;
+      width: 70px;
     }
 
-    .cd-box::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background: radial-gradient(circle at top, rgba(250, 204, 21, 0.18), transparent 55%);
-      opacity: 0.7;
-      pointer-events: none;
-    }
-
-    .cd-number {
-      font-size: 1.1rem;
+    .count-number {
+      font-size: 1.4rem;
       font-weight: 700;
       color: #fbbf24;
     }
 
-    .cd-label {
+    .count-label {
       font-size: 0.7rem;
+      color: #9ca3af;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: #9ca3af;
-      margin-top: 2px;
     }
 
-    .status-text {
-      margin-top: 10px;
-      font-size: 0.8rem;
-      color: #9ca3af;
-    }
-
-    .status-text span {
-      color: #4ade80;
-      font-weight: 600;
-    }
-
-    .cta-area {
-      margin-top: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .cta-button-main {
-      width: 100%;
-      border: none;
-      border-radius: 999px;
-      padding: 12px 18px;
+    button {
       background: linear-gradient(135deg, #fbbf24, #f97316);
-      color: #111827;
-      font-weight: 600;
-      font-size: 0.98rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      box-shadow:
-        0 0 0 1px rgba(0, 0, 0, 0.6),
-        0 14px 35px rgba(248, 181, 54, 0.6);
-      cursor: pointer;
-      transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
-    }
-
-    .cta-button-main:active {
-      transform: translateY(1px) scale(0.99);
-      box-shadow:
-        0 8px 22px rgba(248, 181, 54, 0.55);
-    }
-
-    .cta-button-main.disabled {
-      opacity: 0.45;
-      cursor: default;
-      box-shadow: none;
-    }
-
-    .cta-note {
-      font-size: 0.75rem;
-      color: #9ca3af;
-      text-align: center;
-    }
-
-    .cta-note span {
-      color: #e5e7eb;
-      font-weight: 500;
-    }
-
-    .footer {
-      margin-top: 16px;
-      border-top: 1px solid rgba(31, 41, 55, 0.9);
-      padding-top: 12px;
-      display: flex;
-      justify-content: space-between;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .footer-pill {
-      padding: 6px 10px;
+      border: none;
+      padding: 12px 20px;
       border-radius: 999px;
-      border: 1px solid rgba(75, 85, 99, 0.9);
-      font-size: 0.68rem;
-      color: #9ca3af;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
+      color: #111;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 1rem;
+      box-shadow: 0 0 20px rgba(249, 181, 54, 0.5);
     }
 
-    .footer-pill strong {
-      color: #e5e7eb;
-      font-weight: 500;
+    .app h1 {
+      color: #fbbf24;
+      font-size: 1.6rem;
+      margin-bottom: 10px;
     }
 
-    @media (max-width: 400px) {
-      .hero-title {
-        font-size: 1.45rem;
-      }
-      .brand-title {
-        font-size: 0.9rem;
-        letter-spacing: 0.24em;
-      }
+    .app p {
+      color: #d1d5db;
+      margin-bottom: 20px;
     }
   </style>
 </head>
 <body>
-  <div class="launch-wrapper">
-    <div class="glow"></div>
-
-    <header class="header">
-      <div class="brand">
-        <div class="logo-circle"></div>
-        <div class="brand-text">
-          <div class="brand-title">B I L L I O N M I N D</div>
-          <div class="brand-sub">AI · disciplina · dinheiro · lifestyle</div>
-        </div>
+  <!-- TELA DE LANÇAMENTO -->
+  <div class="launch active" id="launchScreen">
+    <h1 class="title">BillionMind AI</h1>
+    <p class="subtitle">O novo chat de disciplina, dinheiro e lifestyle será lançado em breve.</p>
+    <div class="countdown">
+      <div class="count-box">
+        <div class="count-number" id="days">00</div>
+        <div class="count-label">Dias</div>
       </div>
-      <div class="header-pill">
-        <span class="header-pill-dot"></span>
-        Pré-lançamento
+      <div class="count-box">
+        <div class="count-number" id="hours">00</div>
+        <div class="count-label">Horas</div>
       </div>
-    </header>
-
-    <section class="hero">
-      <p class="hero-eyebrow">Estreia em breve</p>
-      <h1 class="hero-title">
-        Seu novo <span>chat de disciplina</span>, renda extra e lifestyle em 30 dias.
-      </h1>
-      <p class="hero-sub">
-        O BillionMind AI abre oficialmente em <span>4 dias às 19h30</span>.  
-        Até lá, use este link como seu acesso VIP de pré-lançamento.
-      </p>
-    </section>
-
-    <section class="countdown-card">
-      <p class="countdown-label">Contagem regressiva para o lançamento</p>
-      <p class="countdown-target" id="launch-date-text">
-        Calculando horário exato do lançamento…
-      </p>
-
-      <div class="countdown-row">
-        <div class="cd-box">
-          <div class="cd-number" id="cd-days">00</div>
-          <div class="cd-label">Dias</div>
-        </div>
-        <div class="cd-box">
-          <div class="cd-number" id="cd-hours">00</div>
-          <div class="cd-label">Horas</div>
-        </div>
-        <div class="cd-box">
-          <div class="cd-number" id="cd-mins">00</div>
-          <div class="cd-label">Min</div>
-        </div>
-        <div class="cd-box">
-          <div class="cd-number" id="cd-secs">00</div>
-          <div class="cd-label">Seg</div>
-        </div>
+      <div class="count-box">
+        <div class="count-number" id="minutes">00</div>
+        <div class="count-label">Min</div>
       </div>
-
-      <p class="status-text" id="status-text">
-        Quando o contador zerar, o <span>chat será liberado</span> para login, planos e imagens de lifestyle via IA.
-      </p>
-    </section>
-
-    <section class="cta-area">
-      <button id="cta-btn" class="cta-button-main disabled">
-        🔒 Lançamento em breve
-      </button>
-      <p class="cta-note">
-        Salve este link agora. <span>Assim que o relógio zerar</span>, o botão será liberado para entrar no app.
-      </p>
-    </section>
-
-    <footer class="footer">
-      <div class="footer-pill">
-        🌍 <strong>Uso global</strong>
+      <div class="count-box">
+        <div class="count-number" id="seconds">00</div>
+        <div class="count-label">Seg</div>
       </div>
-      <div class="footer-pill">
-        ⚡ Página única · Chat de alta performance
-      </div>
-    </footer>
+    </div>
+    <p style="color:#9ca3af;">Fique pronto. O lançamento oficial acontece em 4 dias às 19h30.</p>
+  </div>
+
+  <!-- APP PRINCIPAL -->
+  <div class="app" id="appScreen">
+    <h1>Bem-vindo ao BillionMind AI 🚀</h1>
+    <p>O chat de alta performance está ativo. Conecte-se, explore planos, tarefas e discipline sua mente.</p>
+    <button onclick="alert('Em breve: login e assinaturas!')">Entrar no app</button>
   </div>
 
   <script>
-    // Define o horário de lançamento: daqui a 4 dias às 19:30
+    // Define a data de lançamento (4 dias a partir de agora, às 19:30)
     const now = new Date();
     const launchDate = new Date();
-
     launchDate.setDate(now.getDate() + 4);
-    launchDate.setHours(19, 30, 0, 0); // 19:30:00
+    launchDate.setHours(19, 30, 0, 0);
 
-    // Atualiza o texto que mostra a data/hora do lançamento
-    const launchTextEl = document.getElementById("launch-date-text");
-    launchTextEl.textContent =
-      "Lançamento marcado para " +
-      launchDate.toLocaleDateString("pt-BR", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric"
-      }) +
-      " às " +
-      launchDate.toLocaleTimeString("pt-BR", {
-        hour: "2-digit",
-        minute: "2-digit"
-      });
+    const launchScreen = document.getElementById("launchScreen");
+    const appScreen = document.getElementById("appScreen");
 
-    const daysEl = document.getElementById("cd-days");
-    const hoursEl = document.getElementById("cd-hours");
-    const minsEl = document.getElementById("cd-mins");
-    const secsEl = document.getElementById("cd-secs");
-    const statusEl = document.getElementById("status-text");
-    const ctaBtn = document.getElementById("cta-btn");
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
 
     function updateCountdown() {
       const nowTime = new Date().getTime();
-      const launchTime = launchDate.getTime();
-      const distance = launchTime - nowTime;
+      const distance = launchDate - nowTime;
 
       if (distance <= 0) {
         clearInterval(timer);
-        daysEl.textContent = "00";
-        hoursEl.textContent = "00";
-        minsEl.textContent = "00";
-        secsEl.textContent = "00";
-
-        statusEl.innerHTML =
-          "O relógio zerou. <span>BillionMind AI está liberado.</span> Clique no botão para entrar no app.";
-        ctaBtn.classList.remove("disabled");
-        ctaBtn.textContent = "🚀 Entrar no BillionMind AI";
-
-        // Se quiser redirecionar automaticamente ao liberar:
-        // window.location.href = "/app";  // ajuste a rota do seu app aqui
+        launchScreen.classList.remove("active");
+        appScreen.classList.add("active");
         return;
       }
 
-      const totalSeconds = Math.floor(distance / 1000);
-      const days = Math.floor(totalSeconds / (60 * 60 * 24));
-      const hours = Math.floor((totalSeconds % (60 * 60 * 24)) / (60 * 60));
-      const minutes = Math.floor((totalSeconds % (60 * 60)) / 60);
-      const seconds = totalSeconds % 60;
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      daysEl.textContent = String(days).padStart(2, "0");
-      hoursEl.textContent = String(hours).padStart(2, "0");
-      minsEl.textContent = String(minutes).padStart(2, "0");
-      secsEl.textContent = String(seconds).padStart(2, "0");
+      daysEl.textContent = days.toString().padStart(2, "0");
+      hoursEl.textContent = hours.toString().padStart(2, "0");
+      minutesEl.textContent = minutes.toString().padStart(2, "0");
+      secondsEl.textContent = seconds.toString().padStart(2, "0");
     }
 
     const timer = setInterval(updateCountdown, 1000);
     updateCountdown();
-
-    // Ação do botão após o lançamento
-    ctaBtn.addEventListener("click", () => {
-      if (ctaBtn.classList.contains("disabled")) return;
-
-      // Defina aqui o caminho da sua página principal do app
-      window.location.href = "/"; // ajuste se a app estiver em outra rota
-    });
   </script>
 </body>
 </html>
