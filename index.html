@@ -25,10 +25,10 @@
     .app-wrap {
       max-width: 520px;
       margin: 0 auto;
-      padding-bottom: 70px;
+      padding-bottom: 80px;
     }
 
-    /* -------- HEADER -------- */
+    /* HEADER */
     .app-header {
       padding: 14px 16px;
       display: flex;
@@ -51,6 +51,7 @@
     .brand-sub {
       font-size: 0.75rem;
       color: var(--text-soft);
+      margin-top: 3px;
     }
 
     .header-login-btn {
@@ -64,7 +65,7 @@
       cursor: pointer;
     }
 
-    /* -------- CONTENT SCREENS -------- */
+    /* SCREENS */
     .screen {
       display: none;
       padding: 20px 15px;
@@ -73,7 +74,7 @@
       display: block;
     }
 
-    /* -------- CARDS -------- */
+    /* CARDS */
     .card, .hero-card {
       padding: 18px;
       border-radius: 18px;
@@ -84,7 +85,7 @@
 
     .hero-title {
       font-size: 1.5rem;
-      margin-bottom: 6px;
+      margin-bottom: 10px;
     }
     .hero-title span {
       color: var(--gold);
@@ -92,7 +93,7 @@
 
     .hero-btn {
       width: 100%;
-      padding: 12px;
+      padding: 13px;
       border: none;
       border-radius: 14px;
       background: linear-gradient(90deg, #f4c86c, #c99b32);
@@ -102,7 +103,7 @@
       margin-top: 12px;
     }
 
-    /* BOTTOM NAV */
+    /* NAVBAR */
     .bottom-nav {
       position: fixed;
       bottom: 0;
@@ -128,6 +129,7 @@
     .nav-item.active {
       color: var(--gold);
     }
+
   </style>
 </head>
 
@@ -143,7 +145,7 @@
       <button class="header-login-btn" onclick="loginUser()">Login</button>
     </header>
 
-    <!-- USER PLAN DISPLAY -->
+    <!-- PLANO DO USUÁRIO -->
     <p id="userPlanDisplay" style="text-align:center; font-size:14px; color:var(--gold); margin-top:12px;">
       Carregando plano...
     </p>
@@ -152,7 +154,7 @@
     <main id="homeScreen" class="screen active">
       <section class="hero-card">
         <h1 class="hero-title">Construa sua <span>Nova Mente</span></h1>
-        <p style="opacity:0.8;">Transforme disciplina, rotina e foco em resultados reais.</p>
+        <p style="opacity:0.8;">Transforme disciplina, rotina e foco em resultados reais com o BillionMind.</p>
         <button class="hero-btn" onclick="if(checkFeatureAccess('chat-basico')) goToScreen('chatScreen')">
           Iniciar Sessão de Alta Performance
         </button>
@@ -160,33 +162,53 @@
 
       <section class="card">
         <h2 style="color:var(--gold);">Meta do Dia</h2>
-        <p style="opacity:0.75;">Foque 90 minutos na sua meta principal.</p>
+        <p style="opacity:0.8;">Foque 90 minutos no seu objetivo principal.</p>
       </section>
 
       <section class="card">
         <h2 style="color:var(--gold);">Seu Progresso</h2>
-        <p style="opacity:0.75;">Histórico será liberado após login e plano ativo.</p>
+        <p style="opacity:0.8;">Histórico disponível apenas para assinantes PRO e PREMIUM.</p>
       </section>
     </main>
 
     <!-- CHAT -->
     <section id="chatScreen" class="screen">
       <h2 style="color:var(--gold);">Chat de Alta Performance</h2>
-      <p style="opacity:0.75;">
-        Aqui ficará o chat real após a liberação do seu plano.
-      </p>
+      <p style="opacity:0.75;">Área do chat — liberada para todos os planos.</p>
     </section>
 
     <!-- HISTÓRICO -->
     <section id="historyScreen" class="screen">
       <h2 style="color:var(--gold);">Histórico</h2>
-      <p style="opacity:0.75;">Disponível apenas para assinantes.</p>
+      <p style="opacity:0.75;">Liberado somente para PRO e PREMIUM.</p>
     </section>
 
     <!-- PERFIL -->
     <section id="profileScreen" class="screen">
       <h2 style="color:var(--gold);">Perfil</h2>
-      <p style="opacity:0.75;">Informações da conta e status da assinatura.</p>
+      <p style="opacity:0.75;">Veja seus dados e plano atual.</p>
+
+      <button class="hero-btn" onclick="goToScreen('plansScreen')">
+        Gerenciar Assinatura
+      </button>
+    </section>
+
+    <!-- PLANOS -->
+    <section id="plansScreen" class="screen">
+      <h2 style="color:var(--gold); font-size:1.4rem;">Assinaturas</h2>
+      <p style="opacity:0.8;">Escolha seu plano e libere todo o poder do BillionMind AI.</p>
+
+      <div class="card">
+        <h3 style="color:var(--gold);">Plano PRO — R$ 24,90/mês</h3>
+        <p>Acesso ao histórico, imagens e desempenho avançado.</p>
+        <button class="hero-btn" onclick="upgradePlan('pro')">Assinar PRO</button>
+      </div>
+
+      <div class="card">
+        <h3 style="color:var(--gold);">Plano PREMIUM — R$ 39,90/mês</h3>
+        <p>Desbloqueie tudo: lifestyle, disciplina avançada e IA ilimitada.</p>
+        <button class="hero-btn" onclick="upgradePlan('premium')">Assinar PREMIUM</button>
+      </div>
     </section>
   </div>
 
@@ -196,10 +218,11 @@
     <div id="navChat" class="nav-item" onclick="goToScreen('chatScreen')">💬 Chat</div>
     <div id="navHist" class="nav-item" onclick="goToScreen('historyScreen')">📜 Histórico</div>
     <div id="navPerfil" class="nav-item" onclick="goToScreen('profileScreen')">👤 Perfil</div>
+    <div id="navPlanos" class="nav-item" onclick="goToScreen('plansScreen')">⭐ Planos</div>
   </nav>
 
 <script>
-/* --------- TROCA DE TELAS --------- */
+/* TROCA DE TELAS */
 function goToScreen(id) {
   document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
   document.getElementById(id).classList.add("active");
@@ -209,14 +232,16 @@ function goToScreen(id) {
   if(id==="chatScreen") navChat.classList.add("active");
   if(id==="historyScreen") navHist.classList.add("active");
   if(id==="profileScreen") navPerfil.classList.add("active");
+  if(id==="plansScreen") navPlanos.classList.add("active");
 }
 
-/* --------- LOGIN --------- */
+/* LOGIN */
 async function loginUser() {
   const email = prompt("Digite seu e-mail:");
   const password = prompt("Digite sua senha:");
 
-  if (!email || !password) return alert("Digite os dados corretamente.");
+  if (!email || !password)
+    return alert("Digite os dados corretamente.");
 
   const res = await fetch("/api/login", {
     method: "POST",
@@ -239,19 +264,17 @@ async function loginUser() {
   location.reload();
 }
 
-/* --------- CARREGAR PLANO --------- */
+/* MOSTRAR PLANO DO USUÁRIO */
 document.addEventListener("DOMContentLoaded", () => {
   const plano = localStorage.getItem("plano");
   if (plano) {
-    document.getElementById("userPlanDisplay").innerText =
-      "Plano atual: " + plano.toUpperCase();
+    userPlanDisplay.innerText = "Plano atual: " + plano.toUpperCase();
   } else {
-    document.getElementById("userPlanDisplay").innerText =
-      "Faça login para liberar funções.";
+    userPlanDisplay.innerText = "Faça login para liberar funções.";
   }
 });
 
-/* --------- CONTROLE DE FUNÇÕES --------- */
+/* CONTROLE DE FUNÇÕES */
 function checkFeatureAccess(feature) {
   const plano = localStorage.getItem("plano");
 
@@ -272,6 +295,32 @@ function checkFeatureAccess(feature) {
 
   alert("Função disponível apenas para assinantes.");
   return false;
+}
+
+/* UPGRADE DE PLANO */
+async function upgradePlan(tipo) {
+  const user_id = localStorage.getItem("user_id");
+
+  if (!user_id) {
+    alert("Faça login antes de assinar.");
+    return;
+  }
+
+  const res = await fetch("/api/upgrade", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ user_id, plano: tipo })
+  });
+
+  const data = await res.json();
+
+  if (data.success) {
+    localStorage.setItem("plano", tipo);
+    alert("Plano atualizado para: " + tipo.toUpperCase());
+    location.reload();
+  } else {
+    alert("Erro ao atualizar plano.");
+  }
 }
 </script>
 
