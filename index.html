@@ -1,231 +1,225 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>BillionMind AI · Pré-lançamento</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BillionMind AI</title>
 
 <style>
-    body {
-        margin: 0;
-        padding: 0;
-        background: #0b0b0f;
-        font-family: Arial, sans-serif;
-        color: white;
-        overflow-x: hidden;
-    }
+body{
+  margin:0;background:#0b0b0f;color:white;
+  font-family:Arial, sans-serif;overflow-x:hidden;
+}
+#appHeader{
+  position:fixed;top:0;width:100%;padding:15px;
+  text-align:center;background:rgba(10,10,14,0.65);
+  backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,215,0,0.2);
+  font-size:20px;color:#ffd700;font-weight:bold;z-index:1000;
+}
+.page{display:none;padding:90px 20px 80px 20px;}
+.activePage{display:block;}
+.card{
+  background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);
+  padding:18px;border-radius:18px;margin-bottom:18px;
+  backdrop-filter:blur(12px);
+}
+.titulo{font-size:22px;font-weight:bold;color:#ffd700;}
+.sub{opacity:.7;font-size:14px;margin-top:4px;}
+#bottomMenu{
+  position:fixed;bottom:0;width:100%;display:flex;justify-content:space-around;
+  background:rgba(10,10,14,0.85);backdrop-filter:blur(12px);
+  border-top:1px solid rgba(255,255,255,0.1);padding:10px 0;z-index:1000;
+}
+#bottomMenu div{font-size:13px;color:#bbb;text-align:center;cursor:pointer;}
+#bottomMenu .active{color:#ffd700;font-weight:bold;}
 
-    .header {
-        width: 100%;
-        padding: 15px;
-        background: rgba(20, 20, 30, 0.6);
-        backdrop-filter: blur(10px);
-        border-bottom: 1px solid rgba(255, 215, 0, 0.3);
-        text-align: center;
-        font-size: 14px;
-        color: #ffdd77;
-        letter-spacing: 1px;
-    }
-
-    .timer {
-        font-size: 16px;
-        font-weight: bold;
-        margin-top: 5px;
-        color: #ffd700;
-        text-shadow: 0 0 8px #d4b100;
-    }
-
-    .container {
-        padding: 20px;
-        width: 90%;
-        margin: 0 auto;
-    }
-
-    .titulo {
-        font-size: 28px;
-        font-weight: bold;
-        text-align: left;
-        margin-top: 10px;
-    }
-
-    .subtitulo {
-        font-size: 15px;
-        opacity: 0.6;
-        margin-bottom: 20px;
-    }
-
-    .card {
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 215, 0, 0.2);
-        padding: 15px;
-        border-radius: 18px;
-        margin-bottom: 20px;
-        backdrop-filter: blur(10px);
-    }
-
-    .botao {
-        width: 90%;
-        margin: 0 auto;
-        margin-top: 20px;
-        padding: 14px;
-        text-align: center;
-        background: linear-gradient(90deg, #ffcf33, #d4a000);
-        border-radius: 50px;
-        color: black;
-        font-weight: bold;
-        font-size: 17px;
-        cursor: pointer;
-        box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
-    }
-
-    .botao:hover {
-        filter: brightness(1.15);
-    }
-
-    .chat-preview {
-        background: #11141a;
-        border-radius: 20px;
-        padding: 15px;
-        margin-top: 20px;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .mensagem-usuario {
-        background: linear-gradient(120deg, #4fa3ff, #005eff);
-        padding: 12px;
-        border-radius: 12px;
-        margin-bottom: 10px;
-        color: white;
-    }
-
-    .mensagem-ai {
-        background: #1a1d25;
-        padding: 12px;
-        border-radius: 12px;
-        margin-bottom: 10px;
-        color: #d3d3d3;
-        border: 1px solid rgba(255, 215, 0, 0.1);
-    }
+#chatWindow{
+  height:63vh;overflow-y:auto;padding:10px;border-radius:15px;
+  background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);
+}
+.chatMsgUser{
+  background:#2f6bff;padding:12px;border-radius:12px;margin-bottom:10px;
+  max-width:80%;color:white;
+}
+.chatMsgAI{
+  background:#15171d;padding:12px;border-radius:12px;margin-bottom:10px;
+  border:1px solid rgba(255,215,0,0.15);max-width:80%;
+}
+#chatInputBox{display:flex;gap:10px;margin-top:10px;}
+#chatInput{
+  flex:1;padding:12px;border-radius:10px;border:none;
+  background:#1b1e26;color:white;
+}
+#sendBtn{
+  background:#ffd700;border:none;padding:12px 16px;border-radius:10px;
+  cursor:pointer;
+}
 
 </style>
 </head>
 <body>
 
-<div class="header">
-    🚀 APP EM LANÇAMENTO — ESTREIA EM <span class="timer" id="contador"></span>
+<div id="appHeader">BillionMind AI</div>
+
+<!-- DASHBOARD -->
+<div id="pageDashboard" class="page activePage">
+  <div class="card">
+    <div class="titulo">Bem-vindo à sua nova mente</div>
+    <div class="sub">Comece pelo menu abaixo</div>
+  </div>
+
+  <div class="card">
+    <div class="titulo">Meta do dia</div>
+    <div class="sub">Trabalhar 90 minutos focado em 1 objetivo.</div>
+  </div>
+
+  <div class="card">
+    <div class="titulo">Seu progresso</div>
+    <div class="sub">Painel em construção — será salvo no Supabase.</div>
+  </div>
 </div>
 
-<div class="container">
+<!-- CHAT -->
+<div id="pageChat" class="page">
+  <div id="chatWindow"></div>
 
-    <div class="titulo">B I L L I O N M I N D <span style="color:#ffd700;">AI</span></div>
-    <div class="subtitulo">De hoje a 2 dias · lançamento global</div>
-
-    <div class="card">
-        <strong>Organize disciplina, dinheiro e lifestyle em um único chat de alta performance.</strong>
-        <br><br>
-        BillionMind AI está em fase final de lançamento. Esta tela mostra exatamente como será a sua experiência.
-    </div>
-
-    <div class="card">
-        <div style="color:#23ff70; font-weight:bold;">● Sessão Preview ativa</div>
-        <div>Modo demonstração antes do lançamento.</div>
-    </div>
-
-    <div class="card">
-        <div style="font-weight:bold; font-size:18px; color:#ffd700;">Meta principal de hoje</div>
-        <div style="margin-top:5px; font-size:16px;">Trabalhar 90 min em um objetivo importante.</div>
-    </div>
-
-    <div class="card">
-        <div style="font-size:18px; font-weight:bold; color:#00ff88;">30 dias guiados</div>
-        BillionMind monta os passos para você seguir.
-    </div>
-
-    <div class="chat-preview">
-        <div class="mensagem-usuario">Chat crie uma rotina de um milionário em desenvolvimento</div>
-
-        <div class="mensagem-ai">
-            Claro! Aqui está uma rotina diária inspirada em um milionário em desenvolvimento...
-            <br><br>
-            (Preview – funções reais só no lançamento)
-        </div>
-    </div>
-
-    <div class="botao" id="btnEntrar">Entrar</div>
-    <div class="botao" id="btnAviso">Quero ser avisado</div>
-
+  <div id="chatInputBox">
+    <input id="chatInput" placeholder="Escreva sua mensagem...">
+    <button id="sendBtn" onclick="sendChatMessage()">➤</button>
+  </div>
 </div>
 
+<!-- HISTÓRICO -->
+<div id="pageHistorico" class="page">
+  <div class="card">
+    <div class="titulo">Histórico</div>
+    <div class="sub">Carregando conversas...</div>
+  </div>
+  <div id="histList"></div>
+</div>
 
-<!-- ============================== -->
-<!--        CONTADOR Lançamento    -->
-<!-- ============================== -->
+<!-- PERFIL -->
+<div id="pagePerfil" class="page">
+  <div class="card">
+    <div class="titulo">Sua conta</div>
+    <div class="sub">Abaixo os dados do usuário</div>
+  </div>
+  <div class="card">
+    <div id="perfilInfo">Você não está logado.</div>
+  </div>
+  <button onclick="logout()" style="
+    margin-top:20px;width:100%;padding:14px;border:none;
+    background:#ffd700;color:#000;border-radius:10px;font-weight:bold;">
+    Sair
+  </button>
+</div>
+
+<!-- MENU INFERIOR -->
+<div id="bottomMenu">
+  <div onclick="openPage('Dashboard')" class="active">🏠<br>Home</div>
+  <div onclick="openPage('Chat')">💬<br>Chat</div>
+  <div onclick="openPage('Historico')">📜<br>Histórico</div>
+  <div onclick="openPage('Perfil')">👤<br>Perfil</div>
+</div>
+
+<!-- SCRIPTS -->
 <script>
-const LAUNCH_DATE = new Date(Date.now() + 2 * 24 * 60 * 60 * 1000);
-
-function atualizarContador() {
-    const agora = new Date();
-    const diff = LAUNCH_DATE - agora;
-
-    if (diff <= 0) {
-        document.getElementById("contador").innerText = "AGORA!";
-        return;
-    }
-
-    const h = Math.floor((diff / 1000 / 60 / 60));
-    const m = Math.floor((diff / 1000 / 60) % 60);
-    const s = Math.floor((diff / 1000) % 60);
-
-    document.getElementById("contador").innerText =
-        `${h}h ${m}m ${s}s`;
+function openPage(name){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('activePage'));
+  document.querySelector('#page'+name).classList.add('activePage');
+  
+  document.querySelectorAll('#bottomMenu div').forEach(d=>d.classList.remove('active'));
+  event.target.classList.add('active');
 }
 
-setInterval(atualizarContador, 1000);
-atualizarContador();
-</script>
+/* ---------------- LOGIN ---------------- */
+let USER = null;
 
+async function login(){
+  const email = prompt("E-mail:");
+  const senha = prompt("Senha:");
 
-<!-- ============================== -->
-<!--        LOGIN REAL Supabase    -->
-<!-- ============================== -->
-<script>
-const API_BASE = "/api";
+  const res = await fetch("/api/login",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({email, senha})
+  });
+  const data = await res.json();
 
-// login
-async function login(email, senha) {
-    const res = await fetch(`${API_BASE}/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, senha })
-    });
+  if(data.error){ alert("Erro: "+data.error); return; }
 
-    return res.json();
+  USER = data.user;
+  localStorage.setItem("bm_user_id", USER.id);
+  alert("Login feito!");
+  loadPerfil();
 }
 
-document.getElementById("btnEntrar").addEventListener("click", async () => {
-    const email = prompt("Digite seu e-mail:");
-    const senha = prompt("Digite sua senha:");
+function logout(){
+  USER = null;
+  localStorage.removeItem("bm_user_id");
+  alert("Desconectado.");
+  document.getElementById("perfilInfo").innerText="Você não está logado.";
+}
 
-    if (!email || !senha) {
-        alert("Digite todos os dados.");
-        return;
-    }
+/* ---------------- PERFIL ---------------- */
+function loadPerfil(){
+  const uid = localStorage.getItem("bm_user_id");
+  if(!uid){
+    document.getElementById("perfilInfo").innerText="Você não está logado.";
+    return;
+  }
+  document.getElementById("perfilInfo").innerHTML = `
+    <b>ID:</b> ${uid}<br>
+    <b>Status:</b> Logado
+  `;
+}
 
-    const resultado = await login(email, senha);
+/* ---------------- CHAT ---------------- */
+async function sendChatMessage(){
+  const input=document.getElementById("chatInput");
+  const text=input.value.trim();
+  if(!text)return;
 
-    if (resultado.error) {
-        alert("Erro: " + resultado.error);
-    } else {
-        localStorage.setItem("bm_token", resultado.session.access_token);
-        alert("Login realizado com sucesso!");
-    }
-});
+  const chat=document.getElementById("chatWindow");
 
-// botão de aviso — envia seu número
-document.getElementById("btnAviso").addEventListener("click", () => {
-    window.location.href = "https://wa.me/5577981485840?text=Quero+ser+avisado+do+lan%C3%A7amento+do+BillionMind+AI";
-});
+  let u=document.createElement("div");
+  u.className="chatMsgUser";
+  u.innerText=text;
+  chat.appendChild(u);
+
+  input.value="";
+
+  let loading=document.createElement("div");
+  loading.className="chatMsgAI";
+  loading.innerText="Pensando...";
+  chat.appendChild(loading);
+
+  const res = await fetch("/api/chat",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({message:text})
+  });
+
+  const data=await res.json();
+  loading.remove();
+
+  let ai=document.createElement("div");
+  ai.className="chatMsgAI";
+  ai.innerText=data.reply || "Erro ao responder.";
+  chat.appendChild(ai);
+
+  chat.scrollTop=chat.scrollHeight;
+}
+
+loadPerfil();
 </script>
+
+<button onclick="login()" style="
+position:fixed;top:80px;right:20px;z-index:2000;
+padding:10px 15px;background:#ffd700;color:#000;
+border:none;border-radius:10px;font-weight:bold;">
+Login
+</button>
 
 </body>
 </html>
