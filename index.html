@@ -1,219 +1,610 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BillionMind AI – Lançamento</title>
-
-<style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  }
-
-  body {
-    background: linear-gradient(180deg, #050610, #0b0f1f 40%, #000);
-    color: #f9fafb;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-  }
-
-  .launch-container, .app {
-    width: 100%;
-    max-width: 480px;
-    text-align: center;
-    display: none;
-  }
-
-  .launch-container.active {
-    display: block;
-    animation: fadeIn 0.8s ease-in-out;
-  }
-
-  .app.active {
-    display: block;
-    animation: fadeIn 0.8s ease-in-out;
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .logo {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    margin-bottom: 16px;
-    background: radial-gradient(circle at 30% 20%, #fce7b2, #f7c458, #8a5b16);
-    box-shadow: 0 0 25px rgba(247, 196, 88, 0.5);
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  h1 {
-    font-size: 1.8rem;
-    color: #fbbf24;
-    margin-bottom: 8px;
-    letter-spacing: 0.05em;
-  }
-
-  .sub {
-    color: #d1d5db;
-    font-size: 1rem;
-    margin-bottom: 10px;
-  }
-
-  /* COUNTDOWN */
-  .countdown-box {
-    margin: 25px 0;
-  }
-
-  .countdown {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-  }
-
-  .cd-item {
-    width: 70px;
-    padding: 12px 10px;
-    border-radius: 14px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(148, 163, 184, 0.3);
-  }
-
-  .cd-number {
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: #fbbf24;
-  }
-
-  .cd-label {
-    font-size: 0.75rem;
-    color: #9ca3af;
-    margin-top: 4px;
-    text-transform: uppercase;
-  }
-
-  /* BOTÃO */
-  .notify-btn {
-    width: 100%;
-    padding: 14px;
-    border-radius: 999px;
-    background: linear-gradient(135deg, #fbbf24, #f97316);
-    color: #111;
-    font-size: 1rem;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-    margin-top: 10px;
-    box-shadow: 0 0 22px rgba(249, 181, 54, 0.5);
-  }
-
-  .footer-text {
-    margin-top: 14px;
-    font-size: 0.85rem;
-    color: #9ca3af;
-  }
-</style>
-</head>
-
-<body>
-
-<!-- TELA DE LANÇAMENTO -->
-<div class="launch-container active" id="launchScreen">
-
-  <div class="logo"></div>
-
-  <h1>BillionMind AI</h1>
-  <p class="sub">Seu novo chat de disciplina, dinheiro e lifestyle.</p>
-
-  <div class="countdown-box">
-    <p style="color:#d1d5db; font-size:0.9rem; margin-bottom:10px;">
-      Lançamento oficial em 4 dias às 19:30
-    </p>
-    <div class="countdown">
-      <div class="cd-item">
-        <div class="cd-number" id="cd-days">00</div>
-        <div class="cd-label">Dias</div>
-      </div>
-      <div class="cd-item">
-        <div class="cd-number" id="cd-hours">00</div>
-        <div class="cd-label">Horas</div>
-      </div>
-      <div class="cd-item">
-        <div class="cd-number" id="cd-mins">00</div>
-        <div class="cd-label">Min</div>
-      </div>
-      <div class="cd-item">
-        <div class="cd-number" id="cd-secs">00</div>
-        <div class="cd-label">Seg</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- BOTÃO "ME AVISE" -->
-  <button class="notify-btn" onclick="window.location.href='https://whatsapp.com/channel/0029VbBg2OxK0IBk3CURik35'">
-    🔔 Quero ser avisado
-  </button>
-
-  <p class="footer-text">Você será notificado assim que o app for liberado.</p>
-</div>
-
-
-<!-- TELA DO APP OFICIAL (APÓS LANÇAMENTO) -->
-<div class="app" id="appScreen">
-  <h1>Bem-vindo ao BillionMind AI 🚀</h1>
-  <p>A partir de agora o app está totalmente liberado.</p>
-  <button class="notify-btn" onclick="alert('Em breve: login, chat e assinaturas ativas!')">Entrar no app</button>
-</div>
-
-<script>
-  // Define contagem regressiva
-  const now = new Date();
-  const launchDate = new Date();
-  launchDate.setDate(now.getDate() + 4);
-  launchDate.setHours(19, 30, 0, 0);
-
-  const daysEl = document.getElementById("cd-days");
-  const hoursEl = document.getElementById("cd-hours");
-  const minsEl = document.getElementById("cd-mins");
-  const secsEl = document.getElementById("cd-secs");
-
-  const launchScreen = document.getElementById("launchScreen");
-  const appScreen = document.getElementById("appScreen");
-
-  function updateCountdown() {
-    const nowTime = new Date().getTime();
-    const distance = launchDate.getTime() - nowTime;
-
-    if (distance <= 0) {
-      clearInterval(timer);
-      launchScreen.classList.remove("active");
-      appScreen.classList.add("active");
-      return;
+  <meta charset="UTF-8" />
+  <title>BillionMind AI – Lançamento Oficial</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg-1: #050712;
+      --bg-2: #080d1c;
+      --accent: #27e197;
+      --accent-soft: rgba(39, 225, 151, 0.15);
+      --gold: #f6c453;
+      --text-main: #f4f7ff;
+      --text-muted: #a3afc7;
+      --danger: #ff5b5b;
+      --card: #0c1222;
+      --border: #1b2236;
+      --radius-lg: 18px;
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.55);
     }
 
-    const d = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const s = Math.floor((distance % (1000 * 60)) / 1000);
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Inter", sans-serif;
+    }
 
-    daysEl.textContent = String(d).padStart(2, "0");
-    hoursEl.textContent = String(h).padStart(2, "0");
-    minsEl.textContent = String(m).padStart(2, "0");
-    secsEl.textContent = String(s).padStart(2, "0");
-  }
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #151b33 0, #050712 55%);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 16px;
+    }
 
-  const timer = setInterval(updateCountdown, 1000);
-  updateCountdown();
-</script>
+    .page {
+      width: 100%;
+      max-width: 480px;
+      background: linear-gradient(145deg, var(--bg-1), var(--bg-2));
+      border-radius: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      box-shadow: var(--shadow-soft);
+      padding: 20px 18px 24px;
+      position: relative;
+      overflow: hidden;
+    }
 
+    .glow {
+      position: absolute;
+      inset: -120px;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(39, 225, 151, 0.12), transparent 60%),
+        radial-gradient(circle at 100% 0%, rgba(246, 196, 83, 0.12), transparent 60%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #fff2c7 0, #f2ae2c 32%, #a36f0d 80%);
+      box-shadow: 0 0 18px rgba(246, 196, 83, 0.6);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-name {
+      letter-spacing: 0.36em;
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+
+    .brand-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .pill-launch {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      background: rgba(246, 196, 83, 0.05);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--danger);
+      box-shadow: 0 0 10px rgba(255, 91, 91, 0.9);
+    }
+
+    .hero {
+      margin-top: 10px;
+      padding: 18px 16px 16px;
+      background: radial-gradient(circle at 0 0, rgba(39, 225, 151, 0.16), transparent 60%),
+        rgba(6, 11, 30, 0.9);
+      border-radius: 22px;
+      border: 1px solid rgba(140, 254, 201, 0.25);
+      box-shadow: 0 12px 40px rgba(2, 16, 11, 0.8);
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      background: rgba(4, 28, 20, 0.95);
+      border: 1px solid rgba(71, 255, 184, 0.45);
+      color: #71ffd0;
+      margin-bottom: 10px;
+    }
+
+    .hero-tag span.icon {
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(71, 255, 184, 0.12);
+      font-size: 13px;
+    }
+
+    .hero-title {
+      font-size: 22px;
+      line-height: 1.25;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .hero-title span {
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .countdown-card {
+      margin-top: 16px;
+      padding: 14px 12px 12px;
+      border-radius: 16px;
+      background: radial-gradient(circle at 0 0, rgba(39, 225, 151, 0.18), transparent 60%),
+        var(--card);
+      border: 1px solid rgba(60, 255, 188, 0.25);
+    }
+
+    .countdown-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: rgba(163, 175, 199, 0.9);
+      margin-bottom: 8px;
+    }
+
+    .countdown-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .time-block {
+      flex: 1;
+      background: rgba(10, 18, 40, 0.95);
+      border-radius: 14px;
+      padding: 8px 4px 7px;
+      text-align: center;
+      border: 1px solid rgba(60, 255, 188, 0.15);
+    }
+
+    .time-value {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    .time-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .time-value.highlight {
+      color: var(--accent);
+    }
+
+    .time-value.ending {
+      color: var(--danger);
+    }
+
+    .after-text {
+      margin-top: 6px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .grid {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 12px;
+    }
+
+    .card {
+      background: rgba(6, 10, 26, 0.95);
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      padding: 12px 11px 11px;
+    }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card-title span.dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .card-title span.icon {
+      font-size: 13px;
+    }
+
+    .card p {
+      font-size: 11px;
+      line-height: 1.5;
+      color: var(--text-muted);
+    }
+
+    .badge-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .badge {
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .badge strong {
+      color: var(--accent);
+    }
+
+    .cta-block {
+      margin-top: 18px;
+      padding: 12px 11px;
+      border-radius: 18px;
+      border: 1px solid rgba(246, 196, 83, 0.5);
+      background: radial-gradient(circle at 0 0, rgba(246, 196, 83, 0.16), transparent 60%),
+        rgba(12, 9, 2, 0.96);
+    }
+
+    .cta-text {
+      font-size: 12px;
+      margin-bottom: 8px;
+      color: rgba(255, 245, 220, 0.9);
+    }
+
+    .cta-text span {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .cta-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 11px 10px;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, #ffb347, #ffcc33);
+      color: #23160a;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 12px 28px rgba(255, 179, 71, 0.5);
+      cursor: pointer;
+      transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.1s ease;
+    }
+
+    .btn-primary span.icon {
+      font-size: 14px;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 36px rgba(255, 179, 71, 0.65);
+      filter: brightness(1.02);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      padding: 9px 10px;
+      border-radius: 999px;
+      border: 1px dashed rgba(255, 255, 255, 0.35);
+      background: rgba(6, 11, 30, 0.85);
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.75);
+      text-decoration: none;
+    }
+
+    .btn-secondary span {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .footer {
+      margin-top: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10px;
+      color: var(--text-muted);
+      opacity: 0.75;
+    }
+
+    .footer span.app-name {
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .status-pill {
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(39, 225, 151, 0.6);
+      color: var(--accent);
+      font-size: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+      animation: pulse 1.4s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      70% {
+        transform: scale(1.4);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .hero-title {
+        font-size: 20px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="glow"></div>
+
+    <header>
+      <div class="brand">
+        <div class="brand-logo"></div>
+        <div class="brand-text">
+          <div class="brand-name">B I L L I O N M I N D</div>
+          <div class="brand-sub">Acelerador de Disciplina · Edição Completa</div>
+        </div>
+      </div>
+      <div class="pill-launch">
+        <span class="pill-dot"></span>
+        Lançamento em breve
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-tag">
+        <span class="icon">⚡</span>
+        Acelerador de Disciplina · 30 Dias
+      </div>
+      <h1 class="hero-title">
+        Transforme sua <span>disciplina diária</span> em estilo de vida de alta performance.
+      </h1>
+      <p class="hero-sub">
+        O BillionMind AI não é motivação vazia. É um painel inteligente que organiza seus dias
+        com protocolos claros, metas objetivas e foco absoluto.
+      </p>
+
+      <div class="countdown-card">
+        <div class="countdown-label">Contagem regressiva para o lançamento</div>
+        <div class="countdown-row" id="countdown">
+          <div class="time-block">
+            <div class="time-value" id="days">--</div>
+            <div class="time-label">Dias</div>
+          </div>
+          <div class="time-block">
+            <div class="time-value" id="hours">--</div>
+            <div class="time-label">Horas</div>
+          </div>
+          <div class="time-block">
+            <div class="time-value" id="minutes">--</div>
+            <div class="time-label">Min</div>
+          </div>
+          <div class="time-block">
+            <div class="time-value" id="seconds">--</div>
+            <div class="time-label">Seg</div>
+          </div>
+        </div>
+        <p class="after-text" id="after-text">
+          Garanta sua vaga antes da abertura oficial e entre para a primeira turma.
+        </p>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <div class="card-title">
+          <span class="dot"></span>
+          O que o BillionMind AI faz?
+        </div>
+        <p>
+          • Organiza seus dias com protocolos de disciplina, foco e renda.<br />
+          • Gera planos práticos em poucos cliques (rotina, metas e ações).<br />
+          • Acompanha seu progresso com um painel visual e simples de entender.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <span class="icon">🎯</span> Para quem é
+        </div>
+        <p>
+          Para quem quer parar de procrastinar, executar de verdade e construir uma rotina
+          de alta performance com cara de “software de bilionário”.
+        </p>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top: 12px;">
+      <div class="card-title">
+        <span class="icon">🚀</span> Vantagens de entrar no lançamento
+      </div>
+      <div class="badge-list">
+        <span class="badge"><strong>Acesso antecipado</strong> à plataforma</span>
+        <span class="badge"><strong>Condições especiais</strong> na assinatura</span>
+        <span class="badge">Você ajuda a modelar os próximos recursos</span>
+        <span class="badge">Conteúdos extras apenas para a primeira turma</span>
+      </div>
+    </section>
+
+    <section class="cta-block">
+      <p class="cta-text">
+        Entre no <span>canal VIP de lançamento</span> para receber o link de acesso, bônus
+        exclusivos e avisos em primeira mão.
+      </p>
+
+      <div class="cta-actions">
+        <a
+          href="https://whatsapp.com/channel/0029VbBg2OxK0IBk3CURik35"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-primary"
+        >
+          <span class="icon">🔔</span>
+          Entrar no canal de lançamento
+        </a>
+
+        <a href="#detalhes" class="btn-secondary">
+          Prefiro só acompanhar por enquanto.
+          <span>Me mostre mais detalhes</span>
+        </a>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span class="app-name">BillionMind AI</span>
+      <div class="status-pill">
+        <span class="status-dot"></span>
+        Pré-lançamento ativo
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Lançamento: sábado às 19:30 (horário de Brasília, UTC-3)
+    const launchDate = new Date("2025-11-29T19:30:00-03:00").getTime();
+
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
+    const afterTextEl = document.getElementById("after-text");
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = launchDate - now;
+
+      if (distance <= 0) {
+        // Lançado
+        daysEl.textContent = "00";
+        hoursEl.textContent = "00";
+        minutesEl.textContent = "00";
+        secondsEl.textContent = "00";
+
+        daysEl.classList.remove("highlight");
+        hoursEl.classList.remove("highlight");
+        minutesEl.classList.remove("highlight");
+        secondsEl.classList.add("ending");
+
+        afterTextEl.textContent =
+          "O BillionMind AI acaba de ser liberado. Atualize a página para acessar a plataforma.";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor(
+        (distance % (1000 * 60 * 60)) / (1000 * 60)
+      );
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      daysEl.textContent = String(days).padStart(2, "0");
+      hoursEl.textContent = String(hours).padStart(2, "0");
+      minutesEl.textContent = String(minutes).padStart(2, "0");
+      secondsEl.textContent = String(seconds).padStart(2, "0");
+
+      daysEl.classList.add("highlight");
+      if (distance < 1000 * 60 * 60 * 3) {
+        secondsEl.classList.add("ending");
+      }
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
 </body>
 </html>
