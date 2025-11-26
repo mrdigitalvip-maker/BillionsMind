@@ -682,6 +682,69 @@
       color: var(--gold);
     }
 
+    /* AUTH / INTEGRAÇÃO */
+    .auth-card {
+      margin-top: 12px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      background: linear-gradient(145deg, rgba(8, 47, 73, 0.32), rgba(6, 9, 18, 0.88));
+      display: grid;
+      gap: 8px;
+    }
+
+    .auth-fields {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 8px;
+    }
+
+    .auth-fields input {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      background: rgba(4, 7, 15, 0.95);
+      color: var(--text-main);
+      padding: 8px 10px;
+      font-size: 0.85rem;
+    }
+
+    .auth-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .status-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 9px;
+      border-radius: 12px;
+      background: rgba(16, 185, 129, 0.12);
+      color: var(--emerald-soft);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      font-size: 0.8rem;
+    }
+
+    .history-list {
+      display: grid;
+      gap: 6px;
+      font-size: 0.78rem;
+      color: var(--text-soft);
+      max-height: 240px;
+      overflow: auto;
+      border-top: 1px solid rgba(148, 163, 184, 0.25);
+      padding-top: 6px;
+    }
+
+    .history-item {
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      border-radius: 10px;
+      padding: 7px 8px;
+      background: rgba(5, 7, 15, 0.92);
+    }
+
     /* NAV INFERIOR */
     nav.bottom-nav {
       position: fixed;
@@ -1026,6 +1089,34 @@
             Se sua rota /api/checkout estiver configurada, este botão abrirá o pagamento oficial da Stripe.
           </p>
         </div>
+
+        <div class="auth-card">
+          <div>
+            <div class="bp-section-title" style="color: var(--text-soft);">Login real com Supabase</div>
+            <p class="forge-note" style="margin: 4px 0 6px;">
+              Crie sua conta ou faça login usando as rotas backend deste projeto. O status abaixo muda conforme a sessão.
+            </p>
+          </div>
+          <div class="auth-fields">
+            <input id="authEmail" type="email" placeholder="Seu e-mail" />
+            <input id="authPassword" type="password" placeholder="Senha (mín. 6 caracteres)" />
+          </div>
+          <div class="auth-actions">
+            <button class="btn-primary" id="btnSignup">Criar conta</button>
+            <button class="btn-secondary" id="btnLogin">Entrar</button>
+            <button class="btn-small" id="btnLogout">Sair</button>
+            <div class="status-chip" id="authStatus">Offline · simulando</div>
+          </div>
+          <div>
+            <div class="bp-section-title" style="color: var(--text-soft);">Histórico (Supabase)</div>
+            <p class="forge-note" style="margin-bottom:6px;">Entrou? Busque seu histórico salvo no Supabase.</p>
+            <div class="auth-actions">
+              <button class="btn-small" id="btnLoadHistory">🔄 Atualizar histórico</button>
+              <button class="btn-small" id="btnSyncPlan">💾 Enviar plano do dia</button>
+            </div>
+            <div class="history-list" id="historyList"></div>
+          </div>
+        </div>
       </section>
     </main>
   </div>
@@ -1175,6 +1266,7 @@
       setCompletedToday();
       updateCvUi();
       updateForgeState();
+      syncPlanToSupabase(false);
       alert("Protocolo concluído. Seu CV subiu para " + newCv + ".");
     });
 
@@ -1259,6 +1351,18 @@
     const btnSimularLogin = document.getElementById("btnSimularLogin");
     const btnSimularElite = document.getElementById("btnSimularElite");
     const btnSimularVip = document.getElementById("btnSimularVip");
+    const authEmail = document.getElementById("authEmail");
+    const authPassword = document.getElementById("authPassword");
+    const authStatus = document.getElementById("authStatus");
+    const btnSignup = document.getElementById("btnSignup");
+    const btnLogin = document.getElementById("btnLogin");
+    const btnLogout = document.getElementById("btnLogout");
+    const btnLoadHistory = document.getElementById("btnLoadHistory");
+    const btnSyncPlan = document.getElementById("btnSyncPlan");
+    const historyList = document.getElementById("historyList");
+
+    let currentUser = null;
+    let currentPlan = null;
 
     btnSimularLogin.addEventListener("click", () => {
       profileEmail.textContent = "brunobrandao179@gmail.com";
@@ -1276,6 +1380,187 @@
       profilePlanChip.style.borderColor = "#facc6b";
       badgeCv.style.borderColor = "rgba(250, 204, 107, 0.9)";
     });
+
+    function setStatus(text, success = false) {
+      authStatus.textContent = text;
+      authStatus.style.color = success ? "var(--emerald-soft)" : "var(--gold)";
+      authStatus.style.borderColor = success
+        ? "rgba(16, 185, 129, 0.35)"
+        : "rgba(250, 204, 107, 0.35)";
+      authStatus.style.background = success
+        ? "rgba(16, 185, 129, 0.12)"
+        : "rgba(250, 204, 107, 0.08)";
+    }
+
+    function persistUser(user, plan) {
+      localStorage.setItem(
+        "bm_user",
+        JSON.stringify({ id: user?.id, email: user?.email, plan: plan || null })
+      );
+    }
+
+    function hydrateUser() {
+      const raw = localStorage.getItem("bm_user");
+      if (!raw) return;
+      try {
+        const data = JSON.parse(raw);
+        currentUser = { id: data.id, email: data.email };
+        currentPlan = data.plan;
+        renderAuthUi();
+      } catch (e) {
+        console.warn("Falha ao carregar sessão local", e);
+      }
+    }
+
+    function renderAuthUi() {
+      if (currentUser?.email) {
+        profileEmail.textContent = currentUser.email;
+        profilePlanChip.textContent =
+          "Plano atual: " + (currentPlan?.plano || "Visionário (Supabase)");
+        setStatus("Online · " + currentUser.email, true);
+      } else {
+        profileEmail.textContent = "email@exemplo.com";
+        profilePlanChip.textContent = "Plano atual: Visionário (Gratuito)";
+        setStatus("Offline · simulando");
+      }
+    }
+
+    async function postJson(url, body) {
+      const res = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body || {}),
+      });
+
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        throw new Error(data.error || res.statusText);
+      }
+      return data;
+    }
+
+    async function getJson(url) {
+      const res = await fetch(url);
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        throw new Error(data.error || res.statusText);
+      }
+      return data;
+    }
+
+    async function handleSignup() {
+      try {
+        if (!authEmail.value || !authPassword.value) {
+          return setStatus("Preencha e-mail e senha para criar a conta.");
+        }
+        const data = await postJson("/api/signup", {
+          email: authEmail.value,
+          password: authPassword.value,
+        });
+        setStatus("Conta criada! Faça login para carregar seus dados.", true);
+        console.info("Signup", data);
+      } catch (error) {
+        console.error(error);
+        setStatus("Falha ao criar conta: " + error.message);
+      }
+    }
+
+    async function handleLogin() {
+      try {
+        if (!authEmail.value || !authPassword.value) {
+          return setStatus("Preencha e-mail e senha para entrar.");
+        }
+        const data = await postJson("/api/login", {
+          email: authEmail.value,
+          password: authPassword.value,
+        });
+        currentUser = data.user || data?.user_metadata || { email: authEmail.value };
+        currentPlan = data.plano || null;
+        persistUser(currentUser, currentPlan);
+        renderAuthUi();
+        await loadHistory();
+      } catch (error) {
+        console.error(error);
+        setStatus("Falha no login: " + error.message);
+      }
+    }
+
+    function handleLogout() {
+      currentUser = null;
+      currentPlan = null;
+      localStorage.removeItem("bm_user");
+      historyList.innerHTML = "";
+      renderAuthUi();
+    }
+
+    async function loadHistory() {
+      if (!currentUser?.id) {
+        historyList.innerHTML =
+          '<div class="history-item">Entre para carregar seu histórico salvo.</div>';
+        return;
+      }
+
+      try {
+        const data = await getJson(`/api/getHistory?user_id=${encodeURIComponent(currentUser.id)}`);
+        if (!data.length) {
+          historyList.innerHTML =
+            '<div class="history-item">Nenhum histórico encontrado para este usuário.</div>';
+          return;
+        }
+
+        historyList.innerHTML = data
+          .map(
+            (item) => `
+              <div class="history-item">
+                <strong>${new Date(item.criado_em || item.created_at).toLocaleString()}</strong><br />
+                <div><em>Mensagem:</em> ${item.mensagem_usuario || item.mensagem}</div>
+                <div><em>Resposta:</em> ${item.resposta_ai || item.resposta || "(sem resposta)"}</div>
+              </div>
+            `
+          )
+          .join("");
+      } catch (error) {
+        console.error(error);
+        historyList.innerHTML =
+          '<div class="history-item">Erro ao carregar histórico: ' + error.message + "</div>";
+      }
+    }
+
+    async function syncPlanToSupabase(showToast = true) {
+      if (!currentUser?.id) {
+        if (showToast) alert("Faça login para enviar seu plano do dia.");
+        return;
+      }
+
+      const task = forgeTask.value.trim();
+      const t = forgeTime.value.trim();
+      const q = forgeQuality.value.trim();
+      if (!task || !t || !q) {
+        if (showToast) alert("Preencha a ação, tempo e qualidade para salvar no Supabase.");
+        return;
+      }
+
+      try {
+        const payload = {
+          user_id: currentUser.id,
+          titulo: `Protocolo ${new Date().toISOString().slice(0, 10)}`,
+          conteudo: `${task} | Tempo: ${t} | Qualidade: ${q}`,
+        };
+        await postJson("/api/createPlan", payload);
+        setStatus("Plano sincronizado no Supabase!", true);
+      } catch (error) {
+        console.error(error);
+        setStatus("Falha ao sincronizar plano: " + error.message);
+      }
+    }
+
+    btnSignup.addEventListener("click", handleSignup);
+    btnLogin.addEventListener("click", handleLogin);
+    btnLogout.addEventListener("click", handleLogout);
+    btnLoadHistory.addEventListener("click", loadHistory);
+    btnSyncPlan.addEventListener("click", () => syncPlanToSupabase(true));
+    hydrateUser();
+    renderAuthUi();
 
     // -------- Stripe (se /api/checkout existir) --------
     const btnAssinarPro = document.getElementById("btnAssinarPro");
