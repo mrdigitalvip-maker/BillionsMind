@@ -1,66 +1,56 @@
-import OpenAI from "openai";
-import { createClient } from "@supabase/supabase-js";
-
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Método não permitido" });
   }
 
-  const { prompt, plano, user_id } = req.body;
+  const { prompt, plano } = req.body || {};
 
   if (!prompt) {
     return res.status(400).json({ error: "Prompt não enviado." });
   }
 
+  if (!process.env.OPENAI_API_KEY) {
+    return res.status(500).json({ error: "OPENAI_API_KEY não configurada no ambiente." });
+  }
+
   if (plano === "free") {
     return res.status(403).json({
-      error: "Geração de imagens é liberada apenas para PRO e PREMIUM."
+      error: "Geração de imagens é liberada apenas para PRO e PREMIUM.",
     });
   }
 
-  const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY
-  });
-
-  const supabase = createClient(
-    process.env.SUPABASE_URL,
-    process.env.SUPABASE_ANON_KEY
-  );
-
   try {
-    // ✔ Gerar a imagem
-    const result = await openai.images.generate({
-      model: "gpt-image-1",
-      prompt: prompt,
-      size: "1024x1024"
+    const response = await fetch("https://api.openai.com/v1/images/generations", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+      },
+      body: JSON.stringify({
+        model: "gpt-image-1",
+        prompt,
+        size: "1024x1024",
+        response_format: "b64_json",
+      }),
     });
 
-    const image_base64 = result.data[0].b64_json;
-
-    // ✔ Converter para buffer
-    const buffer = Buffer.from(image_base64, "base64");
-
-    // ✔ Salvar no Supabase Storage
-    const fileName = `img_${Date.now()}.png`;
-
-    const upload = await supabase.storage
-      .from("images")
-      .upload(fileName, buffer, {
-        contentType: "image/png"
-      });
-
-    if (upload.error) {
-      console.error(upload.error);
-      return res.status(500).json({ error: "Erro ao salvar imagem." });
+    if (!response.ok) {
+      const err = await response.text();
+      console.error(err);
+      return res.status(500).json({ error: "Erro ao gerar imagem." });
     }
 
-    const publicURL = supabase.storage
-      .from("images")
-      .getPublicUrl(fileName).data.publicUrl;
+    const data = await response.json();
+    const image_base64 = data?.data?.[0]?.b64_json;
 
-    // ✔ Retornar URL pública da imagem
-    return res.status(200).json({ url: publicURL });
+    if (!image_base64) {
+      return res.status(500).json({ error: "Não foi possível obter a imagem gerada." });
+    }
 
+    return res.status(200).json({
+      // Retornar data URI simplifica a visualização local mesmo sem bucket configurado
+      url: `data:image/png;base64,${image_base64}`,
+    });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: "Erro ao gerar imagem." });

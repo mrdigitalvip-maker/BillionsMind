@@ -1,0 +1,13 @@
+{
+  "name": "billionsmind",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "BillionMind AI web experience with API helpers",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+  }
+}

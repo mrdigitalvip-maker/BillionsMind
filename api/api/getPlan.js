@@ -1,23 +1,40 @@
-import { createClient } from '@supabase/supabase-js';
-
-const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_ANON_KEY
-);
+const SUPABASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
 
 export default async function handler(req, res) {
-  const { user_id } = req.query;
-
-  const { data, error } = await supabase
-    .from("planos")
-    .select("*")
-    .eq("user_id", user_id)
-    .order("criado_em", { ascending: false })
-    .limit(1);
-
-  if (error) {
-    return res.status(400).json({ error: error.message });
+  if (req.method !== "GET") {
+    return res.status(405).json({ error: "Método não permitido" });
   }
 
-  return res.status(200).json(data[0] || {});
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+    return res.status(500).json({ error: "Configurações do Supabase ausentes." });
+  }
+
+  const { user_id } = req.query || {};
+  if (!user_id) {
+    return res.status(400).json({ error: "user_id é obrigatório" });
+  }
+
+  try {
+    const response = await fetch(
+      `${SUPABASE_URL}/rest/v1/planos?user_id=eq.${user_id}&select=*&order=criado_em.desc&limit=1`,
+      {
+        headers: {
+          apikey: SUPABASE_ANON_KEY,
+          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      const err = await response.text();
+      throw new Error(err || "Erro ao buscar plano");
+    }
+
+    const data = await response.json();
+    return res.status(200).json(data?.[0] || {});
+  } catch (error) {
+    console.error(error);
+    return res.status(400).json({ error: error.message });
+  }
 }

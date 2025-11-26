@@ -4,7 +4,13 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { message } = req.body;
+    const { message } = req.body || {};
+
+    if (!process.env.OPENAI_API_KEY) {
+      return res
+        .status(500)
+        .json({ error: "OPENAI_API_KEY não configurada no ambiente." });
+    }
 
     if (!message || typeof message !== "string") {
       return res.status(400).json({ error: "Mensagem inválida" });
@@ -14,7 +20,7 @@ export default async function handler(req, res) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
+        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
       },
       body: JSON.stringify({
         model: "gpt-4o-mini",
@@ -23,16 +29,16 @@ export default async function handler(req, res) {
             role: "system",
             content:
               "Você é a BillionMind AI, um mentor de disciplina, dinheiro e lifestyle de alto desempenho. " +
-              "Responda sempre em português, de forma direta, prática e motivadora."
+              "Responda sempre em português, de forma direta, prática e motivadora.",
           },
           {
             role: "user",
-            content: message
-          }
+            content: message,
+          },
         ],
         temperature: 0.8,
-        max_tokens: 400
-      })
+        max_tokens: 400,
+      }),
     });
 
     if (!openaiRes.ok) {
