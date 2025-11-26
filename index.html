@@ -1183,6 +1183,7 @@
 
     function setStoredCv(v) {
       localStorage.setItem("bm_cv", String(v));
+      updateKpis();
     }
 
     function getCvLevel(cv) {
@@ -1218,6 +1219,7 @@
 
       profileCvLine.textContent = "Capital de Vida: " + cv + " (" + risco + ")";
       profileLevelLine.textContent = "Status: " + level + " · seu acesso aumenta com o seu CV.";
+      updateKpis();
     }
 
     updateCvUi();
