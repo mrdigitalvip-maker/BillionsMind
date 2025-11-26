@@ -1,1299 +1,205 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <title>BillionMind AI – Acelerador de Disciplina</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <style>
-    :root {
-      --bg-main: #05070c;
-      --bg-card: #0b1018;
-      --bg-soft: #070b13;
-      --emerald: #10b981;
-      --emerald-soft: #34d399;
-      --gold: #facc6b;
-      --gold-muted: #c49b3f;
-      --danger: #ef4444;
-      --text-main: #f9fafb;
-      --text-soft: #cbd5f5;
-      --text-muted: #8b91aa;
-      --border-soft: rgba(148, 163, 184, 0.35);
-      --radius-xl: 22px;
-      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.8);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      min-height: 100vh;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #151827 0, #05070c 50%, #020309 100%);
-      color: var(--text-main);
-      -webkit-font-smoothing: antialiased;
-    }
-
-    .app-shell {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 14px 14px 80px;
-    }
-
-    /* HEADER */
-    header.app-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .brand-logo {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 20%, #ffffff 0, #facc6b 10%, #c49b3f 45%, #0b0a0f 100%);
-      box-shadow:
-        0 0 0 2px rgba(0, 0, 0, 0.8),
-        0 0 18px rgba(250, 204, 107, 0.7);
-    }
-
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.1;
-    }
-
-    .brand-title {
-      font-size: 0.9rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--text-soft);
-    }
-
-    .brand-sub {
-      font-size: 0.74rem;
-      color: var(--text-muted);
-    }
-
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .badge-cv {
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(16, 185, 129, 0.7);
-      background: radial-gradient(circle at top, rgba(16, 185, 129, 0.2), rgba(3, 7, 18, 0.95));
-      font-size: 0.7rem;
-      display: inline-flex;
-      flex-direction: column;
-      justify-content: center;
-      min-width: 120px;
-    }
-
-    .badge-cv-main {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 6px;
-    }
-
-    .badge-cv-label {
-      color: var(--emerald-soft);
-      font-weight: 600;
-      font-size: 0.72rem;
-    }
-
-    .badge-cv-value {
-      font-weight: 700;
-      font-size: 0.9rem;
-    }
-
-    .badge-cv-sub {
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
-    .header-avatar {
-      width: 30px;
-      height: 30px;
-      border-radius: 999px;
-      border: 1px solid rgba(250, 204, 107, 0.7);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9rem;
-      color: var(--gold);
-      background: radial-gradient(circle at top, #020617, #020309);
-      cursor: pointer;
-    }
-
-    /* TELAS */
-    main.app-screen {
-      display: none;
-    }
-
-    main.app-screen.active {
-      display: block;
-      animation: fadeIn 0.35s ease-out;
-    }
-
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(6px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-
-    /* BOTÕES */
-    .btn-primary {
-      border-radius: 999px;
-      border: none;
-      padding: 10px 14px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      background: linear-gradient(135deg, var(--emerald-soft), var(--emerald));
-      color: #041016;
-      cursor: pointer;
-      box-shadow: 0 14px 30px rgba(16, 185, 129, 0.55);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-    }
-
-    .btn-secondary {
-      border-radius: 999px;
-      padding: 10px 14px;
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      background: rgba(7, 11, 19, 0.96);
-      color: var(--text-soft);
-      font-size: 0.85rem;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-    }
-
-    .btn-outline-gold {
-      border-radius: 999px;
-      padding: 9px 13px;
-      border: 1px solid rgba(250, 204, 107, 0.8);
-      background: rgba(7, 8, 13, 0.92);
-      color: var(--gold);
-      font-size: 0.8rem;
-      cursor: pointer;
-    }
-
-    .btn-small {
-      border-radius: 999px;
-      padding: 7px 11px;
-      border: none;
-      font-size: 0.78rem;
-      font-weight: 600;
-      cursor: pointer;
-      background: linear-gradient(135deg, #4b5563, #111827);
-      color: var(--text-soft);
-    }
-
-    /* HOME */
-    .card-hero {
-      background: radial-gradient(circle at top left, rgba(16, 185, 129, 0.12), rgba(11, 15, 25, 0.98));
-      border-radius: var(--radius-xl);
-      padding: 18px 16px 18px;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      box-shadow: var(--shadow-soft);
-      margin-bottom: 14px;
-    }
-
-    .hero-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 11px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, var(--emerald-soft), var(--gold));
-      color: #020617;
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin-bottom: 10px;
-    }
-
-    .hero-title {
-      font-size: 1.45rem;
-      line-height: 1.2;
-      margin-bottom: 8px;
-    }
-
-    .hero-title span {
-      color: var(--gold);
-    }
-
-    .hero-sub {
-      font-size: 0.88rem;
-      color: var(--text-soft);
-      margin-bottom: 12px;
-    }
-
-    .hero-sub span {
-      color: var(--emerald-soft);
-      font-weight: 600;
-    }
-
-    .hero-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 14px;
-    }
-
-    .hero-tags span {
-      font-size: 0.75rem;
-      padding: 4px 9px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.45);
-      color: var(--text-soft);
-      background: rgba(10, 14, 22, 0.95);
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .home-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 1fr;
-      gap: 10px;
-    }
-
-    @media (max-width: 720px) {
-      .home-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .home-card {
-      background: linear-gradient(150deg, rgba(15, 23, 42, 0.98), rgba(4, 7, 15, 0.98));
-      border-radius: 18px;
-      border: 1px solid rgba(30, 64, 175, 0.5);
-      padding: 12px 11px;
-    }
-
-    .home-card h3 {
-      font-size: 0.95rem;
-      margin-bottom: 4px;
-    }
-
-    .home-card p {
-      font-size: 0.8rem;
-      color: var(--text-soft);
-      margin-bottom: 7px;
-    }
-
-    .home-bullets {
-      font-size: 0.8rem;
-      color: var(--text-soft);
-      list-style: none;
-    }
-
-    .home-bullets li {
-      margin-bottom: 3px;
-    }
-
-    .home-bullets li::before {
-      content: "• ";
-      color: var(--gold);
-    }
-
-    /* FORJA 30X */
-    .forge-card {
-      background: linear-gradient(145deg, rgba(15, 23, 42, 0.98), rgba(5, 7, 14, 0.98));
-      border-radius: var(--radius-xl);
-      border: 1px solid var(--border-soft);
-      padding: 14px 12px;
-      box-shadow: var(--shadow-soft);
-    }
-
-    .section-title {
-      font-size: 0.95rem;
-      margin-bottom: 4px;
-    }
-
-    .section-sub {
-      font-size: 0.8rem;
-      color: var(--text-soft);
-      margin-bottom: 10px;
-    }
-
-    .forge-step-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 10px;
-    }
-
-    .forge-step {
-      background: radial-gradient(circle at top left, rgba(250, 204, 107, 0.06), rgba(8, 11, 20, 0.98));
-      border-radius: 16px;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      padding: 10px 9px;
-      font-size: 0.8rem;
-    }
-
-    .forge-step-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 4px;
-      gap: 6px;
-    }
-
-    .forge-step-title {
-      font-weight: 600;
-      font-size: 0.85rem;
-    }
-
-    .forge-step-tag {
-      font-size: 0.7rem;
-      padding: 2px 7px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      color: var(--text-soft);
-    }
-
-    .forge-step textarea,
-    .forge-step input {
-      width: 100%;
-      border-radius: 12px;
-      border: 1px solid rgba(148, 163, 184, 0.65);
-      background: rgba(5, 7, 15, 0.96);
-      color: var(--text-main);
-      font-size: 0.8rem;
-      padding: 7px 8px;
-      resize: none;
-      margin-top: 6px;
-    }
-
-    .forge-step textarea::placeholder,
-    .forge-step input::placeholder {
-      color: var(--text-muted);
-    }
-
-    .forge-footer {
-      margin-top: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .forge-note {
-      font-size: 0.76rem;
-      color: var(--text-muted);
-    }
-
-    .forge-note span {
-      color: var(--emerald-soft);
-    }
-
-    /* ANALYTICS */
-    .analytics-card {
-      background: linear-gradient(150deg, rgba(4, 7, 15, 0.98), #020309);
-      border-radius: var(--radius-xl);
-      padding: 14px 12px;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .analytics-graph {
-      margin-top: 8px;
-      margin-bottom: 10px;
-      border-radius: 16px;
-      background: linear-gradient(180deg, #020617, #020309);
-      border: 1px solid rgba(31, 41, 55, 0.9);
-      padding: 8px 8px 10px;
-    }
-
-    .graph-header {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      margin-bottom: 4px;
-    }
-
-    .graph-line {
-      position: relative;
-      height: 80px;
-      border-radius: 12px;
-      background: radial-gradient(circle at top left, rgba(16, 185, 129, 0.15), rgba(15, 23, 42, 0.9));
-      overflow: hidden;
-    }
-
-    .graph-line::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(0deg, rgba(15, 23, 42, 0.85) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(15, 23, 42, 0.8) 1px, transparent 1px);
-      background-size: 100% 20px, 32px 100%;
-      opacity: 0.5;
-    }
-
-    .graph-curve {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(220, 38, 38, 0.0), rgba(220, 38, 38, 0.4), rgba(16, 185, 129, 0.8));
-      clip-path: polygon(
-        0% 70%,
-        10% 75%,
-        20% 50%,
-        30% 60%,
-        40% 40%,
-        50% 45%,
-        60% 30%,
-        70% 40%,
-        80% 25%,
-        90% 35%,
-        100% 20%,
-        100% 100%,
-        0% 100%
-      );
-      opacity: 0.95;
-    }
-
-    .analytics-kpis {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 8px;
-      margin-top: 8px;
-      font-size: 0.78rem;
-    }
-
-    .kpi-card {
-      background: rgba(10, 14, 23, 0.96);
-      border-radius: 12px;
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      padding: 6px 7px;
-    }
-
-    .kpi-label {
-      color: var(--text-muted);
-      margin-bottom: 2px;
-    }
-
-    .kpi-value {
-      font-weight: 600;
-      margin-bottom: 2px;
-    }
-
-    .kpi-tag {
-      font-size: 0.7rem;
-      color: var(--emerald-soft);
-    }
-
-    /* BLUEPRINT */
-    .blueprint-card {
-      background: linear-gradient(145deg, rgba(15, 23, 42, 0.98), rgba(5, 7, 16, 0.98));
-      border-radius: var(--radius-xl);
-      border: 1px solid var(--border-soft);
-      padding: 14px 12px;
-      box-shadow: var(--shadow-soft);
-    }
-
-    .bp-section-title {
-      font-size: 0.86rem;
-      margin-bottom: 4px;
-      color: var(--gold);
-    }
-
-    .bp-list {
-      margin-top: 4px;
-    }
-
-    .bp-item {
-      padding: 7px 8px;
-      border-radius: 12px;
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      background: rgba(6, 9, 18, 0.96);
-      font-size: 0.8rem;
-      margin-bottom: 5px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .bp-item.locked {
-      opacity: 0.6;
-    }
-
-    .bp-tag {
-      font-size: 0.7rem;
-      padding: 3px 7px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.8);
-      color: var(--text-soft);
-    }
-
-    .bp-tag.vip {
-      border-color: var(--gold);
-      color: var(--gold);
-    }
-
-    /* FOCO */
-    .focus-card {
-      background: linear-gradient(150deg, rgba(8, 47, 73, 0.9), rgba(3, 7, 18, 0.98));
-      border-radius: var(--radius-xl);
-      border: 1px solid rgba(56, 189, 248, 0.7);
-      padding: 14px 12px;
-      box-shadow: var(--shadow-soft);
-    }
-
-    .focus-timer {
-      margin-top: 8px;
-      margin-bottom: 10px;
-      border-radius: 16px;
-      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), #020617);
-      border: 1px solid rgba(148, 163, 184, 0.8);
-      padding: 10px;
-      text-align: center;
-    }
-
-    .focus-time {
-      font-size: 1.8rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      margin-bottom: 4px;
-    }
-
-    .focus-label {
-      font-size: 0.8rem;
-      color: var(--text-soft);
-    }
-
-    .focus-buttons {
-      margin-top: 10px;
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .focus-note {
-      font-size: 0.76rem;
-      color: var(--text-muted);
-      margin-top: 6px;
-    }
-
-    /* PERFIL / ASSINATURA */
-    .profile-card {
-      background: linear-gradient(145deg, rgba(15, 23, 42, 0.98), rgba(5, 7, 16, 0.98));
-      border-radius: var(--radius-xl);
-      border: 1px solid var(--border-soft);
-      padding: 14px 12px;
-      box-shadow: var(--shadow-soft);
-    }
-
-    .profile-row {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-
-    .profile-avatar-big {
-      width: 44px;
-      height: 44px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 20%, #ffffff 0, #facc6b 10%, #c49b3f 45%, #0b0a10 100%);
-      border: 1px solid rgba(250, 204, 107, 0.7);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      color: #161616;
-    }
-
-    .profile-main {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .profile-name {
-      font-size: 0.95rem;
-      font-weight: 600;
-    }
-
-    .profile-email {
-      font-size: 0.78rem;
-      color: var(--text-soft);
-      margin-bottom: 3px;
-    }
-
-    .profile-plan-chip {
-      font-size: 0.75rem;
-      padding: 3px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(16, 185, 129, 0.7);
-      color: var(--emerald-soft);
-      width: fit-content;
-    }
-
-    .profile-lines {
-      font-size: 0.8rem;
-      color: var(--text-soft);
-    }
-
-    .profile-lines div {
-      margin-bottom: 3px;
-    }
-
-    .profile-btn-row {
-      margin-top: 8px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .plans-mini {
-      margin-top: 10px;
-      font-size: 0.78rem;
-      color: var(--text-soft);
-    }
-
-    .plans-mini strong {
-      color: var(--gold);
-    }
-
-    /* NAV INFERIOR */
-    nav.bottom-nav {
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      padding: 8px 10px 14px;
-      background: radial-gradient(circle at top, rgba(5, 7, 12, 0.98), #020309 70%);
-      border-top: 1px solid rgba(148, 163, 184, 0.3);
-      backdrop-filter: blur(16px);
-      z-index: 30;
-    }
-
-    .bottom-nav-inner {
-      max-width: 980px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 4px;
-    }
-
-    .nav-item {
-      flex: 1;
-      text-align: center;
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      cursor: pointer;
-      padding: 4px 0;
-    }
-
-    .nav-item span.icon {
-      display: block;
-      font-size: 1.1rem;
-      margin-bottom: 2px;
-    }
-
-    .nav-item.active {
-      color: var(--emerald-soft);
-      font-weight: 600;
-    }
-
-    .nav-item.active span.icon {
-      filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.9));
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pré-Lançamento Oficial | BillionMind AI</title>
+    <!-- Carrega o Tailwind CSS CDN para um estilo moderno e responsivo --><script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* Configuração de Fonte Padrão */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117; /* Fundo escuro */
+            color: #ffffff;
+            transition: all 0.5s ease-in-out;
+        }
+
+        /* Estilo para a seção de contagem regressiva */
+        .countdown-item {
+            background-color: #161b22; /* Fundo do bloco do contador */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Animação de pulso para a data de lançamento */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.03); opacity: 0.95; }
+        }
+        .pulse-effect {
+            animation: pulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+        }
+    </style>
 </head>
-<body>
-  <div class="app-shell">
-    <header class="app-header">
-      <div class="brand">
-        <div class="brand-logo"></div>
-        <div class="brand-text">
-          <div class="brand-title">BILLIONMIND</div>
-          <div class="brand-sub">Acelerador de Disciplina · Edição Completa</div>
-        </div>
-      </div>
-      <div class="header-actions">
-        <div class="badge-cv">
-          <div class="badge-cv-main">
-            <span class="badge-cv-label">Capital de Vida</span>
-            <span class="badge-cv-value" id="cvValue">0</span>
-          </div>
-          <div class="badge-cv-sub" id="cvLevelLabel">Nível: Visionário</div>
-        </div>
-        <div class="header-avatar" id="headerAvatar">
-          BB
-        </div>
-      </div>
-    </header>
+<body class="min-h-screen antialiased flex flex-col items-center">
 
-    <!-- HOME -->
-    <main id="screen-home" class="app-screen active">
-      <section class="card-hero">
-        <div class="hero-pill">
-          <span>⚡</span> Acelerador de Disciplina · 30 dias
-        </div>
-        <h1 class="hero-title">
-          Transforme disciplina em <span>patrimônio de alta performance</span>.
-        </h1>
-        <p class="hero-sub">
-          O BillionMind AI não te dá frases vazias. Ele converte <span>ação diária</span>
-          em <span>Capital de Vida (CV)</span>, nível de poder e status dentro do seu próprio sistema.
-        </p>
-        <div class="hero-tags">
-          <span>CV Analytics em tempo real</span>
-          <span>Forja da Disciplina 30X</span>
-          <span>Billionaire Blueprint</span>
-          <span>Protocolos de Foco & KPIs</span>
-        </div>
-        <div class="hero-actions">
-          <button class="btn-primary" data-nav="screen-forge">
-            🔥 Iniciar Forja da Disciplina 30X
-          </button>
-          <button class="btn-secondary" data-nav="screen-analytics">
-            📈 Ver meu painel CV Analytics
-          </button>
-        </div>
-      </section>
+    <!-- Conteúdo centralizado e limitado à largura máxima --><div class="w-full max-w-7xl mx-auto flex flex-col items-center">
 
-      <div class="home-grid">
-        <div class="home-card">
-          <h3>Como o Capital de Vida funciona</h3>
-          <p>
-            Seu CV sobe quando você cumpre os Protocolos Diários e desce quando você foge deles.
-            É sua “bolsa de valores” da disciplina.
-          </p>
-          <ul class="home-bullets">
-            <li>Complete o desafio do dia para ganhar CV.</li>
-            <li>Mantenha constância para subir de nível (Visionário → VIP).</li>
-            <li>Use o CV Analytics para ver se você está em ascensão ou queda.</li>
-          </ul>
-        </div>
-        <div class="home-card">
-          <h3>Planos e status</h3>
-          <p>
-            Gratuito para começar. Elite e VIP para quem quer jogar o jogo completo.
-          </p>
-          <ul class="home-bullets">
-            <li>Visionário: modo teste, 5 dias de protocolo.</li>
-            <li>Elite: protocolos ilimitados + KPIs avançados.</li>
-            <li>VIP: tudo desbloqueado + conteúdo exclusivo.</li>
-          </ul>
-        </div>
-      </div>
-    </main>
-
-    <!-- FORJA DA DISCIPLINA 30X -->
-    <main id="screen-forge" class="app-screen">
-      <section class="forge-card">
-        <h2 class="section-title">Forja da Disciplina 30X</h2>
-        <p class="section-sub">
-          Todo dia, um protocolo. Você tem 24h para executar o plano do dia. Ao concluir, seu CV sobe.
-        </p>
-
-        <div class="forge-step-grid">
-          <div class="forge-step">
-            <div class="forge-step-header">
-              <div class="forge-step-title">1. Dose VIP (Mentoria do Dia)</div>
-              <div class="forge-step-tag">Mentalidade</div>
+        <!-- Cabeçalho (Header) --><header class="w-full p-4 md:p-8">
+            <div class="flex justify-between items-center">
+                <h1 class="text-3xl font-extrabold text-white tracking-tight">
+                    <span class="text-purple-400">BillionMind</span> AI
+                </h1>
+                <!-- Botão no Cabeçalho (Direciona para o Canal do WhatsApp) --><a href="https://whatsapp.com/channel/0029VbBg2OxK0IBk3CURik35" 
+                   target="_blank"
+                   class="px-4 py-2 bg-purple-600 text-white text-sm font-semibold rounded-lg shadow-lg hover:bg-purple-700 transition duration-300 transform hover:scale-105">
+                    Quero Ser Notificado
+                </a>
             </div>
-            <p>
-              Hoje seu foco é <strong>agir como alguém que já vive o lifestyle que deseja</strong>.
-              Durante 1 bloco de foco, trabalhe como se alguém estivesse auditando sua disciplina.
+        </header>
+
+        <!-- Seção Principal com Contador Regressivo --><main class="w-full p-4 md:p-8">
+            <div class="text-center mb-16 mt-8 md:mt-16">
+                <p class="text-lg md:text-xl text-purple-400 font-semibold mb-3 tracking-wider">A INTELIGÊNCIA ARTIFICIAL QUE EXPANDE SEU POTENCIAL</p>
+                <h2 class="text-5xl sm:text-7xl md:text-8xl font-black leading-tight mb-6">
+                    Lançamento Oficial
+                </h2>
+                <p class="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto">
+                    Prepare-se para transformar a maneira como você trabalha e vive. O <span class="text-purple-400 font-bold">BillionMind AI</span> redefine a produtividade e a tomada de decisões.
+                </p>
+            </div>
+
+            <!-- Bloco do Contador --><div class="bg-gray-900 border border-gray-700 p-6 sm:p-10 rounded-2xl shadow-2xl mb-16 max-w-4xl mx-auto">
+                <p class="text-xl font-bold text-center mb-6 text-white">
+                    Lançamento em: <br class="sm:hidden">
+                    <span id="launch-info" class="text-purple-400 text-2xl md:text-3xl font-extrabold">
+                        Sábado, 29 de Novembro, às 19:30 (BRT)
+                    </span>
+                </p>
+
+                <div id="countdown" class="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-8">
+                    <!-- Dias --><div class="countdown-item p-4 sm:p-6 rounded-xl text-center border-b-4 border-purple-600">
+                        <div id="days" class="text-5xl md:text-6xl font-extrabold text-white">00</div>
+                        <div class="text-sm md:text-base font-medium text-gray-400 mt-1">DIAS</div>
+                    </div>
+                    <!-- Horas --><div class="countdown-item p-4 sm:p-6 rounded-xl text-center border-b-4 border-purple-600">
+                        <div id="hours" class="text-5xl md:text-6xl font-extrabold text-white">00</div>
+                        <div class="text-sm md:text-base font-medium text-gray-400 mt-1">HORAS</div>
+                    </div>
+                    <!-- Minutos --><div class="countdown-item p-4 sm:p-6 rounded-xl text-center border-b-4 border-purple-600">
+                        <div id="minutes" class="text-5xl md:text-6xl font-extrabold text-white">00</div>
+                        <div class="text-sm md:text-base font-medium text-gray-400 mt-1">MINUTOS</div>
+                    </div>
+                    <!-- Segundos --><div class="countdown-item p-4 sm:p-6 rounded-xl text-center border-b-4 border-purple-600">
+                        <div id="seconds" class="text-5xl md:text-6xl font-extrabold text-white">00</div>
+                        <div class="text-sm md:text-base font-medium text-gray-400 mt-1">SEGUNDOS</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção: O Que Você Precisa Saber Sobre o BillionMind AI --><section class="mb-16">
+                <h3 class="text-4xl font-bold text-center mb-10 text-white">
+                    O <span class="text-purple-400">Poder da AI</span> em Suas Mãos
+                </h3>
+                <div class="grid md:grid-cols-3 gap-8 text-center max-w-6xl mx-auto">
+                    
+                    <!-- Benefício 1 --><div class="p-6 bg-gray-800 rounded-xl border border-gray-700 hover:border-purple-600 transition duration-300">
+                        <div class="text-purple-400 text-4xl mb-4">🧠</div>
+                        <h4 class="text-xl font-bold mb-2">Análise Preditiva</h4>
+                        <p class="text-gray-400">
+                            Utilize modelos de IA avançados para prever tendências e otimizar estratégias, transformando dados em decisões bilionárias.
+                        </p>
+                    </div>
+                    
+                    <!-- Benefício 2 --><div class="p-6 bg-gray-800 rounded-xl border border-gray-700 hover:border-purple-600 transition duration-300">
+                        <div class="text-purple-400 text-4xl mb-4">⚡</div>
+                        <h4 class="text-xl font-bold mb-2">Automação Inteligente</h4>
+                        <p class="text-gray-400">
+                            Automatize tarefas repetitivas com precisão de IA, liberando seu tempo para foco em inovação e crescimento.
+                        </p>
+                    </div>
+
+                    <!-- Benefício 3 --><div class="p-6 bg-gray-800 rounded-xl border border-gray-700 hover:border-purple-600 transition duration-300">
+                        <div class="text-purple-400 text-4xl mb-4">🔒</div>
+                        <h4 class="text-xl font-bold mb-2">Segurança de Dados</h4>
+                        <p class="text-gray-400">
+                            Suas informações críticas são protegidas com criptografia de ponta e sincronização segura em todos os seus dispositivos.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Call to Action (CTA) para o Canal do WhatsApp --><section id="cta" class="text-center bg-purple-900 bg-opacity-30 border border-purple-700 p-8 md:p-12 rounded-2xl max-w-4xl mx-auto shadow-2xl pulse-effect">
+                <h3 class="text-3xl md:text-4xl font-extrabold mb-4">Seja o Primeiro a Saber!</h3>
+                <p class="text-lg md:text-xl text-purple-200 mb-8">
+                    Clique abaixo e entre no nosso canal exclusivo no WhatsApp para receber o link de lançamento exatamente às 19:30 de sábado.
+                </p>
+                
+                <!-- Botão de Ação Principal (Substitui o formulário) --><a href="https://whatsapp.com/channel/0029VbBg2OxK0IBk3CURik35"
+                   target="_blank"
+                   class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-green-500 text-white font-black text-xl rounded-lg shadow-2xl hover:bg-green-600 transition duration-300 transform hover:scale-105 border-b-4 border-green-700">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.036 21.688c-.67 0-1.282-.185-1.78-.54l-3.328-1.921c-.498-.288-.87-.768-1.07-1.332L4.01 15.532c-.201-.564-.201-1.187 0-1.751l.849-2.302c.2-.564.572-1.044 1.07-1.332l3.328-1.921c.498-.288 1.11-.473 1.78-.473h1.86c.67 0 1.282.185 1.78.473l3.328 1.921c.498-.288.87.768 1.07 1.332l.849 2.302c.201.564.201 1.187 0 1.751l-.849 2.302c-.2.564-.572 1.044-1.07 1.332l-3.328 1.921c-.498.288-1.11.473-1.78.473h-1.86zM12 2C6.477 2 2 6.477 2 12c0 1.487.315 2.924.912 4.21l-.963 3.515c-.07.26.012.54.218.736.206.195.494.277.754.207l3.515-.963C8.428 21.685 10.198 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm1.68 15.118h-3.36c-.198 0-.36-.162-.36-.36V9.118c0-.198.162-.36.36-.36h3.36c.198 0 .36.162.36.36v5.64c0 .198-.162.36-.36.36z"/>
+                    </svg>
+                    Acessar Canal VIP no WhatsApp
+                </a>
+            </section>
+        </main>
+
+        <!-- Rodapé (Footer) --><footer class="w-full p-4 md:p-8 mt-12 border-t border-gray-800 text-center">
+            <p class="text-gray-500 text-sm">
+                &copy; 2025 BillionMind AI. Todos os direitos reservados.
             </p>
-          </div>
+            <p class="text-gray-500 text-sm mt-1">
+                Lançamento: <span class="font-semibold text-purple-400">29 de Novembro de 2025, 19:30 BRT</span>
+            </p>
+        </footer>
 
-          <div class="forge-step">
-            <div class="forge-step-header">
-              <div class="forge-step-title">2. Protocolo de Ação</div>
-              <div class="forge-step-tag">Execução</div>
-            </div>
-            <p>Defina uma ação clara e mensurável para hoje:</p>
-            <textarea id="forgeTask" rows="3"
-              placeholder="Ex: 60 minutos de Deep Work montando meu plano de receita das próximas 4 semanas..."></textarea>
-          </div>
-
-          <div class="forge-step">
-            <div class="forge-step-header">
-              <div class="forge-step-title">3. Relatório de Execução</div>
-              <div class="forge-step-tag">Métricas</div>
-            </div>
-            <p>Registre como você foi na prática:</p>
-            <input id="forgeTime" placeholder="Tempo dedicado (ex: 65 minutos)" />
-            <input id="forgeQuality" placeholder="Qualidade da execução (0 a 10)" />
-          </div>
-        </div>
-
-        <div class="forge-footer">
-          <button class="btn-primary" id="btnConcluirDia">
-            ✅ Concluir protocolo de hoje e ganhar CV
-          </button>
-          <p class="forge-note" id="forgeNote">
-            Ao concluir o protocolo de hoje você ganhará <span>+120 de CV</span>.
-            Uma vez por dia, sem repetição.
-          </p>
-        </div>
-      </section>
-    </main>
-
-    <!-- CV ANALYTICS -->
-    <main id="screen-analytics" class="app-screen">
-      <section class="analytics-card">
-        <h2 class="section-title">CV Analytics · Painel de Alta Performance</h2>
-        <p class="section-sub">
-          Veja seu Capital de Vida como se fosse uma carteira de investimentos. Alta disciplina, alta valorização.
-        </p>
-
-        <div class="analytics-graph">
-          <div class="graph-header">
-            <span id="graphStatus">CV em ascensão</span>
-            <span id="graphCvLabel">CV atual: 0</span>
-          </div>
-          <div class="graph-line">
-            <div class="graph-curve"></div>
-          </div>
-        </div>
-
-        <div class="analytics-kpis">
-          <div class="kpi-card">
-            <div class="kpi-label">Horas de Foco (24h)</div>
-            <div class="kpi-value" id="kpiFocus">0.0 h</div>
-            <div class="kpi-tag">Alvo: 3.0 h</div>
-          </div>
-          <div class="kpi-card">
-            <div class="kpi-label">Rendimento (Semana)</div>
-            <div class="kpi-value" id="kpiRevenue">R$ 0</div>
-            <div class="kpi-tag">Meta: R$ 1.000</div>
-          </div>
-          <div class="kpi-card">
-            <div class="kpi-label">Disciplina Física</div>
-            <div class="kpi-value" id="kpiTraining">0 sessões</div>
-            <div class="kpi-tag">Meta: 4/semana</div>
-          </div>
-        </div>
-
-        <p class="forge-note" style="margin-top:10px;">
-          Em breve: conecte seus KPIs reais (tempo de estudo, vendas, treino) e veja o impacto direto no seu CV.
-        </p>
-      </section>
-    </main>
-
-    <!-- BLUEPRINT -->
-    <main id="screen-blueprint" class="app-screen">
-      <section class="blueprint-card">
-        <h2 class="section-title">Billionaire Blueprint · Cofre de Conhecimento</h2>
-        <p class="section-sub">
-          Módulos curtos, diretos ao ponto. Cada módulo concluído com quiz aumenta seu Capital de Vida.
-        </p>
-
-        <div class="bp-list">
-          <div class="bp-section-title">Foco & Disciplina</div>
-          <div class="bp-item">
-            <span>Fundamentos da Disciplina Implacável</span>
-            <span class="bp-tag">Introdução · Free</span>
-          </div>
-          <div class="bp-item">
-            <span>Arquitetando seus 30 dias de alta performance</span>
-            <span class="bp-tag">Elite</span>
-          </div>
-          <div class="bp-item locked">
-            <span>Rotina de Bilionário: como blindar sua mente</span>
-            <span class="bp-tag vip">VIP</span>
-          </div>
-
-          <div class="bp-section-title" style="margin-top:8px;">Finanças & Riqueza</div>
-          <div class="bp-item">
-            <span>Do zero ao primeiro fluxo de renda extra</span>
-            <span class="bp-tag">Elite</span>
-          </div>
-          <div class="bp-item locked">
-            <span>Estrutura mental de quem fatura alto no digital</span>
-            <span class="bp-tag vip">VIP</span>
-          </div>
-
-          <div class="bp-section-title" style="margin-top:8px;">Longevidade & Performance Física</div>
-          <div class="bp-item">
-            <span>Disciplina física mínima para alta performance</span>
-            <span class="bp-tag">Free</span>
-          </div>
-          <div class="bp-item locked">
-            <span>Protocolo Avançado de Energia Diária</span>
-            <span class="bp-tag vip">VIP</span>
-          </div>
-        </div>
-
-        <p class="forge-note" style="margin-top:8px;">
-          Em breve: quizzes, desbloqueio de CV e trilhas completas serão conectados ao seu perfil real.
-        </p>
-      </section>
-    </main>
-
-    <!-- FOCO -->
-    <main id="screen-focus" class="app-screen">
-      <section class="focus-card">
-        <h2 class="section-title">Protocolo de Foco · Pomodoro High Performance</h2>
-        <p class="section-sub">
-          Use blocos de 25 minutos como se cada um valesse R$ 10.000,00 em construção de vida.
-        </p>
-
-        <div class="focus-timer">
-          <div class="focus-time" id="focusTime">25:00</div>
-          <div class="focus-label" id="focusLabel">Pronto para iniciar o bloco de foco.</div>
-        </div>
-
-        <div class="focus-buttons">
-          <button class="btn-primary" id="btnStartFocus">▶ Iniciar</button>
-          <button class="btn-secondary" id="btnStopFocus">⏸ Pausar</button>
-          <button class="btn-small" id="btnResetFocus">↺ Resetar</button>
-        </div>
-
-        <p class="focus-note">
-          Na assinatura Elite e VIP, você desbloqueia trilhas sonoras exclusivas e o modo
-          <strong>"Foco Implacável"</strong>, que bloqueia distrações.
-        </p>
-      </section>
-    </main>
-
-    <!-- PERFIL / ASSINATURA -->
-    <main id="screen-profile" class="app-screen">
-      <section class="profile-card">
-        <div class="profile-row">
-          <div class="profile-avatar-big">BB</div>
-          <div class="profile-main">
-            <div class="profile-name" id="profileName">Bruno Brandão</div>
-            <div class="profile-email" id="profileEmail">email@exemplo.com</div>
-            <div class="profile-plan-chip" id="profilePlanChip">Plano atual: Visionário (Gratuito)</div>
-          </div>
-        </div>
-
-        <div class="profile-lines">
-          <div id="profileCvLine">Capital de Vida: 0 (Risco de oscilação alto)</div>
-          <div id="profileLevelLine">Status: Visionário · liberado para testar protocolos iniciais</div>
-        </div>
-
-        <div class="profile-btn-row">
-          <button class="profile-btn btn-small" id="btnSimularLogin">
-            Simular login com seu e-mail
-          </button>
-          <button class="profile-btn btn-small" id="btnSimularElite">
-            Simular plano Elite
-          </button>
-          <button class="profile-btn btn-small" id="btnSimularVip">
-            Simular plano VIP
-          </button>
-        </div>
-
-        <div class="plans-mini">
-          <p style="margin-top:8px;">
-            <strong>Assinatura Elite:</strong> protocolos ilimitados, 3 KPIs integrados e histórico de CV de 6 meses.
-          </p>
-          <p>
-            <strong>Assinatura VIP:</strong> tudo do Elite + conteúdo extra, comparativo com média da Elite
-            e sessões mensais de revisão.
-          </p>
-
-          <button class="btn-outline-gold" id="btnAssinarPro">
-            💳 Assinar via Stripe (PRO – exemplo)
-          </button>
-
-          <p class="forge-note" id="plansNote" style="margin-top:6px;">
-            Se sua rota /api/checkout estiver configurada, este botão abrirá o pagamento oficial da Stripe.
-          </p>
-        </div>
-      </section>
-    </main>
-  </div>
-
-  <!-- NAV INFERIOR -->
-  <nav class="bottom-nav">
-    <div class="bottom-nav-inner">
-      <div class="nav-item active" data-nav="screen-home">
-        <span class="icon">🏠</span>
-        Home
-      </div>
-      <div class="nav-item" data-nav="screen-forge">
-        <span class="icon">🔥</span>
-        Forja 30X
-      </div>
-      <div class="nav-item" data-nav="screen-analytics">
-        <span class="icon">📈</span>
-        CV
-      </div>
-      <div class="nav-item" data-nav="screen-blueprint">
-        <span class="icon">📚</span>
-        Blueprint
-      </div>
-      <div class="nav-item" data-nav="screen-focus">
-        <span class="icon">⏱</span>
-        Foco
-      </div>
-      <div class="nav-item" data-nav="screen-profile">
-        <span class="icon">👤</span>
-        Perfil
-      </div>
     </div>
-  </nav>
 
-  <script>
-    // -------- Navegação entre telas --------
-    const navItems = document.querySelectorAll(".nav-item");
-    const screens = document.querySelectorAll(".app-screen");
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Data alvo: Próximo Sábado (29/11/2025) às 19:30.
+            // A data é configurada para um horário específico.
+            // Usamos 'GMT-03:00' para simular o fuso horário de Brasília (BRT).
+            const targetDate = new Date("November 29, 2025 19:30:00 GMT-0300").getTime();
+            
+            const daysEl = document.getElementById('days');
+            const hoursEl = document.getElementById('hours');
+            const minutesEl = document.getElementById('minutes');
+            const secondsEl = document.getElementById('seconds');
+            const launchInfoEl = document.getElementById('launch-info');
+            const countdownEl = document.getElementById('countdown');
 
-    navItems.forEach((item) => {
-      item.addEventListener("click", () => {
-        const target = item.getAttribute("data-nav");
-        navItems.forEach((i) => i.classList.remove("active"));
-        item.classList.add("active");
-        screens.forEach((s) => {
-          s.classList.remove("active");
-          if (s.id === target) s.classList.add("active");
+            // Função para formatar números com dois dígitos (ex: 05, 12)
+            const formatTime = (time) => String(Math.max(0, time)).padStart(2, '0');
+
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
+
+                // Cálculo do tempo em unidades
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Exibe os resultados nos elementos
+                daysEl.innerHTML = formatTime(days);
+                hoursEl.innerHTML = formatTime(hours);
+                minutesEl.innerHTML = formatTime(minutes);
+                secondsEl.innerHTML = formatTime(seconds);
+
+                // Se a contagem regressiva terminar
+                if (distance < 0) {
+                    clearInterval(interval);
+                    daysEl.innerHTML = hoursEl.innerHTML = minutesEl.innerHTML = secondsEl.innerHTML = '00';
+                    countdownEl.innerHTML = '<p class="text-4xl font-extrabold text-green-400">LANÇADO AGORA! Visite nossa loja de aplicativos!</p>';
+                    launchInfoEl.innerHTML = 'O BillionMind AI está no ar!';
+                }
+            }
+
+            // Atualiza o contador a cada 1 segundo
+            const interval = setInterval(updateCountdown, 1000);
+            
+            // Garante que o contador comece imediatamente
+            updateCountdown();
+
+            // Como o formulário foi substituído por um link direto, o código de manipulação de formulário não é mais necessário,
+            // mas mantemos o script de contagem regressiva.
         });
-      });
-    });
-
-    // -------- Capital de Vida (CV) --------
-    const cvValueEl = document.getElementById("cvValue");
-    const cvLevelLabel = document.getElementById("cvLevelLabel");
-    const graphStatus = document.getElementById("graphStatus");
-    const graphCvLabel = document.getElementById("graphCvLabel");
-    const profileCvLine = document.getElementById("profileCvLine");
-    const profileLevelLine = document.getElementById("profileLevelLine");
-
-    function getStoredCv() {
-      const v = parseInt(localStorage.getItem("bm_cv") || "0", 10);
-      return isNaN(v) ? 0 : v;
-    }
-
-    function setStoredCv(v) {
-      localStorage.setItem("bm_cv", String(v));
-    }
-
-    function getCvLevel(cv) {
-      if (cv >= 5001) return "VIP";
-      if (cv >= 2001) return "Elite";
-      if (cv >= 501) return "Executor";
-      return "Visionário";
-    }
-
-    function updateCvUi() {
-      const cv = getStoredCv();
-      cvValueEl.textContent = cv;
-      const level = getCvLevel(cv);
-      cvLevelLabel.textContent = "Nível: " + level;
-
-      graphCvLabel.textContent = "CV atual: " + cv;
-
-      if (cv === 0) {
-        graphStatus.textContent = "CV neutro · pronto para começar";
-      } else if (cv < 500) {
-        graphStatus.textContent = "CV em construção · risco de queda alto";
-      } else if (cv < 2000) {
-        graphStatus.textContent = "CV em ascensão · disciplina crescente";
-      } else if (cv < 5000) {
-        graphStatus.textContent = "Patrimônio mental consolidado em alta";
-      } else {
-        graphStatus.textContent = "Zona VIP · mantenha a disciplina implacável";
-      }
-
-      let risco = "Risco de oscilação alto";
-      if (cv >= 2000) risco = "Patrimônio mental em consolidação";
-      if (cv >= 5000) risco = "Risco de queda baixo · sua disciplina está cara";
-
-      profileCvLine.textContent = "Capital de Vida: " + cv + " (" + risco + ")";
-      profileLevelLine.textContent = "Status: " + level + " · seu acesso aumenta com o seu CV.";
-    }
-
-    updateCvUi();
-
-    // -------- Forja: conclusão diária --------
-    const btnConcluirDia = document.getElementById("btnConcluirDia");
-    const forgeNote = document.getElementById("forgeNote");
-    const forgeTask = document.getElementById("forgeTask");
-    const forgeTime = document.getElementById("forgeTime");
-    const forgeQuality = document.getElementById("forgeQuality");
-
-    function hasCompletedToday() {
-      const todayStr = new Date().toISOString().slice(0, 10);
-      const last = localStorage.getItem("bm_last_forge");
-      return last === todayStr;
-    }
-
-    function setCompletedToday() {
-      const todayStr = new Date().toISOString().slice(0, 10);
-      localStorage.setItem("bm_last_forge", todayStr);
-    }
-
-    function updateForgeState() {
-      if (hasCompletedToday()) {
-        btnConcluirDia.disabled = true;
-        btnConcluirDia.textContent = "Protocolo de hoje já concluído";
-        forgeNote.innerHTML = "Você já ganhou <span>+120 de CV</span> hoje. Volte amanhã para manter sua linha em ascensão.";
-      }
-    }
-    updateForgeState();
-
-    btnConcluirDia.addEventListener("click", () => {
-      if (hasCompletedToday()) return;
-
-      const task = forgeTask.value.trim();
-      const t = forgeTime.value.trim();
-      const q = forgeQuality.value.trim();
-      if (!task || !t || !q) {
-        alert("Preencha os três campos antes de concluir o protocolo.");
-        return;
-      }
-
-      const currentCv = getStoredCv();
-      const newCv = currentCv + 120;
-      setStoredCv(newCv);
-      setCompletedToday();
-      updateCvUi();
-      updateForgeState();
-      alert("Protocolo concluído. Seu CV subiu para " + newCv + ".");
-    });
-
-    // -------- KPIs simples de exemplo --------
-    const kpiFocus = document.getElementById("kpiFocus");
-    const kpiRevenue = document.getElementById("kpiRevenue");
-    const kpiTraining = document.getElementById("kpiTraining");
-
-    // Só para visual: correlaciona KPIs com CV atual
-    function updateKpis() {
-      const cv = getStoredCv();
-      const foco = (cv / 400).toFixed(1); // ex: com 120 CV -> 0.3h
-      const receita = cv * 1.5; // só demonstrativo
-      const treino = Math.min(7, Math.floor(cv / 600)); // até 7 por semana
-
-      kpiFocus.textContent = foco + " h";
-      kpiRevenue.textContent = "R$ " + receita.toFixed(0);
-      kpiTraining.textContent = treino + " sessões";
-    }
-    updateKpis();
-
-    // -------- Foco (Pomodoro básico) --------
-    const focusTimeEl = document.getElementById("focusTime");
-    const focusLabelEl = document.getElementById("focusLabel");
-    const btnStartFocus = document.getElementById("btnStartFocus");
-    const btnStopFocus = document.getElementById("btnStopFocus");
-    const btnResetFocus = document.getElementById("btnResetFocus");
-
-    let focusSeconds = 25 * 60;
-    let focusTimer = null;
-
-    function renderFocusTime() {
-      const m = String(Math.floor(focusSeconds / 60)).padStart(2, "0");
-      const s = String(focusSeconds % 60).padStart(2, "0");
-      focusTimeEl.textContent = m + ":" + s;
-    }
-    renderFocusTime();
-
-    function stopFocusTimer() {
-      if (focusTimer) {
-        clearInterval(focusTimer);
-        focusTimer = null;
-      }
-    }
-
-    btnStartFocus.addEventListener("click", () => {
-      if (focusTimer) return;
-      focusLabelEl.textContent = "Bloco de foco em andamento. Não negocie esses minutos.";
-      focusTimer = setInterval(() => {
-        if (focusSeconds <= 0) {
-          stopFocusTimer();
-          focusLabelEl.textContent = "Bloco concluído. Seu CV merece um upgrade.";
-          // pequeno bônus simbólico
-          const newCv = getStoredCv() + 40;
-          setStoredCv(newCv);
-          updateCvUi();
-          updateKpis();
-          alert("Bloco de foco completo. Seu CV subiu para " + newCv + ".");
-          return;
-        }
-        focusSeconds--;
-        renderFocusTime();
-      }, 1000);
-    });
-
-    btnStopFocus.addEventListener("click", () => {
-      stopFocusTimer();
-      focusLabelEl.textContent = "Pausa. Retome o bloco assim que possível.";
-    });
-
-    btnResetFocus.addEventListener("click", () => {
-      stopFocusTimer();
-      focusSeconds = 25 * 60;
-      renderFocusTime();
-      focusLabelEl.textContent = "Pronto para iniciar o bloco de foco.";
-    });
-
-    // -------- Perfil / Simulações --------
-    const profileEmail = document.getElementById("profileEmail");
-    const profilePlanChip = document.getElementById("profilePlanChip");
-    const badgeCv = document.querySelector(".badge-cv");
-    const btnSimularLogin = document.getElementById("btnSimularLogin");
-    const btnSimularElite = document.getElementById("btnSimularElite");
-    const btnSimularVip = document.getElementById("btnSimularVip");
-
-    btnSimularLogin.addEventListener("click", () => {
-      profileEmail.textContent = "brunobrandao179@gmail.com";
-      alert("Login simulado com seu e-mail.");
-    });
-
-    btnSimularElite.addEventListener("click", () => {
-      profilePlanChip.textContent = "Plano atual: Elite";
-      profilePlanChip.style.borderColor = "#facc6b";
-      badgeCv.style.borderColor = "rgba(250, 204, 107, 0.7)";
-    });
-
-    btnSimularVip.addEventListener("click", () => {
-      profilePlanChip.textContent = "Plano atual: VIP";
-      profilePlanChip.style.borderColor = "#facc6b";
-      badgeCv.style.borderColor = "rgba(250, 204, 107, 0.9)";
-    });
-
-    // -------- Stripe (se /api/checkout existir) --------
-    const btnAssinarPro = document.getElementById("btnAssinarPro");
-    const plansNote = document.getElementById("plansNote");
-
-    btnAssinarPro.addEventListener("click", async () => {
-      try {
-        const res = await fetch("/api/checkout", { method: "POST" });
-        const data = await res.json();
-        if (data.url) {
-          window.location.href = data.url;
-        } else {
-          plansNote.textContent = "Erro ao criar pagamento. Verifique se a rota /api/checkout está configurada.";
-        }
-      } catch (e) {
-        plansNote.textContent = "Erro de conexão com o servidor. Tente novamente em alguns instantes.";
-      }
-    });
-  </script>
+    </script>
 </body>
 </html>
+
+http://googleusercontent.com/immersive_entry_chip/0
