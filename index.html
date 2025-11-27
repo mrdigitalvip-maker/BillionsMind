@@ -2,528 +2,205 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#000000">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>BillionMind AI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pré-Lançamento Oficial | BillionMind AI</title>
+    <!-- Carrega o Tailwind CSS CDN para um estilo moderno e responsivo --><script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* =========================================
-           CSS VARIABLES & RESET
-           ========================================= */
-        :root {
-            --bg-dark: #050505;
-            --bg-card: rgba(20, 20, 20, 0.7);
-            --bg-glass: rgba(255, 255, 255, 0.03);
-            --border-glass: rgba(255, 255, 255, 0.08);
-            
-            --text-primary: #ffffff;
-            --text-secondary: #a1a1aa;
-            
-            --accent-gold: #FFD700;
-            --accent-gold-glow: rgba(255, 215, 0, 0.4);
-            --accent-green: #00FF9D;
-            --accent-blue: #00C2FF;
-            --accent-purple: #BD00FF;
-            --accent-red: #FF4D4D;
-            
-            --grad-gold: linear-gradient(135deg, #FFD700 0%, #B8860B 100%);
-            --grad-premium: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
-            
-            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            --ease: cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        
+        /* Configuração de Fonte Padrão */
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-primary);
-            font-family: var(--font-main);
-            height: 100vh;
-            width: 100vw;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117; /* Fundo escuro */
+            color: #ffffff;
+            transition: all 0.5s ease-in-out;
         }
 
-        /* =========================================
-           UTILITIES
-           ========================================= */
-        .glass {
-            background: var(--bg-glass);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--border-glass);
-        }
-        
-        .glass-panel {
-            background: rgba(30,30,30,0.4);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 20px;
+        /* Estilo para a seção de contagem regressiva */
+        .countdown-item {
+            background-color: #161b22; /* Fundo do bloco do contador */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
         }
 
-        .text-grad-gold {
-            background: var(--grad-gold);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 700;
+        /* Animação de pulso para a data de lançamento */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.03); opacity: 0.95; }
         }
-
-        .hidden { display: none !important; }
-        .fade-in { animation: fadeIn 0.5s var(--ease) forwards; }
-        .scale-in { animation: scaleIn 0.4s var(--ease) forwards; }
-
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes scaleIn { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-
-        /* =========================================
-           HEADER & LAYOUT
-           ========================================= */
-        header {
-            position: fixed; top: 0; left: 0; right: 0;
-            height: 60px;
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 0 20px; z-index: 50;
-            background: rgba(5, 5, 5, 0.85);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+        .pulse-effect {
+            animation: pulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
         }
-        .app-logo { font-size: 18px; letter-spacing: -0.5px; display:flex; align-items:center; gap:8px;}
-        
-        main {
-            flex: 1; overflow-y: auto;
-            padding: 80px 20px 100px 20px;
-            scroll-behavior: smooth;
-        }
-
-        /* =========================================
-           QUIZ OVERLAY (Onboarding)
-           ========================================= */
-        #quiz-overlay {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: #000; z-index: 200;
-            padding: 24px;
-            display: flex; flex-direction: column; justify-content: center;
-        }
-        .quiz-progress {
-            height: 4px; background: #222; border-radius: 2px; margin-bottom: 30px;
-            overflow: hidden;
-        }
-        .quiz-bar { height: 100%; background: var(--grad-gold); width: 0%; transition: width 0.3s; }
-        
-        .quiz-option {
-            background: #111; border: 1px solid #333;
-            padding: 16px; margin-bottom: 12px; border-radius: 12px;
-            cursor: pointer; transition: all 0.2s;
-            display: flex; align-items: center; justify-content: space-between;
-        }
-        .quiz-option:active { border-color: var(--accent-gold); background: rgba(255,215,0,0.05); }
-
-        /* =========================================
-           HOME ELEMENTS
-           ========================================= */
-        .status-pill {
-            display: inline-flex; align-items: center; gap: 6px;
-            background: rgba(255, 215, 0, 0.1);
-            border: 1px solid rgba(255, 215, 0, 0.2);
-            padding: 6px 12px; border-radius: 100px;
-            font-size: 12px; color: var(--accent-gold);
-            margin-bottom: 16px;
-        }
-
-        .feature-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
-            margin-bottom: 24px;
-        }
-
-        .card-modern {
-            background: linear-gradient(160deg, #161616 0%, #0a0a0a 100%);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 18px;
-            padding: 16px;
-            position: relative; overflow: hidden;
-            display: flex; flex-direction: column; gap: 8px;
-            transition: transform 0.2s;
-        }
-        .card-modern:active { transform: scale(0.98); }
-        
-        .card-icon-box {
-            width: 36px; height: 36px; border-radius: 10px;
-            background: rgba(255,255,255,0.05);
-            display: flex; align-items: center; justify-content: center;
-            margin-bottom: 4px;
-        }
-        
-        .bonus-banner {
-            background: linear-gradient(90deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
-            border-radius: 16px; padding: 16px;
-            display: flex; align-items: center; justify-content: space-between;
-            margin-bottom: 24px;
-            border: 1px solid rgba(0, 255, 157, 0.2);
-        }
-
-        /* =========================================
-           VIDEO CREATOR UI
-           ========================================= */
-        .video-preview {
-            aspect-ratio: 9/16; width: 100%; max-width: 200px;
-            background: #111; border-radius: 12px; border: 1px dashed #444;
-            margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;
-            color: #444; font-size: 12px;
-        }
-        
-        /* =========================================
-           CHAT BAR
-           ========================================= */
-        #chat-interface {
-            position: fixed; bottom: 0; left: 0; right: 0;
-            background: linear-gradient(0deg, #050505 60%, transparent 100%);
-            padding: 16px 20px 20px; z-index: 40;
-        }
-        .chat-input-box {
-            background: #1a1a1a; border: 1px solid #333;
-            border-radius: 30px; padding: 4px 6px 4px 18px;
-            display: flex; align-items: center;
-        }
-        .chat-input { background: none; border: none; color: white; flex: 1; outline: none; height: 40px;}
-
-        /* Buttons */
-        .btn-gold {
-            background: var(--grad-gold); color: black; border: none;
-            padding: 14px; border-radius: 12px; font-weight: 600; width: 100%;
-            font-size: 15px; cursor: pointer;
-            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
-        }
-        .btn-glow {
-            position: relative; overflow: hidden;
-        }
-        .btn-glow::after {
-            content:''; position: absolute; top:0; left:-100%; width:100%; height:100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            animation: shine 3s infinite;
-        }
-        @keyframes shine { 100% { left: 100%; } }
-
-        /* SVG Styles */
-        .svg-icon { width: 22px; height: 22px; stroke-width: 1.5; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; }
-        .text-gold { color: var(--accent-gold); }
-        .text-green { color: var(--accent-green); }
-        .text-blue { color: var(--accent-blue); }
-        .text-purple { color: var(--accent-purple); }
-
     </style>
 </head>
-<body>
+<body class="min-h-screen antialiased flex flex-col items-center">
 
-    <div id="quiz-overlay" class="hidden">
-        <div style="text-align:center; margin-bottom:20px;">
-            <div class="text-grad-gold" style="font-size:12px; letter-spacing:2px; text-transform:uppercase;">Configuração Mental</div>
-        </div>
-        <div class="quiz-progress"><div class="quiz-bar" id="quiz-bar-fill"></div></div>
-        
-        <h2 id="quiz-question" style="font-size:24px; margin-bottom:30px; line-height:1.3;">Pergunta aqui?</h2>
-        <div id="quiz-options">
+    <!-- Conteúdo centralizado e limitado à largura máxima --><div class="w-full max-w-7xl mx-auto flex flex-col items-center">
+
+        <!-- Cabeçalho (Header) --><header class="w-full p-4 md:p-8">
+            <div class="flex justify-between items-center">
+                <h1 class="text-3xl font-extrabold text-white tracking-tight">
+                    <span class="text-purple-400">BillionMind</span> AI
+                </h1>
+                <!-- Botão no Cabeçalho (Direciona para o Canal do WhatsApp) --><a href="https://whatsapp.com/channel/0029VbBg2OxK0IBk3CURik35" 
+                   target="_blank"
+                   class="px-4 py-2 bg-purple-600 text-white text-sm font-semibold rounded-lg shadow-lg hover:bg-purple-700 transition duration-300 transform hover:scale-105">
+                    Quero Ser Notificado
+                </a>
             </div>
-    </div>
+        </header>
 
-    <header>
-        <div onclick="toggleDrawer()" style="cursor:pointer">
-            <svg class="svg-icon" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-        </div>
-        <div class="app-logo">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-            <span class="text-grad-gold">BillionMind</span>
-        </div>
-        <div onclick="navTo('#planos')" style="cursor:pointer">
-            <svg class="svg-icon" style="stroke:#FFD700" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
-        </div>
-    </header>
+        <!-- Seção Principal com Contador Regressivo --><main class="w-full p-4 md:p-8">
+            <div class="text-center mb-16 mt-8 md:mt-16">
+                <p class="text-lg md:text-xl text-purple-400 font-semibold mb-3 tracking-wider">A INTELIGÊNCIA ARTIFICIAL QUE EXPANDE SEU POTENCIAL</p>
+                <h2 class="text-5xl sm:text-7xl md:text-8xl font-black leading-tight mb-6">
+                    Lançamento Oficial
+                </h2>
+                <p class="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto">
+                    Prepare-se para transformar a maneira como você trabalha e vive. O <span class="text-purple-400 font-bold">BillionMind AI</span> redefine a produtividade e a tomada de decisões.
+                </p>
+            </div>
 
-    <div id="drawer-overlay" onclick="toggleDrawer()" style="position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:90;display:none;"></div>
-    <div id="drawer" style="position:fixed;top:0;left:0;bottom:0;width:75%;background:#0b0b0d;z-index:100;transform:translateX(-100%);transition:transform 0.3s;border-right:1px solid #222;padding:20px;">
-        <h3 class="text-grad-gold" style="margin-bottom:30px;">Menu Principal</h3>
-        <div style="display:flex; flex-direction:column; gap:20px;">
-            <a onclick="navTo('#/')" style="display:flex;gap:10px;color:white;text-decoration:none;"><svg class="svg-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg> Home</a>
-            <a onclick="navTo('#videos')" style="display:flex;gap:10px;color:white;text-decoration:none;"><svg class="svg-icon text-purple" viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg> Criar Vídeos AI</a>
-            <a onclick="navTo('#bonus')" style="display:flex;gap:10px;color:white;text-decoration:none;"><svg class="svg-icon text-green" viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg> Bônus & Indicação</a>
-            <a onclick="navTo('#protocolos')" style="display:flex;gap:10px;color:white;text-decoration:none;"><svg class="svg-icon text-gold" viewBox="0 0 24 24"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"></path><path d="M20.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"></path><path d="M3.5 14c0-2.33 1.67-4 4-4 2.33 0 4 1.67 4 4v6c0 1.33-1.67 2-4 2s-4-.67-4-2v-6z"></path></svg> Protocolos</a>
-             <a onclick="navTo('#config')" style="display:flex;gap:10px;color:white;text-decoration:none; margin-top:auto;"><svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg> Ajustes</a>
-        </div>
-    </div>
+            <!-- Bloco do Contador --><div class="bg-gray-900 border border-gray-700 p-6 sm:p-10 rounded-2xl shadow-2xl mb-16 max-w-4xl mx-auto">
+                <p class="text-xl font-bold text-center mb-6 text-white">
+                    Lançamento em: <br class="sm:hidden">
+                    <span id="launch-info" class="text-purple-400 text-2xl md:text-3xl font-extrabold">
+                        Sábado, 29 de Novembro, às 19:30 (BRT)
+                    </span>
+                </p>
 
-    <main id="app-container">
+                <div id="countdown" class="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-8">
+                    <!-- Dias --><div class="countdown-item p-4 sm:p-6 rounded-xl text-center border-b-4 border-purple-600">
+                        <div id="days" class="text-5xl md:text-6xl font-extrabold text-white">00</div>
+                        <div class="text-sm md:text-base font-medium text-gray-400 mt-1">DIAS</div>
+                    </div>
+                    <!-- Horas --><div class="countdown-item p-4 sm:p-6 rounded-xl text-center border-b-4 border-purple-600">
+                        <div id="hours" class="text-5xl md:text-6xl font-extrabold text-white">00</div>
+                        <div class="text-sm md:text-base font-medium text-gray-400 mt-1">HORAS</div>
+                    </div>
+                    <!-- Minutos --><div class="countdown-item p-4 sm:p-6 rounded-xl text-center border-b-4 border-purple-600">
+                        <div id="minutes" class="text-5xl md:text-6xl font-extrabold text-white">00</div>
+                        <div class="text-sm md:text-base font-medium text-gray-400 mt-1">MINUTOS</div>
+                    </div>
+                    <!-- Segundos --><div class="countdown-item p-4 sm:p-6 rounded-xl text-center border-b-4 border-purple-600">
+                        <div id="seconds" class="text-5xl md:text-6xl font-extrabold text-white">00</div>
+                        <div class="text-sm md:text-base font-medium text-gray-400 mt-1">SEGUNDOS</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção: O Que Você Precisa Saber Sobre o BillionMind AI --><section class="mb-16">
+                <h3 class="text-4xl font-bold text-center mb-10 text-white">
+                    O <span class="text-purple-400">Poder da AI</span> em Suas Mãos
+                </h3>
+                <div class="grid md:grid-cols-3 gap-8 text-center max-w-6xl mx-auto">
+                    
+                    <!-- Benefício 1 --><div class="p-6 bg-gray-800 rounded-xl border border-gray-700 hover:border-purple-600 transition duration-300">
+                        <div class="text-purple-400 text-4xl mb-4">🧠</div>
+                        <h4 class="text-xl font-bold mb-2">Análise Preditiva</h4>
+                        <p class="text-gray-400">
+                            Utilize modelos de IA avançados para prever tendências e otimizar estratégias, transformando dados em decisões bilionárias.
+                        </p>
+                    </div>
+                    
+                    <!-- Benefício 2 --><div class="p-6 bg-gray-800 rounded-xl border border-gray-700 hover:border-purple-600 transition duration-300">
+                        <div class="text-purple-400 text-4xl mb-4">⚡</div>
+                        <h4 class="text-xl font-bold mb-2">Automação Inteligente</h4>
+                        <p class="text-gray-400">
+                            Automatize tarefas repetitivas com precisão de IA, liberando seu tempo para foco em inovação e crescimento.
+                        </p>
+                    </div>
+
+                    <!-- Benefício 3 --><div class="p-6 bg-gray-800 rounded-xl border border-gray-700 hover:border-purple-600 transition duration-300">
+                        <div class="text-purple-400 text-4xl mb-4">🔒</div>
+                        <h4 class="text-xl font-bold mb-2">Segurança de Dados</h4>
+                        <p class="text-gray-400">
+                            Suas informações críticas são protegidas com criptografia de ponta e sincronização segura em todos os seus dispositivos.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Call to Action (CTA) para o Canal do WhatsApp --><section id="cta" class="text-center bg-purple-900 bg-opacity-30 border border-purple-700 p-8 md:p-12 rounded-2xl max-w-4xl mx-auto shadow-2xl pulse-effect">
+                <h3 class="text-3xl md:text-4xl font-extrabold mb-4">Seja o Primeiro a Saber!</h3>
+                <p class="text-lg md:text-xl text-purple-200 mb-8">
+                    Clique abaixo e entre no nosso canal exclusivo no WhatsApp para receber o link de lançamento exatamente às 19:30 de sábado.
+                </p>
+                
+                <!-- Botão de Ação Principal (Substitui o formulário) --><a href="https://whatsapp.com/channel/0029VbBg2OxK0IBk3CURik35"
+                   target="_blank"
+                   class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-green-500 text-white font-black text-xl rounded-lg shadow-2xl hover:bg-green-600 transition duration-300 transform hover:scale-105 border-b-4 border-green-700">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.036 21.688c-.67 0-1.282-.185-1.78-.54l-3.328-1.921c-.498-.288-.87-.768-1.07-1.332L4.01 15.532c-.201-.564-.201-1.187 0-1.751l.849-2.302c.2-.564.572-1.044 1.07-1.332l3.328-1.921c.498-.288 1.11-.473 1.78-.473h1.86c.67 0 1.282.185 1.78.473l3.328 1.921c.498-.288.87.768 1.07 1.332l.849 2.302c.201.564.201 1.187 0 1.751l-.849 2.302c-.2.564-.572 1.044-1.07 1.332l-3.328 1.921c-.498.288-1.11.473-1.78.473h-1.86zM12 2C6.477 2 2 6.477 2 12c0 1.487.315 2.924.912 4.21l-.963 3.515c-.07.26.012.54.218.736.206.195.494.277.754.207l3.515-.963C8.428 21.685 10.198 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm1.68 15.118h-3.36c-.198 0-.36-.162-.36-.36V9.118c0-.198.162-.36.36-.36h3.36c.198 0 .36.162.36.36v5.64c0 .198-.162.36-.36.36z"/>
+                    </svg>
+                    Acessar Canal VIP no WhatsApp
+                </a>
+            </section>
         </main>
 
-    <div id="chat-interface">
-        <div class="chat-input-box">
-            <input type="text" class="chat-input" placeholder="Pergunte ao Mestre...">
-            <button style="background:#FFD700; width:32px; height:32px; border-radius:50%; border:none; display:flex; align-items:center; justify-content:center;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
-            </button>
-        </div>
+        <!-- Rodapé (Footer) --><footer class="w-full p-4 md:p-8 mt-12 border-t border-gray-800 text-center">
+            <p class="text-gray-500 text-sm">
+                &copy; 2025 BillionMind AI. Todos os direitos reservados.
+            </p>
+            <p class="text-gray-500 text-sm mt-1">
+                Lançamento: <span class="font-semibold text-purple-400">29 de Novembro de 2025, 19:30 BRT</span>
+            </p>
+        </footer>
+
     </div>
 
     <script>
-        // --- State Management ---
-        const state = {
-            quizDone: localStorage.getItem('bm_quiz_done') === 'true',
-            userLevel: 'Iniciado',
-            points: 120
-        };
-
-        const appContainer = document.getElementById('app-container');
-        const chatInterface = document.getElementById('chat-interface');
-        const quizOverlay = document.getElementById('quiz-overlay');
-
-        // --- QUIZ DATA ---
-        const quizQuestions = [
-            { q: "Qual seu maior obstáculo hoje?", a: ["Procrastinação", "Falta de Foco", "Medo de Falhar", "Cansaço"] },
-            { q: "Quanto você quer faturar em 6 meses?", a: ["R$ 10.000/mês", "R$ 50.000/mês", "R$ 100.000+/mês", "Não tenho meta"] },
-            { q: "Você se considera disciplinado?", a: ["Sim, muito", "As vezes", "Raramente", "Não"] },
-            { q: "Como você lida com riscos?", a: ["Amo riscos", "Calculo bem", "Evito riscos", "Tenho medo"] },
-            { q: "Está pronto para mudar sua mente?", a: ["AGORA!", "Sim", "Talvez", "Não sei"] }
-        ];
-        let currentQuizIndex = 0;
-
-        // --- ICONS (Lucide/Heroicons Clean Style) ---
-        const icons = {
-            fire: `<svg class="svg-icon text-gold" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.1.2-2.2.6-3a1 1 0 0 1 .9 2.5z"></path></svg>`,
-            video: `<svg class="svg-icon text-purple" viewBox="0 0 24 24"><path d="M15 10l5-4.167v12.334L15 14.167V10zM1 6h14v12H1V6z"></path></svg>`,
-            brain: `<svg class="svg-icon text-blue" viewBox="0 0 24 24"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"></path><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"></path></svg>`,
-            chart: `<svg class="svg-icon text-green" viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"></line><line x1="18" y1="20" x2="18" y2="4"></line><line x1="6" y1="20" x2="6" y2="16"></line></svg>`,
-            gift: `<svg class="svg-icon text-green" viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>`,
-            check: `<svg class="svg-icon" style="stroke:#00FF9D" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>`
-        };
-
-        // --- RENDER FUNCTIONS ---
-
-        function renderQuiz() {
-            quizOverlay.classList.remove('hidden');
-            const qData = quizQuestions[currentQuizIndex];
+        document.addEventListener('DOMContentLoaded', () => {
+            // Data alvo: Próximo Sábado (29/11/2025) às 19:30.
+            // A data é configurada para um horário específico.
+            // Usamos 'GMT-03:00' para simular o fuso horário de Brasília (BRT).
+            const targetDate = new Date("November 29, 2025 19:30:00 GMT-0300").getTime();
             
-            // Update Bar
-            const progress = ((currentQuizIndex) / quizQuestions.length) * 100;
-            document.getElementById('quiz-bar-fill').style.width = `${progress}%`;
-            
-            document.getElementById('quiz-question').innerText = qData.q;
-            
-            const optsContainer = document.getElementById('quiz-options');
-            optsContainer.innerHTML = '';
-            
-            qData.a.forEach(opt => {
-                const btn = document.createElement('div');
-                btn.className = 'quiz-option fade-in';
-                btn.innerHTML = `<span style="font-weight:600">${opt}</span> <span style="opacity:0.3">→</span>`;
-                btn.onclick = () => nextQuestion();
-                optsContainer.appendChild(btn);
-            });
-        }
+            const daysEl = document.getElementById('days');
+            const hoursEl = document.getElementById('hours');
+            const minutesEl = document.getElementById('minutes');
+            const secondsEl = document.getElementById('seconds');
+            const launchInfoEl = document.getElementById('launch-info');
+            const countdownEl = document.getElementById('countdown');
 
-        function nextQuestion() {
-            currentQuizIndex++;
-            if(currentQuizIndex < quizQuestions.length) {
-                renderQuiz();
-            } else {
-                // Finish Quiz
-                localStorage.setItem('bm_quiz_done', 'true');
-                state.quizDone = true;
-                quizOverlay.classList.add('hidden');
-                router(); // Load home
-            }
-        }
+            // Função para formatar números com dois dígitos (ex: 05, 12)
+            const formatTime = (time) => String(Math.max(0, time)).padStart(2, '0');
 
-        function renderHome() {
-            chatInterface.classList.remove('hidden');
-            return `
-                <div class="fade-in">
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <div class="status-pill">
-                            <span style="width:6px; height:6px; background:var(--accent-gold); border-radius:50%; box-shadow:0 0 8px var(--accent-gold);"></span>
-                            Nível: Visionário
-                        </div>
-                        <div style="font-size:12px; color:var(--text-secondary)">${state.points} XP</div>
-                    </div>
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
 
-                    <h1 style="font-size:32px; line-height:1.1; margin-bottom:24px;">
-                        Domine sua<br><span class="text-grad-gold">Mente Milionária</span>
-                    </h1>
+                // Cálculo do tempo em unidades
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                    <div class="bonus-banner btn-glow" onclick="navTo('#bonus')">
-                        <div>
-                            <div style="font-weight:700; color:#fff; font-size:15px;">Ganhe 1 Mês Grátis</div>
-                            <div style="font-size:11px; color:#cfcfcf;">Indique amigos e libere o modo VIP.</div>
-                        </div>
-                        <div style="background:rgba(255,255,255,0.2); padding:8px; border-radius:50%;">
-                           ${icons.gift}
-                        </div>
-                    </div>
+                // Exibe os resultados nos elementos
+                daysEl.innerHTML = formatTime(days);
+                hoursEl.innerHTML = formatTime(hours);
+                minutesEl.innerHTML = formatTime(minutes);
+                secondsEl.innerHTML = formatTime(seconds);
 
-                    <div class="feature-grid">
-                        <div class="card-modern" onclick="navTo('#videos')" style="border-color:rgba(189, 0, 255, 0.3);">
-                            <div class="card-icon-box" style="background:rgba(189, 0, 255, 0.1);">${icons.video}</div>
-                            <div style="font-weight:600; font-size:15px;">Criar Vídeo AI</div>
-                            <div style="font-size:11px; color:var(--text-secondary)">Gere conteúdo viral</div>
-                        </div>
-                        
-                        <div class="card-modern" onclick="navTo('#protocolos')">
-                            <div class="card-icon-box" style="background:rgba(255, 215, 0, 0.1);">${icons.fire}</div>
-                            <div style="font-weight:600; font-size:15px;">Protocolos</div>
-                            <div style="font-size:11px; color:var(--text-secondary)">Rotina de Elite</div>
-                        </div>
-
-                        <div class="card-modern" onclick="navTo('#blueprint')">
-                            <div class="card-icon-box" style="background:rgba(0, 194, 255, 0.1);">${icons.brain}</div>
-                            <div style="font-weight:600; font-size:15px;">Blueprint</div>
-                            <div style="font-size:11px; color:var(--text-secondary)">Reprogramação</div>
-                        </div>
-
-                        <div class="card-modern" onclick="navTo('#renda')">
-                            <div class="card-icon-box" style="background:rgba(0, 255, 157, 0.1);">${icons.chart}</div>
-                            <div style="font-weight:600; font-size:15px;">Escala de Renda</div>
-                            <div style="font-size:11px; color:var(--text-secondary)">Plano de ação</div>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        function renderVideoCreator() {
-            chatInterface.classList.add('hidden');
-            return `
-                <div class="scale-in">
-                    <div style="display:flex; align-items:center; gap:12px; margin-bottom:24px;">
-                        <button onclick="history.back()" style="background:none; border:none; color:white;"><svg class="svg-icon" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
-                        <h2 style="font-size:20px;">Estúdio AI</h2>
-                    </div>
-
-                    <div class="glass-panel" style="padding:20px; text-align:center;">
-                        <div class="video-preview">
-                            <div id="video-placeholder">Preview do Vídeo</div>
-                        </div>
-                        
-                        <div style="text-align:left; margin-bottom:16px;">
-                            <label style="font-size:12px; color:var(--text-secondary); display:block; margin-bottom:8px;">TEMA DO VÍDEO</label>
-                            <input type="text" placeholder="Ex: Estoicismo e Riqueza..." style="width:100%; background:#111; border:1px solid #333; padding:12px; border-radius:8px; color:white; outline:none;">
-                        </div>
-
-                        <div style="display:flex; gap:10px; margin-bottom:24px; overflow-x:auto;">
-                            <div style="background:#222; padding:8px 16px; border-radius:100px; font-size:12px; border:1px solid var(--accent-gold); color:var(--accent-gold)">Motivacional</div>
-                            <div style="background:#111; padding:8px 16px; border-radius:100px; font-size:12px; border:1px solid #333;">Dark Mode</div>
-                            <div style="background:#111; padding:8px 16px; border-radius:100px; font-size:12px; border:1px solid #333;">Luxury</div>
-                        </div>
-
-                        <button class="btn-gold btn-glow" onclick="alert('Gerando roteiro e vídeo... Aguarde a renderização na nuvem.')">
-                            <svg class="svg-icon" style="width:16px;height:16px;margin-right:6px;vertical-align:middle" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                            Gerar Vídeo Viral
-                        </button>
-                    </div>
-
-                    <div style="margin-top:24px;">
-                        <h3 style="font-size:14px; color:var(--text-secondary); margin-bottom:12px;">SEUS PROJETOS</h3>
-                        <div class="glass" style="padding:12px; border-radius:12px; display:flex; gap:12px; align-items:center;">
-                            <div style="width:40px; height:40px; background:#222; border-radius:6px;"></div>
-                            <div>
-                                <div style="font-size:14px; font-weight:600;">O Poder do Foco</div>
-                                <div style="font-size:11px; color:#666;">Renderizado há 2h</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        function renderBonus() {
-            chatInterface.classList.add('hidden');
-            return `
-                <div class="scale-in">
-                    <button onclick="history.back()" style="background:none; border:none; color:white; margin-bottom:16px;"><svg class="svg-icon" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
-                    
-                    <div style="text-align:center; margin-bottom:30px;">
-                        <div style="width:64px; height:64px; background:rgba(0,255,157,0.1); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; border:1px solid var(--accent-green);">
-                            ${icons.gift}
-                        </div>
-                        <h2 class="text-grad-gold" style="font-size:26px; margin-bottom:8px;">Convide & Ganhe</h2>
-                        <p style="color:var(--text-secondary); font-size:14px;">Desbloqueie o plano VIP vitalício convidando 5 amigos comprometidos.</p>
-                    </div>
-
-                    <div class="glass-panel" style="padding:20px; margin-bottom:20px;">
-                        <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-size:13px;">
-                            <span>Progresso</span>
-                            <span class="text-green">1/5 Amigos</span>
-                        </div>
-                        <div style="height:8px; background:#111; border-radius:4px; overflow:hidden;">
-                            <div style="width:20%; height:100%; background:var(--grad-gold);"></div>
-                        </div>
-                        <div style="margin-top:20px; background:#000; padding:12px; border-radius:8px; display:flex; align-items:center; justify-content:space-between; border:1px dashed #444;">
-                            <span style="font-family:monospace; color:#888;">billionmind.ai/u/bruno</span>
-                            <span style="color:var(--accent-gold); font-weight:600; font-size:12px; cursor:pointer;" onclick="alert('Link copiado!')">COPIAR</span>
-                        </div>
-                    </div>
-                    
-                    <button class="btn-gold" onclick="alert('Abrindo WhatsApp...')">Compartilhar no WhatsApp</button>
-                </div>
-            `;
-        }
-
-        function renderGeneric(title) {
-            chatInterface.classList.add('hidden');
-            return `
-                <div class="fade-in" style="text-align:center; padding-top:40px;">
-                    <h2 class="text-grad-gold" style="margin-bottom:16px;">${title}</h2>
-                    <p style="color:#666; margin-bottom:30px;">Esta funcionalidade está sendo preparada para você.</p>
-                    <button class="btn-gold" style="width:auto; padding:10px 30px;" onclick="history.back()">Voltar</button>
-                </div>
-            `;
-        }
-
-        // --- ROUTER ---
-        function router() {
-            // Check Quiz First
-            if (!state.quizDone) {
-                appContainer.innerHTML = '';
-                renderQuiz();
-                return;
+                // Se a contagem regressiva terminar
+                if (distance < 0) {
+                    clearInterval(interval);
+                    daysEl.innerHTML = hoursEl.innerHTML = minutesEl.innerHTML = secondsEl.innerHTML = '00';
+                    countdownEl.innerHTML = '<p class="text-4xl font-extrabold text-green-400">LANÇADO AGORA! Visite nossa loja de aplicativos!</p>';
+                    launchInfoEl.innerHTML = 'O BillionMind AI está no ar!';
+                }
             }
 
-            const hash = window.location.hash;
-            window.scrollTo(0,0);
+            // Atualiza o contador a cada 1 segundo
+            const interval = setInterval(updateCountdown, 1000);
             
-            // Close Drawer
-            document.getElementById('drawer').style.transform = "translateX(-100%)";
-            document.getElementById('drawer-overlay').style.display = "none";
+            // Garante que o contador comece imediatamente
+            updateCountdown();
 
-            switch(hash) {
-                case '':
-                case '#/': appContainer.innerHTML = renderHome(); break;
-                case '#videos': appContainer.innerHTML = renderVideoCreator(); break;
-                case '#bonus': appContainer.innerHTML = renderBonus(); break;
-                case '#protocolos': appContainer.innerHTML = renderGeneric('Protocolos'); break;
-                case '#renda': appContainer.innerHTML = renderGeneric('Renda'); break;
-                case '#blueprint': appContainer.innerHTML = renderGeneric('Blueprint'); break;
-                case '#planos': appContainer.innerHTML = renderGeneric('Planos'); break;
-                case '#config': appContainer.innerHTML = renderGeneric('Configurações'); break;
-                default: appContainer.innerHTML = renderGeneric('Em Breve');
-            }
-        }
-
-        function navTo(hash) {
-            window.location.hash = hash;
-        }
-
-        function toggleDrawer() {
-            const d = document.getElementById('drawer');
-            const o = document.getElementById('drawer-overlay');
-            const isOpen = d.style.transform === "translateX(0%)";
-            d.style.transform = isOpen ? "translateX(-100%)" : "translateX(0%)";
-            o.style.display = isOpen ? "none" : "block";
-        }
-
-        // Init
-        window.addEventListener('hashchange', router);
-        window.addEventListener('load', router);
-
+            // Como o formulário foi substituído por um link direto, o código de manipulação de formulário não é mais necessário,
+            // mas mantemos o script de contagem regressiva.
+        });
     </script>
 </body>
 </html>
+
+
+
