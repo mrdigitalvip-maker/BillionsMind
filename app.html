@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BillionMind AI – Acelerador de Disciplina</title>
+    <!-- Carrega o Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Cores base para o tema escuro/quase preto */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a; /* Quase Preto */
+            color: #ffffff; /* Texto Branco */
+        }
+        /* Cor de destaque: Verde Esmeralda/Ciano */
+        .accent-color {
+            color: #2dd4bf; /* tailwind emerald-400/cyan-400 */
+        }
+        .accent-bg {
+            background-color: #0d9488; /* tailwind emerald-600 */
+        }
+        /* Fundo do Drawer/Cartões Escuros */
+        .drawer-bg, .card-bg {
+            background-color: #111111; /* Cinza Escuro */
+        }
+        /* Classe para transição da sidebar e painel */
+        .transition-transform {
+            transition: transform 0.3s ease-out;
+        }
+        /* Classe para o overlay semi-transparente */
+        .overlay {
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 40;
+        }
+        /* Estilo para ícones no input de chat (simulando SVG) */
+        .chat-icon-button {
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="h-screen overflow-hidden flex flex-col">
+
+    <!-- OVERLAY (Usado para fechar menus ao clicar fora) -->
+    <div id="overlay" class="fixed inset-0 hidden overlay transition-opacity duration-300" onclick="hideAllModals()"></div>
+
+    <!-- MENU LATERAL (DRAWER) -->
+    <div id="sidebarMenu"
+         class="drawer-bg fixed top-0 left-0 h-full w-72 max-w-xs z-50 shadow-2xl transition-transform -translate-x-full p-4 flex flex-col">
+
+        <h2 class="text-3xl font-extrabold mb-8 pt-2">
+            <span class="accent-color">BillionMind</span>
+        </h2>
+
+        <!-- Lista de Chats/Seções -->
+        <nav class="space-y-2 flex-grow overflow-y-auto pr-2">
+            <button onclick="showScreen('homeScreen')" class="flex items-center w-full p-3 card-bg rounded-lg hover:bg-gray-800 transition duration-150">
+                <span class="text-xl mr-3">✨</span>
+                Novo protocolo diário
+            </button>
+            <button onclick="showScreen('homeScreen')" class="flex items-center w-full p-3 rounded-lg hover:bg-gray-800 transition duration-150">
+                <span class="text-xl mr-3">📒</span>
+                Diário de disciplina
+            </button>
+            <button onclick="showScreen('homeScreen')" class="flex items-center w-full p-3 rounded-lg hover:bg-gray-800 transition duration-150">
+                <span class="text-xl mr-3">📈</span>
+                Painel financeiro
+            </button>
+            <button onclick="showScreen('homeScreen')" class="flex items-center w-full p-3 rounded-lg hover:bg-gray-800 transition duration-150">
+                <span class="text-xl mr-3">📚</span>
+                Biblioteca BillionMind
+            </button>
+            <button onclick="showScreen('homeScreen')" class="flex items-center w-full p-3 rounded-lg hover:bg-gray-800 transition duration-150">
+                <span class="text-xl mr-3">🗺️</span>
+                Blueprint de Alta Performance
+            </button>
+        </nav>
+        
+        <!-- Bloco Inferior de Configurações e Perfil -->
+        <div class="mt-4 pt-4 border-t border-gray-800 space-y-2">
+            <button onclick="showScreen('settingsScreen')" class="flex items-center w-full p-3 rounded-lg hover:bg-gray-800 transition duration-150">
+                <span class="text-xl mr-3">⚙️</span>
+                Configurações
+            </button>
+
+            <!-- Cartão do Usuário -->
+            <div class="flex items-center p-3 rounded-xl card-bg border border-gray-800">
+                <div class="w-10 h-10 bg-purple-600 text-white font-bold rounded-full flex items-center justify-center mr-3">BB</div>
+                <div>
+                    <p class="text-sm font-semibold">Bruno Brandão</p>
+                    <p class="text-xs text-gray-400">usuario@billionmind.ai</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- PAINEL DE FERRAMENTAS (BOTTOM SHEET) -->
+    <div id="toolsPanel"
+         class="fixed bottom-0 left-0 right-0 max-h-[80%] drawer-bg z-50 shadow-2xl rounded-t-3xl transition-transform translate-y-full p-6">
+
+        <h3 class="text-xl font-bold mb-4 border-b border-gray-800 pb-2">Ferramentas de Disciplina</h3>
+
+        <!-- Cartões Grandes (Linha 1) -->
+        <div class="grid grid-cols-3 gap-3 mb-6">
+            <button class="card-bg p-3 rounded-xl flex flex-col items-center justify-center hover:bg-gray-800 transition">
+                <span class="text-3xl mb-1">📅</span>
+                <span class="text-xs font-medium text-center">Registrar dia</span>
+            </button>
+            <button class="card-bg p-3 rounded-xl flex flex-col items-center justify-center hover:bg-gray-800 transition">
+                <span class="text-3xl mb-1">📊</span>
+                <span class="text-xs font-medium text-center">Ver estatísticas</span>
+            </button>
+            <button class="card-bg p-3 rounded-xl flex flex-col items-center justify-center hover:bg-gray-800 transition">
+                <span class="text-3xl mb-1">💰</span>
+                <span class="text-xs font-medium text-center">Metas de renda</span>
+            </button>
+        </div>
+
+        <!-- Lista de Ferramentas -->
+        <div class="space-y-2">
+            <button class="flex items-center w-full p-3 rounded-lg hover:bg-gray-800 transition duration-150">
+                <span class="text-xl mr-3 accent-color">✅</span> Protocolo de Disciplina
+            </button>
+            <button class="flex items-center w-full p-3 rounded-lg hover:bg-gray-800 transition duration-150">
+                <span class="text-xl mr-3 accent-color">📝</span> Planejador de Tarefas
+            </button>
+            <button class="flex items-center w-full p-3 rounded-lg hover:bg-gray-800 transition duration-150">
+                <span class="text-xl mr-3 accent-color">⏱️</span> Modo Foco (Pomodoro)
+            </button>
+            <button class="flex items-center w-full p-3 rounded-lg hover:bg-gray-800 transition duration-150">
+                <span class="text-xl mr-3 accent-color">💡</span> Notas rápidas
+            </button>
+        </div>
+
+        <!-- Alça de Fechamento -->
+        <div class="absolute top-2 left-1/2 -translate-x-1/2 w-10 h-1 bg-gray-700 rounded-full cursor-pointer" onclick="toggleToolsPanel()"></div>
+    </div>
+
+
+    <!-- CONTEÚDO PRINCIPAL (Todas as Telas) -->
+    <div id="app-container" class="flex-grow relative overflow-y-auto">
+        
+        <!-- TELA HOME (PADRÃO) -->
+        <section id="homeScreen" class="h-full flex flex-col p-4 pt-6 md:p-10">
+
+            <!-- Header da Home -->
+            <header class="flex justify-between items-center mb-10">
+                <button onclick="toggleSidebar()" class="chat-icon-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-white"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </button>
+                <h1 class="text-2xl font-extrabold text-white">BillionMind AI</h1>
+                <button onclick="toggleToolsPanel()" class="chat-icon-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 accent-color"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+                </button>
+            </header>
+
+            <!-- Conteúdo Central -->
+            <div class="flex-grow flex flex-col items-center justify-center text-center px-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#2dd4bf" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mb-6"><path d="M12 20h.01"/><path d="M12 4v16"/><path d="m14 6-2-2-2 2"/><path d="M12 20v-4"/><path d="m14 18-2 2-2-2"/><path d="M14 12h.01"/><path d="M14 12l-2-2-2 2"/></svg>
+                <h2 class="text-3xl md:text-5xl font-extrabold mb-10 max-w-lg leading-tight">
+                    Como posso acelerar sua disciplina hoje?
+                </h2>
+
+                <!-- Chips de Sugestão -->
+                <div class="grid grid-cols-2 gap-4 max-w-md w-full mb-16">
+                    <button onclick="alert('Iniciando Rotina de Disciplina...')" class="chip-button">Rotina de Disciplina</button>
+                    <button onclick="alert('Iniciando Planejador de Renda...')" class="chip-button">Planejar Renda</button>
+                    <button onclick="alert('Iniciando Protocolos de Foco...')" class="chip-button">Protocolos de Foco</button>
+                    <button onclick="alert('Iniciando Blueprint Mental...')" class="chip-button">Blueprint Mental</button>
+                </div>
+            </div>
+
+            <!-- Input de Chat (Fundo) -->
+            <footer class="p-4 pt-0">
+                <div class="flex items-center w-full card-bg rounded-2xl p-2 shadow-lg">
+                    <div class="chat-icon-button text-gray-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4 4 0 0 0-4-4H8c-2.2 0-4-1.8-4-4V4c0-2.2 1.8-4 4-4h8c2.2 0 4 1.8 4 4v.5"/></svg>
+                    </div>
+                    <input type="text" placeholder="Mensagem BillionMind AI" class="flex-grow bg-transparent text-white placeholder-gray-500 border-none focus:ring-0 p-2 text-lg">
+                    <button class="w-10 h-10 accent-bg text-white rounded-full chat-icon-button hover:opacity-80 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18v-6m0 0V6m0 6h6m-6 0H6"/></svg>
+                    </button>
+                </div>
+            </footer>
+        </section>
+        
+        <!-- TELA DE CONFIGURAÇÕES -->
+        <section id="settingsScreen" class="h-full hidden flex-col p-4 md:p-10 overflow-y-auto">
+            <header class="flex items-center mb-8">
+                <button onclick="showScreen('homeScreen')" class="chat-icon-button text-white mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                </button>
+                <h2 class="text-2xl font-bold">Configurações</h2>
+            </header>
+
+            <!-- Cartão da Conta -->
+            <div class="card-bg p-5 rounded-xl mb-6">
+                <p class="text-sm font-semibold mb-2">Conta</p>
+                <div class="flex items-center mb-3">
+                    <div class="w-12 h-12 bg-purple-600 text-white font-bold rounded-full flex items-center justify-center mr-4">BB</div>
+                    <div>
+                        <p class="font-bold text-lg">Bruno Brandão</p>
+                        <p class="text-sm text-gray-400">claudineibrandao373@gmail.com</p>
+                    </div>
+                </div>
+                <p id="planDisplay" class="text-sm text-gray-400">Plano atual: Visionário (Gratuito)</p>
+            </div>
+
+            <!-- Lista de Opções -->
+            <div class="space-y-3">
+                <div onclick="alert('Funcionalidade de Aparência')" class="setting-item">
+                    <span class="text-xl mr-3">🎨</span> Aparência
+                </div>
+                <div onclick="alert('Funcionalidade de Notificações')" class="setting-item">
+                    <span class="text-xl mr-3">🔔</span> Notificações
+                </div>
+                <div onclick="alert('Funcionalidade de Voz & Áudio')" class="setting-item">
+                    <span class="text-xl mr-3">🎤</span> Voz & Áudio
+                </div>
+                <div onclick="showScreen('plansScreen')" class="setting-item bg-gray-900/50 hover:bg-gray-800 transition">
+                    <span class="text-xl mr-3 accent-color">⚡</span> Planos e Assinatura
+                </div>
+                <div onclick="alert('Funcionalidade de Dados & Privacidade')" class="setting-item">
+                    <span class="text-xl mr-3">🔒</span> Dados & Privacidade
+                </div>
+                <div onclick="alert('Funcionalidade de Segurança')" class="setting-item">
+                    <span class="text-xl mr-3">🛡️</span> Segurança
+                </div>
+                <div onclick="alert('Informações sobre o App')" class="setting-item">
+                    <span class="text-xl mr-3">ℹ️</span> Sobre o BillionMind AI
+                </div>
+                <div onclick="alert('Saindo da aplicação...')" class="setting-item text-red-500 hover:bg-red-900/20">
+                    <span class="text-xl mr-3">🚪</span> Sair
+                </div>
+            </div>
+        </section>
+
+        <!-- TELA DE PLANOS / ASSINATURA -->
+        <section id="plansScreen" class="h-full hidden flex-col p-4 md:p-10 overflow-y-auto">
+            <header class="flex items-center mb-8">
+                <button onclick="showScreen('settingsScreen')" class="chat-icon-button text-white mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                </button>
+                <h2 class="text-2xl font-bold">Planos BillionMind AI</h2>
+            </header>
+
+            <div class="space-y-6 max-w-xl mx-auto w-full">
+                <!-- Plano 1 – Visionário (Gratuito) -->
+                <div class="card-bg p-6 rounded-xl border border-gray-800 shadow-lg">
+                    <h3 class="text-xl font-bold mb-2">Visionário</h3>
+                    <p class="text-sm text-gray-400 mb-4">Plano Básico</p>
+                    <p class="text-4xl font-extrabold mb-4">R$ 0<span class="text-sm font-medium text-gray-400"> / mês</span></p>
+                    <ul class="space-y-2 text-sm text-gray-300 mb-6">
+                        <li class="flex items-center"><span class="accent-color mr-2">✓</span> Acesso limitado aos Protocolos Diários (5 dias de teste)</li>
+                        <li class="flex items-center"><span class="accent-color mr-2">✓</span> 1 métrica básica de disciplina</li>
+                        <li class="flex items-center"><span class="accent-color mr-2">✓</span> Acesso simples ao chat de disciplina</li>
+                    </ul>
+                    <button onclick="selectPlan('Visionário')" class="w-full py-3 bg-gray-700 text-white font-bold rounded-lg hover:bg-gray-600 transition">
+                        Continuar no gratuito
+                    </button>
+                </div>
+
+                <!-- Plano 2 – Elite (Recomendado) -->
+                <div class="card-bg p-6 rounded-xl border-2 border-emerald-500 shadow-2xl relative">
+                    <span class="absolute top-0 right-0 bg-emerald-600 text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-xl">RECOMENDADO</span>
+                    <h3 class="text-xl font-bold mb-2 accent-color">Elite</h3>
+                    <p class="text-sm text-gray-400 mb-4">Otimização de Performance</p>
+                    <p class="text-4xl font-extrabold mb-4">R$ 29,90<span class="text-sm font-medium text-gray-400"> / mês</span></p>
+                    <ul class="space-y-2 text-sm text-gray-300 mb-6">
+                        <li class="flex items-center"><span class="accent-color mr-2">🚀</span> Protocolos Diários Ilimitados</li>
+                        <li class="flex items-center"><span class="accent-color mr-2">📊</span> Até 3 métricas de disciplina e renda</li>
+                        <li class="flex items-center"><span class="accent-color mr-2">🔑</span> Acesso ao painel **Elite de Disciplina**</li>
+                        <li class="flex items-center"><span class="accent-color mr-2">📚</span> Acesso completo à Biblioteca BillionMind</li>
+                    </ul>
+                    <button onclick="selectPlan('Elite')" class="w-full py-3 accent-bg text-white font-bold rounded-lg hover:bg-emerald-700 transition">
+                        Assinar plano Elite
+                    </button>
+                </div>
+
+                <!-- Plano 3 – VIP -->
+                <div class="card-bg p-6 rounded-xl border border-gray-800 shadow-lg">
+                    <h3 class="text-xl font-bold mb-2 text-yellow-500">VIP</h3>
+                    <p class="text-sm text-gray-400 mb-4">Alta Performance Total</p>
+                    <p class="text-4xl font-extrabold mb-4">R$ 59,90<span class="text-sm font-medium text-gray-400"> / mês</span></p>
+                    <ul class="space-y-2 text-sm text-gray-300 mb-6">
+                        <li class="flex items-center"><span class="text-yellow-500 mr-2">⭐</span> Tudo do plano Elite</li>
+                        <li class="flex items-center"><span class="text-yellow-500 mr-2">📈</span> Até 10 métricas avançadas</li>
+                        <li class="flex items-center"><span class="text-yellow-500 mr-2">🗣️</span> Sessões de revisão mensal (conteúdo VIP)</li>
+                        <li class="flex items-center"><span class="text-yellow-500 mr-2">🎯</span> Modo “Foco Implacável”</li>
+                    </ul>
+                    <button onclick="selectPlan('VIP')" class="w-full py-3 bg-yellow-700 text-white font-bold rounded-lg hover:bg-yellow-600 transition">
+                        Assinar plano VIP
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Classes CSS auxiliares para as telas -->
+    <style>
+        .chip-button {
+            @apply px-4 py-3 bg-gray-800 text-white font-semibold rounded-xl text-sm hover:bg-gray-700 transition duration-150 shadow-md;
+        }
+        .setting-item {
+            @apply flex items-center p-4 card-bg rounded-xl hover:bg-gray-800 transition duration-150 cursor-pointer text-base;
+            /* Adiciona o ícone de seta (chevrão) à direita */
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='lucide lucide-chevron-right'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+        }
+    </style>
+
+    <!-- LÓGICA JAVASCRIPT -->
+    <script>
+        // Mapeamento de telas e estado da navegação
+        const screens = ['homeScreen', 'settingsScreen', 'plansScreen'];
+        const sidebar = document.getElementById('sidebarMenu');
+        const toolsPanel = document.getElementById('toolsPanel');
+        const overlay = document.getElementById('overlay');
+        const planDisplay = document.getElementById('planDisplay');
+
+        // Inicializa o estado do plano a partir do localStorage
+        const currentPlan = localStorage.getItem('billionmind_plan') || 'Visionário';
+        if (currentPlan) {
+            updatePlanDisplay(currentPlan);
+        }
+
+        /**
+         * Atualiza o display do plano na tela de Configurações
+         * @param {string} planName 
+         */
+        function updatePlanDisplay(planName) {
+            const planText = planName === 'Visionário' 
+                ? 'Plano atual: Visionário (Gratuito)' 
+                : `Plano atual: ${planName} (Ativo)`;
+            planDisplay.textContent = planText;
+        }
+
+        /**
+         * Alterna a visibilidade das telas principais.
+         * @param {string} screenId - O ID da tela a ser exibida.
+         */
+        function showScreen(screenId) {
+            // Esconde o Menu Lateral e o Painel de Ferramentas antes de mudar de tela
+            hideAllModals();
+
+            screens.forEach(id => {
+                const screen = document.getElementById(id);
+                if (screen) {
+                    if (id === screenId) {
+                        screen.classList.remove('hidden');
+                        screen.classList.add('flex');
+                    } else {
+                        screen.classList.add('hidden');
+                        screen.classList.remove('flex');
+                    }
+                }
+            });
+            // Rola para o topo ao trocar de tela
+            document.getElementById('app-container').scrollTo(0, 0);
+        }
+
+        /**
+         * Alterna a abertura e fechamento do Menu Lateral.
+         */
+        function toggleSidebar() {
+            const isHidden = sidebar.classList.contains('-translate-x-full');
+            if (isHidden) {
+                sidebar.classList.remove('-translate-x-full');
+                sidebar.classList.add('translate-x-0');
+                overlay.classList.remove('hidden');
+            } else {
+                sidebar.classList.remove('translate-x-0');
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+            }
+        }
+
+        /**
+         * Alterna a abertura e fechamento do Painel de Ferramentas (Bottom Sheet).
+         */
+        function toggleToolsPanel() {
+            const isHidden = toolsPanel.classList.contains('translate-y-full');
+            if (isHidden) {
+                toolsPanel.classList.remove('translate-y-full');
+                toolsPanel.classList.add('translate-y-0');
+                overlay.classList.remove('hidden');
+            } else {
+                toolsPanel.classList.remove('translate-y-0');
+                toolsPanel.classList.add('translate-y-full');
+                overlay.classList.add('hidden');
+            }
+        }
+        
+        /**
+         * Esconde o Menu Lateral e o Painel de Ferramentas.
+         */
+        function hideAllModals() {
+            sidebar.classList.remove('translate-x-0');
+            sidebar.classList.add('-translate-x-full');
+            
+            toolsPanel.classList.remove('translate-y-0');
+            toolsPanel.classList.add('translate-y-full');
+
+            overlay.classList.add('hidden');
+        }
+
+
+        /**
+         * Lógica de Seleção de Plano (Simulação).
+         * @param {string} planName - O nome do plano selecionado.
+         */
+        function selectPlan(planName) {
+            // 1. Grava no localStorage
+            localStorage.setItem('billionmind_plan', planName);
+
+            // 2. Atualiza o display na tela de Configurações
+            updatePlanDisplay(planName);
+
+            // 3. Exibe o alerta
+            alert(`Plano "${planName}" selecionado com sucesso. Integração com pagamento Stripe virá em breve.`);
+
+            // 4. Retorna para a tela de configurações (ou onde o usuário estava)
+            showScreen('settingsScreen');
+        }
+        
+        // Inicializa o estado da tela
+        showScreen('homeScreen');
+    </script>
+</body>
+</html>
