@@ -2,815 +2,733 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BillionMind AI – O Acelerador de Disciplina</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>BillionMind AI</title>
     <style>
-        /*
-        =================================================================
-        === CSS INLINE: ESTILO LUXUOSO, FUTURISTA E MOBILE-FIRST ========
-        =================================================================
-        */
+        /* =========================================
+           CSS VARIABLES & RESET
+           ========================================= */
         :root {
-            --color-bg-dark: #0A0A0E;
-            --color-bg-surface: #1C1C23;
-            --color-bg-card: #282830;
-            --color-primary-gold: #FFD700;
-            --color-primary-gold-dark: #B8860B;
-            --color-text-light: #E0E0E6;
-            --color-text-muted: #A0A0A8;
-            --color-accent-blue: #00F0FF;
-            --color-accent-green: #00FF99;
-            --color-accent-red: #FF4D4D;
-            --color-shadow: rgba(0, 0, 0, 0.4);
-            --color-gradient-gold: linear-gradient(135deg, #FFD700, #F0C419, #A67C00);
-            --color-gradient-main: linear-gradient(145deg, #2D2D35, #1C1C23);
+            --bg-dark: #050505;
+            --bg-card: rgba(25, 25, 25, 0.6);
+            --bg-glass: rgba(255, 255, 255, 0.03);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --text-muted: #52525b;
+
+            --accent-gold: #FFD700;
+            --accent-gold-dim: #b89b00;
+            --accent-green: #00FF9D;
+            --accent-blue: #00C2FF;
+            --accent-purple: #BD00FF;
+            
+            --grad-gold: linear-gradient(135deg, #FFD700 0%, #FDB931 100%);
+            --grad-green: linear-gradient(135deg, #00FF9D 0%, #00CC7A 100%);
+            --grad-blue: linear-gradient(135deg, #00C2FF 0%, #0075FF 100%);
+            --grad-dark: linear-gradient(180deg, rgba(0,0,0,0) 0%, #000000 100%);
+
+            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --ease: cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        /* Base e Reset */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body, html {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--color-bg-dark);
-            color: var(--color-text-light);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* Efeitos de Fundo */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 10% 20%, rgba(10, 10, 14, 0.8) 0%, rgba(28, 28, 35, 0.1) 60%, rgba(10, 10, 14, 0.9) 100%),
-                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="%231a1a20" opacity="0.5"/></svg>') repeat;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        /* Layout Principal */
-        #app-container {
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden; /* App feel */
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
-            max-width: 600px;
-            margin: 0 auto;
-            position: relative;
         }
 
-        /* Cabeçalho */
-        header {
-            padding: 20px 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: var(--color-bg-dark); /* Para cobrir o conteúdo ao rolar */
+        /* =========================================
+           UTILITIES & ANIMATIONS
+           ========================================= */
+        .glass {
+            background: var(--bg-glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-glass);
         }
 
-        .header-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background-image: var(--color-gradient-gold);
+        .text-grad-gold {
+            background: var(--grad-gold);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
         }
 
-        .menu-button, .bottom-sheet-trigger {
+        .hidden { display: none !important; }
+        .fade-in { animation: fadeIn 0.4s var(--ease) forwards; }
+        .slide-up { animation: slideUp 0.4s var(--ease) forwards; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        /* =========================================
+           LAYOUT COMPONENTS
+           ========================================= */
+        /* Header */
+        header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            z-index: 50;
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .header-btn {
             background: none;
             border: none;
+            color: var(--text-primary);
             padding: 8px;
             cursor: pointer;
-            transition: transform 0.2s, opacity 0.2s;
-            color: var(--color-text-light);
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+        .header-btn:active { background: rgba(255,255,255,0.1); }
+        
+        .app-logo { font-weight: 700; font-size: 18px; letter-spacing: -0.5px; }
+
+        /* Main Content Area */
+        main {
+            flex: 1;
+            overflow-y: auto;
+            padding: 70px 16px 100px 16px; /* Bottom padding for chat bar */
+            scroll-behavior: smooth;
+        }
+        
+        /* Remove scrollbar visually */
+        main::-webkit-scrollbar { width: 0px; background: transparent; }
+
+        /* =========================================
+           HOME SCREEN
+           ========================================= */
+        .hero-section {
+            text-align: center;
+            margin-bottom: 32px;
+            margin-top: 20px;
+        }
+        
+        .hero-icon {
+            width: 64px; height: 64px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.15);
         }
 
-        .menu-button:active, .bottom-sheet-trigger:active {
-            transform: scale(0.95);
-        }
-
-        /* Conteúdo da Rota (SPA) */
-        #main-content {
-            flex-grow: 1;
-            padding: 0 25px 90px;
-            transition: opacity 0.3s ease;
-        }
-
-        /* Home Screen */
-        .home-welcome {
-            font-size: 1.6rem;
+        .hero-title {
+            font-size: 24px;
             font-weight: 600;
-            color: var(--color-text-light);
-            margin-bottom: 30px;
-            line-height: 1.4;
+            margin-bottom: 8px;
         }
 
-        .home-cards-grid {
+        .grid-cards {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-bottom: 40px;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        .main-card {
-            background: var(--color-bg-card);
-            border-radius: 12px;
-            padding: 15px;
+        .super-card {
+            padding: 16px;
+            border-radius: 16px;
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
-            justify-content: space-between;
-            min-height: 120px;
+            gap: 10px;
             cursor: pointer;
-            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 4px 15px var(--color-shadow);
+            transition: transform 0.2s, background 0.2s;
+            position: relative;
+            overflow: hidden;
         }
 
-        .main-card:hover {
-            background: #36363f;
+        .super-card:active { transform: scale(0.98); background: rgba(255,255,255,0.08); }
+        
+        /* Subtle glow effect on cards */
+        .super-card::after {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%);
+            opacity: 0; transition: opacity 0.3s; pointer-events: none;
         }
+        .super-card:hover::after { opacity: 1; }
 
-        .main-card:active {
-            transform: translateY(2px);
-            box-shadow: 0 2px 10px var(--color-shadow);
-        }
+        .card-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+        .card-title { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+        .card-desc { font-size: 11px; color: var(--text-secondary); line-height: 1.4; }
 
-        .card-icon {
-            width: 32px;
-            height: 32px;
-            margin-bottom: 10px;
-            filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
-        }
-
-        .card-title {
-            font-size: 0.85rem;
-            font-weight: 600;
-            line-height: 1.3;
-        }
-
-        /* Chat Input (Estilo ChatGPT Mobile) */
-        .chat-area {
+        /* =========================================
+           CHAT INTERFACE (Fixed Bottom)
+           ========================================= */
+        #chat-interface {
             position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 600px;
-            padding: 15px 25px;
-            background: linear-gradient(to top, var(--color-bg-dark) 80%, transparent);
-            z-index: 90;
+            bottom: 0; left: 0; right: 0;
+            background: linear-gradient(0deg, #050505 40%, rgba(5,5,5,0) 100%);
+            padding: 16px;
+            z-index: 40;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
         .chat-input-container {
+            position: relative;
             display: flex;
-            align-items: flex-end;
-            background: var(--color-bg-surface);
-            border-radius: 25px;
-            padding: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            align-items: center;
+            background: #1e1e1e;
+            border-radius: 26px;
+            padding: 6px 6px 6px 16px;
+            border: 1px solid #333;
+            transition: border-color 0.2s;
         }
+        
+        .chat-input-container:focus-within { border-color: var(--text-secondary); }
 
         .chat-input {
-            flex-grow: 1;
-            background: none;
+            flex: 1;
+            background: transparent;
             border: none;
-            color: var(--color-text-light);
-            padding: 5px 10px;
-            font-size: 1rem;
-            resize: none;
+            color: white;
+            font-size: 16px;
             outline: none;
-            height: 20px; /* Altura mínima para uma linha */
-            overflow: hidden;
-            max-height: 100px; /* Altura máxima para 4-5 linhas */
+            max-height: 100px;
         }
 
-        .chat-send-button {
-            background: var(--color-accent-green);
-            border: none;
-            width: 38px;
-            height: 38px;
+        .send-btn {
+            width: 36px; height: 36px;
+            background: var(--text-primary);
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
+            border: none;
             cursor: pointer;
-            margin-left: 10px;
-            transition: background 0.2s, transform 0.2s;
-            box-shadow: 0 0 15px rgba(0, 255, 153, 0.5);
+            color: #000;
         }
 
-        .chat-send-button:active {
-            transform: scale(0.9);
-            box-shadow: 0 0 8px rgba(0, 255, 153, 0.8);
+        /* =========================================
+           DRAWER MENU (Side)
+           ========================================= */
+        #drawer-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 90;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.3s;
+            backdrop-filter: blur(4px);
         }
+        #drawer-overlay.open { opacity: 1; pointer-events: all; }
 
-        .chat-icon-waves {
-            width: 20px;
-            height: 20px;
-            fill: var(--color-bg-dark);
-        }
-
-        /* Menu Lateral (Drawer) */
-        .drawer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 80%;
-            max-width: 300px;
-            height: 100%;
-            background: var(--color-bg-surface);
+        #drawer {
+            position: fixed; top: 0; left: 0; bottom: 0;
+            width: 80%; max-width: 320px;
+            background: #0b0b0d;
+            z-index: 100;
             transform: translateX(-100%);
-            transition: transform 0.3s ease;
-            z-index: 200;
-            box-shadow: 5px 0 15px var(--color-shadow);
-            display: flex;
-            flex-direction: column;
+            transition: transform 0.3s var(--ease);
+            display: flex; flex-direction: column;
+            border-right: 1px solid #222;
         }
+        #drawer.open { transform: translateX(0); }
 
-        .drawer.open {
-            transform: translateX(0);
-        }
-
-        .drawer-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 199;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
-
-        .drawer-overlay.visible {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .drawer-header {
-            padding: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .drawer-nav {
-            flex-grow: 1;
-            padding: 10px 0;
-            overflow-y: auto;
-        }
+        .drawer-header { padding: 20px; border-bottom: 1px solid #222; display:flex; align-items:center; gap:12px; }
+        .drawer-content { flex: 1; overflow-y: auto; padding: 16px; }
+        .drawer-footer { padding: 20px; border-top: 1px solid #222; }
 
         .drawer-item {
-            display: flex;
-            align-items: center;
-            padding: 12px 20px;
-            text-decoration: none;
-            color: var(--color-text-light);
-            font-weight: 400;
-            transition: background 0.2s;
-            cursor: pointer;
-        }
-
-        .drawer-item:hover {
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .drawer-item svg {
-            margin-right: 15px;
-            width: 24px;
-            height: 24px;
-        }
-        
-        /* Estilo para Drawer Itens Específicos */
-        .drawer-item[data-route="#planos"] svg,
-        .drawer-item[data-route="#alta-performance"] svg {
-            filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.8));
-        }
-
-        /* Rodapé do Perfil no Drawer */
-        .drawer-profile {
-            padding: 15px 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex;
-            align-items: center;
-            background: var(--color-bg-card);
-        }
-
-        .profile-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--color-primary-gold);
-            color: var(--color-bg-dark);
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            font-size: 1.1rem;
-        }
-
-        .profile-info {
-            font-size: 0.8rem;
-        }
-
-        .profile-info strong {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 2px;
-        }
-
-        .profile-info span {
-            display: block;
-            color: var(--color-text-muted);
-        }
-        
-        .profile-info .current-plan {
-            color: var(--color-accent-green);
-            font-weight: 600;
-            margin-top: 2px;
-        }
-
-        /* Telas Secundárias (Rotas) */
-        .page-header {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 30px;
-            text-align: left;
-            padding-top: 10px;
-        }
-        
-        .section-list {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .section-item {
-            display: flex;
-            align-items: center;
-            padding: 15px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        
-        .section-item:last-child {
-            border-bottom: none;
-        }
-
-        .section-item:hover {
-             background: rgba(255, 255, 255, 0.03);
-        }
-
-        .section-item-icon {
-            width: 28px;
-            height: 28px;
-            margin-right: 20px;
-        }
-        
-        .section-item-text {
-            flex-grow: 1;
-            font-size: 1rem;
-        }
-        
-        .section-item-text.danger {
-            color: var(--color-accent-red);
-            font-weight: 600;
-        }
-
-        .simple-content-box {
-            background: var(--color-bg-card);
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .simple-content-box p {
-            font-size: 0.95rem;
-            color: var(--color-text-muted);
-            line-height: 1.6;
-        }
-
-        /* Tela de Planos */
-        .plan-card {
-            background: var(--color-bg-card);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 15px;
-            border: 2px solid transparent;
-            box-shadow: 0 4px 10px var(--color-shadow);
-            transition: all 0.3s;
-        }
-
-        .plan-card.highlight {
-            border-color: var(--color-primary-gold);
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
-        }
-
-        .plan-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .plan-name {
-            font-size: 1.4rem;
-            font-weight: 700;
-        }
-
-        .plan-price {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--color-accent-green);
-        }
-        
-        .plan-price small {
-            font-size: 0.7rem;
-            color: var(--color-text-muted);
-            font-weight: 400;
-        }
-
-        .plan-features {
-            font-size: 0.9rem;
-            color: var(--color-text-muted);
-            margin-bottom: 15px;
-        }
-
-        .plan-button {
-            width: 100%;
+            display: flex; align-items: center; gap: 12px;
             padding: 12px;
-            border: none;
+            color: var(--text-primary);
+            text-decoration: none;
             border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s, transform 0.2s;
-        }
-
-        .plan-button.current {
-            background: var(--color-bg-dark);
-            color: var(--color-accent-green);
-            border: 1px solid var(--color-accent-green);
-            cursor: default;
-        }
-
-        .plan-button.subscribe {
-            background: var(--color-primary-gold);
-            color: var(--color-bg-dark);
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-        }
-
-        .plan-button.subscribe:active {
-            transform: scale(0.98);
-        }
-        
-        .plan-button.subscribe[disabled] {
-            background: var(--color-text-muted);
-            box-shadow: none;
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
-
-
-        /* Bottom Sheet (Painel de Ferramentas) */
-        .bottom-sheet-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 150;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
-
-        .bottom-sheet-overlay.visible {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .bottom-sheet {
-            position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translate(-50%, 100%);
-            width: 100%;
-            max-width: 600px;
-            background: var(--color-bg-surface);
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
-            z-index: 151;
-            transition: transform 0.3s ease;
-            box-shadow: 0 -5px 20px var(--color-shadow);
-        }
-
-        .bottom-sheet.open {
-            transform: translate(-50%, 0);
-        }
-
-        .bottom-sheet-handle {
-            height: 4px;
-            width: 40px;
-            background: var(--color-text-muted);
-            border-radius: 2px;
-            margin: 10px auto;
-        }
-
-        .bottom-sheet-content {
-            padding: 10px 25px 30px;
-        }
-
-        .bottom-sheet h2 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-
-        .tools-primary-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 30px;
-        }
-
-        .tool-card-primary {
-            background: var(--color-bg-card);
-            border-radius: 10px;
-            padding: 15px 10px;
-            text-align: center;
-            font-size: 0.75rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s, transform 0.2s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 90px;
-        }
-
-        .tool-card-primary:active {
-            transform: scale(0.95);
-        }
-
-        .tool-card-primary .icon-img {
-            width: 30px;
-            height: 30px;
-            margin-bottom: 5px;
-            filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.4));
-        }
-
-        .tools-secondary-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .tool-item-secondary {
-            display: flex;
-            align-items: center;
-            padding: 12px 0;
-            font-size: 1rem;
-            font-weight: 400;
-            cursor: pointer;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 4px;
             transition: background 0.2s;
+            font-size: 15px;
         }
-        
-        .tool-item-secondary:hover {
-            background: rgba(255, 255, 255, 0.03);
+        .drawer-item:active { background: rgba(255,255,255,0.05); }
+        .drawer-item svg { width: 20px; height: 20px; stroke-width: 2; opacity: 0.8; }
+
+        .user-mini { display: flex; align-items: center; gap: 12px; }
+        .avatar { 
+            width: 40px; height: 40px; 
+            border-radius: 50%; 
+            background: linear-gradient(45deg, #333, #555);
+            display: flex; align-items: center; justify-content: center;
+            font-weight: bold; color: white;
+            border: 2px solid var(--accent-gold);
         }
 
-        .tool-item-secondary:last-child {
-            border-bottom: none;
+        /* =========================================
+           BOTTOM SHEET (Tools)
+           ========================================= */
+        #tools-sheet {
+            position: fixed; bottom: 0; left: 0; right: 0;
+            background: #111111;
+            border-radius: 20px 20px 0 0;
+            padding: 24px 16px 40px;
+            z-index: 100;
+            transform: translateY(100%);
+            transition: transform 0.35s var(--ease);
+            border-top: 1px solid #333;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        #tools-sheet.open { transform: translateY(0); }
+
+        .drag-handle {
+            width: 40px; height: 4px; background: #333;
+            border-radius: 2px; margin: 0 auto 20px;
         }
 
-        .tool-item-secondary svg {
-            width: 20px;
-            height: 20px;
-            margin-right: 15px;
-        }
-
-        /* Tela Genérica para Rotas Vagas */
-        .generic-page-placeholder {
-            min-height: 200px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 40px;
-            background: var(--color-bg-card);
+        .tools-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+        .tool-card {
+            background: #1a1a1a;
             border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .generic-page-placeholder .icon-img {
-            width: 60px;
-            height: 60px;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 0 10px var(--color-accent-blue));
-        }
-        
-        .generic-page-placeholder h3 {
-            font-size: 1.4rem;
-            margin-bottom: 10px;
-            color: var(--color-accent-blue);
-        }
-        
-        .generic-page-placeholder p {
-            color: var(--color-text-muted);
-        }
-
-        /* Componente de Modal */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 300;
-            display: none;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-box {
-            background: var(--color-bg-surface);
-            padding: 30px;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 400px;
-            box-shadow: 0 5px 30px var(--color-shadow);
-            transform: scale(0.9);
-            opacity: 0;
-            transition: transform 0.3s, opacity 0.3s;
-        }
-
-        .modal-overlay.visible {
-            display: flex;
-        }
-
-        .modal-overlay.visible .modal-box {
-            transform: scale(1);
-            opacity: 1;
-        }
-
-        .modal-box h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--color-primary-gold);
-        }
-
-        .modal-box p {
-            color: var(--color-text-muted);
-            margin-bottom: 25px;
-            line-height: 1.5;
-        }
-
-        .modal-close-button {
-            background: var(--color-bg-dark);
-            color: var(--color-text-light);
-            padding: 10px 20px;
-            border: 1px solid var(--color-text-muted);
-            border-radius: 8px;
+            padding: 16px 8px;
+            text-align: center;
+            display: flex; flex-direction: column; align-items: center; gap: 8px;
             cursor: pointer;
-            float: right;
-            transition: background 0.2s;
         }
-        
-        .modal-close-button.red {
-            background: var(--color-accent-red);
-            border-color: var(--color-accent-red);
-            color: white;
+        .tool-card:active { background: #252525; }
+        .tool-label { font-size: 12px; font-weight: 500; }
+
+        /* =========================================
+           PAGE: PRICING (PLANOS)
+           ========================================= */
+        .plan-card {
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
         }
+        .plan-card.active { border-color: var(--accent-gold); box-shadow: 0 0 20px rgba(255,215,0,0.1); }
         
-        .modal-close-button:hover {
-            background: var(--color-bg-card);
-        }
-        
-        .modal-close-button.red:hover {
-             background: #cc3e3e;
+        .plan-badge {
+            position: absolute; top: 12px; right: 12px;
+            font-size: 10px; font-weight: 800; padding: 4px 8px; border-radius: 100px;
+            background: rgba(255,255,255,0.1); text-transform: uppercase;
         }
 
-
-        /* Utilidades */
-        .hidden {
-            display: none !important;
-        }
-
-        .svg-icon {
+        .btn-subscribe {
             width: 100%;
-            height: 100%;
-            fill: currentColor;
+            padding: 14px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 600;
+            margin-top: 16px;
+            cursor: pointer;
+            font-size: 15px;
         }
+        .btn-gold { background: var(--grad-gold); color: #000; }
+        .btn-outline { background: transparent; border: 1px solid #333; color: white; }
+
+        /* =========================================
+           PAGE: SETTINGS
+           ========================================= */
+        .settings-group {
+            background: #111;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+        .settings-item {
+            padding: 16px;
+            display: flex; align-items: center; justify-content: space-between;
+            border-bottom: 1px solid #222;
+            cursor: pointer;
+        }
+        .settings-item:last-child { border-bottom: none; }
+        .settings-item:active { background: #1a1a1a; }
         
-        .gold-glow {
-            filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.8));
+        .icon-box {
+            width: 28px; height: 28px;
+            border-radius: 6px; background: #222;
+            display: flex; align-items: center; justify-content: center;
+            margin-right: 12px;
         }
 
-        .blue-neon-glow {
-            filter: drop-shadow(0 0 5px var(--color-accent-blue));
-        }
-
-        .green-neon-glow {
-            filter: drop-shadow(0 0 5px var(--color-accent-green));
-        }
-        
-        .purple-neon-glow {
-            filter: drop-shadow(0 0 5px #a000ff);
-        }
-
-        /* Estilos Específicos de SVG para consistência */
-        .svg-fill-light { fill: var(--color-text-light); }
-        .svg-stroke-light { stroke: var(--color-text-light); }
+        /* SVG ICONS HELPER */
+        .svg-icon { width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .svg-gold { stroke: var(--accent-gold); }
+        .svg-green { stroke: var(--accent-green); }
+        .svg-blue { stroke: var(--accent-blue); }
 
     </style>
 </head>
 <body>
 
-    <svg style="display: none;">
-        <symbol id="icon-menu" viewBox="0 0 24 24">
-            <path d="M3 6h18M3 12h18M3 18h18" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <rect x="0" y="0" width="24" height="24" fill="none" style="filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.7));" />
-        </symbol>
-        <symbol id="icon-chat-waves" viewBox="0 0 24 24">
-            <path d="M3 10h5L9 3h6l1 7h5" fill="none" stroke="#00FF99" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M3 14h5L9 21h6l1-7h5" fill="none" stroke="#00FF99" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="12" cy="12" r="10" fill="none" stroke="#00FF99" stroke-width="1.5" opacity="0.1"/>
-            <rect x="0" y="0" width="24" height="24" fill="none" style="filter: drop-shadow(0 0 5px rgba(0, 255, 153, 0.8));" />
-        </symbol>
-        <symbol id="icon-config" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="3" fill="#A0A0A8"/>
-            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V22a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H2a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H10V2a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V12h.09a1.65 1.65 0 0 0 1.51 1 1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33z" fill="#E0E0E6"/>
-            <rect x="0" y="0" width="24" height="24" fill="none" style="filter: drop-shadow(0 0 2px rgba(224, 224, 230, 0.5));" />
-        </symbol>
-        <symbol id="icon-planos" viewBox="0 0 24 24">
-            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z" fill="none" stroke="gold" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </symbol>
-        <symbol id="icon-diario" viewBox="0 0 24 24">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" fill="none" stroke="#E0E0E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M12 3a4 4 0 0 0-4 4v7a4 4 0 0 0 4 4 4 4 0 0 0 4-4V7a4 4 0 0 0-4-4z" fill="none" stroke="#E0E0E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </symbol>
-        <symbol id="icon-financeiro" viewBox="0 0 24 24">
-            <path d="M12 1l6 3v7c0 5.5-6 9-6 9s-6-3.5-6-9V4l6-3z" fill="none" stroke="#00F0FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M12 17V12M12 12V7" stroke="#00F0FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </symbol>
-        <symbol id="icon-ferramentas" viewBox="0 0 24 24">
-            <path d="M12 2L15.09 5.09L19.41 4.38L20.82 8.18L18.42 10.58L19.83 14.83L17.5 16.5L15.82 19.18L12 20.59L8.18 19.18L6.5 16.5L4.17 14.83L5.58 10.58L3.18 8.18L4.59 4.38L8.91 5.09L12 2Z" fill="none" stroke="#00F0FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="12" cy="12" r="3" fill="#00F0FF" opacity="0.8"/>
-        </symbol>
-        <symbol id="icon-notas" viewBox="0 0 24 24">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" fill="none" stroke="#00F0FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M14 2v6h6" fill="none" stroke="#00F0FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M10 12h4M10 16h4" fill="none" stroke="#00F0FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <rect x="0" y="0" width="24" height="24" fill="none" style="filter: drop-shadow(0 0 3px rgba(0, 240, 255, 0.6));" />
-        </symbol>
-        <symbol id="icon-planejador" viewBox="0 0 24 24">
-            <path d="M9 16l2 2 4-4M18 6L6 6" fill="none" stroke="#00FF99" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="#00FF99" stroke-width="2"/>
-            <rect x="0" y="0" width="24" height="24" fill="none" style="filter: drop-shadow(0 0 3px rgba(0, 255, 153, 0.6));" />
-        </symbol>
-        <symbol id="icon-aparencia" viewBox="0 0 24 24">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="none" stroke="#FFD700" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <rect x="0" y="0" width="24" height="24" fill="none" style="filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.6));" />
-        </symbol>
-        <symbol id="icon-seguranca" viewBox="0 0 24 24">
-            <path d="M12 22s8-4 8-10V4l-8-2-8 2v8c0 6 8 10 8 10z" fill="#4B4B58" stroke="#E0E0E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <line x1="12" y1="11" x2="12" y2="16" stroke="#E0E0E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <line x1="12" y1="8" x2="12" y2="9" stroke="#E0E0E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </symbol>
-        <symbol id="icon-voz" viewBox="0 0 24 24">
-            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" fill="none" stroke="#FFD700" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M19 10v2a7 7 0 0 1-14 0v-2" fill="none" stroke="#FFD700" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <line x1="12" y1="19" x2="12" y2="23" stroke="#FFD700" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <rect x="0" y="0" width="24" height="24" fill="none" style="filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.6));" />
-        </symbol>
-        <symbol id="icon-biblioteca" viewBox="0 0 24 24">
-            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V5c0-1.1-.9-2-2-2H6.5A2.5 2.5 0 0 0 4 5.5v14z" fill="#4B4B58" stroke="#FFD700" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <rect x="0" y="0" width="24" height="24" fill="none" style="filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.6));" />
-        </symbol>
-    </svg>
+    <header>
+        <button class="header-btn" onclick="toggleDrawer()">
+            <svg class="svg-icon" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <div class="app-logo">
+            <span class="text-grad-gold">BillionMind</span> AI
+        </div>
+        <button class="header-btn" onclick="toggleTools()">
+            <svg class="svg-icon" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        </button>
+    </header>
 
+    <div id="drawer-overlay" onclick="toggleDrawer()"></div>
+    <nav id="drawer">
+        <div class="drawer-header">
+            <div class="avatar">BB</div>
+            <div>
+                <div style="font-weight:600;">Bruno Brandão</div>
+                <div style="font-size:12px; color:var(--text-secondary)" id="user-plan-label">Plano Visionário</div>
+            </div>
+        </div>
+        <div class="drawer-content">
+            <a href="#protocolos" class="drawer-item" onclick="toggleDrawer()">
+                <svg class="svg-icon svg-gold" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                Protocolos de Disciplina
+            </a>
+            <a href="#renda" class="drawer-item" onclick="toggleDrawer()">
+                <svg class="svg-icon svg-green" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                Planejar Renda
+            </a>
+            <a href="#blueprint" class="drawer-item" onclick="toggleDrawer()">
+                <svg class="svg-icon svg-blue" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                Blueprint Mental
+            </a>
+            <a href="#diario" class="drawer-item" onclick="toggleDrawer()">
+                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                Diário de Disciplina
+            </a>
+            <hr style="border:0; border-top:1px solid #222; margin: 8px 0;">
+            <a href="#planos" class="drawer-item" onclick="toggleDrawer()">
+                <svg class="svg-icon svg-gold" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                Planos & Assinatura
+            </a>
+            <a href="#config" class="drawer-item" onclick="toggleDrawer()">
+                <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                Configurações
+            </a>
+        </div>
+        <div class="drawer-footer">
+            <div style="font-size:12px; color:#555; text-align:center;">BillionMind v1.0.0</div>
+        </div>
+    </nav>
+
+    <main id="app-container">
+        </main>
+
+    <div id="chat-interface">
+        <div class="chat-input-container">
+            <input type="text" class="chat-input" placeholder="Pergunte algo...">
+            <button class="send-btn">
+                <svg style="width:18px; height:18px; stroke:black; fill:none; stroke-width:2.5" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            </button>
+        </div>
+    </div>
+
+    <div id="tools-overlay" onclick="toggleTools()" style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);z-index:95;opacity:0;pointer-events:none;transition:opacity 0.3s;backdrop-filter:blur(2px);"></div>
+    <div id="tools-sheet">
+        <div class="drag-handle"></div>
+        <h3 style="margin-bottom:16px; font-size:14px; text-transform:uppercase; color:var(--text-secondary); letter-spacing:1px;">Ações Rápidas</h3>
+        
+        <div class="tools-grid">
+            <div class="tool-card" onclick="navTo('#registrar-dia')">
+                <div style="width:40px; height:40px; border-radius:10px; background:rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center;">
+                    <svg class="svg-icon svg-gold" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                </div>
+                <div class="tool-label">Registrar Dia</div>
+            </div>
+            <div class="tool-card" onclick="navTo('#estatisticas')">
+                <div style="width:40px; height:40px; border-radius:10px; background:rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center;">
+                    <svg class="svg-icon" style="stroke:#BD00FF" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                </div>
+                <div class="tool-label">Estatísticas</div>
+            </div>
+            <div class="tool-card" onclick="navTo('#metas')">
+                <div style="width:40px; height:40px; border-radius:10px; background:rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center;">
+                    <svg class="svg-icon svg-green" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+                </div>
+                <div class="tool-label">Metas</div>
+            </div>
+        </div>
+
+        <h3 style="margin-bottom:16px; font-size:14px; text-transform:uppercase; color:var(--text-secondary); letter-spacing:1px; margin-top:24px;">Ferramentas</h3>
+        <div style="display:flex; flex-direction:column; gap:4px;">
+            <div class="settings-item" style="background:#1a1a1a; border-radius:12px; border:none;" onclick="navTo('#planejador')">
+                <div style="display:flex; align-items:center;">
+                    <div class="icon-box"><svg class="svg-icon" viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg></div>
+                    <span>Planejador Diário</span>
+                </div>
+            </div>
+            <div class="settings-item" style="background:#1a1a1a; border-radius:12px; border:none;" onclick="navTo('#notas')">
+                <div style="display:flex; align-items:center;">
+                    <div class="icon-box"><svg class="svg-icon" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></div>
+                    <span>Notas Rápidas</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
-        const ICON_BASE64 = {
-            // 1. Protocolos de Disciplina – chama dourada futurista
+        // --- State Management ---
+        const state = {
+            currentPlan: localStorage.getItem('billionmind_plan') || 'Visionário'
+        };
+
+        const appContainer = document.getElementById('app-container');
+        const chatInterface = document.getElementById('chat-interface');
+        const userPlanLabel = document.getElementById('user-plan-label');
+
+        // --- SVGs Definitions (Reused) ---
+        const iconFire = `<svg class="card-icon glass" style="color:#FFD700" viewBox="0 0 24 24"><path fill="currentColor" d="M17.56 10.24c-.26-1.92-1.28-3.08-1.58-3.41a.88.88 0 0 0-1.42.34 7.91 7.91 0 0 1-.95 1.9c-.39.54-.78.89-1.22.89a.57.57 0 0 1-.58-.57 3.32 3.32 0 0 1 .49-1.63s1.23-2.61.16-4.63a.62.62 0 0 0-1.09-.17 7 7 0 0 0-1.28 2.11C8.28 8.08 7.33 11.64 10 14.8a3.17 3.17 0 0 1 .6 2 2.89 2.89 0 0 1-3.1 2.65 3.36 3.36 0 0 1-2.26-1.12.75.75 0 0 0-1.21.32A6.63 6.63 0 0 0 7.4 22.9c.47.07.95.1 1.43.1 3.5 0 6.66-2.14 7.92-5.38.45-1.16.85-2.53.81-4.14v-.03a8.6 8.6 0 0 0 0-3.21z"/></svg>`;
+        const iconGraph = `<svg class="card-icon glass" style="color:#00FF9D" viewBox="0 0 24 24"><path fill="currentColor" d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/></svg>`;
+        const iconBrain = `<svg class="card-icon glass" style="color:#00C2FF" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>`;
+        const iconBolt = `<svg class="card-icon glass" style="color:#FFD700" viewBox="0 0 24 24"><path fill="currentColor" d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>`;
+
+        // --- Render Functions ---
+
+        function renderHome() {
+            chatInterface.classList.remove('hidden');
+            return `
+                <div class="hero-section fade-in">
+                    <div class="hero-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="url(#goldGradient)" stroke-width="2">
+                            <defs>
+                                <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#FFD700" />
+                                    <stop offset="100%" stop-color="#FFA500" />
+                                </linearGradient>
+                            </defs>
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <div style="font-size:14px; color:var(--text-secondary); margin-bottom:4px;">Bom dia, Bruno</div>
+                    <h1 class="hero-title text-grad-gold">Como posso acelerar<br>sua disciplina hoje?</h1>
+                </div>
+
+                <div class="grid-cards fade-in" style="animation-delay:0.1s">
+                    <div class="super-card glass" onclick="navTo('#protocolos')">
+                        ${iconFire}
+                        <div>
+                            <div class="card-title">Protocolos</div>
+                            <div class="card-desc">Ativar modo monge</div>
+                        </div>
+                    </div>
+                    <div class="super-card glass" onclick="navTo('#renda')">
+                        ${iconGraph}
+                        <div>
+                            <div class="card-title">Renda</div>
+                            <div class="card-desc">Planejar escala</div>
+                        </div>
+                    </div>
+                    <div class="super-card glass" onclick="navTo('#blueprint')">
+                        ${iconBrain}
+                        <div>
+                            <div class="card-title">Blueprint</div>
+                            <div class="card-desc">Reprogramação</div>
+                        </div>
+                    </div>
+                    <div class="super-card glass" onclick="navTo('#alta-performance')">
+                        ${iconBolt}
+                        <div>
+                            <div class="card-title">Performance</div>
+                            <div class="card-desc">Biohacking</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top:24px; padding:0 12px; opacity:0.6; font-size:12px; text-align:center;" class="fade-in">
+                    <p>"Disciplina é fazer o que precisa ser feito, mesmo quando você não quer fazer."</p>
+                </div>
+            `;
+        }
+
+        function renderGeneric(title, iconColor = 'gold') {
+            chatInterface.classList.add('hidden');
+            let colorVar = iconColor === 'gold' ? '#FFD700' : (iconColor === 'green' ? '#00FF9D' : '#00C2FF');
+            return `
+                <div class="fade-in">
+                    <h2 style="font-size:28px; margin-bottom:16px; color:${colorVar}">${title}</h2>
+                    <div class="glass" style="padding:20px; border-radius:16px; height:300px; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:16px;">
+                        <svg width="48" height="48" viewBox="0 0 24 24" stroke="${colorVar}" stroke-width="1" fill="none">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                        <p style="color:var(--text-secondary); text-align:center;">Funcionalidade em desenvolvimento<br>na versão Alpha.</p>
+                        <button class="btn-subscribe btn-outline" style="width:auto; padding: 10px 24px;" onclick="history.back()">Voltar</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderPlans() {
+            chatInterface.classList.add('hidden');
+            return `
+                <div class="fade-in">
+                    <h2 style="text-align:center; margin-bottom:24px; font-size:24px;">Escolha seu Nível</h2>
+                    
+                    <div class="glass plan-card ${state.currentPlan === 'Visionário' ? 'active' : ''}">
+                        <h3 class="text-grad-gold" style="font-size:20px; margin-bottom:8px;">Visionário</h3>
+                        <div style="font-size:24px; font-weight:700;">R$ 0 <span style="font-size:14px; color:#666; font-weight:400">/mês</span></div>
+                        <p style="font-size:13px; color:#999; margin:12px 0;">Acesso básico aos protocolos e diário.</p>
+                        <button class="btn-subscribe btn-outline" onclick="selectPlan('Visionário')">
+                            ${state.currentPlan === 'Visionário' ? 'Plano Atual' : 'Selecionar'}
+                        </button>
+                    </div>
+
+                    <div class="glass plan-card ${state.currentPlan === 'Elite' ? 'active' : ''}">
+                        <div class="plan-badge text-grad-gold">Popular</div>
+                        <h3 class="text-grad-gold" style="font-size:20px; margin-bottom:8px;">Elite</h3>
+                        <div style="font-size:24px; font-weight:700;">R$ 29,90 <span style="font-size:14px; color:#666; font-weight:400">/mês</span></div>
+                        <p style="font-size:13px; color:#999; margin:12px 0;">Blueprint mental completo e métricas.</p>
+                        <button class="btn-subscribe btn-gold" onclick="selectPlan('Elite')">
+                            ${state.currentPlan === 'Elite' ? 'Plano Atual' : 'Assinar Elite'}
+                        </button>
+                    </div>
+
+                    <div class="glass plan-card ${state.currentPlan === 'VIP' ? 'active' : ''}" style="border-color:var(--accent-green);">
+                         <h3 style="font-size:20px; margin-bottom:8px; color:var(--accent-green);">VIP</h3>
+                        <div style="font-size:24px; font-weight:700;">R$ 59,90 <span style="font-size:14px; color:#666; font-weight:400">/mês</span></div>
+                        <p style="font-size:13px; color:#999; margin:12px 0;">Mentoria IA, áudio e acesso total.</p>
+                        <button class="btn-subscribe" style="background:var(--grad-green); color:#000;" onclick="selectPlan('VIP')">
+                            ${state.currentPlan === 'VIP' ? 'Plano Atual' : 'Assinar VIP'}
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderSettings() {
+            chatInterface.classList.add('hidden');
+            return `
+                <div class="fade-in">
+                    <h2 style="margin-bottom:20px;">Configurações</h2>
+                    
+                    <div class="settings-group">
+                        <div class="settings-item">
+                            <div style="display:flex; align-items:center;">
+                                <div class="icon-box"><svg class="svg-icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></div>
+                                <span>Aparência</span>
+                            </div>
+                            <div style="font-size:12px; color:var(--text-secondary);">Escuro</div>
+                        </div>
+                        <div class="settings-item">
+                            <div style="display:flex; align-items:center;">
+                                <div class="icon-box"><svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+                                <span>Segurança</span>
+                            </div>
+                        </div>
+                        <div class="settings-item">
+                            <div style="display:flex; align-items:center;">
+                                <div class="icon-box"><svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg></div>
+                                <span>Voz e Áudio</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-group">
+                         <div class="settings-item">
+                            <div style="display:flex; align-items:center;">
+                                <div class="icon-box"><svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></div>
+                                <span>Sobre BillionMind</span>
+                            </div>
+                        </div>
+                        <div class="settings-item">
+                            <div style="display:flex; align-items:center; color:#ff4d4d;">
+                                <div class="icon-box" style="background:rgba(255, 77, 77, 0.1);"><svg class="svg-icon" style="stroke:#ff4d4d;" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg></div>
+                                <span>Sair</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // --- Routing Logic ---
+        function router() {
+            const hash = window.location.hash;
+            appContainer.innerHTML = '';
+            window.scrollTo(0,0);
+
+            switch(hash) {
+                case '':
+                case '#/':
+                    appContainer.innerHTML = renderHome();
+                    break;
+                case '#protocolos': appContainer.innerHTML = renderGeneric('Protocolos', 'gold'); break;
+                case '#renda': appContainer.innerHTML = renderGeneric('Planejar Renda', 'green'); break;
+                case '#blueprint': appContainer.innerHTML = renderGeneric('Blueprint Mental', 'blue'); break;
+                case '#alta-performance': appContainer.innerHTML = renderGeneric('Alta Performance', 'gold'); break;
+                case '#planos': appContainer.innerHTML = renderPlans(); break;
+                case '#config': appContainer.innerHTML = renderSettings(); break;
+                
+                // Generic fallbacks for tools
+                case '#registrar-dia': appContainer.innerHTML = renderGeneric('Registrar Dia', 'gold'); break;
+                case '#estatisticas': appContainer.innerHTML = renderGeneric('Estatísticas', 'blue'); break;
+                case '#metas': appContainer.innerHTML = renderGeneric('Metas de Renda', 'green'); break;
+                case '#planejador': appContainer.innerHTML = renderGeneric('Planejador', 'gold'); break;
+                case '#notas': appContainer.innerHTML = renderGeneric('Notas', 'blue'); break;
+                case '#diario': appContainer.innerHTML = renderGeneric('Diário', 'gold'); break;
+                default: appContainer.innerHTML = renderGeneric('Página Indisponível');
+            }
+            updateUIState();
+        }
+
+        // --- Interaction Logic ---
+
+        function toggleDrawer() {
+            const d = document.getElementById('drawer');
+            const o = document.getElementById('drawer-overlay');
+            d.classList.toggle('open');
+            o.classList.toggle('open');
+        }
+
+        function toggleTools() {
+            const s = document.getElementById('tools-sheet');
+            const o = document.getElementById('tools-overlay');
+            s.classList.toggle('open');
+            o.classList.toggle('open');
+        }
+
+        function navTo(hash) {
+            window.location.hash = hash;
+            // Close overlays if open
+            document.getElementById('tools-sheet').classList.remove('open');
+            document.getElementById('tools-overlay').classList.remove('open');
+            document.getElementById('drawer').classList.remove('open');
+            document.getElementById('drawer-overlay').classList.remove('open');
+        }
+
+        function selectPlan(planName) {
+            state.currentPlan = planName;
+            localStorage.setItem('billionmind_plan', planName);
+            alert(`Parabéns! Você migrou para o plano ${planName}.`);
+            updateUIState();
+            router(); // Re-render to show active state
+        }
+
+        function updateUIState() {
+            userPlanLabel.innerText = `Plano ${state.currentPlan}`;
+        }
+
+        // --- Init ---
+        window.addEventListener('hashchange', router);
+        window.addEventListener('load', () => {
+            updateUIState();
+            router();
+        });
+
+    </script>
+</body>
+</html>
