@@ -1,393 +1,1087 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#000000">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>BillionMind AI</title>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  />
+  <meta name="theme-color" content="#000000" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>BillionMind AI – O Acelerador de Disciplina</title>
 
-    <style>
-        :root {
-            --bg-dark: #050505;
-            --bg-card: rgba(20, 20, 20, 0.7);
-            --bg-glass: rgba(255, 255, 255, 0.03);
-            --border-glass: rgba(255, 255, 255, 0.08);
+  <style>
+    :root {
+      --bg-dark: #050505;
+      --bg-card: #111111;
+      --bg-card-soft: #151515;
+      --bg-glass: rgba(255, 255, 255, 0.04);
+      --border-glass: rgba(255, 255, 255, 0.08);
 
-            --text-primary: #ffffff;
-            --text-secondary: #a1a1aa;
+      --text-primary: #ffffff;
+      --text-secondary: #a1a1aa;
 
-            --accent-gold: #FFD700;
-            --accent-green: #00FF9D;
-            --accent-blue: #00C2FF;
-            --accent-purple: #BD00FF;
+      --accent-gold: #ffd700;
+      --accent-green: #00ff9d;
+      --accent-blue: #00c2ff;
+      --accent-purple: #bd00ff;
 
-            --grad-gold: linear-gradient(135deg, #FFD700 0%, #B8860B 100%);
-            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
+      --grad-gold: linear-gradient(135deg, #ffd700 0%, #b8860b 100%);
+      --grad-dark: linear-gradient(145deg, #101010 0%, #050505 100%);
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+        Arial, sans-serif;
+    }
 
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-primary);
-            font-family: var(--font-main);
-            height: 100vh;
-            width: 100vw;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-        .hidden { display: none!important; }
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: var(--font-main);
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
 
-        header {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            height: 60px;
-            background: rgba(5,5,5,0.85);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            padding: 0 20px;
-            display: flex; align-items:center; justify-content:space-between;
-            z-index: 999;
-        }
+    .hidden {
+      display: none !important;
+    }
 
-        .app-logo { display:flex; align-items:center; gap:10px; }
-    </style>
+    /* HEADER */
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(5, 5, 5, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      z-index: 1000;
+    }
+
+    .app-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+    }
+
+    .logo-text {
+      background: var(--grad-gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* DRAWER */
+
+    #drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      display: none;
+      z-index: 900;
+    }
+
+    #drawer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 75%;
+      max-width: 320px;
+      background: #050509;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+      padding: 20px;
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      z-index: 950;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .drawer-title {
+      background: var(--grad-gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .drawer-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-primary);
+      font-size: 14px;
+      text-decoration: none;
+      cursor: pointer;
+      padding: 8px 4px;
+    }
+
+    .drawer-footer {
+      margin-top: auto;
+      font-size: 12px;
+      color: var(--text-secondary);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 12px;
+    }
+
+    /* MAIN */
+
+    main {
+      flex: 1;
+      padding: 80px 20px 110px 20px;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+    }
+
+    /* CHAT BAR */
+
+    #chat-interface {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 16px 20px 20px;
+      background: linear-gradient(0deg, #050505 60%, transparent 100%);
+      z-index: 800;
+    }
+
+    .chat-input-box {
+      background: #151515;
+      border: 1px solid #333333;
+      border-radius: 30px;
+      padding: 4px 6px 4px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .chat-input-box input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      color: var(--text-primary);
+      outline: none;
+      height: 40px;
+      font-size: 14px;
+    }
+
+    /* QUIZ OVERLAY */
+
+    #quiz-overlay {
+      position: fixed;
+      inset: 0;
+      background: #000000;
+      z-index: 2000;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .quiz-progress {
+      height: 4px;
+      background: #222222;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .quiz-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--grad-gold);
+      transition: width 0.3s ease;
+    }
+
+    .quiz-option {
+      background: #121212;
+      border-radius: 12px;
+      border: 1px solid #333333;
+      padding: 14px 16px;
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+
+    .quiz-option:active {
+      border-color: var(--accent-gold);
+      background: rgba(255, 215, 0, 0.08);
+    }
+
+    /* COMPONENTES COMUNS */
+
+    .pill-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 11px;
+      background: rgba(255, 215, 0, 0.1);
+      border: 1px solid rgba(255, 215, 0, 0.25);
+      color: var(--accent-gold);
+      margin-bottom: 16px;
+    }
+
+    .pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent-gold);
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+    }
+
+    .card-modern {
+      background: var(--bg-card);
+      border-radius: 18px;
+      padding: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .card-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.04);
+      margin-bottom: 6px;
+    }
+
+    .btn-gold {
+      background: var(--grad-gold);
+      border: none;
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      width: 100%;
+      color: #000000;
+      box-shadow: 0 4px 16px rgba(255, 215, 0, 0.25);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border-radius: 999px;
+      border: 1px solid #333333;
+      padding: 10px 16px;
+      color: var(--text-primary);
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .badge {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--accent-gold);
+    }
+
+    .plans-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .plan-card {
+      background: var(--bg-card-soft);
+      border-radius: 18px;
+      padding: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .plan-price {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .plan-benefits {
+      font-size: 12px;
+      color: var(--text-secondary);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin: 6px 0 10px 0;
+    }
+
+    .settings-group {
+      background: var(--bg-card);
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .settings-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      font-size: 13px;
+    }
+
+    .settings-row:last-child {
+      border-bottom: none;
+    }
+  </style>
 </head>
 <body>
-
-<!-- QUIZ -->
-<div id="quiz-overlay" class="hidden" style="position:fixed;inset:0;background:#000;z-index:9999;padding:24px;">
-    <div class="quiz-progress" style="height:4px;background:#222;border-radius:2px;margin-bottom:30px;">
-        <div id="quiz-bar" style="height:100%;width:0%;background:var(--grad-gold);transition:0.3s;"></div>
+  <!-- QUIZ / ONBOARDING -->
+  <div id="quiz-overlay" class="hidden">
+    <div style="margin-bottom: 20px;">
+      <div
+        style="
+          font-size: 11px;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          color: var(--text-secondary);
+          margin-bottom: 10px;
+        "
+      >
+        CONFIGURAÇÃO MENTAL INICIAL
+      </div>
+      <div class="quiz-progress">
+        <div id="quiz-bar" class="quiz-bar"></div>
+      </div>
     </div>
 
-    <h2 id="quiz-question" style="font-size:24px;margin-bottom:20px;">Pergunta</h2>
+    <h2
+      id="quiz-question"
+      style="font-size: 22px; margin-bottom: 20px; line-height: 1.3;"
+    >
+      Pergunta
+    </h2>
     <div id="quiz-options"></div>
-</div>
+  </div>
 
-<header>
-    <div onclick="toggleDrawer()" style="cursor:pointer;">
-        <svg width="26" height="26" stroke="#fff" fill="none" viewBox="0 0 24 24" stroke-width="2">
-            <line x1="3" y1="6" x2="21" y2="6"/>
-            <line x1="3" y1="12" x2="21" y2="12"/>
-            <line x1="3" y1="18" x2="21" y2="18"/>
-        </svg>
+  <!-- HEADER -->
+  <header>
+    <div onclick="toggleDrawer()" style="cursor: pointer;">
+      <svg
+        width="24"
+        height="24"
+        stroke="#ffffff"
+        stroke-width="2"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <line x1="3" y1="12" x2="21" y2="12" />
+        <line x1="3" y1="18" x2="21" y2="18" />
+      </svg>
     </div>
 
     <div class="app-logo">
-        <svg width="20" height="20" viewBox="0 0 24 24" stroke="#FFD700" stroke-width="2" fill="none">
-            <path d="M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        stroke="#ffd700"
+        stroke-width="2"
+        fill="none"
+      >
+        <path d="M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+      </svg>
+      <span class="logo-text">BillionMind</span>
+    </div>
+
+    <div onclick="navTo('#planos')" style="cursor: pointer;">
+      <svg
+        width="22"
+        height="22"
+        stroke="#ffd700"
+        stroke-width="2"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <path d="M16 10a4 4 0 0 1-8 0" />
+      </svg>
+    </div>
+  </header>
+
+  <!-- DRAWER -->
+  <div id="drawer-overlay" onclick="toggleDrawer()"></div>
+
+  <div id="drawer">
+    <div class="drawer-title">Menu principal</div>
+
+    <div
+      class="drawer-item"
+      onclick="navTo('#/')"
+      style="margin-top: 8px;"
+    >
+      <span>🏠</span>
+      <span>Home</span>
+    </div>
+
+    <div class="drawer-item" onclick="navTo('#videos')">
+      <span>🎬</span>
+      <span>Criar Vídeos AI</span>
+    </div>
+
+    <div class="drawer-item" onclick="navTo('#bonus')">
+      <span>🎁</span>
+      <span>Bônus & Indicação</span>
+    </div>
+
+    <div class="drawer-item" onclick="navTo('#protocolos')">
+      <span>🔥</span>
+      <span>Protocolos de Disciplina</span>
+    </div>
+
+    <div class="drawer-item" onclick="navTo('#renda')">
+      <span>📈</span>
+      <span>Escala de Renda</span>
+    </div>
+
+    <div class="drawer-item" onclick="navTo('#blueprint')">
+      <span>🧠</span>
+      <span>Blueprint Mental</span>
+    </div>
+
+    <div class="drawer-item" onclick="navTo('#planos')">
+      <span>💳</span>
+      <span>Planos & Assinatura</span>
+    </div>
+
+    <div class="drawer-item" onclick="navTo('#config')">
+      <span>⚙️</span>
+      <span>Configurações</span>
+    </div>
+
+    <div class="drawer-footer">
+      <div style="font-weight: 500;">Bruno Brandão</div>
+      <div style="font-size: 11px; color: #6b7280;">
+        Plano atual: <span id="drawer-plan-label">Visionário (Gratuito)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN APP CONTAINER -->
+  <main id="app-container"></main>
+
+  <!-- CHAT BAR -->
+  <div id="chat-interface">
+    <div class="chat-input-box">
+      <input type="text" placeholder="Pergunte ao seu Acelerador de Disciplina..." />
+      <button
+        style="
+          width: 34px;
+          height: 34px;
+          border-radius: 999px;
+          border: none;
+          background: var(--accent-gold);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        "
+        onclick="alert('No futuro: IA respondendo aqui 😈')"
+      >
+        <svg
+          width="16"
+          height="16"
+          stroke="#000000"
+          stroke-width="3"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <line x1="12" y1="19" x2="12" y2="5" />
+          <polyline points="5 12 12 5 19 12" />
         </svg>
-        <span style="background:var(--grad-gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:700;">BillionMind</span>
+      </button>
     </div>
+  </div>
 
-    <div onclick="navTo('#planos')" style="cursor:pointer;">
-        <svg width="24" height="24" stroke="#FFD700" fill="none" viewBox="0 0 24 24" stroke-width="2">
-            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-            <line x1="3" y1="6" x2="21" y2="6"/>
-            <path d="M16 10a4 4 0 0 1-8 0"/>
-        </svg>
-    </div>
-</header>
+  <script>
+    /* ===========================
+       ESTADO GLOBAL
+    ============================ */
+    const state = {
+      quizDone: localStorage.getItem("bm_quiz_done") === "true",
+      xp: 120,
+      level: "Visionário",
+      plan: localStorage.getItem("bm_plan") || "Visionário",
+    };
 
-<!-- DRAWER -->
-<div id="drawer-overlay" onclick="toggleDrawer()" style="position:fixed;inset:0;background:rgba(0,0,0,0.7);display:none;z-index:900;"></div>
+    /* ===========================
+       QUIZ
+    ============================ */
+    const quizData = [
+      {
+        q: "Qual seu maior obstáculo hoje?",
+        a: ["Procrastinação", "Falta de foco", "Cansaço", "Medo de falhar"],
+      },
+      {
+        q: "Quanto você quer faturar em 6 meses?",
+        a: ["10 mil", "50 mil", "100 mil+", "Não sei ainda"],
+      },
+      {
+        q: "Você está pronto para executar, não só assistir motivação?",
+        a: ["AGORA", "Sim", "Talvez", "Ainda não"],
+      },
+    ];
 
-<div id="drawer" style="position:fixed;top:0;left:0;bottom:0;width:75%;background:#0b0b0d;z-index:1000;transform:translateX(-100%);transition:0.3s;padding:20px;">
-    <h3 style="background:var(--grad-gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:30px;">Menu</h3>
+    let quizIndex = 0;
 
-    <a class="menu-item" onclick="navTo('#/')" style="color:white;display:flex;align-items:center;gap:10px;margin-bottom:20px;cursor:pointer;">
-        <svg width="20" height="20" stroke="white" fill="none" viewBox="0 0 24 24"><path d="M3 9 12 2l9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-        Home
-    </a>
+    function startQuiz() {
+      const overlay = document.getElementById("quiz-overlay");
+      overlay.classList.remove("hidden");
+      renderQuizQuestion();
+    }
 
-    <a class="menu-item" onclick="navTo('#videos')" style="color:white;display:flex;align-items:center;gap:10px;margin-bottom:20px;cursor:pointer;">
-        <svg width="20" height="20" stroke="#BD00FF" fill="none" viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
-        Criar Vídeos
-    </a>
+    function renderQuizQuestion() {
+      const bar = document.getElementById("quiz-bar");
+      const questionEl = document.getElementById("quiz-question");
+      const optionsEl = document.getElementById("quiz-options");
 
-    <a class="menu-item" onclick="navTo('#bonus')" style="color:white;display:flex;align-items:center;gap:10px;margin-bottom:20px;cursor:pointer;">
-        <svg width="20" height="20" stroke="#00FF9D" fill="none" viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/></svg>
-        Bônus & Indicação
-    </a>
+      const progress = (quizIndex / quizData.length) * 100;
+      bar.style.width = progress + "%";
 
-    <a class="menu-item" onclick="navTo('#protocolos')" style="color:white;display:flex;align-items:center;gap:10px;margin-bottom:20px;cursor:pointer;">
-        <svg width="20" height="20" stroke="#FFD700" fill="none" viewBox="0 0 24 24"><path d="M14.5 10v-5a1.5 1.5 0 1 1 3 0v5a1.5 1.5 0 1 1-3 0z"/><path d="M3.5 14c0-2.3 1.7-4 4-4s4 1.7 4 4v6c0 1.3-1.7 2-4 2s-4-.7-4-2v-6z"/></svg>
-        Protocolos
-    </a>
+      const item = quizData[quizIndex];
+      questionEl.textContent = item.q;
+      optionsEl.innerHTML = "";
 
-    <a class="menu-item" onclick="navTo('#config')" style="color:white;display:flex;align-items:center;gap:10px;margin-top:auto;cursor:pointer;">
-        <svg width="20" height="20" stroke="white" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.9 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3"/></svg>
-        Ajustes
-    </a>
-</div>
+      item.a.forEach((opt) => {
+        const div = document.createElement("div");
+        div.className = "quiz-option";
+        div.textContent = opt;
+        div.onclick = nextQuizStep;
+        optionsEl.appendChild(div);
+      });
+    }
 
-<main id="app-container" style="padding:80px 20px 120px 20px;overflow-y:auto;flex:1;"></main>
-
-<div id="chat-interface" style="position:fixed;bottom:0;left:0;right:0;padding:16px 20px;background:linear-gradient(0deg,#050505 50%,transparent);">
-    <div style="background:#1a1a1a;border:1px solid #333;border-radius:30px;padding:4px 6px;display:flex;align-items:center;">
-        <input type="text" placeholder="Pergunte ao Mestre..." style="flex:1;border:none;background:transparent;color:white;outline:none;padding-left:10px;">
-        <button style="background:#FFD700;border:none;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;">
-            <svg width="16" height="16" stroke="black" viewBox="0 0 24 24" fill="none" stroke-width="3">
-                <line x1="12" y1="19" x2="12" y2="5"/>
-                <polyline points="5 12 12 5 19 12"/>
-            </svg>
-        </button>
-    </div>
-</div>
-<script>
-/* ============================================================
-   ESTADO GLOBAL DO APP
-============================================================ */
-const state = {
-    quizDone: localStorage.getItem('bm_quiz_done') === 'true',
-    userLevel: "Visionário",
-    xp: 120,
-    plan: localStorage.getItem("bm_plan") || "Visionário"
-};
-
-/* ============================================================
-   QUIZ — Dados e Funções
-============================================================ */
-const quizData = [
-    { q: "Qual seu maior obstáculo hoje?", a: ["Procrastinação", "Falta de foco", "Cansaço", "Medo de falhar"] },
-    { q: "Quanto você quer faturar em 6 meses?", a: ["10 mil", "50 mil", "100 mil+", "Não sei"] },
-    { q: "Você se considera disciplinado?", a: ["Sim", "Às vezes", "Pouco", "Não"] }
-];
-
-let quizIndex = 0;
-
-function startQuiz() {
-    document.getElementById("quiz-overlay").classList.remove("hidden");
-    renderQuizQuestion();
-}
-
-function renderQuizQuestion() {
-    const bar = document.getElementById("quiz-bar");
-    const q = document.getElementById("quiz-question");
-    const options = document.getElementById("quiz-options");
-
-    const progress = (quizIndex / quizData.length) * 100;
-    bar.style.width = progress + "%";
-
-    q.textContent = quizData[quizIndex].q;
-
-    options.innerHTML = "";
-    quizData[quizIndex].a.forEach(opt => {
-        const btn = document.createElement("div");
-        btn.className = "quiz-option";
-        btn.textContent = opt;
-        btn.onclick = nextQuizStep;
-        options.appendChild(btn);
-    });
-}
-
-function nextQuizStep() {
-    quizIndex++;
-    if (quizIndex >= quizData.length) {
+    function nextQuizStep() {
+      quizIndex++;
+      if (quizIndex >= quizData.length) {
         finishQuiz();
-    } else {
+      } else {
         renderQuizQuestion();
+      }
     }
-}
 
-function finishQuiz() {
-    localStorage.setItem("bm_quiz_done", "true");
-    state.quizDone = true;
-    document.getElementById("quiz-overlay").classList.add("hidden");
-    router();
-}
+    function finishQuiz() {
+      localStorage.setItem("bm_quiz_done", "true");
+      state.quizDone = true;
+      document.getElementById("quiz-overlay").classList.add("hidden");
+      router();
+    }
 
-/* ============================================================
-   TELAS / RENDERIZAÇÃO
-============================================================ */
+    /* ===========================
+       TELAS
+    ============================ */
 
-function renderHome() {
-    document.getElementById("chat-interface").classList.remove("hidden");
+    function renderHome() {
+      document.getElementById("chat-interface").classList.remove("hidden");
 
-    return `
-        <div>
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
-                <div style="font-size:12px;background:rgba(255,215,0,0.1);padding:6px 12px;border-radius:20px;color:#FFD700;">
-                    Nível: ${state.userLevel}
-                </div>
-                <div style="font-size:12px;color:#aaa;">${state.xp} XP</div>
-            </div>
-
-            <h1 style="font-size:32px;line-height:1.2;margin-bottom:24px;">
-                Domine sua<br>
-                <span style="background:var(--grad-gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Mente Milionária</span>
-            </h1>
-
-            <div style="background:rgba(255,215,0,0.1);border:1px solid rgba(255,215,0,0.2);padding:16px;border-radius:16px;display:flex;justify-content:space-between;margin-bottom:24px;">
-                <div>
-                    <div style="font-size:15px;font-weight:600;">1 Mês Grátis</div>
-                    <div style="font-size:11px;color:#aaa;">Convide amigos e ganhe VIP</div>
-                </div>
-                <div style="background:rgba(255,255,255,0.15);padding:10px;border-radius:50%;"></div>
-            </div>
-
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
-                <div class="card-modern" onclick="navTo('#videos')">
-                    <div class="card-icon-box"></div>
-                    <div style="font-weight:600;font-size:15px;">Criar Vídeo AI</div>
-                    <div style="font-size:11px;color:#aaa;">Gere vídeos virais</div>
-                </div>
-
-                <div class="card-modern" onclick="navTo('#protocolos')">
-                    <div class="card-icon-box"></div>
-                    <div style="font-weight:600;font-size:15px;">Protocolos</div>
-                    <div style="font-size:11px;color:#aaa;">Rotina de Elite</div>
-                </div>
-
-                <div class="card-modern" onclick="navTo('#blueprint')">
-                    <div class="card-icon-box"></div>
-                    <div style="font-weight:600;font-size:15px;">Blueprint</div>
-                    <div style="font-size:11px;color:#aaa;">Reprogramação</div>
-                </div>
-
-                <div class="card-modern" onclick="navTo('#renda')">
-                    <div class="card-icon-box"></div>
-                    <div style="font-weight:600;font-size:15px;">Escala de Renda</div>
-                    <div style="font-size:11px;color:#aaa;">Plano de ação</div>
-                </div>
-            </div>
+      return `
+      <div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+          <div class="pill-status">
+            <span class="pill-dot"></span>
+            Nível: ${state.level}
+          </div>
+          <div style="font-size:12px;color:var(--text-secondary);">${state.xp} XP</div>
         </div>
-    `;
-}
 
-function renderVideoPage() {
-    document.getElementById("chat-interface").classList.add("hidden");
+        <h1 style="font-size:30px;line-height:1.2;margin-bottom:18px;">
+          Acelere sua<br />
+          <span style="background:var(--grad-gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">
+            disciplina e renda
+          </span>
+        </h1>
 
-    return `
-        <div>
-            <button onclick="history.back()" style="background:none;border:none;color:white;margin-bottom:16px;">← Voltar</button>
+        <p style="font-size:13px;color:var(--text-secondary);margin-bottom:20px;">
+          BillionMind AI transforma a sua rotina em protocolos claros, métricas e evolução diária.
+        </p>
 
-            <h2 style="font-size:20px;margin-bottom:16px;">Estúdio de Vídeos</h2>
-
-            <div style="border-radius:12px;padding:20px;background:#111;border:1px solid #333;text-align:center;margin-bottom:20px;">
-                <div style="width:180px;height:320px;border:1px dashed #555;margin:0 auto 12px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#666;">
-                    Preview
-                </div>
-
-                <input style="width:100%;padding:12px;background:#111;border:1px solid #333;border-radius:8px;color:white;margin-bottom:20px;" placeholder="Tema do vídeo (ex: Estoicismo e riqueza)">
-                
-                <button onclick="alert('Gerando vídeo...')" class="btn-gold" style="margin-top:10px;">Gerar Vídeo AI</button>
+        <div
+          style="
+            background: radial-gradient(circle at top left, rgba(255,215,0,0.12), transparent 55%);
+            border-radius:18px;
+            border:1px solid rgba(255,215,0,0.22);
+            padding:16px;
+            margin-bottom:20px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+          "
+        >
+          <div>
+            <div style="font-size:14px;font-weight:600;">1 Mês Elite Grátis</div>
+            <div style="font-size:11px;color:var(--text-secondary);">
+              Convide 5 amigos e desbloqueie o plano Elite por 30 dias.
             </div>
+          </div>
+          <button
+            class="btn-outline"
+            style="font-size:11px;padding:6px 10px;border-radius:999px;"
+            onclick="navTo('#bonus')"
+          >
+            Ver como
+          </button>
         </div>
-    `;
-}
 
-function renderBonusPage() {
-    document.getElementById("chat-interface").classList.add("hidden");
-
-    return `
-        <div>
-            <button onclick="history.back()" style="background:none;border:none;color:white;margin-bottom:16px;">← Voltar</button>
-
-            <h2 class="text-grad-gold" style="font-size:22px;margin-bottom:12px;">Convide & Ganhe</h2>
-
-            <p style="color:#aaa;font-size:14px;margin-bottom:20px;">
-                Convide 5 amigos e desbloqueie o VIP vitalício.
-            </p>
-
-            <div style="padding:16px;border-radius:16px;background:#111;border:1px solid #333;margin-bottom:20px;">
-                <div style="display:flex;justify-content:space-between;margin-bottom:10px;">
-                    <span style="color:#ccc;">Progresso</span>
-                    <span style="color:#00FF9D;font-weight:600;">0/5 Amigos</span>
-                </div>
-
-                <div style="width:100%;height:8px;background:#222;border-radius:4px;">
-                    <div style="width:0%;height:100%;background:var(--grad-gold);border-radius:4px;"></div>
-                </div>
-
-                <div style="margin-top:20px;padding:12px;border-radius:8px;border:1px dashed #555;background:#000;display:flex;justify-content:space-between;align-items:center;">
-                    <span style="font-family:monospace;color:#999;">billionmind.ai/u/bruno</span>
-                    <span onclick="alert('Copiado')" style="color:#FFD700;cursor:pointer;">COPIAR</span>
-                </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;">
+          <div class="card-modern" onclick="navTo('#protocolos')">
+            <div class="card-icon"></div>
+            <div style="font-size:14px;font-weight:600;">Protocolos Diários</div>
+            <div style="font-size:11px;color:var(--text-secondary);">
+              Rotinas de disciplina guiadas.
             </div>
-
-            <button class="btn-gold">Compartilhar</button>
+          </div>
+          <div class="card-modern" onclick="navTo('#renda')">
+            <div class="card-icon"></div>
+            <div style="font-size:14px;font-weight:600;">Escala de Renda</div>
+            <div style="font-size:11px;color:var(--text-secondary);">
+              Planejamento financeiro prático.
+            </div>
+          </div>
+          <div class="card-modern" onclick="navTo('#videos')">
+            <div class="card-icon"></div>
+            <div style="font-size:14px;font-weight:600;">Vídeos AI</div>
+            <div style="font-size:11px;color:var(--text-secondary);">
+              Crie roteiros para conteúdos virais.
+            </div>
+          </div>
+          <div class="card-modern" onclick="navTo('#blueprint')">
+            <div class="card-icon"></div>
+            <div style="font-size:14px;font-weight:600;">Blueprint Mental</div>
+            <div style="font-size:11px;color:var(--text-secondary);">
+              Reprogramação e mentalidade de elite.
+            </div>
+          </div>
         </div>
+
+        <button class="btn-gold" onclick="navTo('#planos')" style="margin-top:4px;">
+          Ver planos do BillionMind AI
+        </button>
+      </div>
     `;
-}
+    }
 
-function renderGeneric(title) {
-    document.getElementById("chat-interface").classList.add("hidden");
+    function renderVideoPage() {
+      document.getElementById("chat-interface").classList.add("hidden");
+      return `
+      <div>
+        <button onclick="history.back()" class="btn-outline" style="margin-bottom:14px;width:auto;">
+          ← Voltar
+        </button>
+        <h2 style="font-size:20px;margin-bottom:8px;">Estúdio de Vídeos AI</h2>
+        <p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px;">
+          Crie roteiros de vídeos motivacionais, de disciplina e lifestyle prontos para CapCut.
+        </p>
 
-    return `
-        <div style="padding-top:30px;text-align:center;">
-            <h2 class="text-grad-gold" style="margin-bottom:20px;">${title}</h2>
-            <p style="color:#777;margin-bottom:20px;">Função em desenvolvimento.</p>
-            <button onclick="history.back()" class="btn-gold" style="width:auto;padding:10px 20px;">Voltar</button>
+        <div style="background:var(--bg-card);border-radius:18px;padding:16px;border:1px solid rgba(255,255,255,0.06);margin-bottom:18px;">
+          <div
+            style="
+              width:180px;
+              max-width:100%;
+              height:320px;
+              border-radius:16px;
+              border:1px dashed #444;
+              margin:0 auto 14px;
+              display:flex;
+              align-items:center;
+              justify-content:center;
+              color:#555;
+              font-size:12px;
+            "
+          >
+            Pré-visualização 9:16
+          </div>
+
+          <label style="font-size:11px;color:var(--text-secondary);margin-bottom:4px;display:block;">
+            Tema do vídeo
+          </label>
+          <input
+            id="video-topic"
+            style="width:100%;background:#111;border:1px solid #333;border-radius:10px;padding:10px;color:#fff;font-size:13px;margin-bottom:10px;"
+            placeholder="Ex: Disciplina silenciosa, luxo e foco absoluto"
+          />
+
+          <label style="font-size:11px;color:var(--text-secondary);margin-bottom:4px;display:block;">
+            Plataforma
+          </label>
+          <select
+            id="video-platform"
+            style="width:100%;background:#111;border:1px solid #333;border-radius:10px;padding:10px;color:#fff;font-size:13px;margin-bottom:14px;"
+          >
+            <option>Reels / TikTok (15–30s)</option>
+            <option>YouTube Shorts (30–60s)</option>
+            <option>Vídeo longo (3–5min)</option>
+          </select>
+
+          <button
+            class="btn-gold"
+            onclick="alert('No back-end: gerar roteiro + prompt de edição para CapCut.')"
+          >
+            Gerar roteiro e prompt de edição
+          </button>
         </div>
+      </div>
     `;
-}
+    }
 
-/* ============================================================
-   ROTEADOR DE TELAS
-============================================================ */
-function router() {
-    const container = document.getElementById("app-container");
-    const hash = window.location.hash;
+    function renderBonusPage() {
+      document.getElementById("chat-interface").classList.add("hidden");
+      return `
+      <div>
+        <button onclick="history.back()" class="btn-outline" style="margin-bottom:14px;width:auto;">
+          ← Voltar
+        </button>
+        <h2 style="font-size:20px;margin-bottom:8px;">Bônus & Indicação</h2>
+        <p style="font-size:13px;color:var(--text-secondary);margin-bottom:18px;">
+          Convide pessoas que levam disciplina a sério e desbloqueie upgrades de plano.
+        </p>
 
-    if (!state.quizDone) {
+        <div class="card-modern" style="margin-bottom:16px;">
+          <div style="font-size:14px;font-weight:600;margin-bottom:4px;">
+            Regra do Bônus
+          </div>
+          <div style="font-size:12px;color:var(--text-secondary);">
+            • 3 indicações: 7 dias de Elite<br />
+            • 5 indicações: 30 dias de Elite<br />
+            • 10 indicações: 30 dias de VIP
+          </div>
+        </div>
+
+        <div class="card-modern" style="margin-bottom:16px;">
+          <div style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;">
+            Seu link pessoal
+          </div>
+          <div
+            style="
+              font-size:12px;
+              background:#050505;
+              border-radius:10px;
+              border:1px dashed #444;
+              padding:10px;
+              display:flex;
+              justify-content:space-between;
+              align-items:center;
+            "
+          >
+            <span style="font-family:monospace;color:#9ca3af;">billionmind.ai/u/bruno</span>
+            <button
+              class="btn-outline"
+              style="font-size:10px;padding:4px 8px;"
+              onclick="alert('Link copiado (simulação).')"
+            >
+              Copiar
+            </button>
+          </div>
+        </div>
+
+        <button class="btn-gold" onclick="alert('No futuro: abrir WhatsApp pré-preenchido.')">
+          Compartilhar no WhatsApp
+        </button>
+      </div>
+    `;
+    }
+
+    function renderGeneric(title) {
+      document.getElementById("chat-interface").classList.add("hidden");
+      return `
+      <div style="text-align:center;margin-top:20px;">
+        <h2
+          style="
+            font-size:20px;
+            margin-bottom:10px;
+            background:var(--grad-gold);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+          "
+        >
+          ${title}
+        </h2>
+        <p style="font-size:13px;color:var(--text-secondary);margin-bottom:20px;">
+          Esta área será liberada nas próximas versões do BillionMind AI.
+        </p>
+        <button onclick="history.back()" class="btn-outline">Voltar</button>
+      </div>
+    `;
+    }
+
+    function renderPlansPage() {
+      document.getElementById("chat-interface").classList.add("hidden");
+
+      const currentPlan = state.plan;
+
+      function selectedLabel(planName) {
+        return planName === currentPlan
+          ? '<span style="font-size:11px;color:var(--accent-green);margin-left:6px;">(Atual)</span>'
+          : "";
+      }
+
+      return `
+      <div>
+        <button onclick="history.back()" class="btn-outline" style="margin-bottom:14px;width:auto;">
+          ← Voltar
+        </button>
+
+        <h2 style="font-size:20px;margin-bottom:4px;">Planos BillionMind AI</h2>
+        <p style="font-size:13px;color:var(--text-secondary);margin-bottom:18px;">
+          Escolha o nível de disciplina e profundidade de métricas que você quer para sua rotina.
+        </p>
+
+        <div class="plans-grid">
+
+          <div class="plan-card">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div style="font-size:14px;font-weight:600;">Visionário (Gratuito)</div>
+              ${selectedLabel("Visionário")}
+            </div>
+            <div class="plan-price">R$ 0/mês</div>
+            <div class="plan-benefits">
+              <span>• 5 dias de Protocolos Diários de teste</span>
+              <span>• 1 métrica básica de disciplina</span>
+              <span>• Acesso simples ao chat</span>
+            </div>
+            <button class="btn-outline" onclick="selectPlan('Visionário')">
+              Continuar no gratuito
+            </button>
+          </div>
+
+          <div class="plan-card" style="border-color:rgba(255,215,0,0.5);box-shadow:0 0 25px rgba(255,215,0,0.12);">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div style="font-size:14px;font-weight:600;">Elite</div>
+              <span class="badge">Recomendado</span>
+            </div>
+            <div class="plan-price">R$ 29,90/mês</div>
+            <div class="plan-benefits">
+              <span>• Protocolos Diários ilimitados</span>
+              <span>• Até 3 métricas de disciplina e renda</span>
+              <span>• Painel Elite de disciplina</span>
+              <span>• Biblioteca BillionMind completa</span>
+            </div>
+            <button class="btn-gold" onclick="selectPlan('Elite')">
+              Assinar plano Elite
+            </button>
+          </div>
+
+          <div class="plan-card">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div style="font-size:14px;font-weight:600;">VIP</div>
+              ${selectedLabel("VIP")}
+            </div>
+            <div class="plan-price">R$ 59,90/mês</div>
+            <div class="plan-benefits">
+              <span>• Tudo do plano Elite</span>
+              <span>• Até 10 métricas avançadas</span>
+              <span>• Sessões mensais gravadas de revisão</span>
+              <span>• Modo Foco Implacável</span>
+            </div>
+            <button class="btn-gold" style="background:linear-gradient(135deg,#facc15,#a16207);" onclick="selectPlan('VIP')">
+              Assinar plano VIP
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+    }
+
+    function renderSettingsPage() {
+      document.getElementById("chat-interface").classList.add("hidden");
+
+      return `
+      <div>
+        <button onclick="history.back()" class="btn-outline" style="margin-bottom:14px;width:auto;">
+          ← Voltar
+        </button>
+
+        <h2 style="font-size:20px;margin-bottom:12px;">Configurações</h2>
+
+        <div class="settings-group">
+          <div style="font-size:13px;font-weight:600;margin-bottom:6px;">Conta</div>
+          <div class="settings-row">
+            <span>Nome</span>
+            <span style="color:var(--text-secondary);">Bruno Brandão</span>
+          </div>
+          <div class="settings-row">
+            <span>E-mail</span>
+            <span style="color:var(--text-secondary);">claudineibrandao373@gmail.com</span>
+          </div>
+          <div class="settings-row">
+            <span>Plano atual</span>
+            <span style="color:var(--accent-gold);">${state.plan}</span>
+          </div>
+        </div>
+
+        <div class="settings-group">
+          <div style="font-size:13px;font-weight:600;margin-bottom:6px;">Preferências</div>
+          <div class="settings-row">
+            <span>Aparência</span>
+            <span style="color:var(--text-secondary);">Dark (padrão)</span>
+          </div>
+          <div class="settings-row">
+            <span>Notificações</span>
+            <span style="color:var(--text-secondary);">Em breve</span>
+          </div>
+        </div>
+
+        <div class="settings-group">
+          <div style="font-size:13px;font-weight:600;margin-bottom:6px;">Segurança</div>
+          <div class="settings-row">
+            <span>Atividade recente</span>
+            <span style="color:var(--text-secondary);">Monitorar</span>
+          </div>
+          <div class="settings-row">
+            <span>Encerrar sessões</span>
+            <button class="btn-outline" style="font-size:11px;padding:4px 8px;">
+              Encerrar tudo
+            </button>
+          </div>
+        </div>
+
+        <button
+          class="btn-outline"
+          style="border-color:#ef4444;color:#ef4444;margin-top:6px;"
+          onclick="alert('Logout será integrado quando o login real estiver ativo.')"
+        >
+          Sair da conta
+        </button>
+      </div>
+    `;
+    }
+
+    /* ===========================
+       ROTAS
+    ============================ */
+
+    function router() {
+      const container = document.getElementById("app-container");
+      const hash = window.location.hash;
+
+      // Atualiza label de plano no drawer
+      const drawerPlanLabel = document.getElementById("drawer-plan-label");
+      drawerPlanLabel.textContent = state.plan === "Visionário"
+        ? "Visionário (Gratuito)"
+        : state.plan;
+
+      // Se quiz não foi feito, força quiz
+      if (!state.quizDone) {
         startQuiz();
+        container.innerHTML = "";
         return;
-    }
+      }
 
-    switch (hash) {
+      switch (hash) {
         case "":
         case "#/":
-            container.innerHTML = renderHome();
-            break;
+          container.innerHTML = renderHome();
+          break;
         case "#videos":
-            container.innerHTML = renderVideoPage();
-            break;
+          container.innerHTML = renderVideoPage();
+          break;
         case "#bonus":
-            container.innerHTML = renderBonusPage();
-            break;
+          container.innerHTML = renderBonusPage();
+          break;
         case "#protocolos":
-            container.innerHTML = renderGeneric("Protocolos");
-            break;
+          container.innerHTML = renderGeneric("Protocolos de Disciplina");
+          break;
         case "#renda":
-            container.innerHTML = renderGeneric("Escala de Renda");
-            break;
+          container.innerHTML = renderGeneric("Escala de Renda");
+          break;
         case "#blueprint":
-            container.innerHTML = renderGeneric("Blueprint Mental");
-            break;
+          container.innerHTML = renderGeneric("Blueprint Mental");
+          break;
         case "#planos":
-            container.innerHTML = renderPlansPage();
-            break;
+          container.innerHTML = renderPlansPage();
+          break;
         case "#config":
-            container.innerHTML = renderSettingsPage();
-            break;
+          container.innerHTML = renderSettingsPage();
+          break;
         default:
-            container.innerHTML = renderGeneric("Em breve");
+          container.innerHTML = renderGeneric("Em breve");
+      }
+
+      // Fecha o drawer se estiver aberto
+      const drawer = document.getElementById("drawer");
+      const overlay = document.getElementById("drawer-overlay");
+      drawer.style.transform = "translateX(-100%)";
+      overlay.style.display = "none";
     }
-}
 
-/* ============================================================
-   MENU LATERAL
-============================================================ */
-function toggleDrawer() {
-    const drawer = document.getElementById("drawer");
-    const overlay = document.getElementById("drawer-overlay");
+    function navTo(hash) {
+      window.location.hash = hash;
+    }
 
-    if (drawer.style.transform === "translateX(0%)") {
+    /* ===========================
+       MENU LATERAL
+    ============================ */
+
+    function toggleDrawer() {
+      const drawer = document.getElementById("drawer");
+      const overlay = document.getElementById("drawer-overlay");
+
+      if (drawer.style.transform === "translateX(0%)") {
         drawer.style.transform = "translateX(-100%)";
         overlay.style.display = "none";
-    } else {
+      } else {
         drawer.style.transform = "translateX(0%)";
         overlay.style.display = "block";
+      }
     }
-}
 
-window.addEventListener("hashchange", router);
-window.addEventListener("load", router);
-</script>
+    /* ===========================
+       PLANOS – SELEÇÃO
+    ============================ */
+
+    function selectPlan(planName) {
+      state.plan = planName;
+      localStorage.setItem("bm_plan", planName);
+      alert(
+        "Plano selecionado: " +
+          planName +
+          ". No back-end, aqui entraria o Stripe/assinatura real."
+      );
+      router();
+    }
+
+    /* ===========================
+       EVENTOS INICIAIS
+    ============================ */
+
+    window.addEventListener("hashchange", router);
+    window.addEventListener("load", router);
+  </script>
 </body>
 </html>
