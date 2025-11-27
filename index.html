@@ -3,147 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Template de Aplicação Web com Firebase</title>
-    <!-- Incluindo Tailwind CSS para estilização rápida -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Pré-Lançamento Oficial | BillionMind AI</title>
+    <!-- Carrega o Tailwind CSS CDN para um estilo moderno e responsivo --><script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* Definindo a fonte Inter como padrão */
+        /* Configuração de Fonte Padrão */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6; /* Cinza claro de fundo */
+            background-color: #0d1117; /* Fundo escuro */
+            color: #ffffff;
+            transition: all 0.5s ease-in-out;
+        }
+
+        /* Estilo para a seção de contagem regressiva */
+        .countdown-item {
+            background-color: #161b22; /* Fundo do bloco do contador */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Animação de pulso para a data de lançamento */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.03); opacity: 0.95; }
+        }
+        .pulse-effect {
+            animation: pulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center p-4">
+<body class="min-h-screen antialiased flex flex-col items-center">
 
-    <!-- Container principal da aplicação -->
-    <div id="app-container" class="w-full max-w-lg bg-white p-6 rounded-xl shadow-2xl space-y-4">
-        <h1 class="text-3xl font-bold text-gray-800 text-center">
-            Bem-vindo(a) ao seu Template!
-        </h1>
-        <p class="text-center text-gray-600">
-            Este é um ambiente inicial pronto para desenvolvimento.
-        </p>
+    <!-- Conteúdo centralizado e limitado à largura máxima --><div class="w-full max-w-7xl mx-auto flex flex-col items-center">
 
-        <!-- Área de status do Firebase -->
-        <div class="p-4 bg-indigo-50 border border-indigo-200 rounded-lg">
-            <h2 class="text-xl font-semibold text-indigo-700 mb-2">Status da Conexão</h2>
-            <p id="auth-status" class="text-indigo-600 font-medium">Autenticando...</p>
-            <p id="user-id-display" class="text-sm text-indigo-500 break-all mt-1"></p>
-        </div>
+        <!-- Cabeçalho (Header) --><header class="w-full p-4 md:p-8">
+            <div class="flex justify-between items-center">
+                <h1 class="text-3xl font-extrabold text-white tracking-tight">
+                    <span class="text-purple-400">BillionMind</span> AI
+                </h1>
+                <!-- Botão no Cabeçalho (Direciona para o Canal do WhatsApp) --><a href="https://whatsapp.com/channel/0029VbBg2OxK0IBk3CURik35" 
+                   target="_blank"
+                   class="px-4 py-2 bg-purple-600 text-white text-sm font-semibold rounded-lg shadow-lg hover:bg-purple-700 transition duration-300 transform hover:scale-105">
+                    Quero Ser Notificado
+                </a>
+            </div>
+        </header>
 
-        <!-- Seção de Teste de Funcionalidade -->
-        <div class="mt-6 pt-4 border-t border-gray-200">
-            <h2 class="text-xl font-semibold text-gray-700 mb-3">Sua Área de Código</h2>
-            <textarea id="code-output" rows="4" class="w-full p-3 border border-gray-300 rounded-lg text-sm bg-gray-50" readonly placeholder="Resultados do seu código aparecerão aqui..."></textarea>
-            <button onclick="runCustomCode()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-150 ease-in-out mt-3 shadow-md">
-                Executar Código Personalizado
-            </button>
-        </div>
+        <!-- Seção Principal com Contador Regressivo --><main class="w-full p-4 md:p-8">
+            <div class="text-center mb-16 mt-8 md:mt-16">
+                <p class="text-lg md:text-xl text-purple-400 font-semibold mb-3 tracking-wider">A INTELIGÊNCIA ARTIFICIAL QUE EXPANDE SEU POTENCIAL</p>
+                <h2 class="text-5xl sm:text-7xl md:text-8xl font-black leading-tight mb-6">
+                    Lançamento Oficial
+                </h2>
+                <p class="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto">
+                    Prepare-se para transformar a maneira como você trabalha e vive. O <span class="text-purple-400 font-bold">BillionMind AI</span> redefine a produtividade e a tomada de decisões.
+                </p>
+            </div>
+
+            <!-- Bloco do Contador --><div class="bg-gray-900 border border-gray-700 p-6 sm:p-10 rounded-2xl shadow-2xl mb-16 max-w-4xl mx-auto">
+                <p class="text-xl font-bold text-center mb-6 text-white">
+                    Lançamento em: <br class="sm:hidden">
+                    <span id="launch-info" class="text-purple-400 text-2xl md:text-3xl font-extrabold">
+                        Sábado, 29 de Novembro, às 19:30 (BRT)
+                    </span>
+                </p>
+
+                <div id="countdown" class="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-8">
+                    <!-- Dias --><div class="countdown-item p-4 sm:p-6 rounded-xl text-center border-b-4 border-purple-600">
+                        <div id="days" class="text-5xl md:text-6xl font-extrabold text-white">00</div>
+                        <div class="text-sm md:text-base font-medium text-gray-400 mt-1">DIAS</div>
+                    </div>
+                    <!-- Horas --><div class="countdown-item p-4 sm:p-6 rounded-xl text-center border-b-4 border-purple-600">
+                        <div id="hours" class="text-5xl md:text-6xl font-extrabold text-white">00</div>
+                        <div class="text-sm md:text-base font-medium text-gray-400 mt-1">HORAS</div>
+                    </div>
+                    <!-- Minutos --><div class="countdown-item p-4 sm:p-6 rounded-xl text-center border-b-4 border-purple-600">
+                        <div id="minutes" class="text-5xl md:text-6xl font-extrabold text-white">00</div>
+                        <div class="text-sm md:text-base font-medium text-gray-400 mt-1">MINUTOS</div>
+                    </div>
+                    <!-- Segundos --><div class="countdown-item p-4 sm:p-6 rounded-xl text-center border-b-4 border-purple-600">
+                        <div id="seconds" class="text-5xl md:text-6xl font-extrabold text-white">00</div>
+                        <div class="text-sm md:text-base font-medium text-gray-400 mt-1">SEGUNDOS</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção: O Que Você Precisa Saber Sobre o BillionMind AI --><section class="mb-16">
+                <h3 class="text-4xl font-bold text-center mb-10 text-white">
+                    O <span class="text-purple-400">Poder da AI</span> em Suas Mãos
+                </h3>
+                <div class="grid md:grid-cols-3 gap-8 text-center max-w-6xl mx-auto">
+                    
+                    <!-- Benefício 1 --><div class="p-6 bg-gray-800 rounded-xl border border-gray-700 hover:border-purple-600 transition duration-300">
+                        <div class="text-purple-400 text-4xl mb-4">🧠</div>
+                        <h4 class="text-xl font-bold mb-2">Análise Preditiva</h4>
+                        <p class="text-gray-400">
+                            Utilize modelos de IA avançados para prever tendências e otimizar estratégias, transformando dados em decisões bilionárias.
+                        </p>
+                    </div>
+                    
+                    <!-- Benefício 2 --><div class="p-6 bg-gray-800 rounded-xl border border-gray-700 hover:border-purple-600 transition duration-300">
+                        <div class="text-purple-400 text-4xl mb-4">⚡</div>
+                        <h4 class="text-xl font-bold mb-2">Automação Inteligente</h4>
+                        <p class="text-gray-400">
+                            Automatize tarefas repetitivas com precisão de IA, liberando seu tempo para foco em inovação e crescimento.
+                        </p>
+                    </div>
+
+                    <!-- Benefício 3 --><div class="p-6 bg-gray-800 rounded-xl border border-gray-700 hover:border-purple-600 transition duration-300">
+                        <div class="text-purple-400 text-4xl mb-4">🔒</div>
+                        <h4 class="text-xl font-bold mb-2">Segurança de Dados</h4>
+                        <p class="text-gray-400">
+                            Suas informações críticas são protegidas com criptografia de ponta e sincronização segura em todos os seus dispositivos.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Call to Action (CTA) para o Canal do WhatsApp --><section id="cta" class="text-center bg-purple-900 bg-opacity-30 border border-purple-700 p-8 md:p-12 rounded-2xl max-w-4xl mx-auto shadow-2xl pulse-effect">
+                <h3 class="text-3xl md:text-4xl font-extrabold mb-4">Seja o Primeiro a Saber!</h3>
+                <p class="text-lg md:text-xl text-purple-200 mb-8">
+                    Clique abaixo e entre no nosso canal exclusivo no WhatsApp para receber o link de lançamento exatamente às 19:30 de sábado.
+                </p>
+                
+                <!-- Botão de Ação Principal (Substitui o formulário) --><a href="https://whatsapp.com/channel/0029VbBg2OxK0IBk3CURik35"
+                   target="_blank"
+                   class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-green-500 text-white font-black text-xl rounded-lg shadow-2xl hover:bg-green-600 transition duration-300 transform hover:scale-105 border-b-4 border-green-700">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.036 21.688c-.67 0-1.282-.185-1.78-.54l-3.328-1.921c-.498-.288-.87-.768-1.07-1.332L4.01 15.532c-.201-.564-.201-1.187 0-1.751l.849-2.302c.2-.564.572-1.044 1.07-1.332l3.328-1.921c.498-.288 1.11-.473 1.78-.473h1.86c.67 0 1.282.185 1.78.473l3.328 1.921c.498-.288.87.768 1.07 1.332l.849 2.302c.201.564.201 1.187 0 1.751l-.849 2.302c-.2.564-.572 1.044-1.07 1.332l-3.328 1.921c-.498.288-1.11.473-1.78.473h-1.86zM12 2C6.477 2 2 6.477 2 12c0 1.487.315 2.924.912 4.21l-.963 3.515c-.07.26.012.54.218.736.206.195.494.277.754.207l3.515-.963C8.428 21.685 10.198 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm1.68 15.118h-3.36c-.198 0-.36-.162-.36-.36V9.118c0-.198.162-.36.36-.36h3.36c.198 0 .36.162.36.36v5.64c0 .198-.162.36-.36.36z"/>
+                    </svg>
+                    Acessar Canal VIP no WhatsApp
+                </a>
+            </section>
+        </main>
+
+        <!-- Rodapé (Footer) --><footer class="w-full p-4 md:p-8 mt-12 border-t border-gray-800 text-center">
+            <p class="text-gray-500 text-sm">
+                &copy; 2025 BillionMind AI. Todos os direitos reservados.
+            </p>
+            <p class="text-gray-500 text-sm mt-1">
+                Lançamento: <span class="font-semibold text-purple-400">29 de Novembro de 2025, 19:30 BRT</span>
+            </p>
+        </footer>
+
     </div>
 
-    <script type="module">
-        // Importações obrigatórias do Firebase
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, setDoc, doc, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        import { setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Data alvo: Próximo Sábado (29/11/2025) às 19:30.
+            // A data é configurada para um horário específico.
+            // Usamos 'GMT-03:00' para simular o fuso horário de Brasília (BRT).
+            const targetDate = new Date("November 29, 2025 19:30:00 GMT-0300").getTime();
+            
+            const daysEl = document.getElementById('days');
+            const hoursEl = document.getElementById('hours');
+            const minutesEl = document.getElementById('minutes');
+            const secondsEl = document.getElementById('seconds');
+            const launchInfoEl = document.getElementById('launch-info');
+            const countdownEl = document.getElementById('countdown');
 
-        // Variáveis globais obrigatórias do ambiente
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+            // Função para formatar números com dois dígitos (ex: 05, 12)
+            const formatTime = (time) => String(Math.max(0, time)).padStart(2, '0');
 
-        let app;
-        let db;
-        let auth;
-        let currentUserId = null;
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
 
-        // Função para simular a execução de código personalizado e mostrar o ID
-        window.runCustomCode = () => {
-            const output = document.getElementById('code-output');
-            output.value = 'Código personalizado executado.\n';
-            if (currentUserId) {
-                output.value += `Seu ID de usuário atual: ${currentUserId}\n`;
-                output.value += `ID da Aplicação: ${appId}`;
-            } else {
-                output.value += 'Aguardando autenticação do usuário...';
-            }
+                // Cálculo do tempo em unidades
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            // Exemplo de como você pode tentar salvar um documento (DEPOIS de autenticado)
-            if (db && currentUserId) {
-                const userDocRef = doc(db, 'artifacts', appId, 'users', currentUserId, 'logs', 'startup_check');
-                setDoc(userDocRef, { timestamp: new Date().toISOString(), message: 'Template iniciado com sucesso' })
-                    .then(() => {
-                         output.value += '\nLog de inicialização salvo no Firestore com sucesso.';
-                    })
-                    .catch(error => {
-                        console.error("Erro ao salvar no Firestore:", error);
-                        output.value += '\nERRO: Falha ao salvar no Firestore. Verifique o console.';
-                    });
-            }
-        };
+                // Exibe os resultados nos elementos
+                daysEl.innerHTML = formatTime(days);
+                hoursEl.innerHTML = formatTime(hours);
+                minutesEl.innerHTML = formatTime(minutes);
+                secondsEl.innerHTML = formatTime(seconds);
 
-        /**
-         * 1. Inicializa o Firebase e a Autenticação.
-         * 2. Configura um listener para o estado de autenticação.
-         */
-        async function initializeFirebase() {
-            try {
-                // Habilita logs de debug para o Firestore
-                setLogLevel('Debug');
-                
-                if (!Object.keys(firebaseConfig).length) {
-                     console.error("Configuração do Firebase ausente. A aplicação não pode se conectar.");
-                     document.getElementById('auth-status').textContent = "ERRO: Configuração do Firebase ausente.";
-                     return;
+                // Se a contagem regressiva terminar
+                if (distance < 0) {
+                    clearInterval(interval);
+                    daysEl.innerHTML = hoursEl.innerHTML = minutesEl.innerHTML = secondsEl.innerHTML = '00';
+                    countdownEl.innerHTML = '<p class="text-4xl font-extrabold text-green-400">LANÇADO AGORA! Visite nossa loja de aplicativos!</p>';
+                    launchInfoEl.innerHTML = 'O BillionMind AI está no ar!';
                 }
-
-                // Inicializa os serviços
-                app = initializeApp(firebaseConfig);
-                db = getFirestore(app);
-                auth = getAuth(app);
-
-                // Autentica o usuário usando o token customizado fornecido pelo ambiente ou anonimamente
-                if (initialAuthToken) {
-                    await signInWithCustomToken(auth, initialAuthToken);
-                } else {
-                    await signInAnonymously(auth);
-                }
-
-                // Listener para o estado de autenticação
-                onAuthStateChanged(auth, (user) => {
-                    const statusEl = document.getElementById('auth-status');
-                    const userIdEl = document.getElementById('user-id-display');
-
-                    if (user) {
-                        currentUserId = user.uid;
-                        statusEl.textContent = 'Autenticado com Sucesso!';
-                        statusEl.classList.remove('text-indigo-600', 'text-red-600');
-                        statusEl.classList.add('text-green-600');
-                        userIdEl.textContent = `UID: ${currentUserId}`;
-                        console.log("Autenticação completa. UID:", currentUserId);
-                        
-                        // Exemplo: Executar o código personalizado após a autenticação
-                        runCustomCode();
-
-                    } else {
-                        currentUserId = null;
-                        statusEl.textContent = 'ERRO: Falha na Autenticação.';
-                        statusEl.classList.remove('text-indigo-600', 'text-green-600');
-                        statusEl.classList.add('text-red-600');
-                        userIdEl.textContent = 'Nenhum usuário autenticado.';
-                        console.log("Usuário deslogado ou falha na autenticação inicial.");
-                    }
-                });
-
-            } catch (error) {
-                console.error("Erro fatal durante a inicialização do Firebase:", error);
-                document.getElementById('auth-status').textContent = `ERRO FATAL: ${error.message}`;
             }
-        }
 
-        initializeFirebase();
+            // Atualiza o contador a cada 1 segundo
+            const interval = setInterval(updateCountdown, 1000);
+            
+            // Garante que o contador comece imediatamente
+            updateCountdown();
+
+            // Como o formulário foi substituído por um link direto, o código de manipulação de formulário não é mais necessário,
+            // mas mantemos o script de contagem regressiva.
+        });
     </script>
 </body>
 </html>
+
