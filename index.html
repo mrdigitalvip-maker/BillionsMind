@@ -2,205 +2,392 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pré-Lançamento Oficial | BillionMind AI</title>
-    <!-- Carrega o Tailwind CSS CDN para um estilo moderno e responsivo --><script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>BillionMind AI</title>
+
     <style>
-        /* Configuração de Fonte Padrão */
+        :root {
+            --bg-dark: #050505;
+            --bg-card: rgba(20, 20, 20, 0.7);
+            --bg-glass: rgba(255, 255, 255, 0.03);
+            --border-glass: rgba(255, 255, 255, 0.08);
+
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+
+            --accent-gold: #FFD700;
+            --accent-green: #00FF9D;
+            --accent-blue: #00C2FF;
+            --accent-purple: #BD00FF;
+
+            --grad-gold: linear-gradient(135deg, #FFD700 0%, #B8860B 100%);
+            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0d1117; /* Fundo escuro */
-            color: #ffffff;
-            transition: all 0.5s ease-in-out;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Estilo para a seção de contagem regressiva */
-        .countdown-item {
-            background-color: #161b22; /* Fundo do bloco do contador */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        .hidden { display: none!important; }
+
+        header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 60px;
+            background: rgba(5,5,5,0.85);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 0 20px;
+            display: flex; align-items:center; justify-content:space-between;
+            z-index: 999;
         }
 
-        /* Animação de pulso para a data de lançamento */
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.03); opacity: 0.95; }
-        }
-        .pulse-effect {
-            animation: pulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
-        }
+        .app-logo { display:flex; align-items:center; gap:10px; }
     </style>
 </head>
-<body class="min-h-screen antialiased flex flex-col items-center">
+<body>
 
-    <!-- Conteúdo centralizado e limitado à largura máxima --><div class="w-full max-w-7xl mx-auto flex flex-col items-center">
-
-        <!-- Cabeçalho (Header) --><header class="w-full p-4 md:p-8">
-            <div class="flex justify-between items-center">
-                <h1 class="text-3xl font-extrabold text-white tracking-tight">
-                    <span class="text-purple-400">BillionMind</span> AI
-                </h1>
-                <!-- Botão no Cabeçalho (Direciona para o Canal do WhatsApp) --><a href="https://whatsapp.com/channel/0029VbBg2OxK0IBk3CURik35" 
-                   target="_blank"
-                   class="px-4 py-2 bg-purple-600 text-white text-sm font-semibold rounded-lg shadow-lg hover:bg-purple-700 transition duration-300 transform hover:scale-105">
-                    Quero Ser Notificado
-                </a>
-            </div>
-        </header>
-
-        <!-- Seção Principal com Contador Regressivo --><main class="w-full p-4 md:p-8">
-            <div class="text-center mb-16 mt-8 md:mt-16">
-                <p class="text-lg md:text-xl text-purple-400 font-semibold mb-3 tracking-wider">A INTELIGÊNCIA ARTIFICIAL QUE EXPANDE SEU POTENCIAL</p>
-                <h2 class="text-5xl sm:text-7xl md:text-8xl font-black leading-tight mb-6">
-                    Lançamento Oficial
-                </h2>
-                <p class="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto">
-                    Prepare-se para transformar a maneira como você trabalha e vive. O <span class="text-purple-400 font-bold">BillionMind AI</span> redefine a produtividade e a tomada de decisões.
-                </p>
-            </div>
-
-            <!-- Bloco do Contador --><div class="bg-gray-900 border border-gray-700 p-6 sm:p-10 rounded-2xl shadow-2xl mb-16 max-w-4xl mx-auto">
-                <p class="text-xl font-bold text-center mb-6 text-white">
-                    Lançamento em: <br class="sm:hidden">
-                    <span id="launch-info" class="text-purple-400 text-2xl md:text-3xl font-extrabold">
-                        Sábado, 29 de Novembro, às 19:30 (BRT)
-                    </span>
-                </p>
-
-                <div id="countdown" class="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-8">
-                    <!-- Dias --><div class="countdown-item p-4 sm:p-6 rounded-xl text-center border-b-4 border-purple-600">
-                        <div id="days" class="text-5xl md:text-6xl font-extrabold text-white">00</div>
-                        <div class="text-sm md:text-base font-medium text-gray-400 mt-1">DIAS</div>
-                    </div>
-                    <!-- Horas --><div class="countdown-item p-4 sm:p-6 rounded-xl text-center border-b-4 border-purple-600">
-                        <div id="hours" class="text-5xl md:text-6xl font-extrabold text-white">00</div>
-                        <div class="text-sm md:text-base font-medium text-gray-400 mt-1">HORAS</div>
-                    </div>
-                    <!-- Minutos --><div class="countdown-item p-4 sm:p-6 rounded-xl text-center border-b-4 border-purple-600">
-                        <div id="minutes" class="text-5xl md:text-6xl font-extrabold text-white">00</div>
-                        <div class="text-sm md:text-base font-medium text-gray-400 mt-1">MINUTOS</div>
-                    </div>
-                    <!-- Segundos --><div class="countdown-item p-4 sm:p-6 rounded-xl text-center border-b-4 border-purple-600">
-                        <div id="seconds" class="text-5xl md:text-6xl font-extrabold text-white">00</div>
-                        <div class="text-sm md:text-base font-medium text-gray-400 mt-1">SEGUNDOS</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Seção: O Que Você Precisa Saber Sobre o BillionMind AI --><section class="mb-16">
-                <h3 class="text-4xl font-bold text-center mb-10 text-white">
-                    O <span class="text-purple-400">Poder da AI</span> em Suas Mãos
-                </h3>
-                <div class="grid md:grid-cols-3 gap-8 text-center max-w-6xl mx-auto">
-                    
-                    <!-- Benefício 1 --><div class="p-6 bg-gray-800 rounded-xl border border-gray-700 hover:border-purple-600 transition duration-300">
-                        <div class="text-purple-400 text-4xl mb-4">🧠</div>
-                        <h4 class="text-xl font-bold mb-2">Análise Preditiva</h4>
-                        <p class="text-gray-400">
-                            Utilize modelos de IA avançados para prever tendências e otimizar estratégias, transformando dados em decisões bilionárias.
-                        </p>
-                    </div>
-                    
-                    <!-- Benefício 2 --><div class="p-6 bg-gray-800 rounded-xl border border-gray-700 hover:border-purple-600 transition duration-300">
-                        <div class="text-purple-400 text-4xl mb-4">⚡</div>
-                        <h4 class="text-xl font-bold mb-2">Automação Inteligente</h4>
-                        <p class="text-gray-400">
-                            Automatize tarefas repetitivas com precisão de IA, liberando seu tempo para foco em inovação e crescimento.
-                        </p>
-                    </div>
-
-                    <!-- Benefício 3 --><div class="p-6 bg-gray-800 rounded-xl border border-gray-700 hover:border-purple-600 transition duration-300">
-                        <div class="text-purple-400 text-4xl mb-4">🔒</div>
-                        <h4 class="text-xl font-bold mb-2">Segurança de Dados</h4>
-                        <p class="text-gray-400">
-                            Suas informações críticas são protegidas com criptografia de ponta e sincronização segura em todos os seus dispositivos.
-                        </p>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Call to Action (CTA) para o Canal do WhatsApp --><section id="cta" class="text-center bg-purple-900 bg-opacity-30 border border-purple-700 p-8 md:p-12 rounded-2xl max-w-4xl mx-auto shadow-2xl pulse-effect">
-                <h3 class="text-3xl md:text-4xl font-extrabold mb-4">Seja o Primeiro a Saber!</h3>
-                <p class="text-lg md:text-xl text-purple-200 mb-8">
-                    Clique abaixo e entre no nosso canal exclusivo no WhatsApp para receber o link de lançamento exatamente às 19:30 de sábado.
-                </p>
-                
-                <!-- Botão de Ação Principal (Substitui o formulário) --><a href="https://whatsapp.com/channel/0029VbBg2OxK0IBk3CURik35"
-                   target="_blank"
-                   class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-green-500 text-white font-black text-xl rounded-lg shadow-2xl hover:bg-green-600 transition duration-300 transform hover:scale-105 border-b-4 border-green-700">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12.036 21.688c-.67 0-1.282-.185-1.78-.54l-3.328-1.921c-.498-.288-.87-.768-1.07-1.332L4.01 15.532c-.201-.564-.201-1.187 0-1.751l.849-2.302c.2-.564.572-1.044 1.07-1.332l3.328-1.921c.498-.288 1.11-.473 1.78-.473h1.86c.67 0 1.282.185 1.78.473l3.328 1.921c.498-.288.87.768 1.07 1.332l.849 2.302c.201.564.201 1.187 0 1.751l-.849 2.302c-.2.564-.572 1.044-1.07 1.332l-3.328 1.921c-.498.288-1.11.473-1.78.473h-1.86zM12 2C6.477 2 2 6.477 2 12c0 1.487.315 2.924.912 4.21l-.963 3.515c-.07.26.012.54.218.736.206.195.494.277.754.207l3.515-.963C8.428 21.685 10.198 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm1.68 15.118h-3.36c-.198 0-.36-.162-.36-.36V9.118c0-.198.162-.36.36-.36h3.36c.198 0 .36.162.36.36v5.64c0 .198-.162.36-.36.36z"/>
-                    </svg>
-                    Acessar Canal VIP no WhatsApp
-                </a>
-            </section>
-        </main>
-
-        <!-- Rodapé (Footer) --><footer class="w-full p-4 md:p-8 mt-12 border-t border-gray-800 text-center">
-            <p class="text-gray-500 text-sm">
-                &copy; 2025 BillionMind AI. Todos os direitos reservados.
-            </p>
-            <p class="text-gray-500 text-sm mt-1">
-                Lançamento: <span class="font-semibold text-purple-400">29 de Novembro de 2025, 19:30 BRT</span>
-            </p>
-        </footer>
-
+<!-- QUIZ -->
+<div id="quiz-overlay" class="hidden" style="position:fixed;inset:0;background:#000;z-index:9999;padding:24px;">
+    <div class="quiz-progress" style="height:4px;background:#222;border-radius:2px;margin-bottom:30px;">
+        <div id="quiz-bar" style="height:100%;width:0%;background:var(--grad-gold);transition:0.3s;"></div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Data alvo: Próximo Sábado (29/11/2025) às 19:30.
-            // A data é configurada para um horário específico.
-            // Usamos 'GMT-03:00' para simular o fuso horário de Brasília (BRT).
-            const targetDate = new Date("November 29, 2025 19:30:00 GMT-0300").getTime();
-            
-            const daysEl = document.getElementById('days');
-            const hoursEl = document.getElementById('hours');
-            const minutesEl = document.getElementById('minutes');
-            const secondsEl = document.getElementById('seconds');
-            const launchInfoEl = document.getElementById('launch-info');
-            const countdownEl = document.getElementById('countdown');
+    <h2 id="quiz-question" style="font-size:24px;margin-bottom:20px;">Pergunta</h2>
+    <div id="quiz-options"></div>
+</div>
 
-            // Função para formatar números com dois dígitos (ex: 05, 12)
-            const formatTime = (time) => String(Math.max(0, time)).padStart(2, '0');
+<header>
+    <div onclick="toggleDrawer()" style="cursor:pointer;">
+        <svg width="26" height="26" stroke="#fff" fill="none" viewBox="0 0 24 24" stroke-width="2">
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+    </div>
 
-            function updateCountdown() {
-                const now = new Date().getTime();
-                const distance = targetDate - now;
+    <div class="app-logo">
+        <svg width="20" height="20" viewBox="0 0 24 24" stroke="#FFD700" stroke-width="2" fill="none">
+            <path d="M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+        <span style="background:var(--grad-gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:700;">BillionMind</span>
+    </div>
 
-                // Cálculo do tempo em unidades
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    <div onclick="navTo('#planos')" style="cursor:pointer;">
+        <svg width="24" height="24" stroke="#FFD700" fill="none" viewBox="0 0 24 24" stroke-width="2">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+    </div>
+</header>
 
-                // Exibe os resultados nos elementos
-                daysEl.innerHTML = formatTime(days);
-                hoursEl.innerHTML = formatTime(hours);
-                minutesEl.innerHTML = formatTime(minutes);
-                secondsEl.innerHTML = formatTime(seconds);
+<!-- DRAWER -->
+<div id="drawer-overlay" onclick="toggleDrawer()" style="position:fixed;inset:0;background:rgba(0,0,0,0.7);display:none;z-index:900;"></div>
 
-                // Se a contagem regressiva terminar
-                if (distance < 0) {
-                    clearInterval(interval);
-                    daysEl.innerHTML = hoursEl.innerHTML = minutesEl.innerHTML = secondsEl.innerHTML = '00';
-                    countdownEl.innerHTML = '<p class="text-4xl font-extrabold text-green-400">LANÇADO AGORA! Visite nossa loja de aplicativos!</p>';
-                    launchInfoEl.innerHTML = 'O BillionMind AI está no ar!';
-                }
-            }
+<div id="drawer" style="position:fixed;top:0;left:0;bottom:0;width:75%;background:#0b0b0d;z-index:1000;transform:translateX(-100%);transition:0.3s;padding:20px;">
+    <h3 style="background:var(--grad-gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:30px;">Menu</h3>
 
-            // Atualiza o contador a cada 1 segundo
-            const interval = setInterval(updateCountdown, 1000);
-            
-            // Garante que o contador comece imediatamente
-            updateCountdown();
+    <a class="menu-item" onclick="navTo('#/')" style="color:white;display:flex;align-items:center;gap:10px;margin-bottom:20px;cursor:pointer;">
+        <svg width="20" height="20" stroke="white" fill="none" viewBox="0 0 24 24"><path d="M3 9 12 2l9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+        Home
+    </a>
 
-            // Como o formulário foi substituído por um link direto, o código de manipulação de formulário não é mais necessário,
-            // mas mantemos o script de contagem regressiva.
-        });
-    </script>
+    <a class="menu-item" onclick="navTo('#videos')" style="color:white;display:flex;align-items:center;gap:10px;margin-bottom:20px;cursor:pointer;">
+        <svg width="20" height="20" stroke="#BD00FF" fill="none" viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        Criar Vídeos
+    </a>
+
+    <a class="menu-item" onclick="navTo('#bonus')" style="color:white;display:flex;align-items:center;gap:10px;margin-bottom:20px;cursor:pointer;">
+        <svg width="20" height="20" stroke="#00FF9D" fill="none" viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/></svg>
+        Bônus & Indicação
+    </a>
+
+    <a class="menu-item" onclick="navTo('#protocolos')" style="color:white;display:flex;align-items:center;gap:10px;margin-bottom:20px;cursor:pointer;">
+        <svg width="20" height="20" stroke="#FFD700" fill="none" viewBox="0 0 24 24"><path d="M14.5 10v-5a1.5 1.5 0 1 1 3 0v5a1.5 1.5 0 1 1-3 0z"/><path d="M3.5 14c0-2.3 1.7-4 4-4s4 1.7 4 4v6c0 1.3-1.7 2-4 2s-4-.7-4-2v-6z"/></svg>
+        Protocolos
+    </a>
+
+    <a class="menu-item" onclick="navTo('#config')" style="color:white;display:flex;align-items:center;gap:10px;margin-top:auto;cursor:pointer;">
+        <svg width="20" height="20" stroke="white" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.9 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3"/></svg>
+        Ajustes
+    </a>
+</div>
+
+<main id="app-container" style="padding:80px 20px 120px 20px;overflow-y:auto;flex:1;"></main>
+
+<div id="chat-interface" style="position:fixed;bottom:0;left:0;right:0;padding:16px 20px;background:linear-gradient(0deg,#050505 50%,transparent);">
+    <div style="background:#1a1a1a;border:1px solid #333;border-radius:30px;padding:4px 6px;display:flex;align-items:center;">
+        <input type="text" placeholder="Pergunte ao Mestre..." style="flex:1;border:none;background:transparent;color:white;outline:none;padding-left:10px;">
+        <button style="background:#FFD700;border:none;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;">
+            <svg width="16" height="16" stroke="black" viewBox="0 0 24 24" fill="none" stroke-width="3">
+                <line x1="12" y1="19" x2="12" y2="5"/>
+                <polyline points="5 12 12 5 19 12"/>
+            </svg>
+        </button>
+    </div>
+</div>
+<script>
+/* ============================================================
+   ESTADO GLOBAL DO APP
+============================================================ */
+const state = {
+    quizDone: localStorage.getItem('bm_quiz_done') === 'true',
+    userLevel: "Visionário",
+    xp: 120,
+    plan: localStorage.getItem("bm_plan") || "Visionário"
+};
+
+/* ============================================================
+   QUIZ — Dados e Funções
+============================================================ */
+const quizData = [
+    { q: "Qual seu maior obstáculo hoje?", a: ["Procrastinação", "Falta de foco", "Cansaço", "Medo de falhar"] },
+    { q: "Quanto você quer faturar em 6 meses?", a: ["10 mil", "50 mil", "100 mil+", "Não sei"] },
+    { q: "Você se considera disciplinado?", a: ["Sim", "Às vezes", "Pouco", "Não"] }
+];
+
+let quizIndex = 0;
+
+function startQuiz() {
+    document.getElementById("quiz-overlay").classList.remove("hidden");
+    renderQuizQuestion();
+}
+
+function renderQuizQuestion() {
+    const bar = document.getElementById("quiz-bar");
+    const q = document.getElementById("quiz-question");
+    const options = document.getElementById("quiz-options");
+
+    const progress = (quizIndex / quizData.length) * 100;
+    bar.style.width = progress + "%";
+
+    q.textContent = quizData[quizIndex].q;
+
+    options.innerHTML = "";
+    quizData[quizIndex].a.forEach(opt => {
+        const btn = document.createElement("div");
+        btn.className = "quiz-option";
+        btn.textContent = opt;
+        btn.onclick = nextQuizStep;
+        options.appendChild(btn);
+    });
+}
+
+function nextQuizStep() {
+    quizIndex++;
+    if (quizIndex >= quizData.length) {
+        finishQuiz();
+    } else {
+        renderQuizQuestion();
+    }
+}
+
+function finishQuiz() {
+    localStorage.setItem("bm_quiz_done", "true");
+    state.quizDone = true;
+    document.getElementById("quiz-overlay").classList.add("hidden");
+    router();
+}
+
+/* ============================================================
+   TELAS / RENDERIZAÇÃO
+============================================================ */
+
+function renderHome() {
+    document.getElementById("chat-interface").classList.remove("hidden");
+
+    return `
+        <div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+                <div style="font-size:12px;background:rgba(255,215,0,0.1);padding:6px 12px;border-radius:20px;color:#FFD700;">
+                    Nível: ${state.userLevel}
+                </div>
+                <div style="font-size:12px;color:#aaa;">${state.xp} XP</div>
+            </div>
+
+            <h1 style="font-size:32px;line-height:1.2;margin-bottom:24px;">
+                Domine sua<br>
+                <span style="background:var(--grad-gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Mente Milionária</span>
+            </h1>
+
+            <div style="background:rgba(255,215,0,0.1);border:1px solid rgba(255,215,0,0.2);padding:16px;border-radius:16px;display:flex;justify-content:space-between;margin-bottom:24px;">
+                <div>
+                    <div style="font-size:15px;font-weight:600;">1 Mês Grátis</div>
+                    <div style="font-size:11px;color:#aaa;">Convide amigos e ganhe VIP</div>
+                </div>
+                <div style="background:rgba(255,255,255,0.15);padding:10px;border-radius:50%;"></div>
+            </div>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+                <div class="card-modern" onclick="navTo('#videos')">
+                    <div class="card-icon-box"></div>
+                    <div style="font-weight:600;font-size:15px;">Criar Vídeo AI</div>
+                    <div style="font-size:11px;color:#aaa;">Gere vídeos virais</div>
+                </div>
+
+                <div class="card-modern" onclick="navTo('#protocolos')">
+                    <div class="card-icon-box"></div>
+                    <div style="font-weight:600;font-size:15px;">Protocolos</div>
+                    <div style="font-size:11px;color:#aaa;">Rotina de Elite</div>
+                </div>
+
+                <div class="card-modern" onclick="navTo('#blueprint')">
+                    <div class="card-icon-box"></div>
+                    <div style="font-weight:600;font-size:15px;">Blueprint</div>
+                    <div style="font-size:11px;color:#aaa;">Reprogramação</div>
+                </div>
+
+                <div class="card-modern" onclick="navTo('#renda')">
+                    <div class="card-icon-box"></div>
+                    <div style="font-weight:600;font-size:15px;">Escala de Renda</div>
+                    <div style="font-size:11px;color:#aaa;">Plano de ação</div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function renderVideoPage() {
+    document.getElementById("chat-interface").classList.add("hidden");
+
+    return `
+        <div>
+            <button onclick="history.back()" style="background:none;border:none;color:white;margin-bottom:16px;">← Voltar</button>
+
+            <h2 style="font-size:20px;margin-bottom:16px;">Estúdio de Vídeos</h2>
+
+            <div style="border-radius:12px;padding:20px;background:#111;border:1px solid #333;text-align:center;margin-bottom:20px;">
+                <div style="width:180px;height:320px;border:1px dashed #555;margin:0 auto 12px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#666;">
+                    Preview
+                </div>
+
+                <input style="width:100%;padding:12px;background:#111;border:1px solid #333;border-radius:8px;color:white;margin-bottom:20px;" placeholder="Tema do vídeo (ex: Estoicismo e riqueza)">
+                
+                <button onclick="alert('Gerando vídeo...')" class="btn-gold" style="margin-top:10px;">Gerar Vídeo AI</button>
+            </div>
+        </div>
+    `;
+}
+
+function renderBonusPage() {
+    document.getElementById("chat-interface").classList.add("hidden");
+
+    return `
+        <div>
+            <button onclick="history.back()" style="background:none;border:none;color:white;margin-bottom:16px;">← Voltar</button>
+
+            <h2 class="text-grad-gold" style="font-size:22px;margin-bottom:12px;">Convide & Ganhe</h2>
+
+            <p style="color:#aaa;font-size:14px;margin-bottom:20px;">
+                Convide 5 amigos e desbloqueie o VIP vitalício.
+            </p>
+
+            <div style="padding:16px;border-radius:16px;background:#111;border:1px solid #333;margin-bottom:20px;">
+                <div style="display:flex;justify-content:space-between;margin-bottom:10px;">
+                    <span style="color:#ccc;">Progresso</span>
+                    <span style="color:#00FF9D;font-weight:600;">0/5 Amigos</span>
+                </div>
+
+                <div style="width:100%;height:8px;background:#222;border-radius:4px;">
+                    <div style="width:0%;height:100%;background:var(--grad-gold);border-radius:4px;"></div>
+                </div>
+
+                <div style="margin-top:20px;padding:12px;border-radius:8px;border:1px dashed #555;background:#000;display:flex;justify-content:space-between;align-items:center;">
+                    <span style="font-family:monospace;color:#999;">billionmind.ai/u/bruno</span>
+                    <span onclick="alert('Copiado')" style="color:#FFD700;cursor:pointer;">COPIAR</span>
+                </div>
+            </div>
+
+            <button class="btn-gold">Compartilhar</button>
+        </div>
+    `;
+}
+
+function renderGeneric(title) {
+    document.getElementById("chat-interface").classList.add("hidden");
+
+    return `
+        <div style="padding-top:30px;text-align:center;">
+            <h2 class="text-grad-gold" style="margin-bottom:20px;">${title}</h2>
+            <p style="color:#777;margin-bottom:20px;">Função em desenvolvimento.</p>
+            <button onclick="history.back()" class="btn-gold" style="width:auto;padding:10px 20px;">Voltar</button>
+        </div>
+    `;
+}
+
+/* ============================================================
+   ROTEADOR DE TELAS
+============================================================ */
+function router() {
+    const container = document.getElementById("app-container");
+    const hash = window.location.hash;
+
+    if (!state.quizDone) {
+        startQuiz();
+        return;
+    }
+
+    switch (hash) {
+        case "":
+        case "#/":
+            container.innerHTML = renderHome();
+            break;
+        case "#videos":
+            container.innerHTML = renderVideoPage();
+            break;
+        case "#bonus":
+            container.innerHTML = renderBonusPage();
+            break;
+        case "#protocolos":
+            container.innerHTML = renderGeneric("Protocolos");
+            break;
+        case "#renda":
+            container.innerHTML = renderGeneric("Escala de Renda");
+            break;
+        case "#blueprint":
+            container.innerHTML = renderGeneric("Blueprint Mental");
+            break;
+        case "#planos":
+            container.innerHTML = renderPlansPage();
+            break;
+        case "#config":
+            container.innerHTML = renderSettingsPage();
+            break;
+        default:
+            container.innerHTML = renderGeneric("Em breve");
+    }
+}
+
+/* ============================================================
+   MENU LATERAL
+============================================================ */
+function toggleDrawer() {
+    const drawer = document.getElementById("drawer");
+    const overlay = document.getElementById("drawer-overlay");
+
+    if (drawer.style.transform === "translateX(0%)") {
+        drawer.style.transform = "translateX(-100%)";
+        overlay.style.display = "none";
+    } else {
+        drawer.style.transform = "translateX(0%)";
+        overlay.style.display = "block";
+    }
+}
+
+window.addEventListener("hashchange", router);
+window.addEventListener("load", router);
+</script>
 </body>
 </html>
-
-
-
