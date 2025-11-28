@@ -1,14 +1,15 @@
 import { createClient } from "@supabase/supabase-js";
 
+// 🔥 Troque pela sua ANON KEY
+const supabase = createClient(
+  "https://vrhmadjnjcakvzwse.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind3eHZyaG1hZGpuamNha3Z6d3NlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM4NDgxNDYsImV4cCI6MjA3OTQyNDE0Nn0.7TDKS3a7hLf10iao5Y-Dv8Q7YML2IIRzF8--KeRfb-0" 
+);
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Método não permitido" });
   }
-
-  const supabase = createClient(
-    process.env.SUPABASE_URL,
-    process.env.SUPABASE_ANON_KEY
-  );
 
   const { email, password } = req.body;
 
@@ -24,15 +25,21 @@ export default async function handler(req, res) {
 
   const userId = authData.user.id;
 
-  // Criar plano inicial FREE
-  await supabase.from("usa_planos").insert([
-    {
-      id: userId,
-      email,
-      plano: "free",
-      renovacao: null,
-    },
-  ]);
+  // Criar o registro do usuário na tabela 'usuarios'
+  const { error: insertError } = await supabase.from("usuarios").insert({
+    id_autenticacao: userId,
+    email: email,
+    nome: "",
+    plano: "visionário",
+    criado_em: new Date(),
+  });
 
-  return res.status(200).json({ message: "Conta criada com sucesso!", user: authData.user });
+  if (insertError) {
+    return res.status(500).json({ error: insertError.message });
+  }
+
+  return res.status(200).json({
+    message: "Usuário criado com sucesso!",
+    user_id: userId,
+  });
 }
