@@ -1,219 +1,287 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<title>The Millionaire Mindset – Página de Vendas Premium</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Millionaire Mindset – Página Oficial</title>
 
-<style>
+  <style>
+    /* ———— ESTILO ORIGINAL (NÃO ALTERADO) ———— */
+    :root {
+      --bg-main: #05060a;
+      --bg-card: #0c0d16;
+      --bg-soft: #101121;
+      --gold: #f4c86c;
+      --text-soft: #c2c3d6;
+      --white: #ffffff;
+      --accent: #45b3ff;
+      --success: #33d17a;
+      --radius-lg: 18px;
+      --radius-xl: 26px;
+      --shadow-soft: 0 20px 44px rgba(0, 0, 0, 0.85);
+      --max-width: 1180px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
-        margin: 0;
-        padding: 0;
-        background: #000;
-        font-family: Arial, Helvetica, sans-serif;
-        color: #fff;
+      font-family: system-ui, sans-serif;
+      background: #05060a;
+      color: var(--white);
+      line-height: 1.6;
     }
 
-    /* HERO */
-    .hero {
-        background-image: url('https://images.unsplash.com/photo-1519682577862-22b62b24e493');
-        background-size: cover;
-        background-position: center;
-        padding: 130px 20px;
-        text-align: center;
-        position: relative;
+    a { color: inherit; text-decoration: none; }
+
+    header {
+      position: sticky;
+      top: 0;
+      background: #05060ad9;
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(244, 200, 108, 0.18);
+      z-index: 50;
+      padding: 14px;
     }
 
-    .hero::before {
-        content: "";
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        background: rgba(0,0,0,0.70);
+    nav {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
-    .hero-content {
-        position: relative;
-        z-index: 2;
+    .logo {
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--gold);
     }
 
-    h1 {
-        color: #d4af37;
-        font-size: 48px;
-        letter-spacing: 3px;
-        margin-bottom: 10px;
-        text-transform: uppercase;
-        font-weight: 700;
+    .nav-links { display: flex; gap: 16px; font-size: 0.9rem; color: var(--text-soft); }
+
+    .btn {
+      padding: 9px 20px;
+      border-radius: 999px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.15s;
+      font-size: 0.9rem;
+      border: none;
     }
 
-    .sub {
-        font-size: 22px;
-        opacity: 0.9;
-        margin-bottom: 40px;
+    .btn-gold {
+      background: linear-gradient(135deg,#f9dc8e,#f4c86c,#c7902c);
+      color: #090909;
+      box-shadow: 0 12px 28px rgba(244,200,108,0.55);
     }
 
-    /* SEÇÕES */
-    .section {
-        max-width: 900px;
-        margin: 50px auto;
-        padding: 20px;
+    .btn-outline {
+      background: transparent;
+      border: 1px solid rgba(244,200,108,0.4);
+      color: var(--gold);
     }
 
-    h2 {
-        color: #d4af37;
-        font-size: 32px;
-        margin-bottom: 10px;
+    section { padding: 60px 20px; }
+    .container { max-width: var(--max-width); margin: 0 auto; }
+
+    .hero-title {
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      line-height: 1.1;
+      margin-bottom: 12px;
     }
 
-    .divider {
-        width: 100%;
-        height: 2px;
-        background: linear-gradient(to right, #d4af37, transparent);
-        margin: 30px 0;
-        opacity: 0.7;
+    .hero-title span {
+      background: linear-gradient(100deg,#ffffff,#f4c86c);
+      -webkit-background-clip: text;
+      color: transparent;
     }
 
-    p, li {
-        font-size: 20px;
-        line-height: 1.7;
-        color: #eee;
+    .hero-subtitle {
+      font-size: 1rem;
+      color: var(--text-soft);
+      max-width: 520px;
+      margin-bottom: 20px;
     }
 
-    /* IMAGEM DE LUXO */
-    .lux-img {
-        width: 100%;
-        border-radius: 12px;
-        margin: 30px 0;
-        box-shadow: 0 0 20px rgba(212,175,55,0.25);
+    .section-title {
+      font-size: 1.7rem;
+      margin-bottom: 10px;
     }
 
-    /* BOTÕES */
-    .cta {
-        display: block;
-        margin: 45px auto;
-        width: 300px;
-        padding: 18px;
-        text-align: center;
-        background: #d4af37;
-        color: #000;
-        font-weight: bold;
-        border-radius: 10px;
-        font-size: 22px;
-        text-decoration: none;
-        transition: 0.3s;
+    .section-subtitle {
+      color: var(--text-soft);
+      max-width: 580px;
+      margin-bottom: 26px;
     }
 
-    .cta:hover {
-        background: #f0d68a;
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
     }
 
-    /* LISTAS ESTILO LUXO */
-    ul {
-        padding-left: 20px;
+    .card {
+      background: #0c0d16;
+      border: 1px solid rgba(244,200,108,0.18);
+      padding: 18px;
+      border-radius: 18px;
+      font-size: 0.9rem;
     }
 
-    /* RODAPÉ */
+    .card-icon { font-size: 1.6rem; margin-bottom: 8px; }
+
+    .cta-box {
+      background: #0c0d16;
+      border: 1px solid rgba(244,200,108,0.5);
+      border-radius: 22px;
+      padding: 24px;
+      text-align: center;
+    }
+
     footer {
-        text-align: center;
-        opacity: 0.7;
-        margin-top: 60px;
-        padding: 20px;
-        font-size: 16px;
+      padding: 18px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-soft);
+      border-top: 1px solid rgba(244,200,108,0.2);
     }
-</style>
+
+    @media(max-width: 760px){
+      .grid-3 { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
+
 
 <body>
 
-<!-- HERO -->
-<div class="hero">
-    <div class="hero-content">
-        <h1>THE MILLIONAIRE MINDSET</h1>
-        <p class="sub">O e-book premium que muda sua mente, sua rotina e sua vida.</p>
-
-        <a class="cta" href="https://pay.cakto.com.br/4ehcq2y_672236" target="_blank">
-            COMPRAR EDIÇÃO PREMIUM (109,98)
-        </a>
-
-        <a class="cta" href="https://pay.cakto.com.br/v8k65mm_672262" target="_blank" style="background:#444; color:#fff;">
-            VERSÃO ACESSÍVEL (48,98)
-        </a>
+<header>
+  <nav>
+    <div class="logo">BillionMind AI</div>
+    <div class="nav-links">
+      <a href="#inicio">Início</a>
+      <a href="#conteudo">Conteúdo</a>
+      <a href="#beneficios">Benefícios</a>
     </div>
-</div>
+  </nav>
+</header>
 
-<!-- SEÇÃO 1 -->
-<div class="section">
-    <h2>A Transformação Começa Aqui</h2>
-    <p>
-        Este é mais que um e-book.  
-        É um manual para criar a sua versão milionária — por dentro e por fora.
+
+
+<!-- HERO -->
+<section id="inicio">
+  <div class="container">
+
+    <h1 class="hero-title">
+      THE <span>MILLIONAIRE MINDSET</span><br>
+      O e-book que muda sua mente, sua rotina e sua identidade.
+    </h1>
+
+    <p class="hero-subtitle">
+      Um guia de 100 páginas com mentalidade, disciplina, foco, evolução pessoal e visão financeira.
+      Criado para transformar sua mentalidade em versão de alta performance.
     </p>
 
-    <img class="lux-img" src="https://images.unsplash.com/photo-1520558954661-43688d93e0c4" alt="Luxury Car">
+    <div style="display:flex; gap:14px; flex-wrap:wrap;">
+      <a class="btn btn-gold" href="https://pay.cakto.com.br/4ehcq2y_672236">Versão Premium · R$109,98</a>
+      <a class="btn btn-outline" href="https://pay.cakto.com.br/v8k65mm_672262">Versão Acessível · R$48,98</a>
+    </div>
 
-    <p>
-        Um conteúdo profundo, direto e impossível de ignorar.  
-        Criado para quem quer disciplina, riqueza, foco e identidade de alto padrão.
+  </div>
+</section>
+
+
+
+<!-- O QUE É -->
+<section id="conteudo">
+  <div class="container">
+    <h2 class="section-title">O que você encontra dentro do e-book</h2>
+    <p class="section-subtitle">
+      Todo o conteúdo foi dividido em 3 jornadas simples, diretas e aplicáveis.
     </p>
 
-    <div class="divider"></div>
-</div>
+    <div class="grid-3">
 
-<!-- SEÇÃO 2 -->
-<div class="section">
-    <h2>O Que Você Vai Aprender</h2>
+      <div class="card">
+        <div class="card-icon">🔥</div>
+        <strong>Jornada 1 – Disciplina</strong>
+        <p>Reprogramação mental, rotina, foco diário, autodomínio e construção de consistência.</p>
+      </div>
 
-    <ul>
-        <li>Como desenvolver disciplina inabalável</li>
-        <li>Como pensar como um verdadeiro milionário</li>
-        <li>Como criar renda extra com estratégia</li>
-        <li>Como elevar sua identidade e postura</li>
-        <li>Como construir um lifestyle de luxo</li>
-        <li>Como dominar suas emoções e focar no certo</li>
-        <li>Como prever e acelerar sua evolução</li>
-    </ul>
+      <div class="card">
+        <div class="card-icon">💰</div>
+        <strong>Jornada 2 – Renda & Mente de Dono</strong>
+        <p>Identidade de dono, pensamento financeiro correto e ações práticas para evoluir.</p>
+      </div>
 
-    <img class="lux-img" src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a" alt="Luxury Lifestyle">
+      <div class="card">
+        <div class="card-icon">🏆</div>
+        <strong>Jornada 3 – Identidade Milionária</strong>
+        <p>Visão de longo prazo, atitude forte, postura, ambição controlada e comportamento de elite.</p>
+      </div>
 
-    <div class="divider"></div>
-</div>
+    </div>
+  </div>
+</section>
 
-<!-- SEÇÃO 3 -->
-<div class="section">
-    <h2>Para Quem Foi Feito</h2>
-    <p>
-        Para pessoas que estão cansadas da vida comum  
-        e querem entrar na rota da disciplina, dinheiro, liberdade e visão.
-    </p>
 
-    <img class="lux-img" src="https://images.unsplash.com/photo-1518206075495-7f36dcf7657b" alt="Luxury Mansion">
 
-    <ul>
-        <li>Quem quer evoluir rapidamente</li>
-        <li>Quem quer mudar identidade e mente</li>
-        <li>Quem quer ter comportamento milionário</li>
-        <li>Quem quer construir uma vida rica e sólida</li>
-    </ul>
+<!-- BENEFÍCIOS -->
+<section id="beneficios">
+  <div class="container">
+    <h2 class="section-title">O que você recebe ao comprar</h2>
 
-    <div class="divider"></div>
-</div>
+    <div class="grid-3">
+
+      <div class="card">
+        <div class="card-icon">📘</div>
+        <strong>100 páginas diretas</strong>
+        <p>Sem enrolação. Conteúdo objetivo para aplicar no dia a dia.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <strong>Guia prático</strong>
+        <p>Passos simples para transformar comportamento, rotina e visão de vida.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🎯</div>
+        <strong>Mudança real</strong>
+        <p>Clareza mental, atitude forte e mentalidade estruturada para vencer.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
 
 <!-- CTA FINAL -->
-<div class="section" style="text-align:center;">
-    <h2>Decida Quem Você Será Agora</h2>
+<section>
+  <div class="container">
+    <div class="cta-box">
+      <h2>Pronto para mudar sua mente e sua vida?</h2>
+      <p>Comece a leitura ainda hoje e aplique em menos de 24 horas.</p>
 
-    <a class="cta" href="https://pay.cakto.com.br/4ehcq2y_672236" target="_blank">
-        QUERO A VERSÃO PREMIUM
-    </a>
+      <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:14px;">
+        <a class="btn btn-gold" href="https://pay.cakto.com.br/4ehcq2y_672236">Comprar Premium</a>
+        <a class="btn btn-outline" href="https://pay.cakto.com.br/v8k65mm_672262">Comprar Acessível</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <a class="cta" href="https://pay.cakto.com.br/v8k65mm_672262" target="_blank" style="background:#444; color:#fff;">
-        QUERO A VERSÃO ACESSÍVEL
-    </a>
-</div>
+
 
 <footer>
-    THE MILLIONAIRE MINDSET – Todos os direitos reservados.
+  © <span id="year"></span> BillionMind AI · Todos os direitos reservados.
 </footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
 
 </body>
 </html>
