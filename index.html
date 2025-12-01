@@ -1,229 +1,363 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>BillionMind · Método da Mente Lucrativa 2026</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Método da Mente Lucrativa 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #0f0f0f;
+      --gold: #ffd700;
+      --gold-light: #ffed4e;
+      --dark-gold: #b89700;
+    }
 
-<style>
+    * { margin:0; padding:0; box-sizing:border-box; }
     body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        color: #fff;
-        background: #000;
-        overflow-x: hidden;
+      font-family: 'Inter', sans-serif;
+      background: var(--black);
+      color: #fff;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
     }
 
-    /* FUNDO ANIMADO BILLIONMIND — OPÇÃO 1 */
-    .animated-bg {
-        position: fixed;
-        top: 0; 
-        left: 0;
-        width: 100%; 
-        height: 100%;
-        background: 
-            radial-gradient(circle at 20% 30%, rgba(255,215,100,0.25), transparent 60%),
-            radial-gradient(circle at 80% 70%, rgba(255,170,60,0.22), transparent 60%),
-            radial-gradient(circle at 50% 50%, rgba(255,180,80,0.14), transparent 70%);
-        animation: luxuryMove 16s infinite alternate ease-in-out;
-        filter: blur(40px);
-        z-index: -1;
+    /* Fundo animado BillionMind PRO */
+    .bg-animation {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background: radial-gradient(circle at 20% 80%, #1a1400 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, #332200 0%, transparent 50%),
+                  #000;
+      overflow: hidden;
     }
+    .bg-animation::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-conic-gradient(from 0deg at 50% 50%, #ffd70011 0deg, transparent 15deg, transparent 30deg, #ffd70011 45deg);
+      animation: rotate 30s linear infinite;
+      opacity: 0.6;
+    }
+    .bg-animation::after {
+      content: '';
+      position: absolute;
+      width: 800px; height: 800px;
+      background: radial-gradient(circle, #ffd70033 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      animation: pulse 8s ease-in-out infinite;
+      filter: blur(80px);
+    }
+    @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes pulse { 0%,100% { transform: translate(-50%,-50%) scale(1); } 50% { transform: translate(-50%,-50%) scale(1.3); } }
 
-    @keyframes luxuryMove {
-        0% {
-            transform: scale(1) translate(0,0);
-            opacity: 0.50;
-        }
-        50% {
-            transform: scale(1.3) translate(-40px,20px);
-            opacity: 0.75;
-        }
-        100% {
-            transform: scale(1.1) translate(30px,-20px);
-            opacity: 0.60;
-        }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 2;
     }
 
     /* HERO */
     .hero {
-        padding: 60px 20px;
-        text-align: center;
+      text-align: center;
+      padding: 140px 20px 100px;
+      position: relative;
+    }
+    .hero h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(48px, 10vw, 120px);
+      font-weight: 900;
+      background: linear-gradient(90deg, #ffd700, #ffed4e, #ffd700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.1;
+      text-shadow: 0 0 40px rgba(255,215,0,0.5);
+    }
+    .hero p {
+      font-size: clamp(20px, 4vw, 32px);
+      margin-top: 30px;
+      color: #e0e0e0;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.5;
     }
 
-    h1 {
-        font-size: 2.6rem;
-        font-weight: 900;
-        background: linear-gradient(90deg, #ffdd99, #ffffff);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 12px;
+    /* Seção O que você vai dominar */
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(36px, 7vw, 64px);
+      text-align: center;
+      margin: 100px 0 60px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .benefits {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      margin-bottom: 120px;
+    }
+    .benefit-card {
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,215,0,0.3);
+      border-radius: 20px;
+      padding: 40px 30px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6), inset 0 0 20px rgba(255,215,0,0.08);
+      transition: all 0.4s;
+    }
+    .benefit-card:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 20px 50px rgba(255,215,0,0.2);
+      border-color: var(--gold);
+    }
+    .benefit-card h3 {
+      font-size: 24px;
+      margin-bottom: 16px;
+      color: var(--gold);
     }
 
-    p.sub {
-        font-size: 1.15rem;
-        color: #e8e8e8;
-        max-width: 700px;
-        margin: 10px auto 0 auto;
-        line-height: 1.45;
+    /* Ofertas */
+    .offers {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 40px;
+      margin: 100px 0;
     }
-
-    .section {
-        padding: 45px 20px;
-        max-width: 850px;
-        margin: auto;
+    .offer-card {
+      background: rgba(20,20,20,0.7);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,215,0,0.4);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+      transition: all 0.4s;
+      position: relative;
     }
-
-    h2 {
-        font-size: 1.9rem;
-        margin-bottom: 10px;
-        background: linear-gradient(90deg, #ffdd99, #fff);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+    .offer-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent 30%, rgba(255,215,0,0.08) 100%);
+      pointer-events: none;
     }
-
-    ul {
-        color: #f0f0f0;
-        font-size: 1.05rem;
-        line-height: 1.7;
-        margin-top: 12px;
+    .offer-header {
+      background: linear-gradient(90deg, #1a1400, #332200);
+      padding: 30px;
+      text-align: center;
+      border-bottom: 1px solid var(--gold);
     }
-
-    /* CAIXAS DE OFERTA */
-    .offer-box {
-        background: rgba(0, 0, 0, 0.55);
-        padding: 25px;
-        border-radius: 14px;
-        margin-bottom: 30px;
-        border: 1px solid rgba(255,210,100,0.30);
-        box-shadow: 0 0 22px rgba(255,190,80,0.18);
-        backdrop-filter: blur(10px);
+    .offer-header h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 28px;
+      color: var(--gold);
     }
-
-    .offer-title {
-        font-size: 1.4rem;
-        font-weight: 700;
-        color: #ffdd99;
-        margin-bottom: 5px;
+    .price {
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--gold);
+      margin: 20px 0;
     }
-
-    .offer-price {
-        font-size: 1.8rem;
-        font-weight: 900;
-        margin-bottom: 15px;
+    .offer-body {
+      padding: 40px 30px;
     }
-
+    .offer-body ul {
+      list-style: none;
+      space-y-4;
+    }
+    .offer-body li {
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      color: #ddd;
+      position: relative;
+      padding-left: 30px;
+    }
+    .offer-body li::before {
+      content: '✓';
+      color: var(--gold);
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+    .urgency {
+      text-align: center;
+      color: #ff4444;
+      font-weight: 600;
+      margin: 20px 0 30px;
+      font-size: 18px;
+    }
     .btn {
-        display: block;
-        width: 100%;
-        text-align: center;
-        background: linear-gradient(135deg, #ffdd99, #c79c50);
-        padding: 14px;
-        border-radius: 10px;
-        font-size: 1.20rem;
-        color: #000;
-        text-decoration: none;
-        font-weight: 900;
-        margin-top: 12px;
-        box-shadow: 0 0 22px rgba(255,215,120,0.55);
+      display: block;
+      width: 100%;
+      padding: 20px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      color: #000;
+      font-size: 22px;
+      font-weight: 700;
+      text-align: center;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      box-shadow: 0 10px 30px rgba(255,215,0,0.4);
     }
-
     .btn:hover {
-        transform: scale(1.03);
-        transition: 0.2s;
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(255,215,0,0.6);
     }
 
-    .urgencia {
-        color: #ff6b6b;
-        font-size: .92rem;
-        margin-top: 8px;
-        font-weight: 600;
+    /* Fechamento */
+    .closing {
+      text-align: center;
+      padding: 120px 20px;
+      background: rgba(0,0,0,0.5);
+      border-radius: 30px;
+      margin: 100px 20px;
+      border: 1px solid rgba(255,215,0,0.3);
+    }
+    .closing h2 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(40px, 8vw, 72px);
+      margin-bottom: 30px;
+      color: var(--gold);
     }
 
-    .footer {
-        text-align: center;
-        padding: 40px 20px;
-        color: #aaa;
-        font-size: .9rem;
-        margin-top: 20px;
+    /* Rodapé */
+    footer {
+      text-align: center;
+      padding: 60px 20px;
+      color: #666;
+      font-size: 16px;
+      border-top: 1px solid rgba(255,215,0,0.2);
     }
 
-</style>
+    @media (max-width: 768px) {
+      .hero { padding: 100px 20px 60px; }
+      .offers { grid-template-columns: 1fr; padding: 0 20px; }
+      .benefits { padding: 0 20px; }
+    }
+  </style>
 </head>
-
 <body>
 
-<div class="animated-bg"></div>
+  <div class="bg-animation"></div>
 
-<section class="hero">
-    <h1>Método da Mente Lucrativa 2026</h1>
-    <p class="sub">
-        O ensinamento definitivo que mostra como criar seu próprio sistema,
-        construir mentalidade lucrativa e usar a inteligência artificial a seu favor.
-    </p>
-</section>
+  <div class="container">
 
-<section class="section">
-    <h2>O que você vai dominar</h2>
-    <ul>
-        <li>• Como criar um aplicativo funcional usando ferramentas modernas e IA.</li>
-        <li>• Como desenvolver uma mentalidade que transforma foco em lucro.</li>
-        <li>• Um sistema completo para disciplina diária e execução.</li>
-        <li>• Como montar produtos digitais, planos e estrutura profissional.</li>
-        <li>• Como pensar, agir e decidir como um criador 2026+.</li>
-        <li>• Fluxo técnico completo: página, design, Supabase, assinaturas e Vercel.</li>
-        <li>• Acesso ao meu canal exclusivo para tirar dúvidas diretamente.</li>
-    </ul>
-</section>
+    <!-- HERO -->
+    <section class="hero">
+      <h1>Método da Mente Lucrativa 2026</h1>
+      <p>O ensinamento definitivo que mostra como criar seu próprio sistema, construir mentalidade lucrativa e usar a inteligência artificial a seu favor.</p>
+    </section>
 
-<section class="section">
-
-    <div class="offer-box">
-        <div class="offer-title">🔥 Acesso Total · Premium</div>
-        <div class="offer-price">R$109,98</div>
-        <ul>
-            <li>✔ Conteúdo completo (mentalidade + criação + estrutura)</li>
-            <li>✔ Modelos prontos, imagens e exemplos reais</li>
-            <li>✔ Acesso ao canal exclusivo</li>
-        </ul>
-        <a class="btn" href="https://pay.cakto.com.br/4ehcq2y_672236">Quero Acesso Total</a>
-        <div class="urgencia">Vagas limitadas — pode encerrar a qualquer momento.</div>
+    <!-- O QUE VOCÊ VAI DOMINAR -->
+    <h2 class="section-title">O Que Você Vai Dominar</h2>
+    <div class="benefits">
+      <div class="benefit-card">
+        <h3>Criação de Apps com IA</h3>
+        <p>Como criar um aplicativo funcional usando ferramentas modernas e inteligência artificial.</p>
+      </div>
+      <div class="benefit-card">
+        <h3>Mentalidade Lucrativa</h3>
+        <p>Como desenvolver uma mentalidade que transforma foco em lucro real.</p>
+      </div>
+      <div class="benefit-card">
+        <h3>Sistema de Disciplina</h3>
+        <p>Um sistema completo para disciplina diária e execução implacável.</p>
+      </div>
+      <div class="benefit-card">
+        <h3>Estrutura de Produtos Digitais</h3>
+        <p>Como montar produtos digitais, planos e estrutura profissional do zero.</p>
+      </div>
+      <div class="benefit-card">
+        <h3>Pensamento 2026+</h3>
+        <p>Como pensar, agir e decidir como um criador de alto nível em 2026 e além.</p>
+      </div>
+      <div class="benefit-card">
+        <h3>Fluxo Técnico Completo</h3>
+        <p>Página, design, Supabase, assinaturas, Vercel — tudo pronto para usar.</p>
+      </div>
     </div>
 
-    <div class="offer-box">
-        <div class="offer-title">💡 Versão Acessível</div>
-        <div class="offer-price">R$48,98</div>
-        <ul>
-            <li>✔ Conteúdo principal completo</li>
-            <li>✔ Parte estratégica + parte técnica</li>
-        </ul>
-        <a class="btn" href="https://pay.cakto.com.br/v8k65mm_672262">Liberar Acesso</a>
-        <div class="urgencia">Disponível por pouco tempo.</div>
+    <!-- OFERTAS -->
+    <div class="offers">
+
+      <!-- OFERTA PREMIUM -->
+      <div class="offer-card">
+        <div class="offer-header">
+          <h3>🔥 Acesso Total · Premium</h3>
+          <div class="price">R$ 109,98</div>
+        </div>
+        <div class="offer-body">
+          <ul>
+            <li>Conteúdo completo (mentalidade + criação + estrutura)</li>
+            <li>Modelos prontos, imagens e exemplos reais</li>
+            <li>Acesso ao canal exclusivo para dúvidas</li>
+          </ul>
+          <div class="urgency">Vagas limitadas — pode encerrar a qualquer momento.</div>
+          <a href="https://pay.cakto.com.br/4ehcq2y_672236" class="btn" target="_blank">Quero Acesso Total</a>
+        </div>
+      </div>
+
+      <!-- OFERTA ACESSÍVEL -->
+      <div class="offer-card">
+        <div class="offer-header">
+          <h3>💡 Versão Acessível</h3>
+          <div class="price">R$ 48,98</div>
+        </div>
+        <div class="offer-body">
+          <ul>
+            <li>Conteúdo principal completo</li>
+            <li>Parte estratégica + parte técnica</li>
+          </ul>
+          <div class="urgency">Disponível por pouco tempo.</div>
+          <a href="https://pay.cakto.com.br/v8k65mm_672262" class="btn" target="_blank">Liberar Acesso</a>
+        </div>
+      </div>
+
+      <!-- OFERTA LITE -->
+      <div class="offer-card">
+        <div class="offer-header">
+          <h3>⚡ Opção Lite · Essencial</h3>
+          <div class="price">R$ 29,99</div>
+        </div>
+        <div class="offer-body">
+          <ul>
+            <li>Conteúdo essencial para começar</li>
+            <li>Mentalidade + início técnico</li>
+          </ul>
+          <div class="urgency">Enquanto houver vagas.</div>
+          <a href="https://pay.cakto.com.br/3eprkrv_672949" class="btn" target="_blank">Começar Agora</a>
+        </div>
+      </div>
+
     </div>
 
-    <div class="offer-box">
-        <div class="offer-title">⚡ Opção Lite · Essencial</div>
-        <div class="offer-price">R$29,99</div>
-        <ul>
-            <li>✔ Conteúdo essencial para começar</li>
-            <li>✔ Mentalidade + início técnico</li>
-        </ul>
-        <a class="btn" href="https://pay.cakto.com.br/3eprkrv_672949">Começar Agora</a>
-        <div class="urgencia">Enquanto houver vagas.</div>
-    </div>
-
-</section>
-
-<section class="section" style="text-align:center;">
-    <h2>Pronto para ativar sua mente lucrativa?</h2>
-    <p style="color:#e6e6e6;margin-top:8px;">
+    <!-- FECHAMENTO -->
+    <div class="closing">
+      <h2>Pronto para ativar sua mente lucrativa?</h2>
+      <p style="font-size:22px; max-width:800px; margin:0 auto; color:#ccc;">
         Todo o ensinamento foi criado para você evoluir rápido e entrar na era 2026+ com vantagem.
-    </p>
-</section>
+      </p>
+    </div>
 
-<div class="footer">
+  </div>
+
+  <!-- RODAPÉ -->
+  <footer>
     © 2026 · BillionMind AI · Todos os direitos reservados.
-</div>
+  </footer>
 
 </body>
 </html>
