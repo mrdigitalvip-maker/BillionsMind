@@ -1,287 +1,232 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Millionaire Mindset – Página Oficial</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BillionMind · Método da Mente Lucrativa 2026</title>
 
-  <style>
-    /* ———— ESTILO ORIGINAL (NÃO ALTERADO) ———— */
-    :root {
-      --bg-main: #05060a;
-      --bg-card: #0c0d16;
-      --bg-soft: #101121;
-      --gold: #f4c86c;
-      --text-soft: #c2c3d6;
-      --white: #ffffff;
-      --accent: #45b3ff;
-      --success: #33d17a;
-      --radius-lg: 18px;
-      --radius-xl: 26px;
-      --shadow-soft: 0 20px 44px rgba(0, 0, 0, 0.85);
-      --max-width: 1180px;
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
+<style>
     body {
-      font-family: system-ui, sans-serif;
-      background: #05060a;
-      color: var(--white);
-      line-height: 1.6;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        color: #fff;
+        background: #000;
+        overflow-x: hidden;
     }
 
-    a { color: inherit; text-decoration: none; }
-
-    header {
-      position: sticky;
-      top: 0;
-      background: #05060ad9;
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(244, 200, 108, 0.18);
-      z-index: 50;
-      padding: 14px;
+    /* ANIMAÇÃO DO FUNDO */
+    .animated-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at 30% 30%, rgba(255,200,70,0.08) 0%, transparent 60%),
+                    radial-gradient(circle at 70% 70%, rgba(255,150,50,0.06) 0%, transparent 60%);
+        animation: moveGlow 12s infinite alternate ease-in-out;
+        z-index: -1;
+        filter: blur(40px);
     }
 
-    nav {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    @keyframes moveGlow {
+        0% {
+            transform: translate(0px, 0px) scale(1);
+            opacity: 0.50;
+        }
+        50% {
+            transform: translate(40px, -20px) scale(1.2);
+            opacity: 0.70;
+        }
+        100% {
+            transform: translate(-20px, 30px) scale(1.1);
+            opacity: 0.55;
+        }
     }
 
-    .logo {
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--gold);
+    /* HERO */
+    .hero {
+        padding: 60px 20px;
+        text-align: center;
     }
 
-    .nav-links { display: flex; gap: 16px; font-size: 0.9rem; color: var(--text-soft); }
+    h1 {
+        font-size: 2.5rem;
+        font-weight: 900;
+        background: linear-gradient(90deg, #f7c86a, #ffffff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 12px;
+    }
+
+    p.sub {
+        font-size: 1.15rem;
+        color: #cfcfcf;
+        max-width: 700px;
+        margin: 10px auto 0 auto;
+        line-height: 1.4;
+    }
+
+    /* SECTIONS */
+    .section {
+        padding: 45px 20px;
+        max-width: 850px;
+        margin: auto;
+        backdrop-filter: blur(3px);
+    }
+
+    h2 {
+        font-size: 1.9rem;
+        margin-bottom: 10px;
+        background: linear-gradient(90deg, #f7c86a, #fff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    ul {
+        color: #d7d7d7;
+        font-size: 1.05rem;
+        line-height: 1.7;
+        margin-top: 12px;
+    }
+
+    /* BOXES */
+    .offer-box {
+        background: rgba(10,10,10,0.7);
+        padding: 25px;
+        border-radius: 14px;
+        margin-bottom: 30px;
+        border: 1px solid rgba(247,200,106,0.25);
+        box-shadow: 0 0 20px rgba(247,200,106,0.15);
+        backdrop-filter: blur(6px);
+    }
+
+    .offer-title {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #f7c86a;
+        margin-bottom: 5px;
+    }
+
+    .offer-price {
+        font-size: 1.8rem;
+        font-weight: 900;
+        margin-bottom: 15px;
+    }
 
     .btn {
-      padding: 9px 20px;
-      border-radius: 999px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.15s;
-      font-size: 0.9rem;
-      border: none;
+        display: block;
+        width: 100%;
+        text-align: center;
+        background: linear-gradient(135deg, #f7c86a, #b88c32);
+        padding: 14px;
+        border-radius: 8px;
+        font-size: 1.15rem;
+        color: #000;
+        text-decoration: none;
+        font-weight: 900;
+        margin-top: 12px;
+        box-shadow: 0 0 22px rgba(247,200,106,0.50);
     }
 
-    .btn-gold {
-      background: linear-gradient(135deg,#f9dc8e,#f4c86c,#c7902c);
-      color: #090909;
-      box-shadow: 0 12px 28px rgba(244,200,108,0.55);
+    .btn:hover {
+        transform: scale(1.03);
+        transition: 0.2s;
     }
 
-    .btn-outline {
-      background: transparent;
-      border: 1px solid rgba(244,200,108,0.4);
-      color: var(--gold);
+    .urgencia {
+        color: #ff6464;
+        font-size: .92rem;
+        margin-top: 8px;
+        font-weight: 600;
     }
 
-    section { padding: 60px 20px; }
-    .container { max-width: var(--max-width); margin: 0 auto; }
-
-    .hero-title {
-      font-size: clamp(2rem, 3vw, 2.8rem);
-      line-height: 1.1;
-      margin-bottom: 12px;
+    .footer {
+        text-align: center;
+        padding: 40px 20px;
+        color: #777;
+        font-size: .9rem;
+        margin-top: 20px;
     }
+</style>
 
-    .hero-title span {
-      background: linear-gradient(100deg,#ffffff,#f4c86c);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .hero-subtitle {
-      font-size: 1rem;
-      color: var(--text-soft);
-      max-width: 520px;
-      margin-bottom: 20px;
-    }
-
-    .section-title {
-      font-size: 1.7rem;
-      margin-bottom: 10px;
-    }
-
-    .section-subtitle {
-      color: var(--text-soft);
-      max-width: 580px;
-      margin-bottom: 26px;
-    }
-
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .card {
-      background: #0c0d16;
-      border: 1px solid rgba(244,200,108,0.18);
-      padding: 18px;
-      border-radius: 18px;
-      font-size: 0.9rem;
-    }
-
-    .card-icon { font-size: 1.6rem; margin-bottom: 8px; }
-
-    .cta-box {
-      background: #0c0d16;
-      border: 1px solid rgba(244,200,108,0.5);
-      border-radius: 22px;
-      padding: 24px;
-      text-align: center;
-    }
-
-    footer {
-      padding: 18px;
-      text-align: center;
-      font-size: 0.85rem;
-      color: var(--text-soft);
-      border-top: 1px solid rgba(244,200,108,0.2);
-    }
-
-    @media(max-width: 760px){
-      .grid-3 { grid-template-columns: 1fr; }
-    }
-  </style>
 </head>
-
-
 <body>
 
-<header>
-  <nav>
-    <div class="logo">BillionMind AI</div>
-    <div class="nav-links">
-      <a href="#inicio">Início</a>
-      <a href="#conteudo">Conteúdo</a>
-      <a href="#beneficios">Benefícios</a>
-    </div>
-  </nav>
-</header>
-
-
+<div class="animated-bg"></div>
 
 <!-- HERO -->
-<section id="inicio">
-  <div class="container">
-
-    <h1 class="hero-title">
-      THE <span>MILLIONAIRE MINDSET</span><br>
-      O e-book que muda sua mente, sua rotina e sua identidade.
-    </h1>
-
-    <p class="hero-subtitle">
-      Um guia de 100 páginas com mentalidade, disciplina, foco, evolução pessoal e visão financeira.
-      Criado para transformar sua mentalidade em versão de alta performance.
+<section class="hero">
+    <h1>Método da Mente Lucrativa 2026</h1>
+    <p class="sub">
+        O ensinamento definitivo que mostra como criar seu próprio sistema,
+        construir mentalidade lucrativa e usar a inteligência artificial a seu favor.
     </p>
-
-    <div style="display:flex; gap:14px; flex-wrap:wrap;">
-      <a class="btn btn-gold" href="https://pay.cakto.com.br/4ehcq2y_672236">Versão Premium · R$109,98</a>
-      <a class="btn btn-outline" href="https://pay.cakto.com.br/v8k65mm_672262">Versão Acessível · R$48,98</a>
-    </div>
-
-  </div>
 </section>
 
+<!-- O QUE A PESSOA APRENDE -->
+<section class="section">
+    <h2>O que você vai dominar</h2>
+    <ul>
+        <li>• Como criar um aplicativo funcional usando ferramentas modernas e IA.</li>
+        <li>• Como desenvolver uma mentalidade que transforma foco em lucro.</li>
+        <li>• Um sistema completo para disciplina diária e execução.</li>
+        <li>• Como montar produtos digitais, planos e estrutura profissional.</li>
+        <li>• Como pensar, agir e decidir como um criador 2026+.</li>
+        <li>• Fluxo técnico completo: página, design, Supabase, assinaturas e Vercel.</li>
+        <li>• Acesso ao meu canal exclusivo para tirar dúvidas diretamente.</li>
+    </ul>
+</section>
 
+<!-- OFERTAS -->
+<section class="section">
 
-<!-- O QUE É -->
-<section id="conteudo">
-  <div class="container">
-    <h2 class="section-title">O que você encontra dentro do e-book</h2>
-    <p class="section-subtitle">
-      Todo o conteúdo foi dividido em 3 jornadas simples, diretas e aplicáveis.
+    <div class="offer-box">
+        <div class="offer-title">🔥 Acesso Total · Versão Premium</div>
+        <div class="offer-price">R$109,98</div>
+        <ul>
+            <li>✔ Conteúdo completo (mentalidade + criação + estrutura)</li>
+            <li>✔ Exemplos, imagens e modelos prontos</li>
+            <li>✔ Acesso ao canal exclusivo</li>
+        </ul>
+        <a class="btn" href="https://pay.cakto.com.br/4ehcq2y_672236">Quero Acesso Total</a>
+        <div class="urgencia">Vagas limitadas — pode encerrar a qualquer momento.</div>
+    </div>
+
+    <div class="offer-box">
+        <div class="offer-title">💡 Versão Acessível</div>
+        <div class="offer-price">R$48,98</div>
+        <ul>
+            <li>✔ Conteúdo principal completo</li>
+            <li>✔ Parte estratégica + técnica</li>
+        </ul>
+        <a class="btn" href="https://pay.cakto.com.br/v8k65mm_672262">Liberar Acesso</a>
+        <div class="urgencia">Disponível por pouco tempo.</div>
+    </div>
+
+    <div class="offer-box">
+        <div class="offer-title">⚡ Opção Lite · Essencial</div>
+        <div class="offer-price">R$29,99</div>
+        <ul>
+            <li>✔ Conteúdo essencial para começar</li>
+            <li>✔ Mentalidade + parte técnica inicial</li>
+        </ul>
+        <a class="btn" href="https://pay.cakto.com.br/3eprkrv_672949">Começar Agora</a>
+        <div class="urgencia">Enquanto houver vagas.</div>
+    </div>
+
+</section>
+
+<!-- FECHAMENTO -->
+<section class="section" style="text-align:center;">
+    <h2>Pronto para ativar sua mente lucrativa?</h2>
+    <p style="color:#cfcfcf;margin-top:8px;">
+       Todo o ensinamento foi criado para você evoluir rápido e entrar na era 2026+ com vantagem.
     </p>
-
-    <div class="grid-3">
-
-      <div class="card">
-        <div class="card-icon">🔥</div>
-        <strong>Jornada 1 – Disciplina</strong>
-        <p>Reprogramação mental, rotina, foco diário, autodomínio e construção de consistência.</p>
-      </div>
-
-      <div class="card">
-        <div class="card-icon">💰</div>
-        <strong>Jornada 2 – Renda & Mente de Dono</strong>
-        <p>Identidade de dono, pensamento financeiro correto e ações práticas para evoluir.</p>
-      </div>
-
-      <div class="card">
-        <div class="card-icon">🏆</div>
-        <strong>Jornada 3 – Identidade Milionária</strong>
-        <p>Visão de longo prazo, atitude forte, postura, ambição controlada e comportamento de elite.</p>
-      </div>
-
-    </div>
-  </div>
 </section>
 
-
-
-<!-- BENEFÍCIOS -->
-<section id="beneficios">
-  <div class="container">
-    <h2 class="section-title">O que você recebe ao comprar</h2>
-
-    <div class="grid-3">
-
-      <div class="card">
-        <div class="card-icon">📘</div>
-        <strong>100 páginas diretas</strong>
-        <p>Sem enrolação. Conteúdo objetivo para aplicar no dia a dia.</p>
-      </div>
-
-      <div class="card">
-        <div class="card-icon">⚡</div>
-        <strong>Guia prático</strong>
-        <p>Passos simples para transformar comportamento, rotina e visão de vida.</p>
-      </div>
-
-      <div class="card">
-        <div class="card-icon">🎯</div>
-        <strong>Mudança real</strong>
-        <p>Clareza mental, atitude forte e mentalidade estruturada para vencer.</p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-
-<!-- CTA FINAL -->
-<section>
-  <div class="container">
-    <div class="cta-box">
-      <h2>Pronto para mudar sua mente e sua vida?</h2>
-      <p>Comece a leitura ainda hoje e aplique em menos de 24 horas.</p>
-
-      <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:14px;">
-        <a class="btn btn-gold" href="https://pay.cakto.com.br/4ehcq2y_672236">Comprar Premium</a>
-        <a class="btn btn-outline" href="https://pay.cakto.com.br/v8k65mm_672262">Comprar Acessível</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
-<footer>
-  © <span id="year"></span> BillionMind AI · Todos os direitos reservados.
-</footer>
-
-<script>
-  document.getElementById("year").textContent = new Date().getFullYear();
-</script>
+<div class="footer">
+    © 2026 · BillionMind AI · Todos os direitos reservados.
+</div>
 
 </body>
 </html>
