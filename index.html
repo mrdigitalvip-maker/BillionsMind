@@ -1,422 +1,363 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Método da Mente Lucrativa 2026+ | BillionMind</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Método da Mente Lucrativa 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --gold: #f4c86c;
-      --gold-glow: #ffd700;
-      --blue-neon: #00eeff;
-      --bg-dark: #05070f;
-      --glass: rgba(10, 15, 40, 0.45);
-      --text: #e0e7ff;
+      --black: #0f0f0f;
+      --gold: #ffd700;
+      --gold-light: #ffed4e;
+      --dark-gold: #b89700;
     }
+
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
       font-family: 'Inter', sans-serif;
-      background: var(--bg-dark);
-      color: var(--text);
+      background: var(--black);
+      color: #fff;
       overflow-x: hidden;
       min-height: 100vh;
       position: relative;
     }
 
-    /* Fundo animado de luxo com partículas douradas */
-    #particles {
+    /* Fundo animado BillionMind PRO */
+    .bg-animation {
       position: fixed;
       inset: 0;
       z-index: -2;
+      background: radial-gradient(circle at 20% 80%, #1a1400 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, #332200 0%, transparent 50%),
+                  #000;
+      overflow: hidden;
     }
-    canvas { display: block; }
-
-    /* Brilho dourado pulsante no fundo */
-    .glow-bg {
-      position: fixed;
-      width: 1200px; height: 1200px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(244,200,108,0.18) 0%, transparent 70%);
+    .bg-animation::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-conic-gradient(from 0deg at 50% 50%, #ffd70011 0deg, transparent 15deg, transparent 30deg, #ffd70011 45deg);
+      animation: rotate 30s linear infinite;
+      opacity: 0.6;
+    }
+    .bg-animation::after {
+      content: '';
+      position: absolute;
+      width: 800px; height: 800px;
+      background: radial-gradient(circle, #ffd70033 0%, transparent 70%);
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      pointer-events: none;
-      animation: pulseGlow 15s infinite ease-in-out;
-      z-index: -1;
+      animation: pulse 8s ease-in-out infinite;
+      filter: blur(80px);
     }
-    @keyframes pulseGlow { 0%,100% { opacity: 0.3; transform: translate(-50%,-50%) scale(1); } 50% { opacity: 0.6; transform: translate(-50%,-50%) scale(1.5); } }
+    @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes pulse { 0%,100% { transform: translate(-50%,-50%) scale(1); } 50% { transform: translate(-50%,-50%) scale(1.3); } }
 
-    .container { max-width: 1280px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 10; }
-
-    /* Contador fixo no topo */
-    .urgency-bar {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      background: rgba(255,0,0,0.15);
-      backdrop-filter: blur(12px);
-      border-bottom: 2px solid #ff3366;
-      padding: 12px 20px;
-      text-align: center;
-      font-weight: 700;
-      color: #fff;
-      z-index: 999;
-      animation: slideDown 1s ease-out;
-      opacity: 0;
-    }
-    @keyframes slideDown { from { transform: translateY(-100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-    .countdown {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 2.2rem;
-      background: linear-gradient(90deg, var(--gold), var(--blue-neon));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 30px rgba(244,200,108,0.6);
-      animation: pulse 2s infinite;
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 2;
     }
 
-    /* Hero */
+    /* HERO */
     .hero {
       text-align: center;
-      padding: 160px 20px 120px;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      padding: 140px 20px 100px;
+      position: relative;
     }
     .hero h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: clamp(3.5rem, 10vw, 8rem);
+      font-family: 'Cinzel', serif;
+      font-size: clamp(48px, 10vw, 120px);
       font-weight: 900;
-      background: linear-gradient(90deg, #fff, var(--gold), var(--blue-neon), var(--gold), #fff);
+      background: linear-gradient(90deg, #ffd700, #ffed4e, #ffd700);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 80px rgba(244,200,108,0.7);
-      animation: titleGlow 4s infinite alternate, fadeInUp 1.5s ease-out;
-      letter-spacing: 3px;
+      line-height: 1.1;
+      text-shadow: 0 0 40px rgba(255,215,0,0.5);
     }
-    @keyframes titleGlow { from { text-shadow: 0 0 60px rgba(244,200,108,0.6); } to { text-shadow: 0 0 120px rgba(244,200,108,1); } }
     .hero p {
-      font-size: 1.6rem;
+      font-size: clamp(20px, 4vw, 32px);
+      margin-top: 30px;
+      color: #e0e0e0;
       max-width: 900px;
-      margin: 30px auto;
-      opacity: 0;
-      animation: fadeInUp 1.5s ease-out 0.5s forwards;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.5;
     }
 
-    /* Linha de progresso vertical */
-    .progress-line {
-      position: fixed;
-      left: 20px;
-      top: 0; bottom: 0;
-      width: 4px;
-      background: linear-gradient(to bottom, var(--gold), var(--blue-neon));
-      transform: scaleY(0);
-      transform-origin: top;
-      z-index: 99;
-      box-shadow: 0 0 20px var(--gold);
-    }
-
-    /* Seções */
-    section { padding: 120px 20px; }
+    /* Seção O que você vai dominar */
     .section-title {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 3.5rem;
+      font-family: 'Cinzel', serif;
+      font-size: clamp(36px, 7vw, 64px);
       text-align: center;
-      margin-bottom: 80px;
-      background: linear-gradient(90deg, var(--gold), #fff);
+      margin: 100px 0 60px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-
-    /* Benefícios animados */
     .benefits {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 30px;
+      margin-bottom: 120px;
     }
-    .benefit {
-      background: var(--glass);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(244,200,108,0.3);
-      border-radius: 24px;
-      padding: 40px;
+    .benefit-card {
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,215,0,0.3);
+      border-radius: 20px;
+      padding: 40px 30px;
       text-align: center;
-      opacity: 0;
-      transform: translateX(-50px);
-      transition: all 0.6s ease-out;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6), inset 0 0 20px rgba(255,215,0,0.08);
+      transition: all 0.4s;
     }
-    .benefit.show { opacity: 1; transform: translateX(0); }
-    .benefit::before {
-      content: "◆";
-      display: block;
-      font-size: 3rem;
-      margin-bottom: 20px;
-      background: linear-gradient(var(--gold), var(--blue-neon));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .benefit-card:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 20px 50px rgba(255,215,0,0.2);
+      border-color: var(--gold);
     }
-
-    /* Cards flutuantes de prova social */
-    .testimonials {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-      margin: 100px 0;
-    }
-    .testimonial {
-      background: var(--glass);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(244,200,108,0.3);
-      border-radius: 24px;
-      padding: 40px;
-      text-align: center;
-      animation: float 6s infinite ease-in-out;
-    }
-    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
-
-    /* Botões de compra */
-    .offers {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-      gap: 40px;
-      margin: 120px 0;
-    }
-    .offer {
-      background: var(--glass);
-      backdrop-filter: blur(20px);
-      border: 2px solid var(--gold);
-      border-radius: 32px;
-      overflow: hidden;
-      transition: all 0.5s;
-    }
-    .offer:hover {
-      transform: translateY(-20px);
-      box-shadow: 0 40px 100px rgba(244,200,108,0.4);
-    }
-    .price {
-      background: linear-gradient(135deg, #1a1a2e, #16213e);
-      padding: 40px;
-      text-align: center;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 3rem;
+    .benefit-card h3 {
+      font-size: 24px;
+      margin-bottom: 16px;
       color: var(--gold);
     }
-    .btn-buy {
-      display: block;
+
+    /* Ofertas */
+    .offers {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 40px;
+      margin: 100px 0;
+    }
+    .offer-card {
+      background: rgba(20,20,20,0.7);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,215,0,0.4);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+      transition: all 0.4s;
+      position: relative;
+    }
+    .offer-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent 30%, rgba(255,215,0,0.08) 100%);
+      pointer-events: none;
+    }
+    .offer-header {
+      background: linear-gradient(90deg, #1a1400, #332200);
       padding: 30px;
-      background: linear-gradient(90deg, var(--gold), #ffed4e);
+      text-align: center;
+      border-bottom: 1px solid var(--gold);
+    }
+    .offer-header h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 28px;
+      color: var(--gold);
+    }
+    .price {
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--gold);
+      margin: 20px 0;
+    }
+    .offer-body {
+      padding: 40px 30px;
+    }
+    .offer-body ul {
+      list-style: none;
+      space-y-4;
+    }
+    .offer-body li {
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      color: #ddd;
+      position: relative;
+      padding-left: 30px;
+    }
+    .offer-body li::before {
+      content: '✓';
+      color: var(--gold);
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+    .urgency {
+      text-align: center;
+      color: #ff4444;
+      font-weight: 600;
+      margin: 20px 0 30px;
+      font-size: 18px;
+    }
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 20px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
       color: #000;
+      font-size: 22px;
+      font-weight: 700;
       text-align: center;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.8rem;
-      font-weight: 900;
-      text-decoration: none;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
       transition: all 0.3s;
-      animation: pulseBtn 2s infinite;
+      text-decoration: none;
+      box-shadow: 0 10px 30px rgba(255,215,0,0.4);
     }
-    @keyframes pulseBtn { 0%,100% { transform: scale(1); } 50% { transform: scale(1.03); } }
-    .btn-buy:hover { transform: scale(1.06); }
+    .btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(255,215,0,0.6);
+    }
 
-    /* Final */
-    .final {
+    /* Fechamento */
+    .closing {
       text-align: center;
-      padding: 160px 40px;
-      font-size: 2.2rem;
-      line-height: 1.8;
-      background: linear-gradient(135deg, rgba(5,7,15,0.9), rgba(20,0,40,0.9));
-      border-radius: 40px;
-      margin: 120px 20px;
-      border: 2px solid var(--gold);
-      animation: fadeInUp 2s ease-out;
+      padding: 120px 20px;
+      background: rgba(0,0,0,0.5);
+      border-radius: 30px;
+      margin: 100px 20px;
+      border: 1px solid rgba(255,215,0,0.3);
+    }
+    .closing h2 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(40px, 8vw, 72px);
+      margin-bottom: 30px;
+      color: var(--gold);
     }
 
+    /* Rodapé */
     footer {
       text-align: center;
-      padding: 100px 20px;
+      padding: 60px 20px;
       color: #666;
-      font-size: 1.2rem;
+      font-size: 16px;
+      border-top: 1px solid rgba(255,215,0,0.2);
     }
 
-    /* Animações de entrada */
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(60px); }
-      to { opacity: 1; transform: translateY(0); }
+    @media (max-width: 768px) {
+      .hero { padding: 100px 20px 60px; }
+      .offers { grid-template-columns: 1fr; padding: 0 20px; }
+      .benefits { padding: 0 20px; }
     }
   </style>
 </head>
 <body>
 
-  <canvas id="particles"></canvas>
-  <div class="glow-bg"></div>
-
-  <!-- Barra de urgência automática após 20s -->
-  <div class="urgency-bar" id="urgencyBar">
-    ⚠️ Últimas vagas temporariamente liberadas. O acesso pode ser encerrado a qualquer momento.
-    <span class="countdown" id="topTimer">15:00</span>
-  </div>
-
-  <!-- Linha de progresso -->
-  <div class="progress-line" id="progressLine"></div>
+  <div class="bg-animation"></div>
 
   <div class="container">
 
-    <div class="hero">
-      <h1>Método da Mente Lucrativa 2026+</h1>
-      <p>Uma experiência completa BillionMind para criar seu próprio sistema usando IA e desenvolver uma mentalidade lucrativa para a nova era digital.</p>
+    <!-- HERO -->
+    <section class="hero">
+      <h1>Método da Mente Lucrativa 2026</h1>
+      <p>O ensinamento definitivo que mostra como criar seu próprio sistema, construir mentalidade lucrativa e usar a inteligência artificial a seu favor.</p>
+    </section>
 
-      <div class="countdown" style="margin-top:60px; font-size:4rem;" id="mainTimer">15:00</div>
-      <p style="margin-top:20px; font-size:1.4rem; color:#ff3366;">
-        ⚠️ Últimas vagas temporariamente liberadas. O acesso pode ser encerrado a qualquer momento.
-      </p>
+    <!-- O QUE VOCÊ VAI DOMINAR -->
+    <h2 class="section-title">O Que Você Vai Dominar</h2>
+    <div class="benefits">
+      <div class="benefit-card">
+        <h3>Criação de Apps com IA</h3>
+        <p>Como criar um aplicativo funcional usando ferramentas modernas e inteligência artificial.</p>
+      </div>
+      <div class="benefit-card">
+        <h3>Mentalidade Lucrativa</h3>
+        <p>Como desenvolver uma mentalidade que transforma foco em lucro real.</p>
+      </div>
+      <div class="benefit-card">
+        <h3>Sistema de Disciplina</h3>
+        <p>Um sistema completo para disciplina diária e execução implacável.</p>
+      </div>
+      <div class="benefit-card">
+        <h3>Estrutura de Produtos Digitais</h3>
+        <p>Como montar produtos digitais, planos e estrutura profissional do zero.</p>
+      </div>
+      <div class="benefit-card">
+        <h3>Pensamento 2026+</h3>
+        <p>Como pensar, agir e decidir como um criador de alto nível em 2026 e além.</p>
+      </div>
+      <div class="benefit-card">
+        <h3>Fluxo Técnico Completo</h3>
+        <p>Página, design, Supabase, assinaturas, Vercel — tudo pronto para usar.</p>
+      </div>
     </div>
 
-    <section>
-      <h2 class="section-title">O Que Este Método Entrega</h2>
-      <div class="benefits">
-        <div class="benefit">Como criar seu próprio aplicativo usando IA (mesmo sem experiência).</div>
-        <div class="benefit">Como montar toda estrutura: design, páginas, assinaturas, Supabase e Vercel.</div>
-        <div class="benefit">Como desenvolver mentalidade, disciplina e execução 2026+.</div>
-        <div class="benefit">Como transformar conhecimento em renda usando automação inteligente.</div>
-        <div class="benefit">Como criar um sistema digital que funciona mesmo enquanto você está offline.</div>
-        <div class="benefit">Como usar IA como ferramenta de poder — não como ameaça.</div>
-      </div>
-    </section>
+    <!-- OFERTAS -->
+    <div class="offers">
 
-    <section>
-      <h2 class="section-title">Por que este método BillionMind funciona?</h2>
-      <div class="benefits" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
-        <div class="benefit">IA multiplica sua capacidade</div>
-        <div class="benefit">Método 100% prático</div>
-        <div class="benefit">Você executa no mesmo dia</div>
-        <div class="benefit">Simples, direto e impossível de errar</div>
-      </div>
-    </section>
-
-    <section>
-      <h2 class="section-title">O Que Estão Dizendo</h2>
-      <div class="testimonials">
-        <div class="testimonial">“Criei meu primeiro sistema em poucas horas.”</div>
-        <div class="testimonial">“Finalmente entendi como usar IA a meu favor.”</div>
-        <div class="testimonial">“O conteúdo é direto ao ponto e realmente aplicável.”</div>
-      </div>
-    </section>
-
-    <section style="text-align:center;">
-      <h2 class="section-title">Escolha Seu Acesso Agora</h2>
-      <div class="offers">
-        <div class="offer">
-          <div class="price">R$ 47,00</div>
-          <a href="https://pay.cakto.com.br/4eqsgkz_672940" class="btn-buy" target="_blank">
-            QUERO O ACESSO COMPLETO AGORA (ÚLTIMAS VAGAS)
-          </a>
+      <!-- OFERTA PREMIUM -->
+      <div class="offer-card">
+        <div class="offer-header">
+          <h3>🔥 Acesso Total · Premium</h3>
+          <div class="price">R$ 109,98</div>
         </div>
-        <div class="offer">
-          <div class="price">R$ 39,90</div>
-          <a href="https://pay.cakto.com.br/3epvjkn_672948" class="btn-buy" target="_blank">
-            QUERO O ACESSO INTERMEDIÁRIO
-          </a>
+        <div class="offer-body">
+          <ul>
+            <li>Conteúdo completo (mentalidade + criação + estrutura)</li>
+            <li>Modelos prontos, imagens e exemplos reais</li>
+            <li>Acesso ao canal exclusivo para dúvidas</li>
+          </ul>
+          <div class="urgency">Vagas limitadas — pode encerrar a qualquer momento.</div>
+          <a href="https://pay.cakto.com.br/4ehcq2y_672236" class="btn" target="_blank">Quero Acesso Total</a>
         </div>
-        <div class="offer">
+      </div>
+
+      <!-- OFERTA ACESSÍVEL -->
+      <div class="offer-card">
+        <div class="offer-header">
+          <h3>💡 Versão Acessível</h3>
+          <div class="price">R$ 48,98</div>
+        </div>
+        <div class="offer-body">
+          <ul>
+            <li>Conteúdo principal completo</li>
+            <li>Parte estratégica + parte técnica</li>
+          </ul>
+          <div class="urgency">Disponível por pouco tempo.</div>
+          <a href="https://pay.cakto.com.br/v8k65mm_672262" class="btn" target="_blank">Liberar Acesso</a>
+        </div>
+      </div>
+
+      <!-- OFERTA LITE -->
+      <div class="offer-card">
+        <div class="offer-header">
+          <h3>⚡ Opção Lite · Essencial</h3>
           <div class="price">R$ 29,99</div>
-          <a href="https://pay.cakto.com.br/3eprkrv_672949" class="btn-buy" target="_blank">
-            QUERO COMEÇAR AGORA PELO ESSENCIAL
-          </a>
+        </div>
+        <div class="offer-body">
+          <ul>
+            <li>Conteúdo essencial para começar</li>
+            <li>Mentalidade + início técnico</li>
+          </ul>
+          <div class="urgency">Enquanto houver vagas.</div>
+          <a href="https://pay.cakto.com.br/3eprkrv_672949" class="btn" target="_blank">Começar Agora</a>
         </div>
       </div>
-      <p style="margin-top:40px; font-size:1.3rem; color:#ffdd00;">
-        *Acesso imediato. Pode encerrar sem aviso prévio.*
-      </p>
-    </section>
 
-    <div class="final">
-      O futuro não vai esperar ninguém.<br><br>
-      Quem aprende IA hoje domina a próxima década.<br><br>
-      O <strong>Método da Mente Lucrativa 2026+</strong> é sua chance de entrar na frente.
+    </div>
+
+    <!-- FECHAMENTO -->
+    <div class="closing">
+      <h2>Pronto para ativar sua mente lucrativa?</h2>
+      <p style="font-size:22px; max-width:800px; margin:0 auto; color:#ccc;">
+        Todo o ensinamento foi criado para você evoluir rápido e entrar na era 2026+ com vantagem.
+      </p>
     </div>
 
   </div>
 
+  <!-- RODAPÉ -->
   <footer>
-    BillionMind • Nova Era 2026+
+    © 2026 · BillionMind AI · Todos os direitos reservados.
   </footer>
 
-  <script>
-    // Partículas douradas animadas
-    const canvas = document.getElementById('particles');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const particlesArray = [];
-    class Particle {
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 3 + 1;
-        this.speedX = Math.random() * 0.5 - 0.25;
-        this.speedY = Math.random() * 0.5 - 0.25;
-      }
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
-        if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
-      }
-      draw() {
-        ctx.fillStyle = '#f4c86c';
-        ctx.shadowBlur = 20;
-        ctx.shadowColor = '#f4c86c';
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
-    for(let i = 0; i < 120; i++) particlesArray.push(new Particle());
-    function animateParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particlesArray.forEach(p => { p.update(); p.draw(); });
-      requestAnimationFrame(animateParticles);
-    }
-    animateParticles();
-    window.addEventListener('resize', () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    });
-
-    // Contador regressivo de 15 minutos
-    let time = 15 * 60;
-    const updateTimer = () => {
-      const mins = String(Math.floor(time / 60)).padStart(2, '0');
-      const secs = String(time % 60).padStart(2, '0');
-      document.getElementById('mainTimer').textContent = `${mins}:${secs}`;
-      document.getElementById('topTimer').textContent = `${mins}:${secs}`;
-      if (time-- <= 0) time = 15 * 60;
-    };
-    setInterval(updateTimer, 1000);
-    updateTimer();
-
-    // Mostrar barra de urgência após 20s
-    setTimeout(() => {
-      document.getElementById('urgencyBar').style.opacity = '1';
-    }, 20000);
-
-    // Animações ao scroll
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('show');
-        }
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.benefit').forEach(el => observer.observe(el));
-
-    // Linha de progresso
-    window.addEventListener('scroll', () => {
-      const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
-      document.getElementById('progressLine').style.transform = `scaleY(${scrollPercent / 100})`;
-    });
-  </script>
 </body>
 </html>
