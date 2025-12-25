@@ -24,7 +24,7 @@ body{
   overflow-x:hidden;
 }
 
-/* QUIZ */
+/* ===== QUIZ ===== */
 #quiz-overlay{
   position:fixed;
   inset:0;
@@ -68,6 +68,9 @@ body{
   cursor:pointer;
 }
 
+/* ===== PAGE (hidden until quiz) ===== */
+#sales-page{display:none}
+
 /* HERO */
 .hero{
   padding:90px 20px 80px;
@@ -90,26 +93,68 @@ body{
   text-decoration:none;
 }
 
-/* PLANS */
-.section{padding:70px 20px;max-width:1100px;margin:auto}
-.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
+.online{margin-top:14px;font-size:14px;color:#7da2ff}
 
+/* SECTION */
+.section{padding:70px 20px;max-width:1100px;margin:auto}
+.sec-title{text-align:center;color:var(--gold);font-size:26px;margin-bottom:10px}
+.sec-sub{text-align:center;color:var(--text-soft);font-size:15px;margin-bottom:40px}
+
+/* BENEFITS */
+.benefits{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:18px;
+}
+.benefit{
+  background:rgba(255,255,255,0.04);
+  padding:20px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,0.08);
+}
+
+/* ACTIVITY */
+.activity{
+  max-width:520px;
+  margin:30px auto;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.activity div{
+  background:rgba(255,255,255,0.05);
+  padding:14px 18px;
+  border-radius:14px;
+  font-size:14px;
+  border:1px solid rgba(255,255,255,0.08);
+}
+
+/* CAROUSEL */
+.carousel{overflow:hidden;max-width:380px;margin:40px auto}
+.track{display:flex;animation:scroll 32s linear infinite}
+.track img{
+  width:100%;
+  border-radius:16px;
+  margin-right:16px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.6);
+}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+
+/* PLANS */
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
 .plan{
   background:rgba(255,255,255,0.04);
   border:1px solid rgba(255,255,255,0.08);
   padding:22px;
   border-radius:18px;
 }
-
 .plan.featured{
   border:1px solid var(--gold);
   box-shadow:0 0 30px rgba(244,200,108,0.25);
 }
-
 .plan h3{color:var(--gold)}
 .plan-price{font-size:32px;color:var(--gold);margin:10px 0}
 .plan p{color:var(--text-soft);font-size:14px}
-
 .plan-btn{
   display:block;
   margin-top:16px;
@@ -121,12 +166,22 @@ body{
   border-radius:999px;
   text-decoration:none;
 }
+.disabled{background:#333!important;color:#aaa!important;pointer-events:none}
 
-.disabled{
-  background:#333!important;
-  color:#aaa!important;
-  pointer-events:none;
+/* SALE POPUP */
+.sale-popup{
+  position:fixed;
+  bottom:20px;
+  left:20px;
+  background:#0f1b3d;
+  padding:14px 18px;
+  border-radius:14px;
+  font-size:14px;
+  z-index:9999;
+  animation:slide .5s ease;
 }
+.sale-popup small{display:block;color:#9bb0ff;margin-top:4px;font-size:12px}
+@keyframes slide{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:translateX(0)}}
 </style>
 </head>
 
@@ -142,7 +197,7 @@ body{
       <select id="q-country">
         <option value="">Selecione</option>
         <option value="pt">Brasil / Portugal</option>
-        <option value="en">Estados Unidos / Canadá</option>
+        <option value="en">EUA / Canadá</option>
         <option value="es">Espanha / América Latina</option>
       </select>
       <button onclick="nextStep()">Continuar</button>
@@ -171,98 +226,143 @@ body{
   </div>
 </div>
 
-<!-- PAGE -->
-<div class="hero">
-  <h1 id="hero-title">Método da Mente Lucrativa 2026+</h1>
-  <p id="hero-sub">Construa renda digital com estrutura e execução real.</p>
-  <a href="#plans" class="hero-btn" id="cta-main">Liberar meu acesso</a>
-</div>
+<!-- SALES PAGE -->
+<div id="sales-page">
 
-<div class="section" id="plans">
-  <div class="plans">
-
-    <div class="plan featured" id="plan-premium">
-      <h3>Premium</h3>
-      <div class="plan-price" id="price-premium">R$ 49,98</div>
-      <p id="desc-premium">✔ Conteúdo completo</p>
-      <a id="link-premium" class="plan-btn" target="_blank">Acessar Premium</a>
-    </div>
-
-    <div class="plan" id="plan-complete">
-      <h3>Completo</h3>
-      <div class="plan-price" id="price-complete">R$ 39,98</div>
-      <p>✔ Conteúdo essencial</p>
-      <a id="link-complete" class="plan-btn" target="_blank">Acessar</a>
-    </div>
-
-    <div class="plan">
-      <h3>Lite</h3>
-      <div class="plan-price">—</div>
-      <a class="plan-btn disabled">Esgotado</a>
-    </div>
-
+  <div class="hero">
+    <h1 id="hero-title">Método da Mente Lucrativa 2026+</h1>
+    <p id="hero-sub">Construa renda digital com estrutura, disciplina e execução real.</p>
+    <a href="#plans" class="hero-btn" id="cta-main">Liberar meu acesso</a>
+    <div class="online">👁 <span id="online"></span> pessoas online agora</div>
   </div>
+
+  <div class="section">
+    <h2 class="sec-title">Por que isso funciona</h2>
+    <div class="benefits">
+      <div class="benefit">Sistema validado e simples</div>
+      <div class="benefit">Funciona do zero</div>
+      <div class="benefit">Sem aparecer</div>
+      <div class="benefit">Resultados consistentes</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="sec-title">Atividade em tempo real</h2>
+    <div class="activity" id="activity"></div>
+  </div>
+
+  <div class="section">
+    <h2 class="sec-title">Resultados reais</h2>
+    <div class="carousel">
+      <div class="track">
+        <img src="https://drive.google.com/uc?export=view&id=1fzCz7y0u76-tgdDhCDy5QVGIii5HxUAE">
+        <img src="https://drive.google.com/uc?export=view&id=17i8BDm6jzNdW0YDtGl85_hw10-HKCA5F">
+        <img src="https://drive.google.com/uc?export=view&id=1w4svG4p5qmJnxg0RraLwLpBGftn4dzFy">
+        <img src="https://drive.google.com/uc?export=view&id=1GI3RvEm2GJBVhvgsiBiuG4sFUItfnDPM">
+        <img src="https://drive.google.com/uc?export=view&id=1cdivkv1uvrr0ArbEofKcd8ql4vPKlYZw">
+        <img src="https://drive.google.com/uc?export=view&id=15F-DWj0t2xtoiljLsGnfAyr8iOSNvMZO">
+        <img src="https://drive.google.com/uc?export=view&id=1QM2H7YhhT3i0v4MMQcR9CHxezAUdYho-">
+        <img src="https://drive.google.com/uc?export=view&id=1oIZk0VbM7qM-6kEzk_WYl71ZMK1nmTCz">
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="plans">
+    <h2 class="sec-title">Escolha seu acesso</h2>
+    <div class="plans">
+
+      <div class="plan featured" id="plan-premium">
+        <h3>Premium</h3>
+        <div class="plan-price" id="price-premium">R$ 49,98</div>
+        <a id="link-premium" class="plan-btn" target="_blank">Acessar Premium</a>
+      </div>
+
+      <div class="plan" id="plan-complete">
+        <h3>Completo</h3>
+        <div class="plan-price" id="price-complete">R$ 39,98</div>
+        <a id="link-complete" class="plan-btn" target="_blank">Acessar</a>
+      </div>
+
+      <div class="plan">
+        <h3>Lite</h3>
+        <div class="plan-price">—</div>
+        <a class="plan-btn disabled">Esgotado</a>
+      </div>
+
+    </div>
+  </div>
+
 </div>
 
 <script>
+/* ===== QUIZ LOGIC ===== */
 const steps=document.querySelectorAll(".quiz-step");
 let current=0;
-
 function nextStep(){
   steps[current].classList.remove("active");
   current++;
   steps[current].classList.add("active");
 }
-
 function finishQuiz(){
-  const lang=q("q-country").value;
-  const age=q("q-age").value;
-  const intent=q("q-intent").value;
-
   localStorage.setItem("quiz_done","yes");
-  localStorage.setItem("lang",lang);
-  localStorage.setItem("intent",intent);
-  localStorage.setItem("age",age);
-
+  localStorage.setItem("lang",q("q-country").value);
+  localStorage.setItem("intent",q("q-intent").value);
   document.getElementById("quiz-overlay").style.display="none";
-  applyPersonalization(lang,intent);
+  document.getElementById("sales-page").style.display="block";
+  personalize();
 }
-
 function q(id){return document.getElementById(id)}
 
-function applyPersonalization(lang,intent){
-  // idioma + moeda
+/* ===== PERSONALIZATION ===== */
+function personalize(){
+  const lang=localStorage.getItem("lang");
   if(lang==="en"){
     q("hero-title").innerText="Profitable Mind Method 2026+";
     q("hero-sub").innerText="Build digital income with real execution.";
+    q("cta-main").innerText="Unlock my access";
     q("price-premium").innerText="$19.90";
     q("price-complete").innerText="$14.90";
-    q("link-premium").href="https://checkout-stripe-premium.com";
-    q("link-complete").href="https://checkout-stripe-complete.com";
   }
-
   if(lang==="es"){
     q("hero-title").innerText="Método de Mente Rentable 2026+";
     q("hero-sub").innerText="Construye ingresos digitales reales.";
+    q("cta-main").innerText="Desbloquear acceso";
     q("price-premium").innerText="€17.90";
     q("price-complete").innerText="€12.90";
   }
-
-  // intenção
-  if(intent==="principal"){
-    q("plan-premium").classList.add("featured");
-    q("desc-premium").innerText="✔ Ideal para renda principal";
-  }
-
-  if(intent==="extra"){
-    q("plan-complete").classList.add("featured");
-  }
 }
 
+/* ===== ONLINE COUNT ===== */
+document.getElementById("online").innerText=Math.floor(Math.random()*70)+90;
+
+/* ===== ACTIVITY ===== */
+const acts=["Venda aprovada agora","Novo acesso Premium","Pagamento confirmado","Aluno iniciou hoje"];
+setInterval(()=>{
+  const d=document.createElement("div");
+  d.innerText=acts[Math.floor(Math.random()*acts.length)];
+  activity.prepend(d);
+  if(activity.children.length>6)activity.removeChild(activity.lastChild);
+},3200);
+
+/* ===== SALES POPUP ===== */
+const people=[["Jake Navarro","🇺🇸 EUA"],["Lucas Moretti","🇧🇷 Brasil"],["Daniel Costa","🇵🇹 Portugal"],["Ethan Brooks","🇨🇦 Canadá"]];
+setTimeout(()=>{
+  setInterval(()=>{
+    const p=people[Math.floor(Math.random()*people.length)];
+    const pop=document.createElement("div");
+    pop.className="sale-popup";
+    pop.innerHTML=`🔔 <b>${p[0]}</b> adquiriu o conteúdo<br><small>${p[1]} · agora</small>`;
+    document.body.appendChild(pop);
+    setTimeout(()=>pop.remove(),6000);
+  },11000);
+},5000);
+
+/* LOAD */
 document.addEventListener("DOMContentLoaded",()=>{
   if(localStorage.getItem("quiz_done")==="yes"){
     document.getElementById("quiz-overlay").style.display="none";
-    applyPersonalization(localStorage.getItem("lang"),localStorage.getItem("intent"));
+    document.getElementById("sales-page").style.display="block";
+    personalize();
   }
 });
 </script>
