@@ -1,332 +1,564 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Método da Mente Lucrativa 2026+</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-
-<style>
-:root{
-  --gold:#f4c86c;
-  --blue1:#08162f;
-  --blue2:#050b1c;
-  --text-soft:#a9b4ff;
-  --radius:18px;
-  --danger:#ff5c5c;
-}
-
-*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
-
-body{
-  background:linear-gradient(180deg,var(--blue1),var(--blue2));
-  color:#fff;
-  overflow-x:hidden;
-}
-
-/* QUIZ */
-#quiz-overlay{
-  position:fixed;
-  inset:0;
-  background:linear-gradient(180deg,#08162f,#050b1c);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:99999;
-}
-
-.quiz-box{
-  background:#0f1b3d;
-  padding:30px 26px;
-  border-radius:18px;
-  width:100%;
-  max-width:360px;
-  text-align:center;
-  box-shadow:0 20px 50px rgba(0,0,0,.7);
-}
-
-.quiz-step{display:none}
-.quiz-step.active{display:block}
-.quiz-box h2{color:var(--gold);margin-bottom:16px}
-
-.quiz-step select, .quiz-step button{
-  width:100%;
-  padding:12px;
-  border-radius:999px;
-  border:none;
-  margin-bottom:14px;
-}
-
-.quiz-step button{
-  background:linear-gradient(90deg,var(--gold),#d6a849);
-  font-weight:700;
-}
-
-/* PAGE */
-#sales-page{display:none}
-
-/* HERO */
-.hero{
-  padding:90px 20px 80px;
-  text-align:center;
-  max-width:900px;
-  margin:auto;
-}
-
-.hero h1{font-size:42px;font-weight:800;color:var(--gold)}
-.hero p{color:var(--text-soft);font-size:17px;max-width:640px;margin:16px auto}
-
-.hero small{
-  display:block;
-  margin-top:12px;
-  color:#9bb0ff;
-  font-size:13px;
-}
-
-.hero-btn{
-  display:inline-block;
-  margin-top:26px;
-  padding:14px 34px;
-  background:linear-gradient(90deg,var(--gold),#d6a849);
-  color:#000;
-  border-radius:999px;
-  font-weight:800;
-  text-decoration:none;
-}
-
-/* SECTION */
-.section{padding:70px 20px;max-width:1100px;margin:auto}
-.sec-title{text-align:center;color:var(--gold);font-size:26px;margin-bottom:12px}
-.sec-sub{text-align:center;color:var(--text-soft);margin-bottom:40px}
-
-/* BENEFITS */
-.benefits{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:18px;
-}
-
-.benefit{
-  background:rgba(255,255,255,.05);
-  padding:22px;
-  border-radius:16px;
-  border:1px solid rgba(255,255,255,.08);
-  font-size:14px;
-}
-
-/* CAROUSEL */
-.carousel{overflow:hidden;max-width:420px;margin:40px auto}
-.track{display:flex;animation:scroll 28s linear infinite}
-
-.track img{
-  width:100%;
-  border-radius:16px;
-  margin-right:16px;
-  box-shadow:0 10px 30px rgba(0,0,0,.6);
-}
-
-@keyframes scroll{
-  from{transform:translateX(0)}
-  to{transform:translateX(-100%)}
-}
-
-/* PLANS */
-.plans{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:22px;
-}
-
-.plan{
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.1);
-  padding:24px;
-  border-radius:18px;
-  position:relative;
-}
-
-.plan.featured{
-  border:1px solid var(--gold);
-  box-shadow:0 0 30px rgba(244,200,108,.25);
-}
-
-.plan h3{color:var(--gold)}
-.plan-price{font-size:34px;color:var(--gold);margin:12px 0}
-.plan p{font-size:14px;color:var(--text-soft)}
-
-.urgency{
-  font-size:13px;
-  color:var(--danger);
-  margin-top:6px;
-}
-
-.timer{
-  font-size:14px;
-  color:#ffd27d;
-  margin-top:6px;
-}
-
-.plan-btn{
-  display:block;
-  margin-top:18px;
-  padding:14px;
-  text-align:center;
-  background:linear-gradient(90deg,var(--gold),#d6a849);
-  color:#000;
-  font-weight:800;
-  border-radius:999px;
-  text-decoration:none;
-}
-
-.disabled{
-  background:#333!important;
-  color:#aaa!important;
-  pointer-events:none;
-}
-
-/* SALE POPUP */
-.sale-popup{
-  position:fixed;
-  bottom:20px;
-  left:20px;
-  background:#0f1b3d;
-  padding:14px 18px;
-  border-radius:14px;
-  font-size:14px;
-  z-index:9999;
-}
-
-.sale-popup small{display:block;color:#9bb0ff;margin-top:4px}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Vendas Premium</title>
+    <style>
+        /* CSS Geral - Fundo azul premium, detalhes dourados, estilo moderno SaaS */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #001f3f; /* Azul navy premium */
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            color: #ffd700; /* Dourado */
+        }
+        button, a.btn {
+            background-color: #ffd700;
+            color: #001f3f;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover, a.btn:hover {
+            background-color: #e6c200;
+        }
+        /* Quiz Overlay */
+        #quiz-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        #quiz-form {
+            background-color: #ffffff;
+            color: #001f3f;
+            padding: 40px;
+            border-radius: 10px;
+            max-width: 500px;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+        #quiz-form select, #quiz-form input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        /* Página de Vendas */
+        #sales-page {
+            display: none; /* Escondida até quiz ser respondido */
+        }
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background-color: #003366; /* Azul mais escuro */
+            animation: slideIn 1s ease;
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .benefits, .why-works, .social-proof {
+            margin: 40px 0;
+        }
+        .carousel {
+            overflow: hidden;
+            position: relative;
+            height: 200px;
+        }
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .testimonial {
+            min-width: 100%;
+            text-align: center;
+            padding: 20px;
+            background-color: #002b5e;
+            border-radius: 10px;
+        }
+        #activity-feed {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #002b5e;
+            border-radius: 10px;
+        }
+        #online-count {
+            font-size: 20px;
+            color: #ffd700;
+        }
+        .offers {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .offer {
+            background-color: #002b5e;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+            text-align: center;
+            width: 300px;
+        }
+        .offer.sold-out button {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        /* Notificações Pop-up */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #28a745;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            animation: popUp 0.5s ease;
+            display: none;
+        }
+        @keyframes popUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        /* Cronômetro */
+        #timer {
+            font-size: 24px;
+            color: #ff0000;
+            text-align: center;
+            margin: 20px 0;
+        }
+        /* Mobile-first adjustments */
+        @media (max-width: 768px) {
+            .offers {
+                flex-direction: column;
+            }
+            .offer {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
-
 <body>
-
-<!-- QUIZ -->
-<div id="quiz-overlay">
-  <div class="quiz-box">
-    <h2>Antes de continuar…</h2>
-
-    <div class="quiz-step active">
-      <select id="q-country">
-        <option value="">🌍 Seu país</option>
-        <option value="pt">Brasil / Portugal</option>
-        <option value="en">EUA / Canadá</option>
-        <option value="es">Espanha / América Latina</option>
-      </select>
-      <button onclick="nextStep()">Continuar</button>
+    <!-- Quiz Overlay -->
+    <div id="quiz-overlay">
+        <form id="quiz-form">
+            <h2>Responda o Quiz para Acessar a Oferta Exclusiva</h2>
+            <label for="country">1. Seu País/Região:</label>
+            <select id="country" required>
+                <option value="">Selecione</option>
+                <option value="br-pt">Brasil/Portugal</option>
+                <option value="us-ca">EUA/Canadá</option>
+                <option value="es-latam">Espanha/LatAm</option>
+            </select>
+            <label for="age">2. Sua Idade:</label>
+            <input type="number" id="age" min="18" required>
+            <label for="goal">3. Seu Objetivo:</label>
+            <select id="goal" required>
+                <option value="">Selecione</option>
+                <option value="extra">Renda Extra</option>
+                <option value="main">Renda Principal</option>
+                <option value="explore">Explorando</option>
+            </select>
+            <label for="time">4. Tempo Disponível por Dia (horas):</label>
+            <input type="number" id="time" min="1" required>
+            <button type="submit">Enviar e Acessar</button>
+        </form>
     </div>
 
-    <div class="quiz-step">
-      <select id="q-age">
-        <option>18–24</option><option>25–34</option>
-        <option>35–44</option><option>45+</option>
-      </select>
-      <button onclick="nextStep()">Continuar</button>
+    <!-- Página de Vendas -->
+    <div id="sales-page">
+        <div class="container">
+            <!-- Hero -->
+            <section class="hero">
+                <h1 id="hero-title">Transforme Sua Vida Agora!</h1>
+                <p id="subheadline">Descubra o segredo para ganhar renda de forma inteligente e rápida.</p>
+                <a id="hero-cta" class="btn" href="#">Garanta Sua Oferta Agora!</a>
+            </section>
+
+            <!-- Por Que Funciona -->
+            <section class="why-works">
+                <h2 id="why-title">Por Que Isso Funciona</h2>
+                <p id="why-text">Nosso sistema é comprovado por milhares de usuários que alcançaram independência financeira.</p>
+            </section>
+
+            <!-- Benefícios -->
+            <section class="benefits">
+                <h2 id="benefits-title">Benefícios Claros</h2>
+                <ul>
+                    <li id="benefit1">Acesso imediato a ferramentas premium.</li>
+                    <li id="benefit2">Suporte 24/7.</li>
+                    <li id="benefit3">Resultados garantidos em semanas.</li>
+                </ul>
+            </section>
+
+            <!-- Prova Social Textual -->
+            <section class="social-proof">
+                <h2 id="proof-title">O Que Nossos Clientes Dizem</h2>
+                <p id="proof-text">"Mudou minha vida!" - Usuário Satisfeito</p>
+            </section>
+
+            <!-- Prova Social Visual -->
+            <section>
+                <h2>Provas Visuais</h2>
+                <img src="https://drive.google.com/uc?export=view&id=1fzCz7y0u76-tgdDhCDy5QVGIii5HxUAE" alt="Prova 1" style="max-width:100%; margin:10px;">
+                <img src="https://drive.google.com/uc?export=view&id=17i8BDm6jzNdW0YDtGl85_hw10-HKCA5F" alt="Prova 2" style="max-width:100%; margin:10px;">
+                <img src="https://drive.google.com/uc?export=view&id=1w4svG4p5qmJnxg0RraLwLpBGftn4dzFy" alt="Prova 3" style="max-width:100%; margin:10px;">
+                <img src="https://drive.google.com/uc?export=view&id=1GI3RvEm2GJBVhvgsiBiuG4sFUItfnDPM" alt="Prova 4" style="max-width:100%; margin:10px;">
+                <img src="https://drive.google.com/uc?export=view&id=1cdivkv1uvrr0ArbEofKcd8ql4vPKlYZw" alt="Prova 5" style="max-width:100%; margin:10px;">
+                <img src="https://drive.google.com/uc?export=view&id=15F-DWj0t2xtoiljLsGnfAyr8iOSNvMZO" alt="Prova 6" style="max-width:100%; margin:10px;">
+                <img src="https://drive.google.com/uc?export=view&id=1QM2H7YhhT3i0v4MMQcR9CHxezAUdYho-" alt="Prova 7" style="max-width:100%; margin:10px;">
+                <img src="https://drive.google.com/uc?export=view&id=1oIZk0VbM7qM-6kEzk_WYl71ZMK1nmTCz" alt="Prova 8" style="max-width:100%; margin:10px;">
+            </section>
+
+            <!-- Carrossel de Depoimentos -->
+            <section class="carousel">
+                <div class="carousel-inner" id="carousel-inner">
+                    <!-- Depoimentos serão adicionados via JS -->
+                </div>
+            </section>
+
+            <!-- Feed de Atividade em Tempo Real -->
+            <section id="activity-feed">
+                <h2 id="activity-title">Atividade em Tempo Real</h2>
+                <ul id="activity-list"></ul>
+            </section>
+
+            <!-- Contador de Pessoas Online -->
+            <div id="online-count">Pessoas online agora: carregando...</div>
+
+            <!-- Seção de Ofertas -->
+            <section class="offers">
+                <h2 id="offers-title">Escolha Sua Oferta</h2>
+                <div class="offer">
+                    <h3 id="premium-title">Pacote Premium</h3>
+                    <p id="premium-price">Preço: carregando...</p>
+                    <a id="premium-btn" class="btn" href="https://pay.cakto.com.br/4ehcq2y_672236">Comprar Premium Agora! ⏳</a>
+                </div>
+                <div class="offer">
+                    <h3 id="complete-title">Pacote Completo</h3>
+                    <p id="complete-price">Preço: carregando...</p>
+                    <a id="complete-btn" class="btn" href="https://pay.cakto.com.br/v8k65mm_672262">Comprar Completo Agora! ⏳</a>
+                </div>
+                <div class="offer sold-out">
+                    <h3>Lite</h3>
+                    <p>ESGOTADO</p>
+                    <button disabled>Indisponível</button>
+                </div>
+            </section>
+
+            <!-- Cronômetro -->
+            <div id="timer">⏳ Oferta reservada por 15:00</div>
+        </div>
     </div>
 
-    <div class="quiz-step">
-      <select id="q-intent">
-        <option value="extra">Renda extra</option>
-        <option value="principal">Renda principal</option>
-        <option value="explore">Explorando</option>
-      </select>
-      <button onclick="finishQuiz()">Ver conteúdo</button>
-    </div>
-  </div>
-</div>
+    <!-- Notificação Pop-up -->
+    <div class="notification" id="notification"></div>
 
-<!-- SALES PAGE -->
-<div id="sales-page">
+    <script>
+        // JS - Organização: Quiz, Personalização, Notificações, Cronômetro, Carrossel, Feed, Online Count
 
-  <div class="hero">
-    <h1>Método da Mente Lucrativa 2026+</h1>
-    <p>Um sistema simples que já está gerando resultados reais.</p>
-    <a href="#plans" class="hero-btn">Quero garantir minha vaga</a>
-    <small>🔒 Acesso limitado • Vagas encerram sem aviso</small>
-  </div>
+        // Dados de Personalização por Região
+        const regions = {
+            'br-pt': {
+                lang: 'pt',
+                currency: 'R$',
+                premiumPrice: '49,98',
+                completePrice: '39,98',
+                texts: {
+                    heroTitle: 'Transforme Sua Vida Agora!',
+                    subheadline: 'Descubra o segredo para ganhar renda de forma inteligente e rápida.',
+                    whyTitle: 'Por Que Isso Funciona',
+                    whyText: 'Nosso sistema é comprovado por milhares de usuários que alcançaram independência financeira.',
+                    benefitsTitle: 'Benefícios Claros',
+                    benefit1: 'Acesso imediato a ferramentas premium.',
+                    benefit2: 'Suporte 24/7.',
+                    benefit3: 'Resultados garantidos em semanas.',
+                    proofTitle: 'O Que Nossos Clientes Dizem',
+                    proofText: '"Mudou minha vida!" - Usuário Satisfeito',
+                    activityTitle: 'Atividade em Tempo Real',
+                    offersTitle: 'Escolha Sua Oferta',
+                    premiumTitle: 'Pacote Premium',
+                    completeTitle: 'Pacote Completo',
+                    heroCta: 'Garanta Sua Oferta Agora!',
+                    premiumBtn: 'Comprar Premium Agora! ⏳',
+                    completeBtn: 'Comprar Completo Agora! ⏳'
+                },
+                testimonials: [
+                    '"Incrível! Ganhei R$5k no primeiro mês." - João, Brasil',
+                    '"Recomendo a todos!" - Maria, Portugal',
+                    '"Fácil e eficaz." - Pedro, Brasil'
+                ],
+                names: ['João Silva', 'Maria Oliveira', 'Pedro Santos', 'Ana Costa', 'Carlos Pereira'],
+                countries: ['Brasil', 'Portugal']
+            },
+            'us-ca': {
+                lang: 'en',
+                currency: '$',
+                premiumPrice: '19.90',
+                completePrice: '14.90',
+                texts: {
+                    heroTitle: 'Transform Your Life Now!',
+                    subheadline: 'Discover the secret to earning income smartly and quickly.',
+                    whyTitle: 'Why This Works',
+                    whyText: 'Our system is proven by thousands of users who achieved financial independence.',
+                    benefitsTitle: 'Clear Benefits',
+                    benefit1: 'Immediate access to premium tools.',
+                    benefit2: '24/7 support.',
+                    benefit3: 'Guaranteed results in weeks.',
+                    proofTitle: 'What Our Customers Say',
+                    proofText: '"Changed my life!" - Satisfied User',
+                    activityTitle: 'Real-Time Activity',
+                    offersTitle: 'Choose Your Offer',
+                    premiumTitle: 'Premium Package',
+                    completeTitle: 'Complete Package',
+                    heroCta: 'Secure Your Offer Now!',
+                    premiumBtn: 'Buy Premium Now! ⏳',
+                    completeBtn: 'Buy Complete Now! ⏳'
+                },
+                testimonials: [
+                    '"Amazing! Earned $5k in the first month." - John, USA',
+                    '"Recommend to everyone!" - Mary, Canada',
+                    '"Easy and effective." - Peter, USA'
+                ],
+                names: ['John Smith', 'Mary Johnson', 'Peter Davis', 'Anna Wilson', 'Carlos Brown'],
+                countries: ['USA', 'Canada']
+            },
+            'es-latam': {
+                lang: 'es',
+                currency: '€',
+                premiumPrice: '17.90',
+                completePrice: '12.90',
+                texts: {
+                    heroTitle: '¡Transforma Tu Vida Ahora!',
+                    subheadline: 'Descubre el secreto para ganar ingresos de manera inteligente y rápida.',
+                    whyTitle: 'Por Qué Funciona Esto',
+                    whyText: 'Nuestro sistema está probado por miles de usuarios que lograron independencia financiera.',
+                    benefitsTitle: 'Beneficios Claros',
+                    benefit1: 'Acceso inmediato a herramientas premium.',
+                    benefit2: 'Soporte 24/7.',
+                    benefit3: 'Resultados garantizados en semanas.',
+                    proofTitle: 'Qué Dicen Nuestros Clientes',
+                    proofText: '"¡Cambió mi vida!" - Usuario Satisfecho',
+                    activityTitle: 'Actividad en Tiempo Real',
+                    offersTitle: 'Elige Tu Oferta',
+                    premiumTitle: 'Paquete Premium',
+                    completeTitle: 'Paquete Completo',
+                    heroCta: '¡Asegura Tu Oferta Ahora!',
+                    premiumBtn: '¡Comprar Premium Ahora! ⏳',
+                    completeBtn: '¡Comprar Completo Ahora! ⏳'
+                },
+                testimonials: [
+                    '"¡Increíble! Gané €5k en el primer mes." - Juan, España',
+                    '"¡Recomiendo a todos!" - María, México',
+                    '"Fácil y efectivo." - Pedro, Argentina'
+                ],
+                names: ['Juan García', 'María López', 'Pedro Martínez', 'Ana Rodríguez', 'Carlos Hernández'],
+                countries: ['España', 'México', 'Argentina', 'Colombia', 'Chile']
+            }
+        };
 
-  <div class="section">
-    <h2 class="sec-title">Resultados reais</h2>
-    <p class="sec-sub">Pessoas comuns aplicando agora</p>
+        // Manipular Quiz
+        const quizForm = document.getElementById('quiz-form');
+        quizForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const country = document.getElementById('country').value;
+            const age = document.getElementById('age').value;
+            const goal = document.getElementById('goal').value;
+            const time = document.getElementById('time').value;
 
-    <div class="carousel">
-      <div class="track">
-        <img loading="eager" referrerpolicy="no-referrer" src="https://drive.google.com/uc?export=view&id=1fzCz7y0u76-tgdDhCDy5QVGIii5HxUAE">
-        <img loading="eager" referrerpolicy="no-referrer" src="https://drive.google.com/uc?export=view&id=17i8BDm6jzNdW0YDtGl85_hw10-HKCA5F">
-        <img loading="eager" referrerpolicy="no-referrer" src="https://drive.google.com/uc?export=view&id=1w4svG4p5qmJnxg0RraLwLpBGftn4dzFy">
-        <img loading="eager" referrerpolicy="no-referrer" src="https://drive.google.com/uc?export=view&id=1GI3RvEm2GJBVhvgsiBiuG4sFUItfnDPM">
-        <img loading="eager" referrerpolicy="no-referrer" src="https://drive.google.com/uc?export=view&id=1cdivkv1uvrr0ArbEofKcd8ql4vPKlYZw">
-      </div>
-    </div>
-  </div>
+            // Salvar no localStorage
+            localStorage.setItem('quiz_country', country);
+            localStorage.setItem('quiz_age', age);
+            localStorage.setItem('quiz_goal', goal);
+            localStorage.setItem('quiz_time', time);
 
-  <div class="section" id="plans">
-    <h2 class="sec-title">Escolha seu acesso</h2>
+            // Iniciar Cronômetro se não existir
+            if (!localStorage.getItem('timer_end')) {
+                const endTime = Date.now() + 15 * 60 * 1000; // 15 minutos
+                localStorage.setItem('timer_end', endTime);
+            }
 
-    <div class="plans">
+            // Personalizar e Mostrar Página
+            personalizePage(country);
+            document.getElementById('quiz-overlay').style.display = 'none';
+            document.getElementById('sales-page').style.display = 'block';
 
-      <div class="plan featured">
-        <h3>Premium</h3>
-        <div class="plan-price">Oferta ativa</div>
-        <div class="urgency">🔥 Mais escolhido hoje</div>
-        <div class="timer">⏳ Reserva expira em <span class="countdown"></span></div>
-        <a href="#" class="plan-btn">Garantir Premium</a>
-      </div>
+            // Iniciar Funcionalidades em Tempo Real
+            startNotifications(country);
+            startActivityFeed(country);
+            startOnlineCount();
+            startCarousel(country);
+            startTimer();
+        });
 
-      <div class="plan">
-        <h3>Completo</h3>
-        <div class="plan-price">Últimas vagas</div>
-        <div class="urgency">⚠️ Encerrando hoje</div>
-        <div class="timer">⏳ Reserva expira em <span class="countdown"></span></div>
-        <a href="#" class="plan-btn">Garantir Completo</a>
-      </div>
+        // Personalizar Página
+        function personalizePage(country) {
+            const config = regions[country];
+            if (!config) return;
 
-      <div class="plan">
-        <h3>Lite</h3>
-        <div class="plan-price">—</div>
-        <div class="urgency">❌ Esgotado por alta demanda</div>
-        <a class="plan-btn disabled">Indisponível</a>
-      </div>
+            // Atualizar Textos
+            document.getElementById('hero-title').textContent = config.texts.heroTitle;
+            document.getElementById('subheadline').textContent = config.texts.subheadline;
+            document.getElementById('why-title').textContent = config.texts.whyTitle;
+            document.getElementById('why-text').textContent = config.texts.whyText;
+            document.getElementById('benefits-title').textContent = config.texts.benefitsTitle;
+            document.getElementById('benefit1').textContent = config.texts.benefit1;
+            document.getElementById('benefit2').textContent = config.texts.benefit2;
+            document.getElementById('benefit3').textContent = config.texts.benefit3;
+            document.getElementById('proof-title').textContent = config.texts.proofTitle;
+            document.getElementById('proof-text').textContent = config.texts.proofText;
+            document.getElementById('activity-title').textContent = config.texts.activityTitle;
+            document.getElementById('offers-title').textContent = config.texts.offersTitle;
+            document.getElementById('premium-title').textContent = config.texts.premiumTitle;
+            document.getElementById('complete-title').textContent = config.texts.completeTitle;
+            document.getElementById('hero-cta').textContent = config.texts.heroCta;
+            document.getElementById('premium-btn').textContent = config.texts.premiumBtn;
+            document.getElementById('complete-btn').textContent = config.texts.completeBtn;
 
-    </div>
-  </div>
+            // Atualizar Preços
+            document.getElementById('premium-price').textContent = `Preço: ${config.currency} ${config.premiumPrice}`;
+            document.getElementById('complete-price').textContent = `Preço: ${config.currency} ${config.completePrice}`;
 
-</div>
+            // Atualizar Links de CTA (já fixos, mas texto atualizado)
+            document.getElementById('hero-cta').href = 'https://pay.cakto.com.br/4ehcq2y_672236'; // Premium como default
+        }
 
-<script>
-/* QUIZ */
-const steps=document.querySelectorAll(".quiz-step");
-let step=0;
-function nextStep(){
-  steps[step].classList.remove("active");
-  step++; steps[step].classList.add("active");
-}
-function finishQuiz(){
-  document.getElementById("quiz-overlay").style.display="none";
-  document.getElementById("sales-page").style.display="block";
-  startTimer();
-}
+        // Carrossel de Depoimentos
+        function startCarousel(country) {
+            const config = regions[country];
+            const inner = document.getElementById('carousel-inner');
+            config.testimonials.forEach(test => {
+                const div = document.createElement('div');
+                div.className = 'testimonial';
+                div.innerHTML = `<p>${test}</p>`;
+                inner.appendChild(div);
+            });
 
-/* TIMER */
-function startTimer(){
-  let end=localStorage.getItem("deadline");
-  if(!end){
-    end=Date.now()+15*60*1000;
-    localStorage.setItem("deadline",end);
-  }
-  setInterval(()=>{
-    const now=Date.now();
-    const diff=end-now;
-    if(diff<=0)return;
-    const m=Math.floor(diff/60000);
-    const s=Math.floor((diff%60000)/1000);
-    document.querySelectorAll(".countdown")
-      .forEach(e=>e.innerText=`${m}:${s.toString().padStart(2,"0")}`);
-  },1000);
-}
-</script>
+            let index = 0;
+            setInterval(() => {
+                index = (index + 1) % config.testimonials.length;
+                inner.style.transform = `translateX(-${index * 100}%)`;
+            }, 3000);
+        }
 
+        // Notificações em Tempo Real
+        function startNotifications(country) {
+            const config = regions[country];
+            const notification = document.getElementById('notification');
+
+            function showNotification() {
+                const name = config.names[Math.floor(Math.random() * config.names.length)];
+                const countryName = config.countries[Math.floor(Math.random() * config.countries.length)];
+                const package = Math.random() > 0.5 ? 'Premium' : 'Completo';
+                notification.textContent = `${name} de ${countryName} adquiriu o acesso ${package}`;
+                notification.style.display = 'block';
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                }, 5000);
+            }
+
+            // Intervalo aleatório entre 5-15 segundos
+            function scheduleNext() {
+                const delay = Math.random() * 10000 + 5000;
+                setTimeout(() => {
+                    showNotification();
+                    scheduleNext();
+                }, delay);
+            }
+            scheduleNext();
+        }
+
+        // Feed de Atividade
+        function startActivityFeed(country) {
+            const config = regions[country];
+            const list = document.getElementById('activity-list');
+
+            function addActivity() {
+                const name = config.names[Math.floor(Math.random() * config.names.length)];
+                const countryName = config.countries[Math.floor(Math.random() * config.countries.length)];
+                const action = Math.random() > 0.5 ? 'visualizou a oferta' : 'está considerando o pacote';
+                const li = document.createElement('li');
+                li.textContent = `${name} de ${countryName} ${action} agora!`;
+                list.prepend(li);
+                if (list.children.length > 5) list.removeChild(list.lastChild);
+            }
+
+            setInterval(addActivity, 10000); // Toda 10s
+            addActivity(); // Inicial
+        }
+
+        // Contador de Pessoas Online
+        function startOnlineCount() {
+            const countEl = document.getElementById('online-count');
+
+            function updateCount() {
+                const count = Math.floor(Math.random() * 50 + 50); // 50-100
+                countEl.textContent = `Pessoas online agora: ${count}`;
+            }
+
+            setInterval(updateCount, 5000); // Toda 5s
+            updateCount(); // Inicial
+        }
+
+        // Cronômetro Regressivo
+        function startTimer() {
+            const timerEl = document.getElementById('timer');
+            const endTime = parseInt(localStorage.getItem('timer_end'));
+
+            function updateTimer() {
+                const now = Date.now();
+                const remaining = endTime - now;
+                if (remaining <= 0) {
+                    timerEl.textContent = '⏳ Oferta Expirada!';
+                    return;
+                }
+                const minutes = Math.floor((remaining / 1000 / 60) % 60);
+                const seconds = Math.floor((remaining / 1000) % 60);
+                timerEl.textContent = `⏳ Oferta reservada por ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            }
+
+            setInterval(updateTimer, 1000);
+            updateTimer();
+        }
+
+        // Verificar se Quiz já foi respondido
+        if (localStorage.getItem('quiz_country')) {
+            personalizePage(localStorage.getItem('quiz_country'));
+            document.getElementById('quiz-overlay').style.display = 'none';
+            document.getElementById('sales-page').style.display = 'block';
+            startNotifications(localStorage.getItem('quiz_country'));
+            startActivityFeed(localStorage.getItem('quiz_country'));
+            startOnlineCount();
+            startCarousel(localStorage.getItem('quiz_country'));
+            startTimer();
+        }
+    </script>
 </body>
 </html>
