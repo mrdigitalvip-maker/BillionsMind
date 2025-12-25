@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página de Vendas Premium</title>
     <style>
-        /* CSS Geral - Fundo azul premium, detalhes dourados, estilo moderno SaaS */
+        /* CSS Geral - Fundo azul premium com notas de dólares, detalhes dourados, estilo moderno SaaS */
         body {
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
             background-color: #001f3f; /* Azul navy premium */
+            background-image: url('https://www.shutterstock.com/shutterstock/videos/3675925945/thumb/1.jpg?ip=x480');
+            background-repeat: repeat;
             color: #ffffff;
             line-height: 1.6;
             overflow-x: hidden;
@@ -37,7 +39,7 @@
         button:hover, a.btn:hover {
             background-color: #e6c200;
         }
-        /* Quiz Overlay */
+        /* Quiz Overlay com Animação */
         #quiz-overlay {
             position: fixed;
             top: 0;
@@ -57,8 +59,17 @@
             border-radius: 10px;
             max-width: 500px;
             text-align: center;
-            animation: fadeIn 0.5s ease;
+            animation: fadeIn 0.5s ease, pulse 2s infinite;
         }
+        #quiz-form label, #quiz-form select, #quiz-form input {
+            animation: slideIn 0.5s ease forwards;
+            opacity: 0;
+        }
+        #quiz-form label:nth-child(1), #quiz-form select:nth-child(2) { animation-delay: 0.2s; }
+        #quiz-form label:nth-child(3), #quiz-form input:nth-child(4) { animation-delay: 0.4s; }
+        #quiz-form label:nth-child(5), #quiz-form select:nth-child(6) { animation-delay: 0.6s; }
+        #quiz-form label:nth-child(7), #quiz-form input:nth-child(8) { animation-delay: 0.8s; }
+        #quiz-form button { animation-delay: 1s; }
         #quiz-form select, #quiz-form input {
             width: 100%;
             padding: 10px;
@@ -69,6 +80,15 @@
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
         /* Página de Vendas */
         #sales-page {
@@ -86,11 +106,12 @@
         }
         .benefits, .why-works, .social-proof {
             margin: 40px 0;
+            animation: fadeIn 1s ease;
         }
         .carousel {
             overflow: hidden;
             position: relative;
-            height: 200px;
+            height: 300px;
         }
         .carousel-inner {
             display: flex;
@@ -102,6 +123,15 @@
             padding: 20px;
             background-color: #002b5e;
             border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .testimonial img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 10px;
         }
         #activity-feed {
             margin: 20px 0;
@@ -154,6 +184,12 @@
             text-align: center;
             margin: 20px 0;
         }
+        #timer-explanation {
+            font-size: 18px;
+            color: #ffd700;
+            text-align: center;
+            margin-bottom: 20px;
+        }
         /* Mobile-first adjustments */
         @media (max-width: 768px) {
             .offers {
@@ -169,7 +205,7 @@
     <!-- Quiz Overlay -->
     <div id="quiz-overlay">
         <form id="quiz-form">
-            <h2>Responda o Quiz para Acessar a Oferta Exclusiva</h2>
+            <h2>Responda o Quiz para Acessar a Oferta Exclusiva - Não Perca Essa Chance Única de Mudar Sua Vida Financeira!</h2>
             <label for="country">1. Seu País/Região:</label>
             <select id="country" required>
                 <option value="">Selecione</option>
@@ -188,7 +224,7 @@
             </select>
             <label for="time">4. Tempo Disponível por Dia (horas):</label>
             <input type="number" id="time" min="1" required>
-            <button type="submit">Enviar e Acessar</button>
+            <button type="submit">Enviar e Acessar Agora - Garanta Sua Vaga Antes que Acabe!</button>
         </form>
     </div>
 
@@ -197,84 +233,72 @@
         <div class="container">
             <!-- Hero -->
             <section class="hero">
-                <h1 id="hero-title">Transforme Sua Vida Agora!</h1>
-                <p id="subheadline">Descubra o segredo para ganhar renda de forma inteligente e rápida.</p>
-                <a id="hero-cta" class="btn" href="#">Garanta Sua Oferta Agora!</a>
+                <h1 id="hero-title">Transforme Sua Vida Agora - Ganhe Dinheiro de Verdade Sem Sair de Casa!</h1>
+                <p id="subheadline">Descubra o segredo para ganhar renda de forma inteligente, rápida e sem riscos. Milhares já estão lucrando - você será o próximo?</p>
+                <a id="hero-cta" class="btn" href="#">Garanta Sua Oferta Agora Antes que Esgote!</a>
             </section>
 
             <!-- Por Que Funciona -->
             <section class="why-works">
-                <h2 id="why-title">Por Que Isso Funciona</h2>
-                <p id="why-text">Nosso sistema é comprovado por milhares de usuários que alcançaram independência financeira.</p>
+                <h2 id="why-title">Por Que Isso Funciona - Resultados Comprovados!</h2>
+                <p id="why-text">Nosso sistema é comprovado por milhares de usuários que alcançaram independência financeira. Não é sorte, é estratégia comprovada que funciona para qualquer um!</p>
             </section>
 
             <!-- Benefícios -->
             <section class="benefits">
-                <h2 id="benefits-title">Benefícios Claros</h2>
+                <h2 id="benefits-title">Benefícios Claros - Veja o Que Você Ganha!</h2>
                 <ul>
-                    <li id="benefit1">Acesso imediato a ferramentas premium.</li>
-                    <li id="benefit2">Suporte 24/7.</li>
-                    <li id="benefit3">Resultados garantidos em semanas.</li>
+                    <li id="benefit1">Acesso imediato a ferramentas premium que geram renda automática.</li>
+                    <li id="benefit2">Suporte 24/7 para você nunca ficar perdido.</li>
+                    <li id="benefit3">Resultados garantidos em semanas - ou seu dinheiro de volta!</li>
                 </ul>
             </section>
 
             <!-- Prova Social Textual -->
             <section class="social-proof">
-                <h2 id="proof-title">O Que Nossos Clientes Dizem</h2>
-                <p id="proof-text">"Mudou minha vida!" - Usuário Satisfeito</p>
+                <h2 id="proof-title">O Que Nossos Clientes Dizem - Histórias Reais de Sucesso!</h2>
+                <p id="proof-text">"Mudou minha vida! Ganhei mais do que imaginava." - Usuário Satisfeito</p>
             </section>
 
-            <!-- Prova Social Visual -->
-            <section>
-                <h2>Provas Visuais</h2>
-                <img src="https://drive.google.com/uc?export=view&id=1fzCz7y0u76-tgdDhCDy5QVGIii5HxUAE" alt="Prova 1" style="max-width:100%; margin:10px;">
-                <img src="https://drive.google.com/uc?export=view&id=17i8BDm6jzNdW0YDtGl85_hw10-HKCA5F" alt="Prova 2" style="max-width:100%; margin:10px;">
-                <img src="https://drive.google.com/uc?export=view&id=1w4svG4p5qmJnxg0RraLwLpBGftn4dzFy" alt="Prova 3" style="max-width:100%; margin:10px;">
-                <img src="https://drive.google.com/uc?export=view&id=1GI3RvEm2GJBVhvgsiBiuG4sFUItfnDPM" alt="Prova 4" style="max-width:100%; margin:10px;">
-                <img src="https://drive.google.com/uc?export=view&id=1cdivkv1uvrr0ArbEofKcd8ql4vPKlYZw" alt="Prova 5" style="max-width:100%; margin:10px;">
-                <img src="https://drive.google.com/uc?export=view&id=15F-DWj0t2xtoiljLsGnfAyr8iOSNvMZO" alt="Prova 6" style="max-width:100%; margin:10px;">
-                <img src="https://drive.google.com/uc?export=view&id=1QM2H7YhhT3i0v4MMQcR9CHxezAUdYho-" alt="Prova 7" style="max-width:100%; margin:10px;">
-                <img src="https://drive.google.com/uc?export=view&id=1oIZk0VbM7qM-6kEzk_WYl71ZMK1nmTCz" alt="Prova 8" style="max-width:100%; margin:10px;">
-            </section>
-
-            <!-- Carrossel de Depoimentos -->
+            <!-- Carrossel de Depoimentos com Imagens -->
             <section class="carousel">
                 <div class="carousel-inner" id="carousel-inner">
-                    <!-- Depoimentos serão adicionados via JS -->
+                    <!-- Depoimentos serão adicionados via JS com imagens -->
                 </div>
             </section>
 
             <!-- Feed de Atividade em Tempo Real -->
             <section id="activity-feed">
-                <h2 id="activity-title">Atividade em Tempo Real</h2>
+                <h2 id="activity-title">Atividade em Tempo Real - Veja Quem Está Comprando Agora!</h2>
                 <ul id="activity-list"></ul>
             </section>
 
             <!-- Contador de Pessoas Online -->
-            <div id="online-count">Pessoas online agora: carregando...</div>
+            <div id="online-count">Pessoas online agora: carregando... - Junte-se a Elas!</div>
 
             <!-- Seção de Ofertas -->
             <section class="offers">
-                <h2 id="offers-title">Escolha Sua Oferta</h2>
+                <h2 id="offers-title">Escolha Sua Oferta - Preços Imperdíveis por Tempo Limitado!</h2>
                 <div class="offer">
-                    <h3 id="premium-title">Pacote Premium</h3>
+                    <h3 id="premium-title">Pacote Premium - Tudo que Você Precisa para o Sucesso!</h3>
                     <p id="premium-price">Preço: carregando...</p>
-                    <a id="premium-btn" class="btn" href="https://pay.cakto.com.br/4ehcq2y_672236">Comprar Premium Agora! ⏳</a>
+                    <a id="premium-btn" class="btn" href="https://pay.cakto.com.br/4ehcq2y_672236">Comprar Premium Agora! ⏳ - Não Espere!</a>
                 </div>
                 <div class="offer">
-                    <h3 id="complete-title">Pacote Completo</h3>
+                    <h3 id="complete-title">Pacote Completo - Máximo Valor pelo Menor Preço!</h3>
                     <p id="complete-price">Preço: carregando...</p>
-                    <a id="complete-btn" class="btn" href="https://pay.cakto.com.br/v8k65mm_672262">Comprar Completo Agora! ⏳</a>
+                    <a id="complete-btn" class="btn" href="https://pay.cakto.com.br/v8k65mm_672262">Comprar Completo Agora! ⏳ - Oferta Exclusiva!</a>
                 </div>
                 <div class="offer sold-out">
                     <h3>Lite</h3>
                     <p>ESGOTADO</p>
-                    <button disabled>Indisponível</button>
+                    <button disabled>Indisponível - Escolha Outra Oferta!</button>
                 </div>
             </section>
 
             <!-- Cronômetro -->
-            <div id="timer">⏳ Oferta reservada por 15:00</div>
+            <div id="timer">⏳ Oferta reservada por 900 segundos</div>
+            <p id="timer-explanation">Esta oferta é exclusiva e limitada no tempo! Aproveite antes que expire e perca a chance de transformar sua renda para sempre.</p>
         </div>
     </div>
 
@@ -284,7 +308,7 @@
     <script>
         // JS - Organização: Quiz, Personalização, Notificações, Cronômetro, Carrossel, Feed, Online Count
 
-        // Dados de Personalização por Região
+        // Dados de Personalização por Região com Imagens de Depoimentos
         const regions = {
             'br-pt': {
                 lang: 'pt',
@@ -292,28 +316,28 @@
                 premiumPrice: '49,98',
                 completePrice: '39,98',
                 texts: {
-                    heroTitle: 'Transforme Sua Vida Agora!',
-                    subheadline: 'Descubra o segredo para ganhar renda de forma inteligente e rápida.',
-                    whyTitle: 'Por Que Isso Funciona',
-                    whyText: 'Nosso sistema é comprovado por milhares de usuários que alcançaram independência financeira.',
-                    benefitsTitle: 'Benefícios Claros',
-                    benefit1: 'Acesso imediato a ferramentas premium.',
-                    benefit2: 'Suporte 24/7.',
-                    benefit3: 'Resultados garantidos em semanas.',
-                    proofTitle: 'O Que Nossos Clientes Dizem',
-                    proofText: '"Mudou minha vida!" - Usuário Satisfeito',
-                    activityTitle: 'Atividade em Tempo Real',
-                    offersTitle: 'Escolha Sua Oferta',
-                    premiumTitle: 'Pacote Premium',
-                    completeTitle: 'Pacote Completo',
-                    heroCta: 'Garanta Sua Oferta Agora!',
-                    premiumBtn: 'Comprar Premium Agora! ⏳',
-                    completeBtn: 'Comprar Completo Agora! ⏳'
+                    heroTitle: 'Transforme Sua Vida Agora - Ganhe Dinheiro de Verdade Sem Sair de Casa!',
+                    subheadline: 'Descubra o segredo para ganhar renda de forma inteligente, rápida e sem riscos. Milhares já estão lucrando - você será o próximo?',
+                    whyTitle: 'Por Que Isso Funciona - Resultados Comprovados!',
+                    whyText: 'Nosso sistema é comprovado por milhares de usuários que alcançaram independência financeira. Não é sorte, é estratégia comprovada que funciona para qualquer um!',
+                    benefitsTitle: 'Benefícios Claros - Veja o Que Você Ganha!',
+                    benefit1: 'Acesso imediato a ferramentas premium que geram renda automática.',
+                    benefit2: 'Suporte 24/7 para você nunca ficar perdido.',
+                    benefit3: 'Resultados garantidos em semanas - ou seu dinheiro de volta!',
+                    proofTitle: 'O Que Nossos Clientes Dizem - Histórias Reais de Sucesso!',
+                    proofText: '"Mudou minha vida! Ganhei mais do que imaginava." - Usuário Satisfeito',
+                    activityTitle: 'Atividade em Tempo Real - Veja Quem Está Comprando Agora!',
+                    offersTitle: 'Escolha Sua Oferta - Preços Imperdíveis por Tempo Limitado!',
+                    premiumTitle: 'Pacote Premium - Tudo que Você Precisa para o Sucesso!',
+                    completeTitle: 'Pacote Completo - Máximo Valor pelo Menor Preço!',
+                    heroCta: 'Garanta Sua Oferta Agora Antes que Esgote!',
+                    premiumBtn: 'Comprar Premium Agora! ⏳ - Não Espere!',
+                    completeBtn: 'Comprar Completo Agora! ⏳ - Oferta Exclusiva!'
                 },
                 testimonials: [
-                    '"Incrível! Ganhei R$5k no primeiro mês." - João, Brasil',
-                    '"Recomendo a todos!" - Maria, Portugal',
-                    '"Fácil e eficaz." - Pedro, Brasil'
+                    {text: '"Incrível! Ganhei R$5k no primeiro mês." - João, Brasil', img: 'https://www.shutterstock.com/image-photo/happy-young-female-business-leader-260nw-2007206999.jpg'},
+                    {text: '"Recomendo a todos!" - Maria, Portugal', img: 'https://thumbs.dreamstime.com/b/crop-close-up-portrait-smiling-multiracial-employees-show-thumb-up-give-recommendation-happy-diverse-multiethnic-colleagues-226735659.jpg'},
+                    {text: '"Fácil e eficaz." - Pedro, Brasil', img: 'https://media.istockphoto.com/id/1718949646/photo/diverse-american-faces.jpg?s=612x612&w=0&k=20&c=M6UgFJyCOfhZuJHjyKhncYRI7GMhm-XFTRIlzflSkEA='}
                 ],
                 names: ['João Silva', 'Maria Oliveira', 'Pedro Santos', 'Ana Costa', 'Carlos Pereira'],
                 countries: ['Brasil', 'Portugal']
@@ -324,28 +348,28 @@
                 premiumPrice: '19.90',
                 completePrice: '14.90',
                 texts: {
-                    heroTitle: 'Transform Your Life Now!',
-                    subheadline: 'Discover the secret to earning income smartly and quickly.',
-                    whyTitle: 'Why This Works',
-                    whyText: 'Our system is proven by thousands of users who achieved financial independence.',
-                    benefitsTitle: 'Clear Benefits',
-                    benefit1: 'Immediate access to premium tools.',
-                    benefit2: '24/7 support.',
-                    benefit3: 'Guaranteed results in weeks.',
-                    proofTitle: 'What Our Customers Say',
-                    proofText: '"Changed my life!" - Satisfied User',
-                    activityTitle: 'Real-Time Activity',
-                    offersTitle: 'Choose Your Offer',
-                    premiumTitle: 'Premium Package',
-                    completeTitle: 'Complete Package',
-                    heroCta: 'Secure Your Offer Now!',
-                    premiumBtn: 'Buy Premium Now! ⏳',
-                    completeBtn: 'Buy Complete Now! ⏳'
+                    heroTitle: 'Transform Your Life Now - Earn Real Money Without Leaving Home!',
+                    subheadline: 'Discover the secret to earning income smartly, quickly, and risk-free. Thousands are already profiting - will you be next?',
+                    whyTitle: 'Why This Works - Proven Results!',
+                    whyText: 'Our system is proven by thousands of users who achieved financial independence. It\'s not luck, it\'s a proven strategy that works for anyone!',
+                    benefitsTitle: 'Clear Benefits - See What You Get!',
+                    benefit1: 'Immediate access to premium tools that generate automatic income.',
+                    benefit2: '24/7 support so you never get lost.',
+                    benefit3: 'Guaranteed results in weeks - or your money back!',
+                    proofTitle: 'What Our Customers Say - Real Success Stories!',
+                    proofText: '"Changed my life! Earned more than I imagined." - Satisfied User',
+                    activityTitle: 'Real-Time Activity - See Who\'s Buying Now!',
+                    offersTitle: 'Choose Your Offer - Unbeatable Prices for Limited Time!',
+                    premiumTitle: 'Premium Package - Everything You Need for Success!',
+                    completeTitle: 'Complete Package - Maximum Value for the Lowest Price!',
+                    heroCta: 'Secure Your Offer Now Before It\'s Gone!',
+                    premiumBtn: 'Buy Premium Now! ⏳ - Don\'t Wait!',
+                    completeBtn: 'Buy Complete Now! ⏳ - Exclusive Offer!'
                 },
                 testimonials: [
-                    '"Amazing! Earned $5k in the first month." - John, USA',
-                    '"Recommend to everyone!" - Mary, Canada',
-                    '"Easy and effective." - Peter, USA'
+                    {text: '"Amazing! Earned $5k in the first month." - John, USA', img: 'https://thumbs.dreamstime.com/b/diverse-group-people-showing-thumbs-up-satisfaction-emotion-stand-row-multiracial-different-age-smiling-looking-220748682.jpg'},
+                    {text: '"Recommend to everyone!" - Mary, Canada', img: 'https://www.shutterstock.com/image-vector/diverse-group-people-expressing-positive-260nw-2624643353.jpg'},
+                    {text: '"Easy and effective." - Peter, USA', img: 'https://img.freepik.com/free-photo/colleagues-with-thumbs-up-medium-shot_23-2149008932.jpg?semt=ais_hybrid&w=740&q=80'}
                 ],
                 names: ['John Smith', 'Mary Johnson', 'Peter Davis', 'Anna Wilson', 'Carlos Brown'],
                 countries: ['USA', 'Canada']
@@ -356,28 +380,28 @@
                 premiumPrice: '17.90',
                 completePrice: '12.90',
                 texts: {
-                    heroTitle: '¡Transforma Tu Vida Ahora!',
-                    subheadline: 'Descubre el secreto para ganar ingresos de manera inteligente y rápida.',
-                    whyTitle: 'Por Qué Funciona Esto',
-                    whyText: 'Nuestro sistema está probado por miles de usuarios que lograron independencia financiera.',
-                    benefitsTitle: 'Beneficios Claros',
-                    benefit1: 'Acceso inmediato a herramientas premium.',
-                    benefit2: 'Soporte 24/7.',
-                    benefit3: 'Resultados garantizados en semanas.',
-                    proofTitle: 'Qué Dicen Nuestros Clientes',
-                    proofText: '"¡Cambió mi vida!" - Usuario Satisfecho',
-                    activityTitle: 'Actividad en Tiempo Real',
-                    offersTitle: 'Elige Tu Oferta',
-                    premiumTitle: 'Paquete Premium',
-                    completeTitle: 'Paquete Completo',
-                    heroCta: '¡Asegura Tu Oferta Ahora!',
-                    premiumBtn: '¡Comprar Premium Ahora! ⏳',
-                    completeBtn: '¡Comprar Completo Ahora! ⏳'
+                    heroTitle: '¡Transforma Tu Vida Ahora - Gana Dinero Real Sin Salir de Casa!',
+                    subheadline: 'Descubre el secreto para ganar ingresos de manera inteligente, rápida y sin riesgos. ¡Miles ya están ganando - serás el próximo?',
+                    whyTitle: 'Por Qué Funciona Esto - ¡Resultados Probados!',
+                    whyText: 'Nuestro sistema está probado por miles de usuarios que lograron independencia financiera. ¡No es suerte, es una estrategia probada que funciona para cualquiera!',
+                    benefitsTitle: 'Beneficios Claros - ¡Ve Lo Que Ganas!',
+                    benefit1: 'Acceso inmediato a herramientas premium que generan ingresos automáticos.',
+                    benefit2: 'Soporte 24/7 para que nunca te pierdas.',
+                    benefit3: 'Resultados garantizados en semanas - ¡o tu dinero de vuelta!',
+                    proofTitle: 'Qué Dicen Nuestros Clientes - ¡Historias Reales de Éxito!',
+                    proofText: '"¡Cambió mi vida! Gané más de lo que imaginaba." - Usuario Satisfecho',
+                    activityTitle: 'Actividad en Tiempo Real - ¡Ve Quién Está Comprando Ahora!',
+                    offersTitle: 'Elige Tu Oferta - ¡Precios Imperdibles por Tiempo Limitado!',
+                    premiumTitle: 'Paquete Premium - ¡Todo lo que Necesitas para el Éxito!',
+                    completeTitle: 'Paquete Completo - ¡Máximo Valor por el Menor Precio!',
+                    heroCta: '¡Asegura Tu Oferta Ahora Antes de que Se Agote!',
+                    premiumBtn: '¡Comprar Premium Ahora! ⏳ - ¡No Esperes!',
+                    completeBtn: '¡Comprar Completo Ahora! ⏳ - ¡Oferta Exclusiva!'
                 },
                 testimonials: [
-                    '"¡Increíble! Gané €5k en el primer mes." - Juan, España',
-                    '"¡Recomiendo a todos!" - María, México',
-                    '"Fácil y efectivo." - Pedro, Argentina'
+                    {text: '"¡Increíble! Gané €5k en el primer mes." - Juan, España', img: 'https://media.gettyimages.com/id/1477074693/photo/tablet-planning-and-startup-people-in-workspace-meeting-for-digital-collaboration-diversity.jpg?s=612x612&w=gi&k=20&c=O26YIniaeFWyMy96aK5LubgGlKcifKLL6ZgIYZAx1Es='},
+                    {text: '"¡Recomiendo a todos!" - María, México', img: 'https://media.istockphoto.com/id/1466442535/photo/diverse-american-faces.jpg?s=612x612&w=0&k=20&c=op5vaxRkMGyNSodAy-8RQmv2ruBOXiif-5V1c8gQ2qc='},
+                    {text: '"Fácil y efectivo." - Pedro, Argentina', img: 'https://photos.peopleimages.com/picture/202205/2483583-happy-diverse-businesspeople-listening-to-a-colleague-present-feedback-and-ideas-during-a-meeting-in-an-office-boardroom.-smiling-businessmen-and-businesswomen-having-a-discussion-while-brainstorming-fit_400_400.jpg'}
                 ],
                 names: ['Juan García', 'María López', 'Pedro Martínez', 'Ana Rodríguez', 'Carlos Hernández'],
                 countries: ['España', 'México', 'Argentina', 'Colombia', 'Chile']
@@ -399,9 +423,9 @@
             localStorage.setItem('quiz_goal', goal);
             localStorage.setItem('quiz_time', time);
 
-            // Iniciar Cronômetro se não existir
+            // Iniciar Cronômetro se não existir (900 segundos = 15 min)
             if (!localStorage.getItem('timer_end')) {
-                const endTime = Date.now() + 15 * 60 * 1000; // 15 minutos
+                const endTime = Date.now() + 900 * 1000;
                 localStorage.setItem('timer_end', endTime);
             }
 
@@ -450,14 +474,14 @@
             document.getElementById('hero-cta').href = 'https://pay.cakto.com.br/4ehcq2y_672236'; // Premium como default
         }
 
-        // Carrossel de Depoimentos
+        // Carrossel de Depoimentos com Imagens
         function startCarousel(country) {
             const config = regions[country];
             const inner = document.getElementById('carousel-inner');
             config.testimonials.forEach(test => {
                 const div = document.createElement('div');
                 div.className = 'testimonial';
-                div.innerHTML = `<p>${test}</p>`;
+                div.innerHTML = `<img src="${test.img}" alt="Depoimento"><p>${test.text}</p>`;
                 inner.appendChild(div);
             });
 
@@ -468,13 +492,24 @@
             }, 3000);
         }
 
-        // Notificações em Tempo Real
+        // Notificações em Tempo Real sem Repetir Nomes
         function startNotifications(country) {
             const config = regions[country];
             const notification = document.getElementById('notification');
+            let usedNames = new Set();
+
+            function getUniqueName() {
+                let name;
+                do {
+                    name = config.names[Math.floor(Math.random() * config.names.length)];
+                } while (usedNames.has(name) && usedNames.size < config.names.length);
+                usedNames.add(name);
+                if (usedNames.size === config.names.length) usedNames.clear();
+                return name;
+            }
 
             function showNotification() {
-                const name = config.names[Math.floor(Math.random() * config.names.length)];
+                const name = getUniqueName();
                 const countryName = config.countries[Math.floor(Math.random() * config.countries.length)];
                 const package = Math.random() > 0.5 ? 'Premium' : 'Completo';
                 notification.textContent = `${name} de ${countryName} adquiriu o acesso ${package}`;
@@ -495,7 +530,7 @@
             scheduleNext();
         }
 
-        // Feed de Atividade
+        // Feed de Atividade com Tempos em Segundos
         function startActivityFeed(country) {
             const config = regions[country];
             const list = document.getElementById('activity-list');
@@ -504,8 +539,9 @@
                 const name = config.names[Math.floor(Math.random() * config.names.length)];
                 const countryName = config.countries[Math.floor(Math.random() * config.countries.length)];
                 const action = Math.random() > 0.5 ? 'visualizou a oferta' : 'está considerando o pacote';
+                const secondsAgo = Math.floor(Math.random() * 60 + 1); // 1-60 segundos
                 const li = document.createElement('li');
-                li.textContent = `${name} de ${countryName} ${action} agora!`;
+                li.textContent = `${name} de ${countryName} ${action} há ${secondsAgo} segundos!`;
                 list.prepend(li);
                 if (list.children.length > 5) list.removeChild(list.lastChild);
             }
@@ -520,28 +556,26 @@
 
             function updateCount() {
                 const count = Math.floor(Math.random() * 50 + 50); // 50-100
-                countEl.textContent = `Pessoas online agora: ${count}`;
+                countEl.textContent = `Pessoas online agora: ${count} - Junte-se a Elas!`;
             }
 
             setInterval(updateCount, 5000); // Toda 5s
             updateCount(); // Inicial
         }
 
-        // Cronômetro Regressivo
+        // Cronômetro Regressivo em Segundos (não reinicia)
         function startTimer() {
             const timerEl = document.getElementById('timer');
             const endTime = parseInt(localStorage.getItem('timer_end'));
 
             function updateTimer() {
                 const now = Date.now();
-                const remaining = endTime - now;
+                const remaining = Math.floor((endTime - now) / 1000);
                 if (remaining <= 0) {
                     timerEl.textContent = '⏳ Oferta Expirada!';
                     return;
                 }
-                const minutes = Math.floor((remaining / 1000 / 60) % 60);
-                const seconds = Math.floor((remaining / 1000) % 60);
-                timerEl.textContent = `⏳ Oferta reservada por ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                timerEl.textContent = `⏳ Oferta reservada por ${remaining} segundos`;
             }
 
             setInterval(updateTimer, 1000);
