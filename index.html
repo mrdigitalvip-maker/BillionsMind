@@ -1,456 +1,270 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Método da Mente Lucrativa 2026+</title>
 
-<!-- Fonte Inter -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-  :root {
-    --bg: #000000;
-    --gold: #f4c86c;
-    --gold-soft: rgba(244, 200, 108, 0.16);
-    --white: #ffffff;
-    --text-soft: #c2c3d6;
-    --radius: 18px;
-  }
+:root{
+  --gold:#f4c86c;
+  --blue1:#08162f;
+  --blue2:#050b1c;
+  --text-soft:#a9b4ff;
+  --radius:18px;
+}
 
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
-  }
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
 
-  body {
-    background: var(--bg);
-    color: var(--white);
-    overflow-x: hidden;
-  }
+body{
+  background:linear-gradient(180deg,var(--blue1),var(--blue2));
+  color:#fff;
+  overflow-x:hidden;
+}
 
-  /* HEADER */
-  .header {
-    padding: 80px 20px 70px;
-    text-align: center;
-    max-width: 900px;
-    margin: auto;
-  }
+/* QUIZ */
+#quiz-overlay{
+  position:fixed;
+  inset:0;
+  background:linear-gradient(180deg,#08162f,#050b1c);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:99999;
+}
 
-  .header-title {
-    font-size: 42px;
-    font-weight: 800;
-    letter-spacing: 0.09em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 14px;
-  }
+.quiz-box{
+  background:#0f1b3d;
+  padding:30px 26px;
+  border-radius:18px;
+  width:100%;
+  max-width:360px;
+  text-align:center;
+  box-shadow:0 20px 50px rgba(0,0,0,0.7);
+}
 
-  .header-sub {
-    font-size: 17px;
-    color: var(--text-soft);
-    max-width: 620px;
-    margin: 0 auto 24px;
-    line-height: 1.5;
-  }
+.quiz-box h2{color:var(--gold);margin-bottom:18px}
+.quiz-step{display:none}
+.quiz-step.active{display:block}
+.quiz-step p{margin-bottom:12px;font-size:15px}
 
-  .header-btn {
-    display: inline-block;
-    margin-top: 22px;
-    padding: 14px 26px;
-    background: linear-gradient(90deg, var(--gold), #d6a849);
-    color: #000;
-    border-radius: 999px;
-    font-weight: 700;
-    font-size: 16px;
-    text-decoration: none;
-    cursor: pointer;
-    transition: 0.2s;
-  }
+.quiz-step select{
+  width:100%;
+  padding:10px;
+  border-radius:10px;
+  border:none;
+  margin-bottom:14px;
+}
 
-  .header-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 24px rgba(244,200,108,0.5);
-  }
+.quiz-step button{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--gold),#d6a849);
+  font-weight:700;
+  cursor:pointer;
+}
 
-  /* SECTION WRAPPER */
-  .section {
-    padding: 60px 20px;
-    max-width: 1100px;
-    margin: auto;
-  }
+/* HERO */
+.hero{
+  padding:90px 20px 80px;
+  text-align:center;
+  max-width:900px;
+  margin:auto;
+}
 
-  .sec-title {
-    font-size: 26px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    text-align: center;
-    color: var(--gold);
-    margin-bottom: 14px;
-  }
+.hero h1{font-size:42px;font-weight:800;color:var(--gold)}
+.hero p{color:var(--text-soft);font-size:17px;max-width:640px;margin:16px auto}
 
-  .sec-sub {
-    text-align: center;
-    font-size: 15px;
-    color: var(--text-soft);
-    margin-bottom: 30px;
-  }
+.hero-btn{
+  display:inline-block;
+  margin-top:26px;
+  padding:14px 32px;
+  background:linear-gradient(90deg,var(--gold),#d6a849);
+  color:#000;
+  border-radius:999px;
+  font-weight:700;
+  text-decoration:none;
+}
 
-  /* FEATURES */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 18px;
-  }
+/* PLANS */
+.section{padding:70px 20px;max-width:1100px;margin:auto}
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
 
-  .feature {
-    padding: 20px;
-    background: #0a0a0a;
-    border: 1px solid var(--gold-soft);
-    border-radius: var(--radius);
-  }
+.plan{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+  padding:22px;
+  border-radius:18px;
+}
 
-  .feature h3 {
-    font-size: 17px;
-    margin-bottom: 6px;
-  }
+.plan.featured{
+  border:1px solid var(--gold);
+  box-shadow:0 0 30px rgba(244,200,108,0.25);
+}
 
-  .feature p {
-    color: var(--text-soft);
-    font-size: 14px;
-    line-height: 1.5;
-  }
+.plan h3{color:var(--gold)}
+.plan-price{font-size:32px;color:var(--gold);margin:10px 0}
+.plan p{color:var(--text-soft);font-size:14px}
 
+.plan-btn{
+  display:block;
+  margin-top:16px;
+  padding:12px;
+  text-align:center;
+  background:linear-gradient(90deg,var(--gold),#d6a849);
+  color:#000;
+  font-weight:700;
+  border-radius:999px;
+  text-decoration:none;
+}
+
+.disabled{
+  background:#333!important;
+  color:#aaa!important;
+  pointer-events:none;
+}
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
-<header class="header">
-  <h1 class="header-title">Método da Mente Lucrativa 2026+</h1>
+<!-- QUIZ -->
+<div id="quiz-overlay">
+  <div class="quiz-box">
+    <h2>Antes de continuar…</h2>
 
-  <p class="header-sub">
-    A nova era começa na mente. Um método direto e premium para você construir sua estrutura digital,
-    ativar disciplina e entrar em 2026 no controle do seu próprio caminho.
-  </p>
-
-  <a href="#plans" class="header-btn">Liberar meu acesso</a>
-</header>
-
-<!-- SECTION: O QUE VOCÊ VAI DOMINAR -->
-<section class="section">
-  <h2 class="sec-title">O que você vai dominar</h2>
-  <p class="sec-sub">From mindset to execution — everything aligned for your next level.</p>
-
-  <div class="grid">
-    <div class="feature">
-      <h3>Estrutura de Produtos Digitais</h3>
-      <p>Como criar produtos, planos e bases profissionais mesmo começando do zero.</p>
-    </div>
-    <div class="feature">
-      <h3>Pensamento 2026+</h3>
-      <p>Os códigos mentais que colocam você mentalmente à frente de 90% das pessoas.</p>
-    </div>
-    <div class="feature">
-      <h3>Fluxo Técnico Completo</h3>
-      <p>Página, estrutura, assinaturas, base de dados, deploy — explicado de forma simples.</p>
-    </div>
-    <div class="feature">
-      <h3>Criação de Apps com IA</h3>
-      <p>Use IA para criar projetos reais, funcionais e prontos para o mundo.</p>
-    </div>
-    <div class="feature">
-      <h3>Mentalidade Lucrativa</h3>
-      <p>A mentalidade que transforma foco em movimento, e movimento em resultado.</p>
-    </div>
-    <div class="feature">
-      <h3>Sistema de Disciplina</h3>
-      <p>Como manter consistência e evolução diária sem depender de motivação.</p>
-    </div>
-  </div>
-</section>
-<!-- SECTION: PLANOS -->
-<section class="section" id="plans">
-  <h2 class="sec-title">Escolha seu acesso</h2>
-  <p class="sec-sub">Three paths. One evolution.</p>
-
-<style>
-  .plans {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 20px;
-  }
-
-  .plan {
-    background: #0a0a0a;
-    border: 1px solid var(--gold-soft);
-    padding: 22px;
-    border-radius: var(--radius);
-    text-align: left;
-    position: relative;
-  }
-
-  .plan.featured {
-    border: 1px solid var(--gold);
-    box-shadow: 0 0 26px rgba(244,200,108,0.25);
-  }
-
-  .plan h3 {
-    color: var(--gold);
-    font-size: 20px;
-    margin-bottom: 8px;
-  }
-
-  .plan-price {
-    font-size: 32px;
-    color: var(--gold);
-    margin-bottom: 12px;
-    font-weight: 700;
-  }
-
-  .plan p {
-    color: var(--text-soft);
-    font-size: 14px;
-    margin-bottom: 6px;
-  }
-
-  .plan .urgency {
-    color: #ff6666;
-    font-size: 13px;
-    margin-top: 10px;
-  }
-
-  .plan-btn {
-    display: block;
-    width: 100%;
-    padding: 12px 0;
-    text-align: center;
-    background: linear-gradient(90deg, var(--gold), #d6a849);
-    color: #000;
-    font-weight: 700;
-    border-radius: 999px;
-    margin-top: 16px;
-    transition: 0.2s;
-  }
-
-  .plan-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 18px rgba(244,200,108,0.35);
-  }
-
-  .plan-timer {
-    margin-top: 12px;
-    padding: 8px 12px;
-    border-radius: 12px;
-    background: rgba(244,200,108,0.08);
-    border: 1px solid rgba(244,200,108,0.25);
-    font-size: 14px;
-    color: var(--gold);
-    display: inline-block;
-  }
-</style>
-
-<div class="plans">
-
-  <!-- PLANO PREMIUM -->
-  <div class="plan featured">
-    <h3>Acesso Total · Premium</h3>
-    <div class="plan-price">R$ 49,98</div>
-    <p>✔ Conteúdo completo (mentalidade + estrutura + execução)</p>
-    <p>✔ Modelos profissionais e referências</p>
-    <p>✔ Visão de longo prazo</p>
-
-    <div class="urgency">Vagas limitadas — ciclo pode encerrar a qualquer momento.</div>
-
-    <div class="plan-timer">
-      Oferta expira em:
-      <span id="timer-premium"></span>
+    <div class="quiz-step active">
+      <p>🌍 Em qual país você está?</p>
+      <select id="q-country">
+        <option value="">Selecione</option>
+        <option value="pt">Brasil / Portugal</option>
+        <option value="en">Estados Unidos / Canadá</option>
+        <option value="es">Espanha / América Latina</option>
+      </select>
+      <button onclick="nextStep()">Continuar</button>
     </div>
 
-    <a href="https://pay.cakto.com.br/4ehcq2y_672236" target="_blank" class="plan-btn">
-      Liberar meu acesso Premium
-    </a>
-  </div>
-
-  <!-- PLANO MÉDIO -->
-  <div class="plan">
-    <h3>Versão Acessível · Completa</h3>
-    <div class="plan-price">R$ 39,98</div>
-    <p>✔ Conteúdo principal completo</p>
-    <p>✔ Estratégia + técnica essencial</p>
-
-    <div class="urgency">Disponível por tempo limitado.</div>
-
-    <div class="plan-timer">
-      Oferta ativa por:
-      <span id="timer-medio"></span>
+    <div class="quiz-step">
+      <p>🎯 Qual sua idade?</p>
+      <select id="q-age">
+        <option>18–24</option>
+        <option>25–34</option>
+        <option>35–44</option>
+        <option>45+</option>
+      </select>
+      <button onclick="nextStep()">Continuar</button>
     </div>
 
-    <a href="https://pay.cakto.com.br/v8k65mm_672262" target="_blank" class="plan-btn">
-      Liberar meu acesso
-    </a>
-  </div>
-
-  <!-- PLANO BAIXO -->
-  <div class="plan">
-    <h3>Opção Lite · Essencial</h3>
-    <div class="plan-price">R$ 29,99</div>
-    <p>✔ Começo inteligente</p>
-    <p>✔ Mentalidade + base inicial</p>
-
-    <div class="urgency">Enquanto houver vagas.</div>
-
-    <div class="plan-timer">
-      Tempo restante:
-      <span id="timer-lite"></span>
+    <div class="quiz-step">
+      <p>💻 Qual sua intenção?</p>
+      <select id="q-intent">
+        <option value="extra">Renda extra</option>
+        <option value="principal">Renda principal</option>
+        <option value="explore">Explorando</option>
+      </select>
+      <button onclick="finishQuiz()">Ver conteúdo</button>
     </div>
-
-    <a href="https://pay.cakto.com.br/3eprkrv_672949" target="_blank" class="plan-btn">
-      Garantir acesso Lite
-    </a>
-  </div>
-
-</div>
-</section>
-
-
-<!-- SECTION: BONUS -->
-<section class="section">
-  <h2 class="sec-title">Bônus exclusivos deste ciclo</h2>
-  <p class="sec-sub">Extra value for this wave only.</p>
-
-<style>
-  .bonus-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 16px;
-  }
-
-  .bonus {
-    background: #0a0a0a;
-    padding: 18px;
-    border-radius: var(--radius);
-    border: 1px solid var(--gold-soft);
-  }
-
-  .bonus h3 {
-    color: var(--gold);
-    font-size: 17px;
-    margin-bottom: 6px;
-  }
-
-  .bonus small {
-    color: var(--text-soft);
-    font-size: 13px;
-  }
-
-  .bonus p {
-    color: var(--text-soft);
-    margin-top: 6px;
-    font-size: 14px;
-  }
-</style>
-
-<div class="bonus-grid">
-  <div class="bonus">
-    <h3>🎁 Biblioteca de Scripts IA</h3>
-    <small>Valor: R$ 97 — recebido gratuitamente</small>
-    <p>Prompts estratégicos para acelerar sua criação.</p>
-  </div>
-
-  <div class="bonus">
-    <h3>🎁 Checklist Mindset 2026</h3>
-    <small>Valor: R$ 67 — incluso gratuitamente</small>
-    <p>O sistema de disciplina para evolução diária real.</p>
-  </div>
-
-  <div class="bonus">
-    <h3>🎁 Pack de Design Profissional</h3>
-    <small>Valor: R$ 147 — incluso gratuitamente</small>
-    <p>Modelos prontos para páginas e designs premium.</p>
   </div>
 </div>
-</section>
 
+<!-- PAGE -->
+<div class="hero">
+  <h1 id="hero-title">Método da Mente Lucrativa 2026+</h1>
+  <p id="hero-sub">Construa renda digital com estrutura e execução real.</p>
+  <a href="#plans" class="hero-btn" id="cta-main">Liberar meu acesso</a>
+</div>
 
-<!-- SECTION: FINAL CTA -->
-<section class="section">
-  <div style="text-align:center; max-width:700px; margin:auto;">
-    <h2 class="sec-title">Você sabe que pode mais</h2>
-    <p class="sec-sub">
-      Nothing changes until you move.  
-      Escolha seu acesso e comece agora sua nova versão.
-    </p>
+<div class="section" id="plans">
+  <div class="plans">
 
-    <a href="#plans" class="header-btn">Liberar meu acesso</a>
+    <div class="plan featured" id="plan-premium">
+      <h3>Premium</h3>
+      <div class="plan-price" id="price-premium">R$ 49,98</div>
+      <p id="desc-premium">✔ Conteúdo completo</p>
+      <a id="link-premium" class="plan-btn" target="_blank">Acessar Premium</a>
+    </div>
+
+    <div class="plan" id="plan-complete">
+      <h3>Completo</h3>
+      <div class="plan-price" id="price-complete">R$ 39,98</div>
+      <p>✔ Conteúdo essencial</p>
+      <a id="link-complete" class="plan-btn" target="_blank">Acessar</a>
+    </div>
+
+    <div class="plan">
+      <h3>Lite</h3>
+      <div class="plan-price">—</div>
+      <a class="plan-btn disabled">Esgotado</a>
+    </div>
+
   </div>
-</section>
+</div>
 
-
-<!-- FOOTER -->
-<footer style="padding:20px; text-align:center; color:var(--text-soft); font-size:13px;">
-  Método da Mente Lucrativa 2026+ — BillionMind · Todos os direitos reservados.
-</footer>
-
-
-<!-- JAVASCRIPT: CRONÔMETRO REAL -->
 <script>
-  function getDeadline() {
-    const saved = localStorage.getItem("bm_deadline");
-    if (saved) return parseInt(saved);
+const steps=document.querySelectorAll(".quiz-step");
+let current=0;
 
-    const now = new Date().getTime();
-    const deadline = now + 24 * 60 * 60 * 1000; // 24h reais
-    localStorage.setItem("bm_deadline", deadline);
-    return deadline;
+function nextStep(){
+  steps[current].classList.remove("active");
+  current++;
+  steps[current].classList.add("active");
+}
+
+function finishQuiz(){
+  const lang=q("q-country").value;
+  const age=q("q-age").value;
+  const intent=q("q-intent").value;
+
+  localStorage.setItem("quiz_done","yes");
+  localStorage.setItem("lang",lang);
+  localStorage.setItem("intent",intent);
+  localStorage.setItem("age",age);
+
+  document.getElementById("quiz-overlay").style.display="none";
+  applyPersonalization(lang,intent);
+}
+
+function q(id){return document.getElementById(id)}
+
+function applyPersonalization(lang,intent){
+  // idioma + moeda
+  if(lang==="en"){
+    q("hero-title").innerText="Profitable Mind Method 2026+";
+    q("hero-sub").innerText="Build digital income with real execution.";
+    q("price-premium").innerText="$19.90";
+    q("price-complete").innerText="$14.90";
+    q("link-premium").href="https://checkout-stripe-premium.com";
+    q("link-complete").href="https://checkout-stripe-complete.com";
   }
 
-  function updateTimer(id) {
-    const el = document.getElementById(id);
-    if (!el) return;
-
-    const now = new Date().getTime();
-    const distance = getDeadline() - now;
-
-    if (distance <= 0) {
-      el.innerHTML = "Expirado";
-      return;
-    }
-
-    const h = Math.floor(distance / (1000 * 60 * 60));
-    const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const s = Math.floor((distance % (1000 * 60)) / 1000);
-
-    el.innerHTML =
-      h.toString().padStart(2, "0") + "h " +
-      m.toString().padStart(2, "0") + "m " +
-      s.toString().padStart(2, "0") + "s";
+  if(lang==="es"){
+    q("hero-title").innerText="Método de Mente Rentable 2026+";
+    q("hero-sub").innerText="Construye ingresos digitales reales.";
+    q("price-premium").innerText="€17.90";
+    q("price-complete").innerText="€12.90";
   }
 
-  setInterval(() => {
-    updateTimer("timer-premium");
-    updateTimer("timer-medio");
-    updateTimer("timer-lite");
-  }, 1000);
-</script>
+  // intenção
+  if(intent==="principal"){
+    q("plan-premium").classList.add("featured");
+    q("desc-premium").innerText="✔ Ideal para renda principal";
+  }
 
+  if(intent==="extra"){
+    q("plan-complete").classList.add("featured");
+  }
+}
 
-<!-- JAVASCRIPT: IDIOMA AUTOMÁTICO -->
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const lang = navigator.language || navigator.userLanguage;
-
-    if (!lang.startsWith("pt")) {
-      document.body.classList.add("en");
-
-      // Aqui você poderia trocar textos automaticamente
-      // Se quiser, posso gerar uma versão EN completa também.
-    }
-  });
+document.addEventListener("DOMContentLoaded",()=>{
+  if(localStorage.getItem("quiz_done")==="yes"){
+    document.getElementById("quiz-overlay").style.display="none";
+    applyPersonalization(localStorage.getItem("lang"),localStorage.getItem("intent"));
+  }
+});
 </script>
 
 </body>
