@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acesso Premium a Ferramentas de IA - xAI Inspired</title>
-    <!-- ✅ GOOGLE TAG GLOBAL -->
+    <title>IA Lucrativa Elite - Acesso Exclusivo</title>
+    <!-- Google Tag Manager -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16917756362"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -13,284 +13,259 @@
       gtag('config', 'AW-16917756362');
     </script>
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: #001f3f;
-            color: #ffffff;
-            line-height: 1.6;
-            overflow-x: hidden;
+        body { margin:0; font-family:'Segoe UI',Arial,sans-serif; background:#001f3f; color:#fff; overflow-x:hidden; }
+        .container { max-width:1200px; margin:auto; padding:20px; text-align:center; }
+        h1 { color:#ffd700; font-size:32px; margin:20px 0; }
+        h2 { color:#ffd700; font-size:26px; margin:30px 0 20px; }
+        p { line-height:1.7; font-size:18px; margin:15px 0; }
+        .btn {
+            background:#ff0000; color:#fff; padding:20px 40px; border-radius:10px; font-size:20px; font-weight:bold;
+            text-decoration:none; display:block; margin:20px auto; max-width:90%; box-shadow:0 8px 20px rgba(255,0,0,0.4);
+            transition:0.3s;
         }
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-        h1, h2, h3 { color: #ffd700; }
-        button, a.btn {
-            background-color: #ff0000;
-            color: #ffffff;
-            border: none;
-            padding: 15px 30px;
-            font-size: 18px;
-            cursor: pointer;
-            text-decoration: none;
-            border-radius: 5px;
-            display: block;
-            text-align: center;
-            margin: 10px auto; /* Centralizar botões */
-            max-width: 90%; /* Responsivo mobile */
-            transition: background-color 0.3s ease; /* Melhoria: animação suave */
+        .btn:hover { background:#cc0000; transform:scale(1.05); }
+        .btn-timer { font-size:16px; color:#ffd700; margin-top:8px; display:block; }
+        .sold-out { opacity:0.6; }
+        .sold-out .btn { background:#666; cursor:not-allowed; }
+        /* Quiz */
+        #quiz-page { background:#000; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:20px; }
+        #quiz-form { background:#0a2647; padding:40px; border-radius:15px; max-width:500px; width:90%; box-shadow:0 0 30px rgba(255,215,0,0.3); }
+        select { width:100%; padding:14px; margin:15px 0; border:2px solid #ffd700; border-radius:8px; background:#001f3f; color:#fff; font-size:16px; }
+        .quiz-step { display:none; }
+        .quiz-step.active { display:block; animation:fadeIn 0.6s; }
+        @keyframes fadeIn { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
+        /* Notificação */
+        .notif {
+            position:fixed; bottom:20px; right:20px; background:#28a745; color:#fff; padding:14px 20px; border-radius:12px;
+            box-shadow:0 6px 20px rgba(0,0,0,0.6); font-size:15px; max-width:340px; display:none; z-index:1000;
+            animation:slideUp 0.6s ease-out;
         }
-        button:hover, a.btn:hover {
-            background-color: #cc0000;
-        }
-        .btn-timer { font-size: 14px; color: #ffd700; margin-top: 5px; display: block; }
-        /* Quiz Page - Fundo preto, centralizado perfeitamente */
-        #quiz-page {
-            background-color: #000000; /* Fundo todo preto como solicitado */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-            padding: 20px;
-        }
-        #quiz-form {
-            background-color: #1a1a1a; /* Fundo escuro para form, contraste */
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 90%; /* Responsivo mobile */
-            width: 100%;
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2); /* Melhoria: sombra dourada para destaque */
-        }
-        .quiz-step {
-            display: none;
-        }
-        .quiz-step.active {
-            display: block;
-        }
-        #quiz-form select, #quiz-form input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ffd700; /* Borda dourada para urgência */
-            border-radius: 5px;
-            background-color: #001f3f;
-            color: #ffffff;
-            font-size: 16px; /* Melhoria: maior para touch mobile */
-        }
-        /* Sales Page - Melhorias para conversão: Urgência e CTAs destacados */
-        #sales-page {
-            display: none;
-        }
-        #sales-page .container {
-            text-align: center; /* Centralizar tudo para mobile */
-        }
-        /* Mobile adjustments - Otimização para celular */
-        @media (max-width: 768px) {
-            body { font-size: 16px; }
-            h1 { font-size: 24px; }
-            button, a.btn { font-size: 16px; padding: 12px 20px; }
-            #quiz-form { padding: 20px; }
+        .notif img { width:22px; vertical-align:middle; margin-right:10px; }
+        @keyframes slideUp { from{bottom:-100px; opacity:0;} to{bottom:20px; opacity:1;} }
+        /* Carrossel IA */
+        .carousel { overflow:hidden; position:relative; height:180px; margin:50px 0; background:#002b5e; border-radius:15px; }
+        .carousel-inner { display:flex; width:500%; animation:scroll 20s linear infinite; }
+        .ai-icon { min-width:20%; text-align:center; padding:20px; }
+        .ai-icon img { width:90px; height:90px; border-radius:12px; }
+        @keyframes scroll { 0%{transform:translateX(0);} 100%{transform:translateX(-100%);} }
+        /* Contador ao vivo */
+        #live-counter { font-size:30px; color:#ff0000; font-weight:bold; margin:40px 0; background:#002b5e; padding:20px; border-radius:12px; }
+        /* Redes sociais */
+        .social-icons { display:flex; justify-content:center; gap:30px; margin:40px 0; }
+        .social-icons img { width:60px; height:60px; }
+        /* Garantia */
+        .guarantee { background:#002b5e; padding:30px; border-radius:15px; margin:50px 0; font-size:18px; }
+        /* Mobile */
+        @media (max-width:768px) {
+            h1 { font-size:26px; }
+            h2 { font-size:22px; }
+            p { font-size:16px; }
+            #quiz-form { padding:25px; }
+            .btn { padding:18px 30px; font-size:18px; }
+            .notif { max-width:90%; right:5%; left:5%; bottom:10px; font-size:14px; }
         }
     </style>
 </head>
 <body>
-<!-- ===================== LOGO ===================== -->
-<div style="
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:20px 0 10px;
-">
-    <img
-        src="https://github.com/user-attachments/assets/f08d486f-0f70-4c4c-8549-4157eda96ab1"
-        alt="Logo Oficial"
-        style="
-            max-width:140px;
-            width:100%;
-            height:auto;
-            opacity:0.95;
-        "
-    >
+<!-- LOGO -->
+<div style="text-align:center; padding:20px 0;">
+    <img src="https://github.com/user-attachments/assets/f08d486f-0f70-4c4c-8549-4157eda96ab1" alt="Logo Elite" style="max-width:180px;">
 </div>
-<!-- ===================== QUIZ ===================== -->
+
+<!-- QUIZ -->
 <div id="quiz-page">
     <form id="quiz-form">
-        <h2 id="quiz-title">Personalize Sua Jornada com IA - Ganhe Vantagem Agora!</h2>
-        <p id="quiz-desc">Responda rápido e desbloqueie sua oferta exclusiva - Milhares já estão faturando!</p>
+        <h2 id="quiz-h2">Descubra Como Faturar Alto com Conteúdo Viral de Luxo Usando IA</h2>
+        <p id="quiz-p">Responda em menos de 30 segundos e libere sua oferta personalizada – milhares já estão lucrando!</p>
         <div class="quiz-step active" id="step1">
-            <label for="country">1. Seu País/Região:</label>
+            <label>1. Em qual região você está?</label>
             <select id="country" required>
                 <option value="">Selecione</option>
-                <option value="br-pt">Brasil/Portugal</option>
-                <option value="us-ca">EUA/Canadá</option>
-                <option value="es-latam">Espanha/LatAm</option>
+                <option value="br-pt">Brasil / Portugal</option>
+                <option value="us-ca">EUA / Canadá</option>
+                <option value="es-latam">Espanha / América Latina</option>
             </select>
-            <button type="button" onclick="nextStep(1)">Próxima</button>
+            <button type="button" onclick="nextStep(1)">Próxima →</button>
         </div>
         <div class="quiz-step" id="step2">
-            <label for="age">2. Sua Idade:</label>
-            <input type="number" id="age" min="18" required>
-            <button type="button" onclick="nextStep(2)">Próxima</button>
+            <label>2. Qual sua experiência atual criando conteúdo online?</label>
+            <select id="exp" required>
+                <option value="">Selecione</option>
+                <option>Nenhuma ou pouca</option>
+                <option>Já posto, mas pouco engajamento</option>
+                <option>Já monetizo, quero escalar</option>
+            </select>
+            <button type="button" onclick="nextStep(2)">Próxima →</button>
         </div>
         <div class="quiz-step" id="step3">
-            <label for="goal">3. Seu Objetivo:</label>
+            <label>3. Qual seu objetivo financeiro nos próximos 90 dias?</label>
             <select id="goal" required>
                 <option value="">Selecione</option>
-                <option value="extra">Renda Extra</option>
-                <option value="main">Renda Principal</option>
-                <option value="explore">Explorando</option>
+                <option>R$5k–R$15k extra por mês</option>
+                <option>R$20k–R$50k por mês</option>
+                <option>Substituir renda atual e viver de internet</option>
             </select>
-            <button type="button" onclick="nextStep(3)">Próxima</button>
+            <button type="button" onclick="nextStep(3)">Próxima →</button>
         </div>
         <div class="quiz-step" id="step4">
-            <label for="time">4. Tempo Disponível por Dia:</label>
-            <input type="number" id="time" min="1" required>
-            <button type="submit">Enviar e Acessar</button>
+            <label>4. Quanto tempo pode dedicar por dia para criar e postar?</label>
+            <select id="time" required>
+                <option value="">Selecione</option>
+                <option>1–2 horas</option>
+                <option>3–4 horas</option>
+                <option>5 horas ou mais</option>
+            </select>
+            <button type="submit">Liberar Minha Oferta Exclusiva Agora!</button>
         </div>
     </form>
 </div>
-<!-- ===================== VENDAS COMPLETA ===================== -->
+
+<!-- PÁGINA DE VENDAS -->
 <div id="sales-page" style="display:none;">
     <div class="container">
-        <!-- Hero persuasivo com CTA forte -->
-        <section class="hero">
-            <h1 id="hero-title">Transforme Sua Vida Agora!</h1>
-            <p id="subheadline">Descubra o segredo para ganhar renda de forma inteligente e rápida.</p>
-            <a id="hero-cta" class="btn" href="#">Garanta Sua Oferta Agora!</a>
-        </section>
+        <h1 id="main-title">Parabéns! Sua Oferta Personalizada Está Liberada</h1>
+        <p id="main-subtitle"><strong>Você está a um clique de criar conteúdo de luxo viral que fatura alto — sem aparecer na câmera, sem estoque e sem investimento milionário.</strong></p>
 
-        <!-- Por Que Funciona -->
-        <section class="why-works">
-            <h2 id="why-title">Por Que Isso Funciona</h2>
-            <p id="why-text">Nosso sistema é comprovado por milhares de usuários que alcançaram independência financeira.</p>
-        </section>
+        <!-- Contador ao vivo -->
+        <div id="live-counter">Esta oferta está ativa há <span id="days-live">0</span> dias — vagas encerrando em breve!</div>
 
-        <!-- Benefícios -->
-        <section class="benefits">
-            <h2 id="benefits-title">Benefícios Claros</h2>
-            <ul>
-                <li id="benefit1">Acesso imediato a ferramentas premium.</li>
-                <li id="benefit2">Suporte 24/7.</li>
-                <li id="benefit3">Resultados garantidos em semanas.</li>
-            </ul>
-        </section>
+        <!-- Dor + Solução + Gatilho de escassez -->
+        <h2>Você Está Cansado de Trabalhar Duro e Ganhar Pouco?</h2>
+        <p>A maioria passa horas criando conteúdo que ninguém vê. Com IA, você cria reels de carros de luxo, mansões, viagens e estilo de vida premium em minutos — conteúdo que viraliza naturalmente porque as pessoas <strong>amamm</strong> sonhar com essa vida.</p>
+        <p>Esse tipo de conteúdo gera engajamento explosivo no Instagram, TikTok e YouTube. Monetize com afiliados de produtos premium, patrocínios e vendas diretas — tudo automático.</p>
 
-        <!-- Prova Social Textual -->
-        <section class="social-proof">
-            <h2 id="proof-title">O Que Nossos Clientes Dizem</h2>
-            <p id="proof-text">"Mudou minha vida!" - Usuário Satisfeito</p>
-        </section>
+        <!-- Redes sociais com ícones -->
+        <h2>Poste Nessas Plataformas e Veja o Dinheiro Entrar</h2>
+        <div class="social-icons">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+            <img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg" alt="TikTok">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube">
+        </div>
 
-        <!-- Carrossel de Depoimentos -->
-        <section class="carousel">
-            <div class="carousel-inner" id="carousel-inner">
-                <!-- Depoimentos serão adicionados via JS -->
+        <!-- Bônus poderoso + Carrossel IA -->
+        <h2>Bônus Exclusivo: 30 Dias 100% Grátis nas Melhores IAs do Mundo</h2>
+        <p>Você recebe acesso imediato a Grok, ChatGPT, Gemini, Claude e Midjourney — gere textos hipnóticos, imagens de supercarros e vídeos de luxo em segundos.</p>
+        <div class="carousel">
+            <div class="carousel-inner">
+                <div class="ai-icon"><img src="https://1000logos.net/wp-content/uploads/2025/02/Grok-Logo.png" alt="Grok"><p>Grok</p></div>
+                <div class="ai-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/1/13/ChatGPT-Logo.png" alt="ChatGPT"><p>ChatGPT</p></div>
+                <div class="ai-icon"><img src="https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Gemini_Logo.width-800.png" alt="Gemini"><p>Gemini</p></div>
+                <div class="ai-icon"><img src="https://claude.ai/images/claude_ogimage.png" alt="Claude"><p>Claude</p></div>
+                <div class="ai-icon"><img src="https://assets.stickpng.com/images/66af6a25585ea98e55ff8605.png" alt="Midjourney"><p>Midjourney</p></div>
             </div>
-        </section>
+        </div>
 
-        <!-- Feed de Atividade em Tempo Real -->
-        <section id="activity-feed">
-            <h2 id="activity-title">Atividade em Tempo Real</h2>
-            <ul id="activity-list"></ul>
-        </section>
+        <!-- Gatilho de prova social + urgência -->
+        <h2>Outros Já Estão Lucrando Enquanto Você Lê Isso</h2>
+        <p>Milhares de alunos já criaram perfis que faturam R$10k–R$50k/mês com conteúdo de luxo. Eles começaram do zero — exatamente como você pode começar hoje.</p>
 
-        <!-- Contador de Pessoas Online -->
-        <div id="online-count">Pessoas online agora: carregando...</div>
+        <!-- Ofertas com gatilhos fortes -->
+        <h2>Escolha Seu Acesso Imediato Antes que Acabe</h2>
+        <div class="offer">
+            <h3 id="premium-h3">Acesso Premium</h3>
+            <p id="premium-price">Valor normal R$997</p>
+            <p style="color:#ffd700; font-size:20px;"><strong>Hoje apenas [preço]</strong></p>
+            <a id="premium-btn" href="https://pay.cakto.com.br/4ehcq2y_672236" class="btn" onclick="trackConversion()">
+                Quero Premium Agora<br>
+                <span class="btn-timer">+ Templates Virais + Suporte Prioritário + Bônus IA Grátis</span>
+            </a>
+        </div>
+        <div class="offer">
+            <h3 id="complete-h3">Acesso Completo (Mais Escolhido)</h3>
+            <p id="complete-price">Valor normal R$1.997</p>
+            <p style="color:#ffd700; font-size:20px;"><strong>Hoje apenas [preço]</strong></p>
+            <a id="complete-btn" href="https://pay.cakto.com.br/v8k65mm_672262" class="btn" onclick="trackConversion()">
+                Quero Completo Agora<br>
+                <span class="btn-timer">Tudo do Premium + Mentoria Semanal + Estratégias Avançadas</span>
+            </a>
+        </div>
+        <div class="offer sold-out">
+            <h3>Acesso Lite</h3>
+            <p>ESGOTADO</p>
+            <button class="btn" disabled>Indisponível</button>
+        </div>
 
-        <!-- Seção de Ofertas -->
-        <section class="offers">
-            <h2 id="offers-title">Escolha Sua Oferta</h2>
-            <div class="offer">
-                <h3 id="premium-title">Pacote Premium</h3>
-                <p id="premium-price">Preço: carregando...</p>
-                <a id="premium-btn" class="btn" href="https://pay.cakto.com.br/4ehcq2y_672236" onclick="trackConversion()">Comprar Premium Agora! ⏳</a>
-            </div>
-            <div class="offer">
-                <h3 id="complete-title">Pacote Completo</h3>
-                <p id="complete-price">Preço: carregando...</p>
-                <a id="complete-btn" class="btn" href="https://pay.cakto.com.br/v8k65mm_672262" onclick="trackConversion()">Comprar Completo Agora! ⏳</a>
-            </div>
-            <div class="offer sold-out">
-                <h3>Lite</h3>
-                <p>ESGOTADO</p>
-                <button disabled>Indisponível</button>
-            </div>
-        </section>
-
-        <!-- Cronômetro -->
-        <div id="timer">⏳ Oferta reservada por 15:00</div>
+        <!-- Garantia forte -->
+        <div class="guarantee">
+            <h2>Garantia Incondicional de 7 Dias</h2>
+            <p><strong>Teste tudo sem risco.</strong> Se em 7 dias você não estiver criando conteúdo viral e vendo resultados, devolvemos 100% do seu dinheiro — sem perguntas.</p>
+        </div>
     </div>
 </div>
-<!-- ===================== SCRIPT ===================== -->
+
+<!-- NOTIFICAÇÃO -->
+<div class="notif" id="notif"></div>
+
 <script>
-    // Traduções para idiomas
-    const translations = {
-        'br-pt': {
-            quizTitle: 'Personalize Sua Jornada com IA - Ganhe Vantagem Agora!',
-            quizDesc: 'Responda rápido e desbloqueie sua oferta exclusiva - Milhares já estão faturando!',
-            step1Label: '1. Seu País/Região:',
-            step2Label: '2. Sua Idade:',
-            step3Label: '3. Seu Objetivo:',
-            step4Label: '4. Tempo Disponível por Dia:',
-            heroTitle: 'Desbloqueie o Futuro com IA',
-            premiumBtn: 'Acessar Premium',
-            completeBtn: 'Acessar Completo',
-            liteBtn: 'Acessar Lite',
-            timerPremium: '⏳ Últimas vagas',
-            timerComplete: '🔥 Mais escolhido',
-            timerLite: '🚫 Esgotado'
-        },
-        'us-ca': {
-            quizTitle: 'Personalize Your AI Journey - Gain Advantage Now!',
-            quizDesc: 'Answer quickly and unlock your exclusive offer - Thousands are already profiting!',
-            step1Label: '1. Your Country/Region:',
-            step2Label: '2. Your Age:',
-            step3Label: '3. Your Goal:',
-            step4Label: '4. Time Available per Day:',
-            heroTitle: 'Unlock the Future with AI',
-            premiumBtn: 'Access Premium',
-            completeBtn: 'Access Complete',
-            liteBtn: 'Access Lite',
-            timerPremium: '⏳ Last spots',
-            timerComplete: '🔥 Most chosen',
-            timerLite: '🚫 Sold out'
-        },
-        'es-latam': {
-            quizTitle: 'Personaliza Tu Viaje con IA - ¡Gana Ventaja Ahora!',
-            quizDesc: 'Responde rápido y desbloquea tu oferta exclusiva - ¡Miles ya están ganando!',
-            step1Label: '1. Tu País/Región:',
-            step2Label: '2. Tu Edad:',
-            step3Label: '3. Tu Objetivo:',
-            step4Label: '4. Tiempo Disponible por Día:',
-            heroTitle: 'Desbloquea el Futuro con IA',
-            premiumBtn: 'Acceder Premium',
-            completeBtn: 'Acceder Completo',
-            liteBtn: 'Acceder Lite',
-            timerPremium: '⏳ Últimas plazas',
-            timerComplete: '🔥 Más elegido',
-            timerLite: '🚫 Agotado'
-        }
+    const regions = {
+        'br-pt': { currency:'R$', premium:'49,90', complete:'39,90', countries:['Brasil','Portugal','São Paulo','Rio de Janeiro','Lisboa'] },
+        'us-ca': { currency:'$', premium:'19.90', complete:'14.90', countries:['USA','Canada','New York','Los Angeles','Toronto'] },
+        'es-latam': { currency:'€', premium:'17.90', complete:'12.90', countries:['España','México','Argentina','Colombia','Chile'] }
     };
 
-    function nextStep(step) {
-        document.getElementById("step" + step).style.display = "none";
-        document.getElementById("step" + (step + 1)).style.display = "block";
+    function nextStep(n) {
+        document.getElementById('step'+n).classList.remove('active');
+        document.getElementById('step'+(n+1)).classList.add('active');
     }
-    document.getElementById("quiz-form").addEventListener("submit", function(e){
+
+    document.getElementById('quiz-form').onsubmit = function(e) {
         e.preventDefault();
-        const country = document.getElementById('country').value;
-        const trans = translations[country] || translations['br-pt']; // Default PT
-        // Aplicar traduções ao quiz (mas como já submetido, não necessário aqui)
-        // Redirecionar para sales page
-        document.getElementById("quiz-page").style.display = "none";
-        document.getElementById("sales-page").style.display = "block";
-        // Scroll suave
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+        const countryKey = document.getElementById('country').value;
+        const config = regions[countryKey] || regions['br-pt'];
+
+        // Atualiza preços
+        document.getElementById('premium-price').nextElementSibling.innerHTML = `<strong>Hoje apenas ${config.currency} ${config.premium}</strong>`;
+        document.getElementById('complete-price').nextElementSibling.innerHTML = `<strong>Hoje apenas ${config.currency} ${config.complete}</strong>`;
+
+        // Contador ao vivo (diferente por sessão)
+        if (!sessionStorage.getItem('launch_days')) {
+            const days = Math.floor(Math.random() * 15 + 40); // 40-55 dias
+            sessionStorage.setItem('launch_days', days);
+        }
+        document.getElementById('days-live').textContent = sessionStorage.getItem('launch_days');
+
+        // Mostra página de vendas
+        document.getElementById('quiz-page').style.display = 'none';
+        document.getElementById('sales-page').style.display = 'block';
+        window.scrollTo(0,0);
+    };
+
+    // Notificações aleatórias com bandeira e persuasão
+    const names = ['Ana','Pedro','Carlos','Mariana','Lucas','Beatriz','Rafael','Julia','Thiago','Fernanda','Gabriel','Sophia'];
+    let used = new Set();
+    function showNotif() {
+        if (document.getElementById('sales-page').style.display === 'none') return;
+
+        let name;
+        do { name = names[Math.floor(Math.random()*names.length)]; } while (used.has(name));
+        used.add(name); if (used.size > 8) used.clear();
+
+        const pkg = Math.random() > 0.4 ? 'Completo' : 'Premium';
+        const cityCountry = regions['br-pt'].countries.concat(regions['us-ca'].countries, regions['es-latam'].countries);
+        const location = cityCountry[Math.floor(Math.random()*cityCountry.length)];
+        const flag = location.includes('Brasil') || location.includes('São Paulo') || location.includes('Rio') ? '🇧🇷' :
+                     location.includes('Portugal') || location.includes('Lisboa') ? '🇵🇹' :
+                     location.includes('USA') || location.includes('New York') || location.includes('Los Angeles') ? '🇺🇸' :
+                     location.includes('Canada') || location.includes('Toronto') ? '🇨🇦' :
+                     location.includes('México') ? '🇲🇽' : location.includes('Argentina') ? '🇦🇷' : '🇪🇸';
+
+        document.getElementById('notif').innerHTML = `${flag} <strong>${name}</strong> de ${location} acabou de garantir o pacote <strong>${pkg}</strong>!`;
+        document.getElementById('notif').style.display = 'block';
+        setTimeout(() => { document.getElementById('notif').style.display = 'none'; }, 7000);
+    }
+
+    // Intervalo aleatório entre 8-25 segundos
+    function scheduleNotif() {
+        const delay = Math.random() * 17000 + 8000;
+        setTimeout(() => {
+            showNotif();
+            scheduleNotif();
+        }, delay);
+    }
+    scheduleNotif();
+
     function trackConversion() {
-        gtag('event', 'conversion', {
-            'send_to': 'AW-16917756362/COLE_AQUI_O_ID_DO_EVENTO'
-        });
+        gtag('event', 'conversion', {'send_to': 'AW-16917756362'});
     }
 </script>
 </body>
