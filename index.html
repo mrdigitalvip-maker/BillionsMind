@@ -15,7 +15,6 @@
     </script>
 
     <style>
-        /* (SEU CSS ORIGINAL — NÃO ALTERADO) */
         body {
             margin: 0;
             padding: 0;
@@ -44,6 +43,25 @@
 </head>
 
 <body>
+
+<!-- ===================== LOGO ===================== -->
+<div style="
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px 0 10px;
+">
+    <img 
+        src="https://github.com/user-attachments/assets/f08d486f-0f70-4c4c-8549-4157eda96ab1"
+        alt="Logo Oficial"
+        style="
+            max-width:140px;
+            width:100%;
+            height:auto;
+            opacity:0.95;
+        "
+    >
+</div>
 
 <!-- ===================== QUIZ ===================== -->
 <div id="quiz-page">
@@ -132,7 +150,6 @@
         document.getElementById("sales-page").style.display = "block";
     });
 
-    // ✅ EVENTO DE CONVERSÃO GOOGLE ADS
     function trackConversion() {
         gtag('event', 'conversion', {
             'send_to': 'AW-16917756362/COLE_AQUI_O_ID_DO_EVENTO'
