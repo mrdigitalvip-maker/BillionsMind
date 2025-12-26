@@ -15,9 +15,8 @@
     <style>
         body { margin:0; font-family:'Segoe UI',Arial,sans-serif; background:#001f3f; color:#fff; overflow-x:hidden; }
         .container { max-width:1200px; margin:auto; padding:20px; text-align:center; }
-        h1 { color:#ffd700; font-size:32px; margin:20px 0; }
-        h2 { color:#ffd700; font-size:26px; margin:30px 0 20px; }
-        p { line-height:1.7; font-size:18px; margin:15px 0; }
+        h1,h2 { color:#ffd700; }
+        p { line-height:1.6; }
         .btn {
             background:#ff0000; color:#fff; padding:20px 40px; border-radius:10px; font-size:20px; font-weight:bold;
             text-decoration:none; display:block; margin:20px auto; max-width:90%; box-shadow:0 8px 20px rgba(255,0,0,0.4);
@@ -36,33 +35,27 @@
         @keyframes fadeIn { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
         /* Notificação */
         .notif {
-            position:fixed; bottom:20px; right:20px; background:#28a745; color:#fff; padding:14px 20px; border-radius:12px;
-            box-shadow:0 6px 20px rgba(0,0,0,0.6); font-size:15px; max-width:340px; display:none; z-index:1000;
-            animation:slideUp 0.6s ease-out;
+            position:fixed; bottom:20px; right:20px; background:#28a745; color:#fff; padding:12px 18px; border-radius:10px;
+            box-shadow:0 4px 15px rgba(0,0,0,0.5); font-size:14px; max-width:320px; display:none; z-index:1000;
+            animation:slideUp 0.5s;
         }
-        .notif img { width:22px; vertical-align:middle; margin-right:10px; }
+        .notif img { width:20px; vertical-align:middle; margin-right:8px; }
         @keyframes slideUp { from{bottom:-100px; opacity:0;} to{bottom:20px; opacity:1;} }
         /* Carrossel IA */
-        .carousel { overflow:hidden; position:relative; height:180px; margin:50px 0; background:#002b5e; border-radius:15px; }
+        .carousel { overflow:hidden; position:relative; height:160px; margin:40px 0; }
         .carousel-inner { display:flex; width:500%; animation:scroll 20s linear infinite; }
         .ai-icon { min-width:20%; text-align:center; padding:20px; }
-        .ai-icon img { width:90px; height:90px; border-radius:12px; }
+        .ai-icon img { width:80px; height:80px; }
         @keyframes scroll { 0%{transform:translateX(0);} 100%{transform:translateX(-100%);} }
         /* Contador ao vivo */
-        #live-counter { font-size:30px; color:#ff0000; font-weight:bold; margin:40px 0; background:#002b5e; padding:20px; border-radius:12px; }
-        /* Redes sociais */
-        .social-icons { display:flex; justify-content:center; gap:30px; margin:40px 0; }
-        .social-icons img { width:60px; height:60px; }
-        /* Garantia */
-        .guarantee { background:#002b5e; padding:30px; border-radius:15px; margin:50px 0; font-size:18px; }
+        #live-counter { font-size:28px; color:#ff0000; font-weight:bold; margin:30px 0; background:#002b5e; padding:20px; border-radius:12px; }
+        /* Urgência */
+        .urgency-text { font-size:18px; color:#ff0000; font-weight:bold; margin-top:10px; }
         /* Mobile */
         @media (max-width:768px) {
-            h1 { font-size:26px; }
-            h2 { font-size:22px; }
-            p { font-size:16px; }
             #quiz-form { padding:25px; }
             .btn { padding:18px 30px; font-size:18px; }
-            .notif { max-width:90%; right:5%; left:5%; bottom:10px; font-size:14px; }
+            .notif { max-width:90%; right:5%; left:5%; bottom:10px; font-size:13px; }
         }
     </style>
 </head>
@@ -126,25 +119,27 @@
         <h1 id="main-title">Parabéns! Sua Oferta Personalizada Está Liberada</h1>
         <p id="main-subtitle"><strong>Você está a um clique de criar conteúdo de luxo viral que fatura alto — sem aparecer na câmera, sem estoque e sem investimento milionário.</strong></p>
 
-        <!-- Contador ao vivo -->
-        <div id="live-counter">Esta oferta está ativa há <span id="days-live">0</span> dias — vagas encerrando em breve!</div>
+        <!-- Contador 24h ao vivo (nunca para, reinicia a cada visita se expirado) -->
+        <div id="live-counter">⏳ Tempo restante para reservar sua vaga: <span id="timer-countdown">24:00:00</span></div>
+        <p class="urgency-text">Aja agora — esta oferta elite está disponível por apenas 24 horas. Perca e lamentará para sempre!</p>
 
-        <!-- Dor + Solução + Gatilho de escassez -->
-        <h2>Você Está Cansado de Trabalhar Duro e Ganhar Pouco?</h2>
-        <p>A maioria passa horas criando conteúdo que ninguém vê. Com IA, você cria reels de carros de luxo, mansões, viagens e estilo de vida premium em minutos — conteúdo que viraliza naturalmente porque as pessoas <strong>amamm</strong> sonhar com essa vida.</p>
-        <p>Esse tipo de conteúdo gera engajamento explosivo no Instagram, TikTok e YouTube. Monetize com afiliados de produtos premium, patrocínios e vendas diretas — tudo automático.</p>
+        <!-- Como funciona + Gatilho persuasão -->
+        <h2>Por Que Esta é a Solução Definitiva Para Faturar Alto Sem Aparecer</h2>
+        <p>Imagine gerar reels de supercarros, mansões de milhões e viagens de luxo — conteúdo que as pessoas devoram e compartilhammy, criando engajamento massivo. Com IA, você produz isso em minutos, viraliza nas redes e monetiza com afiliados de produtos premium, patrocínios exclusivos e vendas diretas. Sem rosto na tela, sem risco, puro lucro passivo.</p>
+        <p><strong>Gatilho de Escassez:</strong> Apenas 50 vagas restantes nesta edição elite — quando acabar, preço dobra e bônus são removidos.</p>
+        <p><strong>Gatilho de Prova Social:</strong> Alunos elite já faturam R$50k+/mês. "Transformou meu Instagram em máquina de dinheiro" - Membro anterior.</p>
 
-        <!-- Redes sociais com ícones -->
-        <h2>Poste Nessas Plataformas e Veja o Dinheiro Entrar</h2>
+        <!-- Redes sociais -->
+        <h2>Poste Nessas Plataformas e Veja o Engajamento Explodir</h2>
         <div class="social-icons">
             <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
             <img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg" alt="TikTok">
             <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube">
         </div>
 
-        <!-- Bônus poderoso + Carrossel IA -->
-        <h2>Bônus Exclusivo: 30 Dias 100% Grátis nas Melhores IAs do Mundo</h2>
-        <p>Você recebe acesso imediato a Grok, ChatGPT, Gemini, Claude e Midjourney — gere textos hipnóticos, imagens de supercarros e vídeos de luxo em segundos.</p>
+        <!-- Bônus IA Grátis -->
+        <h2>Bônus Exclusivo: 30 Dias Grátis nas IAs Mais Poderosas do Planeta</h2>
+        <p>Acesso imediato a ferramentas que geram imagens hiper-realistas de luxo, textos persuasivos e vídeos virais — tudo pronto para postar.</p>
         <div class="carousel">
             <div class="carousel-inner">
                 <div class="ai-icon"><img src="https://1000logos.net/wp-content/uploads/2025/02/Grok-Logo.png" alt="Grok"><p>Grok</p></div>
@@ -155,15 +150,11 @@
             </div>
         </div>
 
-        <!-- Gatilho de prova social + urgência -->
-        <h2>Outros Já Estão Lucrando Enquanto Você Lê Isso</h2>
-        <p>Milhares de alunos já criaram perfis que faturam R$10k–R$50k/mês com conteúdo de luxo. Eles começaram do zero — exatamente como você pode começar hoje.</p>
-
-        <!-- Ofertas com gatilhos fortes -->
+        <!-- Ofertas com descontos % -->
         <h2>Escolha Seu Acesso Imediato Antes que Acabe</h2>
         <div class="offer">
             <h3 id="premium-h3">Acesso Premium</h3>
-            <p id="premium-price">Valor normal R$997</p>
+            <p>Valor normal R$249,00 <span style="color:#ff0000;">(80% OFF)</span></p>
             <p style="color:#ffd700; font-size:20px;"><strong>Hoje apenas [preço]</strong></p>
             <a id="premium-btn" href="https://pay.cakto.com.br/4ehcq2y_672236" class="btn" onclick="trackConversion()">
                 Quero Premium Agora<br>
@@ -172,7 +163,7 @@
         </div>
         <div class="offer">
             <h3 id="complete-h3">Acesso Completo (Mais Escolhido)</h3>
-            <p id="complete-price">Valor normal R$1.997</p>
+            <p>Valor normal R$139,90 <span style="color:#ff0000;">(85% OFF)</span></p>
             <p style="color:#ffd700; font-size:20px;"><strong>Hoje apenas [preço]</strong></p>
             <a id="complete-btn" href="https://pay.cakto.com.br/v8k65mm_672262" class="btn" onclick="trackConversion()">
                 Quero Completo Agora<br>
@@ -185,7 +176,7 @@
             <button class="btn" disabled>Indisponível</button>
         </div>
 
-        <!-- Garantia forte -->
+        <!-- Garantia -->
         <div class="guarantee">
             <h2>Garantia Incondicional de 7 Dias</h2>
             <p><strong>Teste tudo sem risco.</strong> Se em 7 dias você não estiver criando conteúdo viral e vendo resultados, devolvemos 100% do seu dinheiro — sem perguntas.</p>
@@ -198,9 +189,9 @@
 
 <script>
     const regions = {
-        'br-pt': { currency:'R$', premium:'49,90', complete:'39,90', countries:['Brasil','Portugal','São Paulo','Rio de Janeiro','Lisboa'] },
-        'us-ca': { currency:'$', premium:'19.90', complete:'14.90', countries:['USA','Canada','New York','Los Angeles','Toronto'] },
-        'es-latam': { currency:'€', premium:'17.90', complete:'12.90', countries:['España','México','Argentina','Colombia','Chile'] }
+        'br-pt': { currency:'R$', premium:'49,90', complete:'39,90', countries:['Brasil','Portugal','São Paulo','Rio de Janeiro','Lisboa'], discountPremium:'80', discountComplete:'85' },
+        'us-ca': { currency:'$', premium:'19.90', complete:'14.90', countries:['USA','Canada','New York','Los Angeles','Toronto'], discountPremium:'80', discountComplete:'85' },
+        'es-latam': { currency:'€', premium:'17.90', complete:'12.90', countries:['Espanha','México','Argentina','Colombia','Chile'], discountPremium:'80', discountComplete:'85' }
     };
 
     function nextStep(n) {
@@ -213,16 +204,18 @@
         const countryKey = document.getElementById('country').value;
         const config = regions[countryKey] || regions['br-pt'];
 
-        // Atualiza preços
+        // Atualiza preços e descontos
+        document.getElementById('premium-price').innerHTML = `Valor normal ${config.currency} 249,00 <span style="color:#ff0000;">(${config.discountPremium}% OFF)</span>`;
+        document.getElementById('complete-price').innerHTML = `Valor normal ${config.currency} 139,90 <span style="color:#ff0000;">(${config.discountComplete}% OFF)</span>`;
         document.getElementById('premium-price').nextElementSibling.innerHTML = `<strong>Hoje apenas ${config.currency} ${config.premium}</strong>`;
         document.getElementById('complete-price').nextElementSibling.innerHTML = `<strong>Hoje apenas ${config.currency} ${config.complete}</strong>`;
 
-        // Contador ao vivo (diferente por sessão)
-        if (!sessionStorage.getItem('launch_days')) {
-            const days = Math.floor(Math.random() * 15 + 40); // 40-55 dias
-            sessionStorage.setItem('launch_days', days);
+        // Inicia timer 24h (nunca para, persiste)
+        if (!localStorage.getItem('timer_start')) {
+            localStorage.setItem('timer_start', Date.now());
+            localStorage.setItem('timer_end', Date.now() + 24*60*60*1000);
         }
-        document.getElementById('days-live').textContent = sessionStorage.getItem('launch_days');
+        updateTimer();
 
         // Mostra página de vendas
         document.getElementById('quiz-page').style.display = 'none';
@@ -230,33 +223,50 @@
         window.scrollTo(0,0);
     };
 
-    // Notificações aleatórias com bandeira e persuasão
-    const names = ['Ana','Pedro','Carlos','Mariana','Lucas','Beatriz','Rafael','Julia','Thiago','Fernanda','Gabriel','Sophia'];
+    // Timer 24h ao vivo
+    function updateTimer() {
+        const end = parseInt(localStorage.getItem('timer_end'));
+        const now = Date.now();
+        const remaining = end - now;
+        if (remaining <= 0) {
+            document.getElementById('timer-countdown').textContent = '00:00:00';
+            return;
+        }
+        const hours = Math.floor(remaining / (1000*60*60));
+        const mins = Math.floor((remaining / (1000*60)) % 60);
+        const secs = Math.floor((remaining / 1000) % 60);
+        document.getElementById('timer-countdown').textContent = `${hours.toString().padStart(2,'0')}:${mins.toString().padStart(2,'0')}:${secs.toString().padStart(2,'0')}`;
+    }
+    setInterval(updateTimer, 1000);
+
+    // Notificações
+    const names = ['Ana','Pedro','Carlos','Mariana','Lucas','Beatriz','Rafael','Julia','Thiago','Fernanda','Gabriel','Sophia','Victor','Laura','Miguel'];
     let used = new Set();
     function showNotif() {
         if (document.getElementById('sales-page').style.display === 'none') return;
 
         let name;
         do { name = names[Math.floor(Math.random()*names.length)]; } while (used.has(name));
-        used.add(name); if (used.size > 8) used.clear();
+        used.add(name); if (used.size > 10) used.clear();
 
-        const pkg = Math.random() > 0.4 ? 'Completo' : 'Premium';
-        const cityCountry = regions['br-pt'].countries.concat(regions['us-ca'].countries, regions['es-latam'].countries);
+        const pkg = Math.random() > 0.6 ? 'Completo' : 'Premium';
+        const cityCountry = ['São Paulo','Rio de Janeiro','Lisboa','New York','Los Angeles','Toronto','Madrid','México City','Buenos Aires','Bogotá','Santiago'];
         const location = cityCountry[Math.floor(Math.random()*cityCountry.length)];
         const flag = location.includes('Brasil') || location.includes('São Paulo') || location.includes('Rio') ? '🇧🇷' :
                      location.includes('Portugal') || location.includes('Lisboa') ? '🇵🇹' :
                      location.includes('USA') || location.includes('New York') || location.includes('Los Angeles') ? '🇺🇸' :
                      location.includes('Canada') || location.includes('Toronto') ? '🇨🇦' :
-                     location.includes('México') ? '🇲🇽' : location.includes('Argentina') ? '🇦🇷' : '🇪🇸';
+                     location.includes('Espanha') || location.includes('Madrid') ? '🇪🇸' :
+                     location.includes('México') ? '🇲🇽' : location.includes('Argentina') || location.includes('Buenos Aires') ? '🇦🇷' : '🇨🇴';
 
         document.getElementById('notif').innerHTML = `${flag} <strong>${name}</strong> de ${location} acabou de garantir o pacote <strong>${pkg}</strong>!`;
         document.getElementById('notif').style.display = 'block';
         setTimeout(() => { document.getElementById('notif').style.display = 'none'; }, 7000);
     }
 
-    // Intervalo aleatório entre 8-25 segundos
+    // Intervalo aleatório entre 10-30 segundos
     function scheduleNotif() {
-        const delay = Math.random() * 17000 + 8000;
+        const delay = Math.random() * 20000 + 10000;
         setTimeout(() => {
             showNotif();
             scheduleNotif();
