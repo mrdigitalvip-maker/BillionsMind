@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acesso Premium a Ferramentas de IA - xAI Inspired</title>
-
     <!-- ✅ GOOGLE TAG GLOBAL -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16917756362"></script>
     <script>
@@ -13,7 +12,6 @@
       gtag('js', new Date());
       gtag('config', 'AW-16917756362');
     </script>
-
     <style>
         body {
             margin: 0;
@@ -37,13 +35,65 @@
             border-radius: 5px;
             display: block;
             text-align: center;
+            margin: 10px auto; /* Centralizar botões */
+            max-width: 90%; /* Responsivo mobile */
+            transition: background-color 0.3s ease; /* Melhoria: animação suave */
         }
-        .btn-timer { font-size: 14px; color: #ffd700; margin-top: 5px; }
+        button:hover, a.btn:hover {
+            background-color: #cc0000;
+        }
+        .btn-timer { font-size: 14px; color: #ffd700; margin-top: 5px; display: block; }
+        /* Quiz Page - Fundo preto, centralizado perfeitamente */
+        #quiz-page {
+            background-color: #000000; /* Fundo todo preto como solicitado */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+        #quiz-form {
+            background-color: #1a1a1a; /* Fundo escuro para form, contraste */
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 90%; /* Responsivo mobile */
+            width: 100%;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2); /* Melhoria: sombra dourada para destaque */
+        }
+        .quiz-step {
+            display: none;
+        }
+        .quiz-step.active {
+            display: block;
+        }
+        #quiz-form select, #quiz-form input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ffd700; /* Borda dourada para urgência */
+            border-radius: 5px;
+            background-color: #001f3f;
+            color: #ffffff;
+            font-size: 16px; /* Melhoria: maior para touch mobile */
+        }
+        /* Sales Page - Melhorias para conversão: Urgência e CTAs destacados */
+        #sales-page {
+            display: none;
+        }
+        #sales-page .container {
+            text-align: center; /* Centralizar tudo para mobile */
+        }
+        /* Mobile adjustments - Otimização para celular */
+        @media (max-width: 768px) {
+            body { font-size: 16px; }
+            h1 { font-size: 24px; }
+            button, a.btn { font-size: 16px; padding: 12px 20px; }
+            #quiz-form { padding: 20px; }
+        }
     </style>
 </head>
-
 <body>
-
 <!-- ===================== LOGO ===================== -->
 <div style="
     display:flex;
@@ -51,7 +101,7 @@
     align-items:center;
     padding:20px 0 10px;
 ">
-    <img 
+    <img
         src="https://github.com/user-attachments/assets/f08d486f-0f70-4c4c-8549-4157eda96ab1"
         alt="Logo Oficial"
         style="
@@ -62,24 +112,22 @@
         "
     >
 </div>
-
 <!-- ===================== QUIZ ===================== -->
 <div id="quiz-page">
     <form id="quiz-form">
-        <h2>Personalize Sua Jornada com IA</h2>
-
+        <h2 id="quiz-title">Personalize Sua Jornada com IA - Ganhe Vantagem Agora!</h2>
+        <p id="quiz-desc">Responda rápido e desbloqueie sua oferta exclusiva - Milhares já estão faturando!</p>
         <div class="quiz-step active" id="step1">
             <select id="country" required>
                 <option value="">Selecione seu país</option>
-                <option value="br">Brasil / Portugal</option>
-                <option value="us">EUA / Canadá</option>
-                <option value="es">Espanha / LATAM</option>
+                <option value="br-pt">Brasil / Portugal</option>
+                <option value="us-ca">EUA / Canadá</option>
+                <option value="es-latam">Espanha / LATAM</option>
             </select>
             <button type="button" onclick="nextStep(1)">Próxima</button>
         </div>
-
         <div class="quiz-step" id="step2">
-            <select required>
+            <select id="age" required>
                 <option value="">Faixa etária</option>
                 <option>18–25</option>
                 <option>26–35</option>
@@ -87,9 +135,8 @@
             </select>
             <button type="button" onclick="nextStep(2)">Próxima</button>
         </div>
-
         <div class="quiz-step" id="step3">
-            <select required>
+            <select id="goal" required>
                 <option value="">Objetivo com IA</option>
                 <option>Renda extra</option>
                 <option>Negócio online</option>
@@ -97,25 +144,21 @@
             </select>
             <button type="button" onclick="nextStep(3)">Próxima</button>
         </div>
-
         <div class="quiz-step" id="step4">
-            <select required>
+            <select id="time" required>
                 <option value="">Tempo disponível</option>
                 <option>Menos de 5h</option>
                 <option>5–10h</option>
                 <option>10h+</option>
             </select>
-            <button type="submit">Ver Oferta Personalizada</button>
+            <button type="submit">Ver Oferta Personalizada Agora!</button>
         </div>
     </form>
 </div>
-
 <!-- ===================== VENDAS ===================== -->
 <div id="sales-page" style="display:none;">
     <div class="container">
-
-        <h1>Desbloqueie o Futuro com IA</h1>
-
+        <h1 id="hero-title">Desbloqueie o Futuro com IA</h1>
         <!-- BOTÃO PREMIUM -->
         <a href="https://pay.cakto.com.br/4ehcq2y_672236"
            class="btn"
@@ -123,9 +166,7 @@
            Acessar Premium
            <span class="btn-timer">⏳ Últimas vagas</span>
         </a>
-
         <br>
-
         <!-- BOTÃO COMPLETO -->
         <a href="https://pay.cakto.com.br/v8k65mm_672262"
            class="btn"
@@ -133,29 +174,92 @@
            Acessar Completo
            <span class="btn-timer">🔥 Mais escolhido</span>
         </a>
-
+        <br>
+        <!-- BOTÃO LITE (ESGOTADO) -->
+        <button disabled class="btn" style="background-color: #ccc; cursor: not-allowed;">
+           Acessar Lite
+           <span class="btn-timer">🚫 Esgotado</span>
+        </button>
     </div>
 </div>
-
 <!-- ===================== SCRIPT ===================== -->
 <script>
+    // Traduções para idiomas
+    const translations = {
+        'br-pt': {
+            quizTitle: 'Personalize Sua Jornada com IA - Ganhe Vantagem Agora!',
+            quizDesc: 'Responda rápido e desbloqueie sua oferta exclusiva - Milhares já estão faturando!',
+            step1Label: '1. Em qual região você reside? (Isso afeta as recomendações locais e moeda)',
+            step2Label: '2. Qual é a sua faixa etária? (Ajuda a sugerir conteúdos adequados ao seu estágio de vida)',
+            step3Label: '3. O que você mais busca com IA? (Seja honesto para recomendações precisas)',
+            step4Label: '4. Quanto tempo real você pode dedicar por semana? (Para planos realistas)',
+            heroTitle: 'Desbloqueie o Futuro com IA',
+            premiumBtn: 'Acessar Premium',
+            completeBtn: 'Acessar Completo',
+            liteBtn: 'Acessar Lite',
+            timerPremium: '⏳ Últimas vagas',
+            timerComplete: '🔥 Mais escolhido',
+            timerLite: '🚫 Esgotado'
+        },
+        'us-ca': {
+            quizTitle: 'Personalize Your AI Journey - Gain Advantage Now!',
+            quizDesc: 'Answer quickly and unlock your exclusive offer - Thousands are already profiting!',
+            step1Label: '1. In which region do you reside? (This affects local recommendations and currency)',
+            step2Label: '2. What is your age range? (Helps suggest content suitable for your life stage)',
+            step3Label: '3. What do you seek most with AI? (Be honest for accurate recommendations)',
+            step4Label: '4. How much real time can you dedicate per week? (For realistic plans)',
+            heroTitle: 'Unlock the Future with AI',
+            premiumBtn: 'Access Premium',
+            completeBtn: 'Access Complete',
+            liteBtn: 'Access Lite',
+            timerPremium: '⏳ Last spots',
+            timerComplete: '🔥 Most chosen',
+            timerLite: '🚫 Sold out'
+        },
+        'es-latam': {
+            quizTitle: 'Personaliza Tu Viaje con IA - ¡Gana Ventaja Ahora!',
+            quizDesc: 'Responde rápido y desbloquea tu oferta exclusiva - ¡Miles ya están ganando!',
+            step1Label: '1. ¿En qué región resides? (Esto afecta las recomendaciones locales y moneda)',
+            step2Label: '2. ¿Cuál es tu rango de edad? (Ayuda a sugerir contenido adecuado para tu etapa de vida)',
+            step3Label: '3. ¿Qué buscas más con IA? (Sé honesto para recomendaciones precisas)',
+            step4Label: '4. ¿Cuánto tiempo real puedes dedicar por semana? (Para planes realistas)',
+            heroTitle: 'Desbloquea el Futuro con IA',
+            premiumBtn: 'Acceder Premium',
+            completeBtn: 'Acceder Completo',
+            liteBtn: 'Acceder Lite',
+            timerPremium: '⏳ Últimas plazas',
+            timerComplete: '🔥 Más elegido',
+            timerLite: '🚫 Agotado'
+        }
+    };
+
     function nextStep(step) {
         document.getElementById("step" + step).style.display = "none";
         document.getElementById("step" + (step + 1)).style.display = "block";
     }
-
     document.getElementById("quiz-form").addEventListener("submit", function(e){
         e.preventDefault();
+        const country = document.getElementById('country').value;
+        const trans = translations[country] || translations['br-pt']; // Default PT
+        // Aplicar traduções
+        document.getElementById('hero-title').textContent = trans.heroTitle;
+        document.getElementById('premium-btn').firstChild.textContent = trans.premiumBtn;
+        document.getElementById('complete-btn').firstChild.textContent = trans.completeBtn;
+        document.getElementById('lite-btn').firstChild.textContent = trans.liteBtn;
+        document.querySelector('#premium-btn .btn-timer').textContent = trans.timerPremium;
+        document.querySelector('#complete-btn .btn-timer').textContent = trans.timerComplete;
+        document.querySelector('#lite-btn .btn-timer').textContent = trans.timerLite;
+        // Redirecionar para sales page
         document.getElementById("quiz-page").style.display = "none";
         document.getElementById("sales-page").style.display = "block";
+        // Scroll suave
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-
     function trackConversion() {
         gtag('event', 'conversion', {
             'send_to': 'AW-16917756362/COLE_AQUI_O_ID_DO_EVENTO'
         });
     }
 </script>
-
 </body>
 </html>
