@@ -118,68 +118,107 @@
         <h2 id="quiz-title">Personalize Sua Jornada com IA - Ganhe Vantagem Agora!</h2>
         <p id="quiz-desc">Responda rápido e desbloqueie sua oferta exclusiva - Milhares já estão faturando!</p>
         <div class="quiz-step active" id="step1">
+            <label for="country">1. Seu País/Região:</label>
             <select id="country" required>
-                <option value="">Selecione seu país</option>
-                <option value="br-pt">Brasil / Portugal</option>
-                <option value="us-ca">EUA / Canadá</option>
-                <option value="es-latam">Espanha / LATAM</option>
+                <option value="">Selecione</option>
+                <option value="br-pt">Brasil/Portugal</option>
+                <option value="us-ca">EUA/Canadá</option>
+                <option value="es-latam">Espanha/LatAm</option>
             </select>
             <button type="button" onclick="nextStep(1)">Próxima</button>
         </div>
         <div class="quiz-step" id="step2">
-            <select id="age" required>
-                <option value="">Faixa etária</option>
-                <option>18–25</option>
-                <option>26–35</option>
-                <option>36+</option>
-            </select>
+            <label for="age">2. Sua Idade:</label>
+            <input type="number" id="age" min="18" required>
             <button type="button" onclick="nextStep(2)">Próxima</button>
         </div>
         <div class="quiz-step" id="step3">
+            <label for="goal">3. Seu Objetivo:</label>
             <select id="goal" required>
-                <option value="">Objetivo com IA</option>
-                <option>Renda extra</option>
-                <option>Negócio online</option>
-                <option>Produtividade</option>
+                <option value="">Selecione</option>
+                <option value="extra">Renda Extra</option>
+                <option value="main">Renda Principal</option>
+                <option value="explore">Explorando</option>
             </select>
             <button type="button" onclick="nextStep(3)">Próxima</button>
         </div>
         <div class="quiz-step" id="step4">
-            <select id="time" required>
-                <option value="">Tempo disponível</option>
-                <option>Menos de 5h</option>
-                <option>5–10h</option>
-                <option>10h+</option>
-            </select>
-            <button type="submit">Ver Oferta Personalizada Agora!</button>
+            <label for="time">4. Tempo Disponível por Dia:</label>
+            <input type="number" id="time" min="1" required>
+            <button type="submit">Enviar e Acessar</button>
         </div>
     </form>
 </div>
-<!-- ===================== VENDAS ===================== -->
+<!-- ===================== VENDAS COMPLETA ===================== -->
 <div id="sales-page" style="display:none;">
     <div class="container">
-        <h1 id="hero-title">Desbloqueie o Futuro com IA</h1>
-        <!-- BOTÃO PREMIUM -->
-        <a href="https://pay.cakto.com.br/4ehcq2y_672236"
-           class="btn"
-           onclick="trackConversion()">
-           Acessar Premium
-           <span class="btn-timer">⏳ Últimas vagas</span>
-        </a>
-        <br>
-        <!-- BOTÃO COMPLETO -->
-        <a href="https://pay.cakto.com.br/v8k65mm_672262"
-           class="btn"
-           onclick="trackConversion()">
-           Acessar Completo
-           <span class="btn-timer">🔥 Mais escolhido</span>
-        </a>
-        <br>
-        <!-- BOTÃO LITE (ESGOTADO) -->
-        <button disabled class="btn" style="background-color: #ccc; cursor: not-allowed;">
-           Acessar Lite
-           <span class="btn-timer">🚫 Esgotado</span>
-        </button>
+        <!-- Hero persuasivo com CTA forte -->
+        <section class="hero">
+            <h1 id="hero-title">Transforme Sua Vida Agora!</h1>
+            <p id="subheadline">Descubra o segredo para ganhar renda de forma inteligente e rápida.</p>
+            <a id="hero-cta" class="btn" href="#">Garanta Sua Oferta Agora!</a>
+        </section>
+
+        <!-- Por Que Funciona -->
+        <section class="why-works">
+            <h2 id="why-title">Por Que Isso Funciona</h2>
+            <p id="why-text">Nosso sistema é comprovado por milhares de usuários que alcançaram independência financeira.</p>
+        </section>
+
+        <!-- Benefícios -->
+        <section class="benefits">
+            <h2 id="benefits-title">Benefícios Claros</h2>
+            <ul>
+                <li id="benefit1">Acesso imediato a ferramentas premium.</li>
+                <li id="benefit2">Suporte 24/7.</li>
+                <li id="benefit3">Resultados garantidos em semanas.</li>
+            </ul>
+        </section>
+
+        <!-- Prova Social Textual -->
+        <section class="social-proof">
+            <h2 id="proof-title">O Que Nossos Clientes Dizem</h2>
+            <p id="proof-text">"Mudou minha vida!" - Usuário Satisfeito</p>
+        </section>
+
+        <!-- Carrossel de Depoimentos -->
+        <section class="carousel">
+            <div class="carousel-inner" id="carousel-inner">
+                <!-- Depoimentos serão adicionados via JS -->
+            </div>
+        </section>
+
+        <!-- Feed de Atividade em Tempo Real -->
+        <section id="activity-feed">
+            <h2 id="activity-title">Atividade em Tempo Real</h2>
+            <ul id="activity-list"></ul>
+        </section>
+
+        <!-- Contador de Pessoas Online -->
+        <div id="online-count">Pessoas online agora: carregando...</div>
+
+        <!-- Seção de Ofertas -->
+        <section class="offers">
+            <h2 id="offers-title">Escolha Sua Oferta</h2>
+            <div class="offer">
+                <h3 id="premium-title">Pacote Premium</h3>
+                <p id="premium-price">Preço: carregando...</p>
+                <a id="premium-btn" class="btn" href="https://pay.cakto.com.br/4ehcq2y_672236" onclick="trackConversion()">Comprar Premium Agora! ⏳</a>
+            </div>
+            <div class="offer">
+                <h3 id="complete-title">Pacote Completo</h3>
+                <p id="complete-price">Preço: carregando...</p>
+                <a id="complete-btn" class="btn" href="https://pay.cakto.com.br/v8k65mm_672262" onclick="trackConversion()">Comprar Completo Agora! ⏳</a>
+            </div>
+            <div class="offer sold-out">
+                <h3>Lite</h3>
+                <p>ESGOTADO</p>
+                <button disabled>Indisponível</button>
+            </div>
+        </section>
+
+        <!-- Cronômetro -->
+        <div id="timer">⏳ Oferta reservada por 15:00</div>
     </div>
 </div>
 <!-- ===================== SCRIPT ===================== -->
@@ -189,10 +228,10 @@
         'br-pt': {
             quizTitle: 'Personalize Sua Jornada com IA - Ganhe Vantagem Agora!',
             quizDesc: 'Responda rápido e desbloqueie sua oferta exclusiva - Milhares já estão faturando!',
-            step1Label: '1. Em qual região você reside? (Isso afeta as recomendações locais e moeda)',
-            step2Label: '2. Qual é a sua faixa etária? (Ajuda a sugerir conteúdos adequados ao seu estágio de vida)',
-            step3Label: '3. O que você mais busca com IA? (Seja honesto para recomendações precisas)',
-            step4Label: '4. Quanto tempo real você pode dedicar por semana? (Para planos realistas)',
+            step1Label: '1. Seu País/Região:',
+            step2Label: '2. Sua Idade:',
+            step3Label: '3. Seu Objetivo:',
+            step4Label: '4. Tempo Disponível por Dia:',
             heroTitle: 'Desbloqueie o Futuro com IA',
             premiumBtn: 'Acessar Premium',
             completeBtn: 'Acessar Completo',
@@ -204,10 +243,10 @@
         'us-ca': {
             quizTitle: 'Personalize Your AI Journey - Gain Advantage Now!',
             quizDesc: 'Answer quickly and unlock your exclusive offer - Thousands are already profiting!',
-            step1Label: '1. In which region do you reside? (This affects local recommendations and currency)',
-            step2Label: '2. What is your age range? (Helps suggest content suitable for your life stage)',
-            step3Label: '3. What do you seek most with AI? (Be honest for accurate recommendations)',
-            step4Label: '4. How much real time can you dedicate per week? (For realistic plans)',
+            step1Label: '1. Your Country/Region:',
+            step2Label: '2. Your Age:',
+            step3Label: '3. Your Goal:',
+            step4Label: '4. Time Available per Day:',
             heroTitle: 'Unlock the Future with AI',
             premiumBtn: 'Access Premium',
             completeBtn: 'Access Complete',
@@ -219,10 +258,10 @@
         'es-latam': {
             quizTitle: 'Personaliza Tu Viaje con IA - ¡Gana Ventaja Ahora!',
             quizDesc: 'Responde rápido y desbloquea tu oferta exclusiva - ¡Miles ya están ganando!',
-            step1Label: '1. ¿En qué región resides? (Esto afecta las recomendaciones locales y moneda)',
-            step2Label: '2. ¿Cuál es tu rango de edad? (Ayuda a sugerir contenido adecuado para tu etapa de vida)',
-            step3Label: '3. ¿Qué buscas más con IA? (Sé honesto para recomendaciones precisas)',
-            step4Label: '4. ¿Cuánto tiempo real puedes dedicar por semana? (Para planes realistas)',
+            step1Label: '1. Tu País/Región:',
+            step2Label: '2. Tu Edad:',
+            step3Label: '3. Tu Objetivo:',
+            step4Label: '4. Tiempo Disponible por Día:',
             heroTitle: 'Desbloquea el Futuro con IA',
             premiumBtn: 'Acceder Premium',
             completeBtn: 'Acceder Completo',
@@ -241,14 +280,7 @@
         e.preventDefault();
         const country = document.getElementById('country').value;
         const trans = translations[country] || translations['br-pt']; // Default PT
-        // Aplicar traduções
-        document.getElementById('hero-title').textContent = trans.heroTitle;
-        document.getElementById('premium-btn').firstChild.textContent = trans.premiumBtn;
-        document.getElementById('complete-btn').firstChild.textContent = trans.completeBtn;
-        document.getElementById('lite-btn').firstChild.textContent = trans.liteBtn;
-        document.querySelector('#premium-btn .btn-timer').textContent = trans.timerPremium;
-        document.querySelector('#complete-btn .btn-timer').textContent = trans.timerComplete;
-        document.querySelector('#lite-btn .btn-timer').textContent = trans.timerLite;
+        // Aplicar traduções ao quiz (mas como já submetido, não necessário aqui)
         // Redirecionar para sales page
         document.getElementById("quiz-page").style.display = "none";
         document.getElementById("sales-page").style.display = "block";
