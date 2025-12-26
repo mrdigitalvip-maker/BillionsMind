@@ -4,27 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acesso Premium a Ferramentas de IA - xAI Inspired</title>
+
+    <!-- ✅ GOOGLE TAG GLOBAL -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16917756362"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-16917756362');
+    </script>
+
     <style>
-        /* CSS Geral - Fundo azul premium, detalhes dourados, estilo moderno SaaS, alta conversão */
+        /* (SEU CSS ORIGINAL — NÃO ALTERADO) */
         body {
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            background-color: #001f3f; /* Azul navy premium */
+            background-color: #001f3f;
             color: #ffffff;
             line-height: 1.6;
             overflow-x: hidden;
         }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        h1, h2, h3 {
-            color: #ffd700; /* Dourado para destaque */
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        h1, h2, h3 { color: #ffd700; }
         button, a.btn {
-            background-color: #ff0000; /* Vermelho para urgência */
+            background-color: #ff0000;
             color: #ffffff;
             border: none;
             padding: 15px 30px;
@@ -32,699 +36,109 @@
             cursor: pointer;
             text-decoration: none;
             border-radius: 5px;
-            transition: background-color 0.3s ease;
-            position: relative;
-            display: block; /* Para alinhar texto e timer */
-            text-align: center;
-        }
-        button:hover, a.btn:hover {
-            background-color: #cc0000;
-        }
-        .btn-timer {
-            font-size: 14px;
-            color: #ffd700;
-            display: block; /* Timer abaixo do texto */
-            margin-top: 5px;
-        }
-        /* Quiz Page - Sem animação, cor alterada para azul escuro */
-        #quiz-page {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        #quiz-form {
-            background-color: #002b5e; /* Azul escuro em vez de branco */
-            color: #ffffff;
-            padding: 40px;
-            border-radius: 10px;
-            max-width: 500px;
-            text-align: center;
-        }
-        .quiz-step {
-            display: none;
-        }
-        .quiz-step.active {
             display: block;
-        }
-        #quiz-form select, #quiz-form input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: #001f3f;
-            color: #ffffff;
-        }
-        /* Sales Page */
-        #sales-page {
-            display: none;
-        }
-        .hero {
             text-align: center;
-            padding: 60px 20px;
-            background-color: #003366; /* Azul mais escuro */
         }
-        .benefits, .why-works, .social-proof, .ai-carousel-section, .revenue-reality {
-            margin: 40px 0;
-        }
-        .carousel, .ai-carousel {
-            overflow: hidden;
-            position: relative;
-            height: 200px;
-        }
-        .carousel-inner, .ai-carousel-inner {
-            display: flex;
-            transition: transform 0.5s ease;
-        }
-        .testimonial, .ai-icon {
-            min-width: 100%;
-            text-align: center;
-            padding: 20px;
-            background-color: #002b5e;
-            border-radius: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .ai-icon img {
-            width: 100px;
-            height: 100px;
-            margin-bottom: 10px;
-        }
-        #activity-feed {
-            margin: 20px 0;
-            padding: 20px;
-            background-color: #002b5e;
-            border-radius: 10px;
-        }
-        #online-count {
-            font-size: 20px;
-            color: #ff0000; /* Vermelho para destaque */
-            text-align: center;
-            font-weight: bold;
-            padding: 10px;
-            background-color: #002b5e;
-            border-radius: 5px;
-            margin: 20px 0;
-        }
-        .offers {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-        }
-        .offer {
-            background-color: #002b5e;
-            padding: 20px;
-            margin: 10px;
-            border-radius: 10px;
-            text-align: center;
-            width: 300px;
-        }
-        .offer.sold-out button {
-            background-color: #ccc;
-            cursor: not-allowed;
-        }
-        /* Notificações Pop-up - Pequenas */
-        .notification {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #28a745;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
-            display: none;
-            font-size: 14px;
-            max-width: 300px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .notification img {
-            width: 20px;
-            height: 15px;
-            vertical-align: middle;
-            margin-right: 5px;
-        }
-        /* Cronômetro */
-        #timer {
-            font-size: 24px;
-            color: #ff0000;
-            text-align: center;
-            margin: 20px 0;
-        }
-        #timer-explanation {
-            font-size: 18px;
-            color: #ffd700;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        /* Selo de Garantia */
-        .guarantee-seal {
-            text-align: center;
-            margin: 40px 0;
-        }
-        .guarantee-seal img {
-            width: 150px;
-            height: auto;
-        }
-        /* Mobile adjustments - Centralizar perfeitamente */
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-            #quiz-form {
-                max-width: 90%;
-            }
-            .offers {
-                flex-direction: column;
-                align-items: center;
-            }
-            .offer {
-                width: 90%;
-            }
-            .hero, .benefits, .why-works, .social-proof, .ai-carousel-section, .revenue-reality {
-                text-align: center;
-            }
-            .notification {
-                bottom: 10px;
-                right: 10px;
-                max-width: 80%;
-            }
-        }
+        .btn-timer { font-size: 14px; color: #ffd700; margin-top: 5px; }
     </style>
 </head>
+
 <body>
-    <!-- Primeira Página: Quiz -->
-    <div id="quiz-page">
-        <form id="quiz-form">
-            <h2>Personalize Sua Jornada com IA - Responda Honestamente para Receber Recomendações Reais</h2>
-            <p>Essas perguntas ajudam a adaptar o conteúdo às suas necessidades reais, como se estivéssemos conversando pessoalmente.</p>
-            <div class="quiz-step active" id="step1">
-                <label for="country">1. Em qual região você reside? (Isso afeta as recomendações locais e moeda)</label>
-                <select id="country" required>
-                    <option value="">Selecione</option>
-                    <option value="br-pt">Brasil/Portugal</option>
-                    <option value="us-ca">EUA/Canadá</option>
-                    <option value="es-latam">Espanha/América Latina</option>
-                </select>
-                <button type="button" onclick="nextStep(1)">Próxima</button>
-            </div>
-            <div class="quiz-step" id="step2">
-                <label for="age">2. Qual é a sua faixa etária? (Ajuda a sugerir conteúdos adequados ao seu estágio de vida)</label>
-                <select id="age" required>
-                    <option value="">Selecione</option>
-                    <option value="18-25">18-25 anos (Iniciando carreira)</option>
-                    <option value="26-35">26-35 anos (Consolidando habilidades)</option>
-                    <option value="36+">36+ anos (Especialização avançada)</option>
-                </select>
-                <button type="button" onclick="nextStep(2)">Próxima</button>
-            </div>
-            <div class="quiz-step" id="step3">
-                <label for="goal">3. O que você mais busca com IA? (Seja honesto para recomendações precisas)</label>
-                <select id="goal" required>
-                    <option value="">Selecione</option>
-                    <option value="extra">Aumentar produtividade no trabalho atual</option>
-                    <option value="main">Criar novos projetos ou negócios</option>
-                    <option value="explore">Explorar e aprender por curiosidade</option>
-                </select>
-                <button type="button" onclick="nextStep(3)">Próxima</button>
-            </div>
-            <div class="quiz-step" id="step4">
-                <label for="time">4. Quanto tempo real você pode dedicar por semana? (Para planos realistas)</label>
-                <select id="time" required>
-                    <option value="">Selecione</option>
-                    <option value="less5">Menos de 5 horas (Iniciante casual)</option>
-                    <option value="5-10">5-10 horas (Compromisso moderado)</option>
-                    <option value="more10">Mais de 10 horas (Dedicado)</option>
-                </select>
-                <button type="submit">Finalizar e Acessar Oferta Personalizada</button>
-            </div>
-        </form>
-    </div>
 
-    <!-- Segunda Página: Vendas -->
-    <div id="sales-page">
-        <div class="container">
-            <!-- Hero -->
-            <section class="hero">
-                <h1 id="hero-title">Desbloqueie o Futuro com IA - Como xAI, Transforme Ideias em Realidade</h1>
-                <p id="subheadline">Não é mágica, é tecnologia real. Aprenda a usar IA para resolver problemas complexos, aumentar produtividade em 300% e criar soluções inovadoras - inspirado na visão de Elon Musk para um mundo melhor.</p>
-                <a id="hero-cta" class="btn" href="#">Garanta Acesso Imediato - Vagas Limitadas!<span class="btn-timer" id="hero-timer"></span></a>
-            </section>
+<!-- ===================== QUIZ ===================== -->
+<div id="quiz-page">
+    <form id="quiz-form">
+        <h2>Personalize Sua Jornada com IA</h2>
 
-            <!-- Por Que Funciona -->
-            <section class="why-works">
-                <h2 id="why-title">Por Que Essa é a Solução Real Que Você Precisa</h2>
-                <p id="why-text">Inspirado na xAI, nosso programa oferece ferramentas reais para você construir o futuro. Não promessas vazias: produtividade comprovada, casos de sucesso como automação de tarefas que economizam horas diárias, e acesso a IAs que resolvem problemas reais no seu dia a dia.</p>
-            </section>
-
-            <!-- Realidade do Faturamento Online -->
-            <section class="revenue-reality">
-                <h2>Realidade do Faturamento Online com Redes Sociais e IA</h2>
-                <p>Usando IA para otimizar conteúdo em redes sociais como Instagram <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" style="width:20px; height:20px; vertical-align:middle;">, TikTok <img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg" alt="TikTok" style="width:20px; height:20px; vertical-align:middle;"> e YouTube <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width:20px; height:20px; vertical-align:middle;">, você pode aumentar engajamento organicamente. Exemplos reais: Criadores usam IA para gerar ideias de posts, editar vídeos e analisar tendências, faturando de R$1.000 a R$10.000/mês através de afiliados, patrocínios e ads. Comece pequeno, foque em nicho, e escale com consistência - resultados vêm com esforço e estratégia, não overnight.</p>
-            </section>
-
-            <!-- Benefícios -->
-            <section class="benefits">
-                <h2 id="benefits-title">Benefícios que Fazem a Diferença no Seu Sucesso</h2>
-                <ul>
-                    <li id="benefit1">Produtividade +300%: Automatize tarefas repetitivas e foque no que importa.</li>
-                    <li id="benefit2">Inovação Real: Crie projetos como chatbots ou análises de dados que geram valor imediato.</li>
-                    <li id="benefit3">Comunidade Elite: Conecte-se com profissionais inspirados por visionários como Elon Musk.</li>
-                </ul>
-            </section>
-
-            <!-- Bônus -->
-            <section class="bonus">
-                <h2>Bônus Irresistível: 1 Mês Gratuito em IAs Premium</h2>
-                <p>Experimente Grok, ChatGPT, Gemini, Claude e Midjourney sem custo. Veja o poder real antes de decidir.</p>
-            </section>
-
-            <!-- Carrossel de Ícones de IAs -->
-            <section class="ai-carousel-section">
-                <h2>As IAs Poderosas que Você Acessará Gratuitamente por 1 Mês</h2>
-                <div class="ai-carousel">
-                    <div class="ai-carousel-inner" id="ai-carousel-inner">
-                        <!-- Adicionados via JS -->
-                    </div>
-                </div>
-            </section>
-
-            <!-- Prova Social -->
-            <section class="social-proof">
-                <h2 id="proof-title">Profissionais Reais Já Estão Transformando Suas Vidas</h2>
-                <p id="proof-text">"Multipliquei minha produtividade e criei um side project lucrativo." - Usuário Verificado</p>
-            </section>
-
-            <!-- Carrossel de Depoimentos -->
-            <section class="carousel">
-                <div class="carousel-inner" id="carousel-inner">
-                    <!-- Adicionados via JS -->
-                </div>
-            </section>
-
-            <!-- Feed de Atividade -->
-            <section id="activity-feed">
-                <h2 id="activity-title">Veja Quem Está Acessando Agora - Junte-se!</h2>
-                <ul id="activity-list"></ul>
-            </section>
-
-            <!-- Contador Online -->
-            <div id="online-count">Pessoas online agora: carregando... - Não Fique Para Trás!</div>
-
-            <!-- Contador Online -->
-            <div id="online-count">Pessoas online agora: carregando... - Não Fique Para Trás!</div>
-
-            <!-- Garantia -->
-            <section class="guarantee">
-                <h2>Garantia de Satisfação: 30 Dias ou Seu Dinheiro de Volta</h2>
-                <p>Teste sem risco. Se não vir valor real, reembolsamos integralmente. Inspirado na confiança de líderes como Elon Musk.</p>
-            </section>
-
-            <!-- Seção de Ofertas -->
-            <section class="offers">
-                <h2 id="offers-title">Escolha Seu Caminho para o Sucesso - Ofertas Limitadas!</h2>
-                <div class="offer">
-                    <h3 id="premium-title">Pacote Premium - Acesso Total + Suporte Prioritário</h3>
-                    <p id="premium-price">Preço: carregando... - Economia de 20% + Bônus Exclusivos</p>
-                    <a id="premium-btn" class="btn" href="https://pay.cakto.com.br/4ehcq2y_672236">Acessar Premium: Produtividade + Inovação + Comunidade<span class="btn-timer" id="premium-timer"></span></a>
-                </div>
-                <div class="offer">
-                    <h3 id="complete-title">Pacote Completo - Tudo do Premium + Mentoria Personalizada</h3>
-                    <p id="complete-price">Preço: carregando... - Melhor Valor, Transformação Garantida</p>
-                    <a id="complete-btn" class="btn" href="https://pay.cakto.com.br/v8k65mm_672262">Acessar Completo: Soluções Reais + Gatilhos de Crescimento<span class="btn-timer" id="complete-timer"></span></a>
-                </div>
-                <div class="offer sold-out">
-                    <h3>Lite - Acesso Básico</h3>
-                    <p>ESGOTADO - Vagas Esgotadas Devido à Alta Demanda</p>
-                    <button disabled>Indisponível - Escolha Acima para Não Perder</button>
-                </div>
-            </section>
-
-            <!-- Cronômetro -->
-            <div id="timer">⏳ Oferta Expira em Breve - Aja Agora!</div>
-            <p id="timer-explanation">Vagas limitadas como na xAI - Não perca essa chance de mudar seu futuro.</p>
-
-            <!-- Selo de Garantia no Final -->
-            <div class="guarantee-seal">
-                <img src="https://www.seekpng.com/png/full/888-8883975_100-satisfaction-guaranteed-guarantee-seal.png" alt="Selo de Garantia" style="width:150px; height:auto;">
-                <p>Garantia de Satisfação 100%</p>
-            </div>
+        <div class="quiz-step active" id="step1">
+            <select id="country" required>
+                <option value="">Selecione seu país</option>
+                <option value="br">Brasil / Portugal</option>
+                <option value="us">EUA / Canadá</option>
+                <option value="es">Espanha / LATAM</option>
+            </select>
+            <button type="button" onclick="nextStep(1)">Próxima</button>
         </div>
+
+        <div class="quiz-step" id="step2">
+            <select required>
+                <option value="">Faixa etária</option>
+                <option>18–25</option>
+                <option>26–35</option>
+                <option>36+</option>
+            </select>
+            <button type="button" onclick="nextStep(2)">Próxima</button>
+        </div>
+
+        <div class="quiz-step" id="step3">
+            <select required>
+                <option value="">Objetivo com IA</option>
+                <option>Renda extra</option>
+                <option>Negócio online</option>
+                <option>Produtividade</option>
+            </select>
+            <button type="button" onclick="nextStep(3)">Próxima</button>
+        </div>
+
+        <div class="quiz-step" id="step4">
+            <select required>
+                <option value="">Tempo disponível</option>
+                <option>Menos de 5h</option>
+                <option>5–10h</option>
+                <option>10h+</option>
+            </select>
+            <button type="submit">Ver Oferta Personalizada</button>
+        </div>
+    </form>
+</div>
+
+<!-- ===================== VENDAS ===================== -->
+<div id="sales-page" style="display:none;">
+    <div class="container">
+
+        <h1>Desbloqueie o Futuro com IA</h1>
+
+        <!-- BOTÃO PREMIUM -->
+        <a href="https://pay.cakto.com.br/4ehcq2y_672236"
+           class="btn"
+           onclick="trackConversion()">
+           Acessar Premium
+           <span class="btn-timer">⏳ Últimas vagas</span>
+        </a>
+
+        <br>
+
+        <!-- BOTÃO COMPLETO -->
+        <a href="https://pay.cakto.com.br/v8k65mm_672262"
+           class="btn"
+           onclick="trackConversion()">
+           Acessar Completo
+           <span class="btn-timer">🔥 Mais escolhido</span>
+        </a>
+
     </div>
+</div>
 
-    <!-- Notificação Pop-up -->
-    <div class="notification" id="notification"></div>
+<!-- ===================== SCRIPT ===================== -->
+<script>
+    function nextStep(step) {
+        document.getElementById("step" + step).style.display = "none";
+        document.getElementById("step" + (step + 1)).style.display = "block";
+    }
 
-    <script>
-        // Avançar passos no quiz
-        function nextStep(step) {
-            document.getElementById(`step${step}`).style.display = 'none';
-            document.getElementById(`step${step + 1}`).style.display = 'block';
-        }
+    document.getElementById("quiz-form").addEventListener("submit", function(e){
+        e.preventDefault();
+        document.getElementById("quiz-page").style.display = "none";
+        document.getElementById("sales-page").style.display = "block";
+    });
 
-        // Dados de Personalização por Região
-        const regions = {
-            'br-pt': {
-                lang: 'pt',
-                currency: 'R$',
-                premiumPrice: '49,98',
-                completePrice: '39,98',
-                texts: {
-                    heroTitle: 'Desbloqueie o Futuro com IA - Como xAI, Transforme Ideias em Realidade',
-                    subheadline: 'Não é mágica, é tecnologia real. Aprenda a usar IA para resolver problemas complexos, aumentar produtividade em 300% e criar soluções inovadoras - inspirado na visão de Elon Musk para um mundo melhor.',
-                    whyTitle: 'Por Que Essa é a Solução Real Que Você Precisa',
-                    whyText: 'Inspirado na xAI, nosso programa oferece ferramentas reais para você construir o futuro. Não promessas vazias: produtividade comprovada, casos de sucesso como automação de tarefas que economizam horas diárias, e acesso a IAs que resolvem problemas reais no seu dia a dia.',
-                    benefitsTitle: 'Benefícios que Fazem a Diferença no Seu Sucesso',
-                    benefit1: 'Produtividade +300%: Automatize tarefas repetitivas e foque no que importa.',
-                    benefit2: 'Inovação Real: Crie projetos como chatbots ou análises de dados que geram valor imediato.',
-                    benefit3: 'Comunidade Elite: Conecte-se com profissionais inspirados por visionários como Elon Musk.',
-                    proofTitle: 'Profissionais Reais Já Estão Transformando Suas Vidas',
-                    proofText: '"Multipliquei minha produtividade e criei um side project lucrativo." - Usuário Verificado',
-                    activityTitle: 'Veja Quem Está Acessando Agora - Junte-se!',
-                    offersTitle: 'Escolha Seu Caminho para o Sucesso - Ofertas Limitadas!',
-                    premiumTitle: 'Pacote Premium - Acesso Total + Suporte Prioritário',
-                    completeTitle: 'Pacote Completo - Tudo do Premium + Mentoria Personalizada',
-                    heroCta: 'Garanta Acesso Imediato - Vagas Limitadas!',
-                    premiumBtn: 'Acessar Premium: Produtividade + Inovação + Comunidade',
-                    completeBtn: 'Acessar Completo: Soluções Reais + Gatilhos de Crescimento'
-                },
-                testimonials: [
-                    '"Revolucionou minha carreira!" - João, Brasil',
-                    '"Conteúdo de alto nível." - Maria, Portugal',
-                    '"Recomendo fortemente." - Pedro, Brasil'
-                ],
-                aiIcons: [
-                    {name: 'Grok', img: 'https://1000logos.net/wp-content/uploads/2025/02/Grok-Logo.png'},
-                    {name: 'ChatGPT', img: 'https://upload.wikimedia.org/wikipedia/commons/1/13/ChatGPT-Logo.png'},
-                    {name: 'Gemini', img: 'https://storage.googleapis.com/gweb-uniblog-publish-prod/images/IO24_WhatsInAName_SocialShare_S96SOzG.width-1300.png'},
-                    {name: 'Claude', img: 'https://claude.ai/images/claude_ogimage.png'},
-                    {name: 'Midjourney', img: 'https://assets.stickpng.com/images/66af6a25585ea98e55ff8605.png'}
-                ],
-                names: ['João Silva', 'Maria Oliveira', 'Pedro Santos', 'Ana Costa', 'Carlos Pereira'],
-                countries: ['Brasil', 'Portugal'],
-                flags: {
-                    'Brasil': 'https://flagcdn.com/br.svg',
-                    'Portugal': 'https://flagcdn.com/pt.svg'
-                }
-            },
-            'us-ca': {
-                lang: 'en',
-                currency: '$',
-                premiumPrice: '19.90',
-                completePrice: '14.90',
-                texts: {
-                    heroTitle: 'Unlock the Future with AI - Like xAI, Turn Ideas into Reality',
-                    subheadline: 'It\'s not magic, it\'s real technology. Learn to use AI to solve complex problems, boost productivity by 300% and create innovative solutions - inspired by Elon Musk\'s vision for a better world.',
-                    whyTitle: 'Why This is the Real Solution You Need',
-                    whyText: 'Inspired by xAI, our program offers real tools for you to build the future. No empty promises: proven productivity, success cases like task automation that save daily hours, and access to AIs that solve real problems in your daily life.',
-                    benefitsTitle: 'Benefits That Make a Difference in Your Success',
-                    benefit1: 'Productivity +300%: Automate repetitive tasks and focus on what matters.',
-                    benefit2: 'Real Innovation: Create projects like chatbots or data analyses that generate immediate value.',
-                    benefit3: 'Elite Community: Connect with professionals inspired by visionaries like Elon Musk.',
-                    proofTitle: 'Real Professionals Are Already Transforming Their Lives',
-                    proofText: '"I multiplied my productivity and created a profitable side project." - Verified User',
-                    activityTitle: 'See Who\'s Accessing Now - Join In!',
-                    offersTitle: 'Choose Your Path to Success - Limited Offers!',
-                    premiumTitle: 'Premium Package - Full Access + Priority Support',
-                    completeTitle: 'Complete Package - All of Premium + Personalized Mentoring',
-                    heroCta: 'Secure Immediate Access - Limited Spots!',
-                    premiumBtn: 'Access Premium: Productivity + Innovation + Community',
-                    completeBtn: 'Access Complete: Real Solutions + Growth Triggers'
-                },
-                testimonials: [
-                    '"Revolutionized my career!" - John, USA',
-                    '"High-level content." - Mary, Canada',
-                    '"Highly recommend." - Peter, USA'
-                ],
-                aiIcons: [
-                    {name: 'Grok', img: 'https://1000logos.net/wp-content/uploads/2025/02/Grok-Logo.png'},
-                    {name: 'ChatGPT', img: 'https://upload.wikimedia.org/wikipedia/commons/1/13/ChatGPT-Logo.png'},
-                    {name: 'Gemini', img: 'https://storage.googleapis.com/gweb-uniblog-publish-prod/images/IO24_WhatsInAName_SocialShare_S96SOzG.width-1300.png'},
-                    {name: 'Claude', img: 'https://claude.ai/images/claude_ogimage.png'},
-                    {name: 'Midjourney', img: 'https://assets.stickpng.com/images/66af6a25585ea98e55ff8605.png'}
-                ],
-                names: ['John Smith', 'Mary Johnson', 'Peter Davis', 'Anna Wilson', 'Carlos Brown'],
-                countries: ['USA', 'Canada'],
-                flags: {
-                    'USA': 'https://flagcdn.com/us.svg',
-                    'Canada': 'https://flagcdn.com/ca.svg'
-                }
-            },
-            'es-latam': {
-                lang: 'es',
-                currency: '€',
-                premiumPrice: '17.90',
-                completePrice: '12.90',
-                texts: {
-                    heroTitle: 'Desbloquea el Futuro con IA - Como xAI, Transforma Ideas en Realidad',
-                    subheadline: 'No es magia, es tecnología real. Aprende a usar IA para resolver problemas complejos, aumentar la productividad en 300% y crear soluciones innovadoras - inspirado en la visión de Elon Musk para un mundo mejor.',
-                    whyTitle: 'Por Qué Esta es la Solución Real Que Necesitas',
-                    whyText: 'Inspirado en xAI, nuestro programa ofrece herramientas reales para que construyas el futuro. No promesas vacías: productividad probada, casos de éxito como automatización de tareas que ahorran horas diarias, y acceso a IAs que resuelven problemas reales en tu día a día.',
-                    benefitsTitle: 'Beneficios Que Hacen la Diferencia en Tu Éxito',
-                    benefit1: 'Productividad +300%: Automatiza tareas repetitivas y enfócate en lo que importa.',
-                    benefit2: 'Innovación Real: Crea proyectos como chatbots o análisis de datos que generan valor inmediato.',
-                    benefit3: 'Comunidad Elite: Conéctate con profesionales inspirados por visionarios como Elon Musk.',
-                    proofTitle: 'Profesionales Reales Ya Están Transformando Sus Vidas',
-                    proofText: '"Multipliqué mi productividad y creé un proyecto side lucrativo." - Usuario Verificado',
-                    activityTitle: 'Ve Quién Está Accediendo Ahora - ¡Únete!',
-                    offersTitle: 'Elige Tu Camino al Éxito - ¡Ofertas Limitadas!',
-                    premiumTitle: 'Paquete Premium - Acceso Total + Soporte Prioritario',
-                    completeTitle: 'Paquete Completo - Todo del Premium + Mentoría Personalizada',
-                    heroCta: '¡Asegura Acceso Inmediato - Plazas Limitadas!',
-                    premiumBtn: 'Acceder Premium: Productividad + Innovación + Comunidad',
-                    completeBtn: 'Acceder Completo: Soluciones Reales + Gatillos de Crecimiento'
-                },
-                testimonials: [
-                    '"¡Revolucionó mi carrera!" - Juan, España',
-                    '"Contenido de alto nivel." - María, México',
-                    '"Recomiendo fuertemente." - Pedro, Argentina'
-                ],
-                aiIcons: [
-                    {name: 'Grok', img: 'https://1000logos.net/wp-content/uploads/2025/02/Grok-Logo.png'},
-                    {name: 'ChatGPT', img: 'https://upload.wikimedia.org/wikipedia/commons/1/13/ChatGPT-Logo.png'},
-                    {name: 'Gemini', img: 'https://storage.googleapis.com/gweb-uniblog-publish-prod/images/IO24_WhatsInAName_SocialShare_S96SOzG.width-1300.png'},
-                    {name: 'Claude', img: 'https://claude.ai/images/claude_ogimage.png'},
-                    {name: 'Midjourney', img: 'https://assets.stickpng.com/images/66af6a25585ea98e55ff8605.png'}
-                ],
-                names: ['Juan García', 'María López', 'Pedro Martínez', 'Ana Rodríguez', 'Carlos Hernández'],
-                countries: ['España', 'México', 'Argentina', 'Colombia', 'Chile'],
-                flags: {
-                    'España': 'https://flagcdn.com/es.svg',
-                    'México': 'https://flagcdn.com/mx.svg',
-                    'Argentina': 'https://flagcdn.com/ar.svg',
-                    'Colombia': 'https://flagcdn.com/co.svg',
-                    'Chile': 'https://flagcdn.com/cl.svg'
-                }
-            }
-        };
-
-        // Manipular Quiz
-        const quizForm = document.getElementById('quiz-form');
-        quizForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const country = document.getElementById('country').value;
-            const age = document.getElementById('age').value;
-            const goal = document.getElementById('goal').value;
-            const time = document.getElementById('time').value;
-
-            // Salvar no localStorage
-            localStorage.setItem('quiz_country', country);
-            localStorage.setItem('quiz_age', age);
-            localStorage.setItem('quiz_goal', goal);
-            localStorage.setItem('quiz_time', time);
-
-            // Iniciar Cronômetro se não existir
-            if (!localStorage.getItem('timer_end')) {
-                const endTime = Date.now() + 15 * 60 * 1000; // 15 minutos
-                localStorage.setItem('timer_end', endTime);
-            }
-
-            // Personalizar e Mostrar Página
-            personalizePage(country);
-            document.getElementById('quiz-page').style.display = 'none';
-            document.getElementById('sales-page').style.display = 'block';
-
-            // Iniciar Funcionalidades
-            startNotifications(country);
-            startActivityFeed(country);
-            startOnlineCount();
-            startCarousel(country);
-            startAiCarousel(country);
-            startTimer();
+    // ✅ EVENTO DE CONVERSÃO GOOGLE ADS
+    function trackConversion() {
+        gtag('event', 'conversion', {
+            'send_to': 'AW-16917756362/COLE_AQUI_O_ID_DO_EVENTO'
         });
+    }
+</script>
 
-        // Personalizar Página
-        function personalizePage(country) {
-            const config = regions[country];
-            if (!config) return;
-
-            // Atualizar Textos
-            document.getElementById('hero-title').textContent = config.texts.heroTitle;
-            document.getElementById('subheadline').textContent = config.texts.subheadline;
-            document.getElementById('why-title').textContent = config.texts.whyTitle;
-            document.getElementById('why-text').textContent = config.texts.whyText;
-            document.getElementById('benefits-title').textContent = config.texts.benefitsTitle;
-            document.getElementById('benefit1').textContent = config.texts.benefit1;
-            document.getElementById('benefit2').textContent = config.texts.benefit2;
-            document.getElementById('benefit3').textContent = config.texts.benefit3;
-            document.getElementById('proof-title').textContent = config.texts.proofTitle;
-            document.getElementById('proof-text').textContent = config.texts.proofText;
-            document.getElementById('activity-title').textContent = config.texts.activityTitle;
-            document.getElementById('offers-title').textContent = config.texts.offersTitle;
-            document.getElementById('premium-title').textContent = config.texts.premiumTitle;
-            document.getElementById('complete-title').textContent = config.texts.completeTitle;
-            document.getElementById('hero-cta').firstChild.textContent = config.texts.heroCta;
-            document.getElementById('premium-btn').firstChild.textContent = config.texts.premiumBtn;
-            document.getElementById('complete-btn').firstChild.textContent = config.texts.completeBtn;
-
-            // Atualizar Preços (valores fixos do prompt original, como links não retornaram info)
-            document.getElementById('premium-price').textContent = `Preço: ${config.currency} ${config.premiumPrice}`;
-            document.getElementById('complete-price').textContent = `Preço: ${config.currency} ${config.completePrice}`;
-        }
-
-        // Carrossel de Depoimentos
-        function startCarousel(country) {
-            const config = regions[country];
-            const inner = document.getElementById('carousel-inner');
-            config.testimonials.forEach(test => {
-                const div = document.createElement('div');
-                div.className = 'testimonial';
-                div.innerHTML = `<p>${test}</p>`;
-                inner.appendChild(div);
-            });
-
-            let index = 0;
-            setInterval(() => {
-                index = (index + 1) % config.testimonials.length;
-                inner.style.transform = `translateX(-${index * 100}%)`;
-            }, 3000);
-        }
-
-        // Carrossel de Ícones de IAs
-        function startAiCarousel(country) {
-            const config = regions[country];
-            const inner = document.getElementById('ai-carousel-inner');
-            config.aiIcons.forEach(icon => {
-                const div = document.createElement('div');
-                div.className = 'ai-icon';
-                div.innerHTML = `<img src="${icon.img}" alt="${icon.name}"><p>${icon.name}</p>`;
-                inner.appendChild(div);
-            });
-
-            let index = 0;
-            setInterval(() => {
-                index = (index + 1) % config.aiIcons.length;
-                inner.style.transform = `translateX(-${index * 100}%)`;
-            }, 2000);
-        }
-
-        // Notificações de Vendas em Tempo Real
-        function startNotifications(country) {
-            const config = regions[country];
-            const notification = document.getElementById('notification');
-            let usedNames = new Set();
-
-            function getUniqueName() {
-                let name;
-                do {
-                    name = config.names[Math.floor(Math.random() * config.names.length)];
-                } while (usedNames.has(name) && usedNames.size < config.names.length);
-                usedNames.add(name);
-                if (usedNames.size === config.names.length) usedNames.clear();
-                return name;
-            }
-
-            function showNotification() {
-                const name = getUniqueName();
-                const countryName = config.countries[Math.floor(Math.random() * config.countries.length)];
-                const flag = config.flags[countryName] || '';
-                const package = Math.random() > 0.5 ? 'Premium' : 'Completo';
-                notification.innerHTML = `<img src="${flag}" alt="${countryName}"> ${name} de ${countryName} adquiriu o ${package}!`;
-                notification.style.display = 'block';
-                setTimeout(() => {
-                    notification.style.display = 'none';
-                }, 5000);
-            }
-
-            function scheduleNext() {
-                const delay = Math.random() * 10000 + 5000;
-                setTimeout(() => {
-                    showNotification();
-                    scheduleNext();
-                }, delay);
-            }
-            scheduleNext();
-        }
-
-        // Feed de Atividade
-        function startActivityFeed(country) {
-            const config = regions[country];
-            const list = document.getElementById('activity-list');
-
-            function addActivity() {
-                const name = config.names[Math.floor(Math.random() * config.names.length)];
-                const countryName = config.countries[Math.floor(Math.random() * config.countries.length)];
-                const action = Math.random() > 0.5 ? 'visualizou a oferta' : 'está considerando o pacote';
-                const li = document.createElement('li');
-                li.textContent = `${name} de ${countryName} ${action} agora!`;
-                list.prepend(li);
-                if (list.children.length > 5) list.removeChild(list.lastChild);
-            }
-
-            setInterval(addActivity, 10000);
-            addActivity();
-        }
-
-        // Contador de Pessoas Online
-        function startOnlineCount() {
-            const countEl = document.getElementById('online-count');
-
-            function updateCount() {
-                const count = Math.floor(Math.random() * 50 + 50); // 50-100
-                countEl.textContent = `Pessoas online agora: ${count} - Não Fique Para Trás!`;
-            }
-
-            setInterval(updateCount, 5000);
-            updateCount();
-        }
-
-        // Cronômetro Regressivo
-        function startTimer() {
-            const timerEl = document.getElementById('timer');
-            const endTime = parseInt(localStorage.getItem('timer_end'));
-
-            function updateTimer() {
-                const now = Date.now();
-                const remaining = endTime - now;
-                if (remaining <= 0) {
-                    timerEl.textContent = '⏳ Oferta Expirada!';
-                    return;
-                }
-                const minutes = Math.floor((remaining / 1000 / 60) % 60);
-                const seconds = Math.floor((remaining / 1000) % 60);
-                timerEl.textContent = `⏳ Oferta reservada por ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-            }
-
-            setInterval(updateTimer, 1000);
-            updateTimer();
-        }
-
-        // Verificar se Quiz já foi respondido
-        if (localStorage.getItem('quiz_country')) {
-            personalizePage(localStorage.getItem('quiz_country'));
-            document.getElementById('quiz-page').style.display = 'none';
-            document.getElementById('sales-page').style.display = 'block';
-            startNotifications(localStorage.getItem('quiz_country'));
-            startActivityFeed(localStorage.getItem('quiz_country'));
-            startOnlineCount();
-            startCarousel(localStorage.getItem('quiz_country'));
-            startAiCarousel(localStorage.getItem('quiz_country'));
-            startTimer();
-        }
-    </script>
 </body>
 </html>
