@@ -48,8 +48,9 @@
         .ai-icon { min-width:20%; text-align:center; padding:20px; }
         .ai-icon img { width:90px; height:90px; border-radius:12px; }
         @keyframes scroll { 0%{transform:translateX(0);} 100%{transform:translateX(-100%);} }
-        /* Contador ao vivo */
+        /* Contador 24h */
         #live-counter { font-size:30px; color:#ff0000; font-weight:bold; margin:40px 0; background:#002b5e; padding:20px; border-radius:12px; }
+        .urgency-text { font-size:18px; color:#ff0000; font-weight:bold; margin-top:10px; }
         /* Redes sociais */
         .social-icons { display:flex; justify-content:center; gap:30px; margin:40px 0; }
         .social-icons img { width:60px; height:60px; }
@@ -75,8 +76,8 @@
 <!-- QUIZ -->
 <div id="quiz-page">
     <form id="quiz-form">
-        <h2 id="quiz-h2">Descubra Como Faturar Alto com Conteúdo Viral de Luxo Usando IA</h2>
-        <p id="quiz-p">Responda em menos de 30 segundos e libere sua oferta personalizada – milhares já estão lucrando!</p>
+        <h2>Descubra Como Faturar Alto com Conteúdo Viral de Luxo Usando IA</h2>
+        <p>Responda em menos de 30 segundos e libere sua oferta personalizada – milhares já estão lucrando!</p>
         <div class="quiz-step active" id="step1">
             <label>1. Em qual região você está?</label>
             <select id="country" required>
@@ -123,28 +124,29 @@
 <!-- PÁGINA DE VENDAS -->
 <div id="sales-page" style="display:none;">
     <div class="container">
-        <h1 id="main-title">Parabéns! Sua Oferta Personalizada Está Liberada</h1>
-        <p id="main-subtitle"><strong>Você está a um clique de criar conteúdo de luxo viral que fatura alto — sem aparecer na câmera, sem estoque e sem investimento milionário.</strong></p>
+        <h1>Parabéns! Sua Oferta Personalizada Está Liberada</h1>
+        <p><strong>Você está a um clique de criar conteúdo de luxo viral que fatura alto — sem aparecer na câmera, sem estoque e sem investimento milionário.</strong></p>
 
-        <!-- Contador ao vivo -->
-        <div id="live-counter">Esta oferta está ativa há <span id="days-live">0</span> dias — vagas encerrando em breve!</div>
+        <!-- Contador 24h ao vivo + urgência -->
+        <div id="live-counter">⏳ Tempo restante para garantir o desconto: <span id="timer-countdown">24:00:00</span></div>
+        <p class="urgency-text">Esta oferta expira em 24 horas — depois o preço volta ao normal e os bônus desaparecem!</p>
 
-        <!-- Dor + Solução + Gatilho de escassez -->
-        <h2>Você Está Cansado de Trabalhar Duro e Ganhar Pouco?</h2>
-        <p>A maioria passa horas criando conteúdo que ninguém vê. Com IA, você cria reels de carros de luxo, mansões, viagens e estilo de vida premium em minutos — conteúdo que viraliza naturalmente porque as pessoas <strong>amamm</strong> sonhar com essa vida.</p>
-        <p>Esse tipo de conteúdo gera engajamento explosivo no Instagram, TikTok e YouTube. Monetize com afiliados de produtos premium, patrocínios e vendas diretas — tudo automático.</p>
+        <!-- Conteúdo viral + gatilho persuasão -->
+        <h2>O Segredo do Conteúdo de Luxo que Viraliza e Converte</h2>
+        <p>Carros de milhões, mansões, jatos privados, viagens exóticas — as pessoas AMAM consumir esse estilo de vida. Com IA você cria reels e posts perfeitos em minutos, sem precisar aparecer. O engajamento explode, os seguidores crescem rápido e a monetização vem com afiliados premium, patrocínios e vendas diretas.</p>
+        <p><strong>Exemplos reais:</strong> Alunos faturam R$15k–R$80k/mês apenas postando conteúdo de luxo gerado por IA.</p>
 
-        <!-- Redes sociais com ícones -->
-        <h2>Poste Nessas Plataformas e Veja o Dinheiro Entrar</h2>
+        <!-- Redes sociais -->
+        <h2>Poste Nessas Plataformas e Veja o Lucro Chegar</h2>
         <div class="social-icons">
             <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
             <img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg" alt="TikTok">
             <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube">
         </div>
 
-        <!-- Bônus poderoso + Carrossel IA -->
-        <h2>Bônus Exclusivo: 30 Dias 100% Grátis nas Melhores IAs do Mundo</h2>
-        <p>Você recebe acesso imediato a Grok, ChatGPT, Gemini, Claude e Midjourney — gere textos hipnóticos, imagens de supercarros e vídeos de luxo em segundos.</p>
+        <!-- Bônus IA Grátis + Carrossel -->
+        <h2>Bônus Exclusivo: 30 Dias Grátis nas Melhores IAs do Mundo</h2>
+        <p>Acesso imediato a Grok, ChatGPT, Gemini, Claude e Midjourney — gere imagens, vídeos e textos de luxo em segundos.</p>
         <div class="carousel">
             <div class="carousel-inner">
                 <div class="ai-icon"><img src="https://1000logos.net/wp-content/uploads/2025/02/Grok-Logo.png" alt="Grok"><p>Grok</p></div>
@@ -155,26 +157,22 @@
             </div>
         </div>
 
-        <!-- Gatilho de prova social + urgência -->
-        <h2>Outros Já Estão Lucrando Enquanto Você Lê Isso</h2>
-        <p>Milhares de alunos já criaram perfis que faturam R$10k–R$50k/mês com conteúdo de luxo. Eles começaram do zero — exatamente como você pode começar hoje.</p>
-
-        <!-- Ofertas com gatilhos fortes -->
+        <!-- Ofertas com descontos -->
         <h2>Escolha Seu Acesso Imediato Antes que Acabe</h2>
         <div class="offer">
-            <h3 id="premium-h3">Acesso Premium</h3>
-            <p id="premium-price">Valor normal R$199,97</p>
-            <p style="color:#ffd700; font-size:20px;"><strong>Hoje apenas [preço]</strong></p>
-            <a id="premium-btn" href="https://pay.cakto.com.br/4ehcq2y_672236" class="btn" onclick="trackConversion()">
+            <h3>Acesso Premium</h3>
+            <p>Valor normal R$249,00 <span style="color:#ff0000;">(80% OFF)</span></p>
+            <p style="color:#ffd700; font-size:20px;"><strong>Hoje apenas R$49,90</strong></p>
+            <a href="https://pay.cakto.com.br/4ehcq2y_672236" class="btn" onclick="trackConversion()">
                 Quero Premium Agora<br>
                 <span class="btn-timer">+ Templates Virais + Suporte Prioritário + Bônus IA Grátis</span>
             </a>
         </div>
         <div class="offer">
-            <h3 id="complete-h3">Acesso Completo (Mais Escolhido)</h3>
-            <p id="complete-price">Valor normal R$139,97</p>
-            <p style="color:#ffd700; font-size:20px;"><strong>Hoje apenas [preço]</strong></p>
-            <a id="complete-btn" href="https://pay.cakto.com.br/v8k65mm_672262" class="btn" onclick="trackConversion()">
+            <h3>Acesso Completo (Mais Escolhido)</h3>
+            <p>Valor normal R$139,90 <span style="color:#ff0000;">(85% OFF)</span></p>
+            <p style="color:#ffd700; font-size:20px;"><strong>Hoje apenas R$39,90</strong></p>
+            <a href="https://pay.cakto.com.br/v8k65mm_672262" class="btn" onclick="trackConversion()">
                 Quero Completo Agora<br>
                 <span class="btn-timer">Tudo do Premium + Mentoria Semanal + Estratégias Avançadas</span>
             </a>
@@ -185,7 +183,7 @@
             <button class="btn" disabled>Indisponível</button>
         </div>
 
-        <!-- Garantia forte -->
+        <!-- Garantia -->
         <div class="guarantee">
             <h2>Garantia Incondicional de 7 Dias</h2>
             <p><strong>Teste tudo sem risco.</strong> Se em 7 dias você não estiver criando conteúdo viral e vendo resultados, devolvemos 100% do seu dinheiro — sem perguntas.</p>
@@ -197,12 +195,6 @@
 <div class="notif" id="notif"></div>
 
 <script>
-    const regions = {
-        'br-pt': { currency:'R$', premium:'49,90', complete:'39,90', countries:['Brasil','Portugal','São Paulo','Rio de Janeiro','Lisboa'] },
-        'us-ca': { currency:'$', premium:'19.90', complete:'14.90', countries:['USA','Canada','New York','Los Angeles','Toronto'] },
-        'es-latam': { currency:'€', premium:'17.90', complete:'12.90', countries:['España','México','Argentina','Colombia','Chile'] }
-    };
-
     function nextStep(n) {
         document.getElementById('step'+n).classList.remove('active');
         document.getElementById('step'+(n+1)).classList.add('active');
@@ -210,19 +202,13 @@
 
     document.getElementById('quiz-form').onsubmit = function(e) {
         e.preventDefault();
-        const countryKey = document.getElementById('country').value;
-        const config = regions[countryKey] || regions['br-pt'];
 
-        // Atualiza preços
-        document.getElementById('premium-price').nextElementSibling.innerHTML = `<strong>Hoje apenas ${config.currency} ${config.premium}</strong>`;
-        document.getElementById('complete-price').nextElementSibling.innerHTML = `<strong>Hoje apenas ${config.currency} ${config.complete}</strong>`;
-
-        // Contador ao vivo (diferente por sessão)
-        if (!sessionStorage.getItem('launch_days')) {
-            const days = Math.floor(Math.random() * 15 + 40); // 40-55 dias
-            sessionStorage.setItem('launch_days', days);
+        // Inicia timer 24h persistente
+        if (!localStorage.getItem('timer_end')) {
+            const end = Date.now() + 24*60*60*1000;
+            localStorage.setItem('timer_end', end);
         }
-        document.getElementById('days-live').textContent = sessionStorage.getItem('launch_days');
+        updateTimer();
 
         // Mostra página de vendas
         document.getElementById('quiz-page').style.display = 'none';
@@ -230,33 +216,49 @@
         window.scrollTo(0,0);
     };
 
-    // Notificações aleatórias com bandeira e persuasão
-    const names = ['Ana','Pedro','Carlos','Mariana','Lucas','Beatriz','Rafael','Julia','Thiago','Fernanda','Gabriel','Sophia'];
+    // Timer 24h
+    function updateTimer() {
+        const end = parseInt(localStorage.getItem('timer_end'));
+        const now = Date.now();
+        let remaining = end - now;
+        if (remaining <= 0) {
+            document.getElementById('timer-countdown').textContent = '00:00:00';
+            return;
+        }
+        const h = Math.floor(remaining / 3600000).toString().padStart(2,'0');
+        const m = Math.floor((remaining % 3600000) / 60000).toString().padStart(2,'0');
+        const s = Math.floor((remaining % 60000) / 1000).toString().padStart(2,'0');
+        document.getElementById('timer-countdown').textContent = `${h}:${m}:${s}`;
+    }
+    setInterval(updateTimer, 1000);
+
+    // Notificações aleatórias
+    const names = ['Ana','Pedro','Carlos','Mariana','Lucas','Beatriz','Rafael','Julia','Thiago','Fernanda','Gabriel','Sophia','Victor','Laura','Miguel'];
     let used = new Set();
     function showNotif() {
         if (document.getElementById('sales-page').style.display === 'none') return;
 
         let name;
         do { name = names[Math.floor(Math.random()*names.length)]; } while (used.has(name));
-        used.add(name); if (used.size > 8) used.clear();
+        used.add(name); if (used.size > 10) used.clear();
 
-        const pkg = Math.random() > 0.4 ? 'Completo' : 'Premium';
-        const cityCountry = regions['br-pt'].countries.concat(regions['us-ca'].countries, regions['es-latam'].countries);
-        const location = cityCountry[Math.floor(Math.random()*cityCountry.length)];
-        const flag = location.includes('Brasil') || location.includes('São Paulo') || location.includes('Rio') ? '🇧🇷' :
-                     location.includes('Portugal') || location.includes('Lisboa') ? '🇵🇹' :
-                     location.includes('USA') || location.includes('New York') || location.includes('Los Angeles') ? '🇺🇸' :
-                     location.includes('Canada') || location.includes('Toronto') ? '🇨🇦' :
-                     location.includes('México') ? '🇲🇽' : location.includes('Argentina') ? '🇦🇷' : '🇪🇸';
+        const pkg = Math.random() > 0.6 ? 'Completo' : 'Premium';
+        const locations = ['São Paulo','Rio de Janeiro','Lisboa','New York','Los Angeles','Toronto','Madrid','Cidade do México','Buenos Aires','Bogotá'];
+        const location = locations[Math.floor(Math.random()*locations.length)];
+        const flag = location.includes('São Paulo') || location.includes('Rio') ? '🇧🇷' :
+                     location.includes('Lisboa') ? '🇵🇹' :
+                     location.includes('New York') || location.includes('Los Angeles') ? '🇺🇸' :
+                     location.includes('Toronto') ? '🇨🇦' :
+                     location.includes('Madrid') ? '🇪🇸' :
+                     location.includes('México') ? '🇲🇽' : '🇦🇷';
 
-        document.getElementById('notif').innerHTML = `${flag} <strong>${name}</strong> de ${location} acabou de garantir o pacote <strong>${pkg}</strong>!`;
+        document.getElementById('notif').innerHTML = `${flag} <strong>${name}</strong> de ${location} acabou de comprar o pacote <strong>${pkg}</strong>!`;
         document.getElementById('notif').style.display = 'block';
-        setTimeout(() => { document.getElementById('notif').style.display = 'none'; }, 7000);
+        setTimeout(() => document.getElementById('notif').style.display = 'none', 7000);
     }
 
-    // Intervalo aleatório entre 8-25 segundos
     function scheduleNotif() {
-        const delay = Math.random() * 17000 + 8000;
+        const delay = Math.random() * 20000 + 10000;
         setTimeout(() => {
             showNotif();
             scheduleNotif();
