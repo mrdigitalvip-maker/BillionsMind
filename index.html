@@ -44,58 +44,26 @@
     .brand-text-sub { font-size: 0.7rem; color: var(--text-soft); }
     .badge-year { font-size: 0.75rem; padding: 6px 12px; border-radius: 999px; background: rgba(0, 200, 255, 0.12); border: 1px solid rgba(0, 200, 255, 0.5); color: var(--accent); display: flex; align-items: center; gap: 6px; }
     .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px rgba(0, 200, 255, 0.9); }
-    .hero { margin-bottom: 32px; padding: 26px 22px 26px; border-radius: 26px; background: radial-gradient(circle at top right, rgba(0, 200, 255, 0.12), transparent 55%), radial-gradient(circle at bottom left, rgba(247, 200, 106, 0.16), transparent 60%), var(--bg-card); border: 1px solid rgba(0, 200, 255, 0.35); box-shadow: var(--shadow-soft); position: relative; overflow: hidden; }
+    .hero { margin-bottom: 32px; padding: 26px 22px; border-radius: 26px; background: radial-gradient(circle at top right, rgba(0, 200, 255, 0.12), transparent 55%), radial-gradient(circle at bottom left, rgba(247, 200, 106, 0.16), transparent 60%), var(--bg-card); border: 1px solid rgba(0, 200, 255, 0.35); box-shadow: var(--shadow-soft); position: relative; overflow: hidden; }
     .hero::before { content: ""; position: absolute; inset: -40%; background: radial-gradient(circle at 0% 0%, rgba(0, 200, 255, 0.1), transparent 55%), radial-gradient(circle at 100% 100%, rgba(247, 200, 106, 0.08), transparent 55%); opacity: 0.7; pointer-events: none; }
     .hero-grid { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2.4fr); gap: 28px; position: relative; z-index: 1; }
     .eyebrow { font-size: 0.8rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
     .hero-title { font-size: clamp(1.9rem, 3vw, 2.4rem); line-height: 1.1; margin-bottom: 12px; }
     .hero-title span { color: var(--gold); }
     .hero-sub { font-size: 0.98rem; color: var(--text-soft); max-width: 520px; margin-bottom: 18px; }
-    .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
-    .tag { font-size: 0.72rem; padding: 6px 11px; border-radius: 999px; border: 1px solid rgba(0, 200, 255, 0.4); background: rgba(4, 11, 35, 0.85); color: var(--text-soft); }
-    .hero-cta-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
-    .btn-primary { padding: 11px 20px; border-radius: 999px; border: none; background: linear-gradient(135deg, #f7c86a, #ffdf9a); color: #1b1305; font-weight: 700; font-size: 0.9rem; cursor: pointer; box-shadow: 0 0 18px rgba(247, 200, 106, 0.9), 0 16px 30px rgba(0, 0, 0, 0.7); white-space: nowrap; text-decoration: none; }
-    .hero-note { font-size: 0.74rem; color: var(--text-soft); max-width: 260px; }
-    .hero-right-card { border-radius: 22px; padding: 16px 14px 18px; background: radial-gradient(circle at top, rgba(0, 200, 255, 0.12), transparent 60%), rgba(5, 13, 40, 0.95); border: 1px solid rgba(0, 200, 255, 0.5); box-shadow: var(--shadow-soft); position: relative; overflow: hidden; }
-    .hero-right-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
-    .hero-pill { font-size: 0.7rem; padding: 6px 10px; border-radius: 999px; background: rgba(0, 200, 255, 0.18); color: var(--accent); display: inline-flex; align-items: center; gap: 6px; }
-    .hero-dot { width: 7px; height: 7px; border-radius: 50%; background: #35ff95; box-shadow: 0 0 10px rgba(53, 255, 149, 0.9); }
-    .hero-right-title { font-size: 0.85rem; color: var(--text-soft); text-align: right; }
-    .hero-display { margin-top: 6px; border-radius: 16px; padding: 14px 12px; background: radial-gradient(circle at top, #0f2b55, #050a1a 65%); border: 1px solid rgba(0, 200, 255, 0.35); position: relative; overflow: hidden; }
-    .hero-display-main { font-size: 0.7rem; color: var(--text-soft); margin-bottom: 8px; display: flex; justify-content: space-between; }
-    .hero-display-value { font-size: 1.4rem; font-weight: 700; color: #ffffff; }
-    .hero-display-pill { font-size: 0.75rem; color: #35ff95; background: rgba(9, 169, 91, 0.25); padding: 4px 10px; border-radius: 999px; }
-    .hero-chart-bar-wrap { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 5px; margin-top: 10px; align-items: flex-end; }
-    .hero-chart-bar { width: 100%; border-radius: 999px; background: linear-gradient(to top, rgba(0, 200, 255, 0.1), rgba(0, 200, 255, 0.9)); box-shadow: 0 0 12px rgba(0, 200, 255, 0.6); }
-    .hero-chart-bar:nth-child(5), .hero-chart-bar:nth-child(6), .hero-chart-bar:nth-child(7) { background: linear-gradient(to top, rgba(247, 200, 106, 0.1), rgba(247, 200, 106, 0.95)); box-shadow: 0 0 12px rgba(247, 200, 106, 0.8); }
-    .hero-meta-row { display: flex; justify-content: space-between; margin-top: 10px; font-size: 0.7rem; color: var(--text-soft); }
+    .timer-card { text-align: center; padding: 20px; border-radius: 20px; background: rgba(0, 200, 255, 0.08); border: 1px solid rgba(0, 200, 255, 0.4); }
+    .timer { font-size: 32px; font-weight: 700; color: var(--gold); }
+    .notification { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.9); color: #fff; padding: 14px 24px; border-radius: 12px; font-size: 14px; z-index: 1000; opacity: 0; transition: opacity .4s; border-left: 4px solid var(--accent); max-width: 90%; }
     .section { margin-bottom: 28px; border-radius: 22px; padding: 20px 18px 18px; background: var(--glass); border: 1px solid rgba(0, 200, 255, 0.28); box-shadow: var(--shadow-soft); backdrop-filter: blur(18px); }
     .section-header { margin-bottom: 12px; }
     .section-eyebrow { font-size: 0.78rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
     .section-title { font-size: 1.2rem; margin-bottom: 4px; }
     .section-sub { font-size: 0.88rem; color: var(--text-soft); }
-    p { font-size: 0.9rem; line-height: 1.55; color: var(--text-soft); margin-bottom: 10px; }
-    .highlight { color: var(--gold); }
-    .pill-inline { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; border: 1px solid rgba(0, 200, 255, 0.45); background: rgba(4, 12, 36, 0.95); font-size: 0.75rem; color: var(--text-soft); }
-    .toc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 10px; }
-    .toc-card { border-radius: 16px; padding: 12px 12px 13px; background: rgba(5, 11, 31, 0.9); border: 1px solid rgba(0, 200, 255, 0.25); }
-    .toc-label { font-size: 0.78rem; color: var(--accent); margin-bottom: 4px; }
-    .toc-title { font-size: 0.95rem; margin-bottom: 3px; }
-    .toc-desc { font-size: 0.8rem; color: var(--text-soft); }
-    .quote { border-left: 3px solid rgba(0, 200, 255, 0.7); padding-left: 12px; margin: 12px 0; font-size: 0.9rem; color: var(--text-soft); }
-    @media (max-width: 768px) { header.top-nav { padding: 8px 12px; border-radius: 16px; } .hero-grid { grid-template-columns: minmax(0, 1fr); } .hero { padding: 20px 16px 20px; } .hero-title { font-size: 1.8rem; } }
-    .notification { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.9); color: #fff; padding: 14px 24px; border-radius: 12px; font-size: 14px; z-index: 1000; opacity: 0; transition: opacity .4s; border-left: 4px solid var(--accent); max-width: 90%; }
-    .timer { font-size: 32px; font-weight: 700; color: var(--gold); }
-    .progress-bar { height: 6px; background: #252530; border-radius: 3px; overflow: hidden; margin: 30px 0; }
-    .progress { height: 100%; background: var(--accent); width: 0%; transition: width .6s ease; }
-    .quiz-screen { display: none; }
-    #quiz-1 { display: block; }
-    .carousel { overflow: hidden; display: flex; gap: 20px; padding: 10px 0; scrollbar-width: none; }
+    .carousel { overflow-x: auto; display: flex; gap: 20px; padding: 10px 0; scrollbar-width: none; }
     .carousel::-webkit-scrollbar { display: none; }
-    .carousel-inner { display: flex; transition: transform 0.5s ease; }
     .tool-item { min-width: 100px; text-align: center; }
     .tool-item img { width: 80px; height: 80px; object-fit: contain; border-radius: 12px; background: #222; padding: 10px; }
-    .platform-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin: 40px 0; }
+    .platform-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 20px; margin: 40px 0; }
     .platform-item { text-align: center; }
     .platform-item img { width: 70px; height: 70px; object-fit: contain; }
     .offer-cards { display: grid; gap: 20px; }
@@ -103,8 +71,21 @@
     .sold-out { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%) rotate(-15deg); font-size: 36px; color: var(--danger); font-weight: 700; opacity: 0.8; pointer-events: none; }
     .most-popular { position: absolute; top: -12px; right: 20px; background: var(--gold); color: #000; padding: 6px 16px; border-radius: 20px; font-size: 14px; font-weight: 600; }
     svg { width: 100%; max-width: 300px; margin: 20px auto; display: block; }
-    .testimonial { min-width: 100%; text-align: center; }
-    .testimonial img { width: 100%; border-radius: 16px; }
+    .testimonial-carousel { overflow-x: auto; display: flex; gap: 10px; padding: 10px 0; scrollbar-width: none; }
+    .testimonial-carousel::-webkit-scrollbar { display: none; }
+    .testimonial { min-width: 200px; }
+    .testimonial img { width: 100%; height: auto; max-height: 300px; object-fit: contain; border-radius: 12px; box-shadow: var(--shadow-soft); }
+    .quiz-screen, #sales-page { display: none; min-height: 100vh; }
+    #quiz-1 { display: block; }
+    .btn { display: block; width: 100%; padding: 18px; border-radius: 12px; font-weight: 600; font-size: 18px; text-align: center; cursor: pointer; transition: all .3s; margin: 20px 0; }
+    .btn-primary { background: var(--accent); color: #000; }
+    .btn-primary:hover { transform: scale(1.02); }
+    .btn-disabled { background: #333; color: #666; cursor: not-allowed; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin: 30px 0; }
+    .text-center { text-align: center; }
+    .mb-20 { margin-bottom: 20px; }
+    .mb-40 { margin-bottom: 40px; }
+    @media (max-width: 768px) { .hero-grid { grid-template-columns: minmax(0, 1fr); } .platform-grid { grid-template-columns: repeat(3,1fr); } .testimonial { min-width: 80%; } }
   </style>
 </head>
 <body>
@@ -121,6 +102,7 @@
   <span style="top: 5%; left: 55%; animation-delay: 10.2s;"></span>
 </div>
 <div class="page">
+
   <header class="top-nav">
     <div class="brand">
       <div class="brand-logo"></div>
@@ -136,246 +118,217 @@
   </header>
 
   <!-- QUIZ SECTION -->
-  <div id="quiz-section">
-    <div class="container" style="padding-top:60px;">
-      <h1 class="text-center mb-40" style="font-size:28px;">Descubra seu potencial com IA</h1>
-        
-      <div class="progress-bar"><div class="progress" id="progress"></div></div>
+  <div id="quiz-section" class="quiz-container">
+    <h1 class="text-center mb-40" style="font-size:28px;">Descubra seu potencial com IA</h1>
+    
+    <div class="progress-bar"><div class="progress" id="progress"></div></div>
 
-      <!-- Pergunta 1 -->
-      <div class="quiz-screen" id="quiz-1">
-        <h2 style="font-size:22px; margin-bottom:30px;">Qual seu principal objetivo usando IA?</h2>
-        <div class="btn btn-primary" onclick="nextQuiz(2)">Renda extra</div>
-        <div class="btn btn-primary" onclick="nextQuiz(2)">Negócio online</div>
-        <div class="btn btn-primary" onclick="nextQuiz(2)">Automatizar trabalho</div>
-        <div class="btn btn-primary" onclick="nextQuiz(2)">Escalar resultados</div>
-      </div>
+    <!-- Pergunta 1 -->
+    <div class="quiz-screen" id="quiz-1">
+      <h2 style="font-size:22px; margin-bottom:30px;">Qual seu principal objetivo usando IA?</h2>
+      <div class="btn btn-primary" onclick="nextQuiz(2)">Renda extra</div>
+      <div class="btn btn-primary" onclick="nextQuiz(2)">Negócio online</div>
+      <div class="btn btn-primary" onclick="nextQuiz(2)">Automatizar trabalho</div>
+      <div class="btn btn-primary" onclick="nextQuiz(2)">Escalar resultados</div>
+    </div>
 
-      <!-- Pergunta 2 -->
-      <div class="quiz-screen" id="quiz-2">
-        <h2 style="font-size:22px; margin-bottom:30px;">Quanto tempo por semana você pode dedicar?</h2>
-        <div class="btn btn-primary" onclick="nextQuiz(3)">Menos de 5h</div>
-        <div class="btn btn-primary" onclick="nextQuiz(3)">5–10h</div>
-        <div class="btn btn-primary" onclick="nextQuiz(3)">10h ou mais</div>
-      </div>
+    <!-- Pergunta 2 -->
+    <div class="quiz-screen" id="quiz-2">
+      <h2 style="font-size:22px; margin-bottom:30px;">Quanto tempo por semana você pode dedicar?</h2>
+      <div class="btn btn-primary" onclick="nextQuiz(3)">Menos de 5h</div>
+      <div class="btn btn-primary" onclick="nextQuiz(3)">5–10h</div>
+      <div class="btn btn-primary" onclick="nextQuiz(3)">10h ou mais</div>
+    </div>
 
-      <!-- Pergunta 3 -->
-      <div class="quiz-screen" id="quiz-3">
-        <h2 style="font-size:22px; margin-bottom:30px;">Já tentou ganhar dinheiro online antes?</h2>
-        <div class="btn btn-primary" onclick="nextQuiz(4)">Nunca</div>
-        <div class="btn btn-primary" onclick="nextQuiz(4)">Já tentei</div>
-        <div class="btn btn-primary" onclick="nextQuiz(4)">Já ganho algo</div>
-      </div>
+    <!-- Pergunta 3 -->
+    <div class="quiz-screen" id="quiz-3">
+      <h2 style="font-size:22px; margin-bottom:30px;">Já tentou ganhar dinheiro online antes?</h2>
+      <div class="btn btn-primary" onclick="nextQuiz(4)">Nunca</div>
+      <div class="btn btn-primary" onclick="nextQuiz(4)">Já tentei</div>
+      <div class="btn btn-primary" onclick="nextQuiz(4)">Já ganho algo</div>
+    </div>
 
-      <!-- Pergunta 4 -->
-      <div class="quiz-screen" id="quiz-4">
-        <h2 style="font-size:22px; margin-bottom:30px;">Qual seu nível de urgência para mudar sua situação financeira?</h2>
-        <div class="btn btn-primary" onclick="nextQuiz(5)">Baixa</div>
-        <div class="btn btn-primary" onclick="nextQuiz(5)">Média</div>
-        <div class="btn btn-primary" onclick="nextQuiz(5)">Alta (preciso agora)</div>
-      </div>
+    <!-- Pergunta 4 -->
+    <div class="quiz-screen" id="quiz-4">
+      <h2 style="font-size:22px; margin-bottom:30px;">Qual seu nível de urgência para mudar sua situação financeira?</h2>
+      <div class="btn btn-primary" onclick="nextQuiz(5)">Baixa</div>
+      <div class="btn btn-primary" onclick="nextQuiz(5)">Média</div>
+      <div class="btn btn-primary" onclick="nextQuiz(5)">Alta (preciso agora)</div>
+    </div>
 
-      <!-- Pergunta 5: País -->
-      <div class="quiz-screen" id="quiz-5">
-        <h2 style="font-size:22px; margin-bottom:30px;">De qual país você é?</h2>
-        <div class="btn btn-primary" onclick="selectCountry('Brasil'); goToSales()">Brasil</div>
-        <div class="btn btn-primary" onclick="selectCountry('EUA'); goToSales()">EUA</div>
-        <div class="btn btn-primary" onclick="selectCountry('Portugal'); goToSales()">Portugal</div>
-        <div class="btn btn-primary" onclick="selectCountry('Espanha'); goToSales()">Espanha</div>
-        <div class="btn btn-primary" onclick="selectCountry('Canadá'); goToSales()">Canadá</div>
-      </div>
+    <!-- Pergunta 5 -->
+    <div class="quiz-screen" id="quiz-5">
+      <h2 style="font-size:22px; margin-bottom:30px;">De qual país você é?</h2>
+      <div class="btn btn-primary" onclick="selectCountry('Brasil'); goToSales()">Brasil</div>
+      <div class="btn btn-primary" onclick="selectCountry('EUA'); goToSales()">EUA</div>
+      <div class="btn btn-primary" onclick="selectCountry('Portugal'); goToSales()">Portugal</div>
+      <div class="btn btn-primary" onclick="selectCountry('Espanha'); goToSales()">Espanha</div>
+      <div class="btn btn-primary" onclick="selectCountry('Canadá'); goToSales()">Canadá</div>
     </div>
   </div>
 
   <!-- SALES PAGE -->
   <div id="sales-page" style="display:none;">
-    <div class="container" style="padding-top:40px;">
-      <!-- HERO -->
-      <div class="text-center mb-40">
-        <h1 style="font-size:32px; margin-bottom:20px;" id="hero-headline">Ganhe Dinheiro Usando Inteligência Artificial de Forma Prática e Real</h1>
-        <p style="font-size:18px; opacity:0.9;" id="hero-subheadline">Aprenda estratégias modernas que funcionam hoje para criar renda extra, automatizar processos e escalar resultados com ferramentas gratuitas e acessíveis.</p>
-        
-        <div class="card text-center" style="margin:40px 0;">
-          <p style="font-size:18px; margin-bottom:10px;" id="offer-expires">Oferta exclusiva expira em:</p>
-          <div class="timer" id="timer">00:00:00</div>
-          <p style="font-size:14px; opacity:0.8; margin-top:10px;" id="promo-unique">Esta promoção é única para você</p>
+    <div class="hero">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">SISTEMA ONLINE · ACESSO IMEDIATO</div>
+          <h1 class="hero-title" id="hero-title">Ganhe Dinheiro Usando Inteligência Artificial de Forma Prática e Real</h1>
+          <p class="hero-sub" id="hero-sub">Aprenda estratégias modernas que funcionam hoje para criar renda extra, automatizar processos e escalar resultados com ferramentas gratuitas e acessíveis.</p>
+          
+          <div class="card text-center" style="margin:40px 0;">
+            <p style="font-size:18px; margin-bottom:10px;" id="offer-expires">Oferta exclusiva expira em:</p>
+            <div class="timer" id="timer">00:00:00</div>
+            <p style="font-size:14px; opacity:0.8; margin-top:10px;" id="promo-unique">Esta promoção é única para você</p>
+          </div>
+        </div>
+        <div class="hero-right-card">
+          <img src="https://github.com/user-attachments/assets/307d0280-b238-4f28-8205-41640ed9ff4a" alt="Resultado real" style="width:100%; border-radius:16px;">
         </div>
       </div>
-
-      <!-- NOTIFICAÇÕES -->
-      <div class="notification" id="notification"></div>
-
-      <!-- CONTEÚDO DE ALTA PERSUASÃO -->
-      <div class="card">
-        <h2 class="text-center mb-20" style="font-size:26px;" id="content-title">O que muda na vida de quem adquire IA Lucrativa</h2>
-        <p id="content-p1">O que muda na vida de quem adquire IA Lucrativa</p>
-        <p class="mb-20" id="content-p2">Como a IA ajuda a vender, automatizar, criar conteúdo e escalar resultados</p>
-        <p id="content-p3">Falar de fluxo, velocidade, clareza e oportunidades</p>
-      </div>
-
-      <!-- GRÁFICOS VISUAIS -->
-      <section class="section text-center">
-        <h3 id="graph1-title">Crescimento de produtividade com IA</h3>
-        <svg viewBox="0 0 300 200">
-          <rect x="0" y="150" width="60" height="50" fill="#333"/>
-          <rect x="80" y="100" width="60" height="100" fill="#333"/>
-          <rect x="160" y="40" width="60" height="160" fill="var(--accent)"/>
-          <rect x="240" y="10" width="60" height="190" fill="var(--accent)"/>
-          <text id="graph1-label1" x="30" y="190" fill="#aaa" font-size="12">Sem IA</text>
-          <text id="graph1-label2" x="110" y="190" fill="#aaa" font-size="12">Início</text>
-          <text id="graph1-label3" x="190" y="190" fill="#fff" font-size="12">30 dias</text>
-          <text id="graph1-label4" x="270" y="190" fill="#fff" font-size="12">60 dias</text>
-        </svg>
-      </section>
-
-      <section class="section text-center">
-        <h3 id="graph2-title">Comparação: Antes da IA x Depois da IA</h3>
-        <svg viewBox="0 0 300 180">
-          <circle cx="90" cy="90" r="60" fill="#ff3366" opacity="0.3"/>
-          <circle cx="210" cy="90" r="60" fill="var(--accent)" opacity="0.8"/>
-          <text id="graph2-label1" x="90" y="95" fill="#fff" font-size="14" text-anchor="middle">Horas perdidas</text>
-          <text id="graph2-label2" x="210" y="95" fill="#000" font-size="14" text-anchor="middle">Tempo livre</text>
-        </svg>
-      </section>
-
-      <section class="section text-center">
-        <h3 id="graph3-title">Evolução de ganhos ao longo do tempo</h3>
-        <svg viewBox="0 0 300 180">
-          <polyline fill="none" stroke="var(--accent)" stroke-width="6" points="20,160 80,130 140,90 200,60 260,30"/>
-          <text id="graph3-label1" x="20" y="175" fill="#aaa" font-size="12">Início</text>
-          <text id="graph3-label2" x="260" y="175" fill="#fff" font-size="12">90 dias</text>
-        </svg>
-      </section>
-
-      <!-- BÔNUS: IAs GRATUITAS -->
-      <div class="card">
-        <h2 class="text-center mb-20" style="font-size:24px;" id="bonus-title">IA GRATUITAS (SEM CUSTO PARA O PRODUTOR)</h2>
-        <div class="carousel" id="ia-carousel">
-          <div class="carousel-inner" id="ia-inner">
-            <div class="tool-item">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT">
-              <p>ChatGPT</p>
-            </div>
-            <div class="tool-item">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Grok-feb-2025-logo.svg" alt="Grok">
-              <p>Grok</p>
-            </div>
-            <div class="tool-item">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Google_Gemini_logo.svg" alt="Gemini">
-              <p>Gemini</p>
-            </div>
-            <div class="tool-item">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Claude_AI_logo.svg" alt="Claude">
-              <p>Claude</p>
-            </div>
-            <div class="tool-item">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Microsoft_Copilot_logo.svg" alt="Copilot">
-              <p>Copilot</p>
-            </div>
-            <div class="tool-item">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Midjourney_Logo.svg" alt="Midjourney">
-              <p>Midjourney (trial)</p>
-            </div>
-            <div class="tool-item">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/5/5a/Canva_Logo.svg" alt="Canva AI">
-              <p>Canva AI</p>
-            </div>
-          </div>
-        </div>
-        <p class="text-center">Ferramentas usadas como BÔNUS ESTRATÉGICO, todas com plano grátis ou teste gratuito.</p>
-      </div>
-
-      <!-- REDES SOCIAIS -->
-      <div class="card">
-        <h2 class="text-center mb-20" style="font-size:24px;" id="networks-title">REDES SOCIAIS QUE GERAM DINHEIRO</h2>
-        <div class="platform-grid">
-          <div class="platform-item">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
-            <p>Instagram</p>
-          </div>
-          <div class="platform-item">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/TikTok_logo.svg" alt="TikTok">
-            <p>TikTok</p>
-          </div>
-          <div class="platform-item">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon.svg" alt="YouTube">
-            <p>YouTube</p>
-          </div>
-          <div class="platform-item">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/X_logo_2023_%28black%29.svg" alt="X">
-            <p>X (Twitter)</p>
-          </div>
-          <div class="platform-item">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
-            <p>Facebook</p>
-          </div>
-        </div>
-        <p class="text-center">A IA é usada para: Criar conteúdo, Viralizar, Vender, Automatizar processos</p>
-      </div>
-
-      <!-- DEPOIMENTOS CARROSSEL -->
-      <div class="card">
-        <h2 class="text-center mb-20" style="font-size:24px;">Resultados reais de alunos</h2>
-        <div class="carousel" id="depo-carousel">
-          <div class="carousel-inner" id="depo-inner">
-            <div class="testimonial">
-              <img src="https://github.com/user-attachments/assets/15de3c5c-7d81-4c19-98dd-add5111257b2" alt="Resultado 1">
-            </div>
-            <div class="testimonial">
-              <img src="https://github.com/user-attachments/assets/307d0280-b238-4f28-8205-41640ed9ff4a" alt="Resultado 2">
-            </div>
-            <div class="testimonial">
-              <img src="https://github.com/user-attachments/assets/81148523-7e97-42dc-a921-7f60a1294b5f" alt="Resultado 3">
-            </div>
-            <div class="testimonial">
-              <img src="https://github.com/user-attachments/assets/ee06909d-81be-4f34-9dc6-9385f7a15469" alt="Resultado 4">
-            </div>
-            <div class="testimonial">
-              <img src="https://github.com/user-attachments/assets/c99f7427-ae73-40bb-8eab-d1de0bee9ab7" alt="Resultado 5">
-            </div>
-            <div class="testimonial">
-              <img src="https://github.com/user-attachments/assets/2708cfb6-1e5f-4b98-8a57-ffee9c09fa56" alt="Resultado 6">
-            </div>
-            <div class="testimonial">
-              <img src="https://github.com/user-attachments/assets/acc4865a-c47f-4b02-b8df-24d6efd005ce" alt="Resultado 7">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ÁREA DE OFERTAS -->
-      <h2 class="text-center mb-40" style="font-size:28px;">Escolha seu acesso agora</h2>
-
-      <div class="offer-cards">
-        <div class="offer-card">
-          <div class="sold-out">ESGOTADA</div>
-          <h3>Básica</h3>
-          <p style="font-size:36px; color:var(--accent);">R$ 9,90</p>
-          <div class="btn btn-disabled">Indisponível no momento</div>
-        </div>
-
-        <div class="offer-card">
-          <h3>IA Lucrativa</h3>
-          <p style="font-size:36px; color:var(--accent);">R$ 19,90</p>
-          <p style="opacity:0.9;">✓ Acesso imediato<br>✓ Estratégias práticas<br>✓ Suporte comunitário<br>✓ Ferramentas gratuitas<br>✓ Atualizações mensais<br>✓ Guia rápido de início</p>
-          <a href="https://pay.cakto.com.br/4ehcq2y_672236" class="btn btn-primary">
-            🚀 Quero começar agora<br><small>Acesso vitalício • Oferta limitada • Antes que expire!</small>
-          </a>
-        </div>
-
-        <div class="offer-card">
-          <div class="most-popular">Mais escolhida</div>
-          <h3>IA Lucrativa Completa</h3>
-          <p style="font-size:36px; color:var(--accent);">R$ 29,90</p>
-          <p style="opacity:0.9;">✓ Tudo da versão padrão<br>✓ Bônus exclusivos<br>✓ Atualizações prioritárias<br>✓ Resultados mais rápidos<br>✓ Comunidade VIP<br>✓ Mentoria básica</p>
-          <a href="https://pay.cakto.com.br/v8k65mm_672262" class="btn btn-primary">
-            🔥 Quero o acesso completo<br><small>Melhor opção • Últimas vagas • Ação imediata!</small>
-          </a>
-        </div>
-      </div>
-
-      <div style="height:100px;"></div>
     </div>
+
+    <!-- NOTIFICAÇÕES -->
+    <div class="notification" id="notification"></div>
+
+    <!-- CONTEÚDO DE ALTA PERSUASÃO -->
+    <div class="card">
+      <h2 class="text-center mb-20" style="font-size:26px;" id="content-title">O que muda quando você domina a IA lucrativa</h2>
+      <p id="content-p1">Você para de perder horas criando conteúdo manualmente. A IA gera ideias, textos, imagens e estratégias em minutos.</p>
+      <p class="mb-20" id="content-p2">Você automatiza tarefas repetitivas e foca no que realmente gera dinheiro: vender, conectar e escalar.</p>
+      <p id="content-p3">Você entra em um fluxo constante de oportunidades reais — sem promessas mágicas, apenas métodos testados que funcionam em 2025.</p>
+    </div>
+
+    <!-- GRÁFICOS VISUAIS -->
+    <div class="card text-center">
+      <h3 style="margin-bottom:30px;" id="graph1-title">Crescimento de produtividade com IA</h3>
+      <svg viewBox="0 0 300 200">
+        <rect x="0" y="150" width="60" height="50" fill="#333"/>
+        <rect x="80" y="100" width="60" height="100" fill="#333"/>
+        <rect x="160" y="40" width="60" height="160" fill="var(--accent)"/>
+        <rect x="240" y="10" width="60" height="190" fill="var(--accent)"/>
+        <text x="30" y="190" fill="#aaa" font-size="12" id="graph1-label1">Sem IA</text>
+        <text x="110" y="190" fill="#aaa" font-size="12" id="graph1-label2">Início</text>
+        <text x="190" y="190" fill="#fff" font-size="12" id="graph1-label3">30 dias</text>
+        <text x="270" y="190" fill="#fff" font-size="12" id="graph1-label4">60 dias</text>
+      </svg>
+    </div>
+
+    <div class="card text-center">
+      <h3 style="margin-bottom:30px;" id="graph2-title">Comparação: Antes da IA x Depois da IA</h3>
+      <svg viewBox="0 0 300 180">
+        <circle cx="90" cy="90" r="60" fill="#ff3366" opacity="0.3"/>
+        <circle cx="210" cy="90" r="60" fill="var(--accent)" opacity="0.8"/>
+        <text x="90" y="95" fill="#fff" font-size="14" text-anchor="middle" id="graph2-label1">Horas perdidas</text>
+        <text x="210" y="95" fill="#000" font-size="14" text-anchor="middle" id="graph2-label2">Tempo livre</text>
+      </svg>
+    </div>
+
+    <div class="card text-center">
+      <h3 style="margin-bottom:30px;" id="graph3-title">Evolução de ganhos ao longo do tempo</h3>
+      <svg viewBox="0 0 300 180">
+        <polyline fill="none" stroke="var(--accent)" stroke-width="6" points="20,160 80,130 140,90 200,60 260,30"/>
+        <text x="20" y="175" fill="#aaa" font-size="12" id="graph3-label1">Início</text>
+        <text x="260" y="175" fill="#fff" font-size="12" id="graph3-label2">90 dias</text>
+      </svg>
+    </div>
+
+    <!-- BÔNUS: IA GRATUITAS -->
+    <div class="card">
+      <h2 class="text-center mb-20" style="font-size:24px;" id="bonus-title">IA GRATUITAS (SEM CUSTO PARA O PRODUTOR)</h2>
+      <div class="carousel">
+        <div class="tool-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT">
+          <p>ChatGPT</p>
+        </div>
+        <div class="tool-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Grok_logo.svg" alt="Grok" style="filter:invert(1);">
+          <p>Grok</p>
+        </div>
+        <div class="tool-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Google_Gemini_logo.svg" alt="Gemini">
+          <p>Gemini</p>
+        </div>
+        <div class="tool-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Claude_AI_logo.svg" alt="Claude">
+          <p>Claude</p>
+        </div>
+        <div class="tool-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Microsoft_Copilot_logo.svg" alt="Copilot">
+          <p>Copilot</p>
+        </div>
+        <div class="tool-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Midjourney_Logo.svg" alt="Midjourney">
+          <p>Midjourney (trial)</p>
+        </div>
+        <div class="tool-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/5a/Canva_Logo.svg" alt="Canva AI">
+          <p>Canva AI</p>
+        </div>
+      </div>
+      <p class="text-center">Deixar claro que são ferramentas usadas como BÔNUS ESTRATÉGICO.</p>
+    </div>
+
+    <!-- REDES SOCIAIS QUE GERAM DINHEIRO -->
+    <div class="card">
+      <h2 class="text-center mb-20" style="font-size:24px;" id="networks-title">REDES SOCIAIS QUE GERAM DINHEIRO</h2>
+      <div class="platform-grid">
+        <div class="platform-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+          <p>Instagram</p>
+        </div>
+        <div class="platform-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/TikTok_logo.svg" alt="TikTok">
+          <p>TikTok</p>
+        </div>
+        <div class="platform-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon.svg" alt="YouTube">
+          <p>YouTube</p>
+        </div>
+        <div class="platform-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/X_logo_2023_%28black%29.svg" alt="X">
+          <p>X (Twitter)</p>
+        </div>
+        <div class="platform-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
+          <p>Facebook</p>
+        </div>
+      </div>
+      <p class="text-center">Explicar que a IA é usada para: Criar conteúdo, Viralizar, Vender, Automatizar processos</p>
+    </div>
+
+    <!-- ÁREA DE OFERTAS -->
+    <h2 class="text-center mb-40" style="font-size:28px;">Escolha seu acesso agora</h2>
+
+    <div class="offer-cards">
+      <div class="offer-card">
+        <div class="sold-out">ESGOTADA</div>
+        <h3>Básica</h3>
+        <p style="font-size:36px; color:var(--accent);">R$ 9,90</p>
+        <div class="btn btn-disabled">Indisponível no momento</div>
+      </div>
+
+      <div class="offer-card">
+        <h3>IA Lucrativa</h3>
+        <p style="font-size:36px; color:var(--accent);">R$ 19,90</p>
+        <p style="opacity:0.9;">✓ Acesso imediato<br>✓ Estratégias práticas<br>✓ Suporte comunitário<br>✓ Ferramentas gratuitas<br>✓ Atualizações mensais<br>✓ Guia rápido de início</p>
+        <a href="https://pay.cakto.com.br/4ehcq2y_672236" class="btn btn-primary">
+          🚀 Quero começar agora<br><small>Acesso vitalício • Oferta limitada • Antes que expire!</small>
+        </a>
+      </div>
+
+      <div class="offer-card">
+        <div class="most-popular">Mais escolhida</div>
+        <h3>IA Lucrativa Completa</h3>
+        <p style="font-size:36px; color:var(--accent);">R$ 29,90</p>
+        <p style="opacity:0.9;">✓ Tudo da versão padrão<br>✓ Bônus exclusivos<br>✓ Atualizações prioritárias<br>✓ Resultados mais rápidos<br>✓ Comunidade VIP<br>✓ Mentoria básica</p>
+        <a href="https://pay.cakto.com.br/v8k65mm_672262" class="btn btn-primary">
+          🔥 Quero o acesso completo<br><small>Melhor opção • Últimas vagas • Ação imediata!</small>
+        </a>
+      </div>
+    </div>
+
+    <div style="height:100px;"></div>
   </div>
 </div>
 
@@ -390,6 +343,7 @@
   }
   function selectCountry(country) {
     selectedCountry = country;
+    goToSales();
   }
   function goToSales() {
     document.getElementById('quiz-section').style.display = 'none';
@@ -397,7 +351,6 @@
     translatePage();
     startTimer();
     startNotifications();
-    startCarousel();
   }
 
   // Map country to language
@@ -409,11 +362,11 @@
     'Espanha': 'es'
   };
 
-  // Translations object
+  // Translations object (abridged, expand as needed)
   const translations = {
     'pt': {
-      'hero-headline': 'Ganhe Dinheiro Usando Inteligência Artificial de Forma Prática e Real',
-      'hero-subheadline': 'Aprenda estratégias modernas que funcionam hoje para criar renda extra, automatizar processos e escalar resultados com ferramentas gratuitas e acessíveis.',
+      'hero-title': 'Ganhe Dinheiro Usando Inteligência Artificial de Forma Prática e Real',
+      'hero-sub': 'Aprenda estratégias modernas que funcionam hoje para criar renda extra, automatizar processos e escalar resultados com ferramentas gratuitas e acessíveis.',
       'offer-expires': 'Oferta exclusiva expira em:',
       'promo-unique': 'Esta promoção é única para você',
       'content-title': 'O que muda quando você domina a IA lucrativa',
@@ -421,29 +374,16 @@
       'content-p2': 'Você automatiza tarefas repetitivas e foca no que realmente gera dinheiro: vender, conectar e escalar.',
       'content-p3': 'Você entra em um fluxo constante de oportunidades reais — sem promessas mágicas, apenas métodos testados que funcionam em 2025.',
       'graph1-title': 'Crescimento de produtividade com IA',
-      'graph1-label1': 'Sem IA',
-      'graph1-label2': 'Início',
-      'graph1-label3': '30 dias',
-      'graph1-label4': '60 dias',
       'graph2-title': 'Comparação: Antes da IA x Depois da IA',
-      'graph2-label1': 'Horas perdidas',
-      'graph2-label2': 'Tempo livre',
       'graph3-title': 'Evolução de ganhos ao longo do tempo',
-      'graph3-label1': 'Início',
-      'graph3-label2': '90 dias',
       'bonus-title': 'IA GRATUITAS (SEM CUSTO PARA O PRODUTOR)',
       'networks-title': 'REDES SOCIAIS QUE GERAM DINHEIRO',
-      'offers-title': 'Escolha seu acesso agora',
       'sold-out': 'ESGOTADA',
-      'offer1-name': 'Básica',
-      'offer2-name': 'IA Lucrativa',
-      'offer3-name': 'IA Lucrativa Completa',
-      'most-popular': 'Mais escolhida',
       'notification-text': 'acabou de adquirir'
     },
     'en': {
-      'hero-headline': 'Make Money Using Artificial Intelligence in a Practical and Real Way',
-      'hero-subheadline': 'Learn modern strategies that work today to create extra income, automate processes, and scale results with free and accessible tools.',
+      'hero-title': 'Make Money Using Artificial Intelligence in a Practical and Real Way',
+      'hero-sub': 'Learn modern strategies that work today to create extra income, automate processes, and scale results with free and accessible tools.',
       'offer-expires': 'Exclusive offer expires in:',
       'promo-unique': 'This promotion is unique to you',
       'content-title': 'What changes when you master profitable AI',
@@ -451,29 +391,16 @@
       'content-p2': 'You automate repetitive tasks and focus on what really makes money: selling, connecting, and scaling.',
       'content-p3': 'You enter a constant flow of real opportunities — no magic promises, just tested methods that work in 2025.',
       'graph1-title': 'Productivity growth with AI',
-      'graph1-label1': 'Without AI',
-      'graph1-label2': 'Start',
-      'graph1-label3': '30 days',
-      'graph1-label4': '60 days',
       'graph2-title': 'Comparison: Before AI x After AI',
-      'graph2-label1': 'Lost hours',
-      'graph2-label2': 'Free time',
       'graph3-title': 'Earnings evolution over time',
-      'graph3-label1': 'Start',
-      'graph3-label2': '90 days',
       'bonus-title': 'FREE AIs (NO COST FOR THE PRODUCER)',
       'networks-title': 'SOCIAL NETWORKS THAT GENERATE MONEY',
-      'offers-title': 'Choose your access now',
       'sold-out': 'SOLD OUT',
-      'offer1-name': 'Basic',
-      'offer2-name': 'Profitable AI',
-      'offer3-name': 'Complete Profitable AI',
-      'most-popular': 'Most chosen',
       'notification-text': 'just acquired'
     },
     'es': {
-      'hero-headline': 'Gana Dinero Usando Inteligencia Artificial de Forma Práctica y Real',
-      'hero-subheadline': 'Aprende estrategias modernas que funcionan hoy para crear ingresos extra, automatizar procesos y escalar resultados con herramientas gratuitas y accesibles.',
+      'hero-title': 'Gana Dinero Usando Inteligencia Artificial de Forma Práctica y Real',
+      'hero-sub': 'Aprende estrategias modernas que funcionan hoy para crear ingresos extra, automatizar procesos y escalar resultados con herramientas gratuitas y accesibles.',
       'offer-expires': 'Oferta exclusiva expira en:',
       'promo-unique': 'Esta promoción es única para ti',
       'content-title': 'Qué cambia cuando dominas la IA lucrativa',
@@ -481,24 +408,11 @@
       'content-p2': 'Automatizas tareas repetitivas y te enfocas en lo que realmente genera dinero: vender, conectar y escalar.',
       'content-p3': 'Entras en un flujo constante de oportunidades reales — sin promesas mágicas, solo métodos probados que funcionan en 2025.',
       'graph1-title': 'Crecimiento de productividad con IA',
-      'graph1-label1': 'Sin IA',
-      'graph1-label2': 'Inicio',
-      'graph1-label3': '30 días',
-      'graph1-label4': '60 días',
       'graph2-title': 'Comparación: Antes de IA x Después de IA',
-      'graph2-label1': 'Horas perdidas',
-      'graph2-label2': 'Tiempo libre',
       'graph3-title': 'Evolución de ganancias a lo largo del tiempo',
-      'graph3-label1': 'Inicio',
-      'graph3-label2': '90 días',
       'bonus-title': 'IAs GRATUITAS (SIN COSTO PARA EL PRODUCTOR)',
       'networks-title': 'REDES SOCIALES QUE GENERAN DINERO',
-      'offers-title': 'Elige tu acceso ahora',
       'sold-out': 'AGOTADA',
-      'offer1-name': 'Básica',
-      'offer2-name': 'IA Lucrativa',
-      'offer3-name': 'IA Lucrativa Completa',
-      'most-popular': 'Más elegida',
       'notification-text': 'acaba de adquirir'
     }
   };
@@ -507,41 +421,81 @@
   function translatePage() {
     const lang = langMap[selectedCountry] || 'pt';
     document.documentElement.lang = lang === 'pt' ? 'pt-BR' : lang;
-    for (const key in translations[lang].texts) {
+    for (const key in translations[lang]) {
       const elem = document.getElementById(key);
-      if (elem) elem.innerHTML = translations[lang].texts[key];
+      if (elem) elem.innerHTML = translations[lang][key];
     }
-    // Atualizar preços com moeda
-    const curr = translations[lang].currency || 'R$';
-    document.getElementById('price-basic').innerText = curr + ' ' + translations[lang].prices.basic;
-    document.getElementById('price-standard').innerText = curr + ' ' + translations[lang].prices.standard;
-    document.getElementById('price-complete').innerText = curr + ' ' + translations[lang].prices.complete;
   }
 
-  // Prices by lang
-  translations.pt.prices = { basic: '9,90', standard: '19,90', complete: '29,90' };
-  translations.en.prices = { basic: '4.99', standard: '9.99', complete: '14.99' };
-  translations.es.prices = { basic: '9,90', standard: '19,90', complete: '29,90' };
+  // Timer
+  function startTimer() {
+    const saved = localStorage.getItem('iaLucrativaTimer');
+    let endTime;
+    if (saved) {
+      endTime = parseInt(saved);
+    } else {
+      const minutes = 15 + Math.floor(Math.random() * 16); // 15-30 min
+      endTime = Date.now() + minutes * 60000;
+      localStorage.setItem('iaLucrativaTimer', endTime);
+    }
 
-  // Adicionar textos completos a translations (como no primeiro código)
+    const timer = setInterval(() => {
+      const diff = endTime - Date.now();
+      if (diff <= 0) {
+        clearInterval(timer);
+        document.getElementById('timer').innerText = '00:00:00';
+        return;
+      }
+      const m = Math.floor((diff % 3600000) / 60000).toString().padStart(2,'0');
+      const s = Math.floor((diff % 60000) / 1000).toString().padStart(2,'0');
+      document.getElementById('timer').innerText = '00:' + m + ':' + s;
+    }, 1000);
+  }
 
-  // Start with quiz
-  document.getElementById('quiz-1').style.display = 'block';
+  // Notifications
+  const names = ['João S.', 'Maria L.', 'Pedro R.', 'Ana C.', 'Lucas M.', 'Carla F.', 'Rafael T.', 'Juliana P.', 'Thiago K.', 'Beatriz O.'];
+  const countries = ['🇧🇷', '🇺🇸', '🇵🇹', '🇪🇸', '🇨🇦'];
+  const offers = ['IA Lucrativa', 'IA Lucrativa Completa'];
+  let usedNames = [];
 
-  // Carrossel automático para IAs
+  function showNotification() {
+    if (usedNames.length === names.length) usedNames = [];
+    
+    let name;
+    do { name = names[Math.floor(Math.random() * names.length)]; }
+    while (usedNames.includes(name));
+    usedNames.push(name);
+
+    const country = countries[Math.floor(Math.random() * countries.length)];
+    const offer = offers[Math.floor(Math.random() * offers.length)];
+    
+    const notif = document.getElementById('notification');
+    notif.innerHTML = `<strong>${name}</strong> ${country} ${translations[langMap[selectedCountry] || 'pt']['notification-text']} <strong>${offer}</strong>`;
+    notif.style.opacity = '1';
+    setTimeout(() => { notif.style.opacity = '0'; }, 5000);
+  }
+
+  function startNotifications() {
+    setTimeout(() => {
+      showNotification();
+      setInterval(showNotification, Math.random() * 20000 + 20000);
+    }, 15000);
+  }
+
+  // Carousel auto-slide for testimonials
   function startCarousel() {
-    const depoInner = document.getElementById('depo-inner');
-    const iaInner = document.getElementById('ia-inner');
-    let depoIndex = 0;
-    let iaIndex = 0;
+    const inner = document.getElementById('testimonial-inner');
+    let index = 0;
     setInterval(() => {
-      depoIndex = (depoIndex + 1) % depoInner.children.length;
-      depoInner.style.transform = `translateX(-${depoIndex * 100}%)`;
+      index = (index + 1) % inner.children.length;
+      inner.style.transform = `translateX(-${index * 100}%)`;
     }, 4000);
-    setInterval(() => {
-      iaIndex = (iaIndex + 1) % iaInner.children.length;
-      iaInner.style.transform = `translateX(-${iaIndex * 100}%)`;
-    }, 3000);
+  }
+
+  function trackConversion() {
+    gtag('event', 'conversion', {
+      'send_to': 'AW-16917756362/COLE_AQUI_O_ID_DO_EVENTO'
+    });
   }
 </script>
 </body>
