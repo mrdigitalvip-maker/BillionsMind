@@ -12,6 +12,25 @@
     gtag('js', new Date());
     gtag('config', 'AW-16917756362');
   </script>
+  <!-- Facebook Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window,document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+   fbq('init', '1818596368797834');
+   fbq('track', 'PageView');
+  </script>
+  <noscript>
+   <img height="1" width="1" 
+  src="https://www.facebook.com/tr?id=1818596368797834&ev=PageView
+  &noscript=1"/>
+  </noscript>
+  <!-- End Facebook Pixel Code -->
   <style>
     :root {
       --bg-main: #020716;
@@ -52,49 +71,41 @@
     .hero-title span { color: var(--gold); }
     .hero-sub { font-size: 0.98rem; color: var(--text-soft); max-width: 520px; margin-bottom: 18px; }
     .timer-card { text-align: center; padding: 20px; border-radius: 20px; background: rgba(0, 200, 255, 0.08); border: 1px solid rgba(0, 200, 255, 0.4); }
-    .timer { font-size: 36px; font-weight: 700; color: var(--gold); }
+    .timer { font-size: 32px; font-weight: 700; color: var(--gold); }
     .notification { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.9); color: #fff; padding: 14px 24px; border-radius: 12px; font-size: 14px; z-index: 1000; opacity: 0; transition: opacity .4s; border-left: 4px solid var(--accent); max-width: 90%; }
     .section { margin-bottom: 28px; border-radius: 22px; padding: 20px 18px 18px; background: var(--glass); border: 1px solid rgba(0, 200, 255, 0.28); box-shadow: var(--shadow-soft); backdrop-filter: blur(18px); }
     .section-header { margin-bottom: 12px; }
     .section-eyebrow { font-size: 0.78rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
     .section-title { font-size: 1.2rem; margin-bottom: 4px; }
     .section-sub { font-size: 0.88rem; color: var(--text-soft); }
-    .carousel { overflow: hidden; position: relative; border-radius: 20px; }
-    .carousel-inner { display: flex; transition: transform 0.8s ease; width: 100%; }
-    .tool-item { min-width: 100%; padding: 20px; text-align: center; }
-    .tool-item img { width: 100%; border-radius: 16px; margin-bottom: 12px; }
+    .carousel { overflow-x: auto; display: flex; gap: 20px; padding: 10px 0; scrollbar-width: none; }
+    .carousel::-webkit-scrollbar { display: none; }
+    .tool-item { min-width: 100px; text-align: center; }
+    .tool-item img { width: 80px; height: 80px; object-fit: contain; border-radius: 12px; background: #222; padding: 10px; }
+    .platform-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 20px; margin: 40px 0; }
+    .platform-item { text-align: center; }
+    .platform-item img { width: 70px; height: 70px; object-fit: contain; }
     .offer-cards { display: grid; gap: 20px; }
-    .offer-card { position: relative; padding: 28px; border-radius: 20px; background: rgba(5, 11, 31, 0.9); border: 1px solid rgba(0, 200, 255, 0.3); text-align: center; }
-    .most-popular { position: absolute; top: -12px; right: 20px; background: var(--gold); color: #000; padding: 6px 16px; border-radius: 20px; font-size: 14px; font-weight: 600; }
+    .offer-card { position: relative; }
     .sold-out { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%) rotate(-15deg); font-size: 36px; color: var(--danger); font-weight: 700; opacity: 0.8; pointer-events: none; }
-    .btn-primary { display: block; padding: 18px; border-radius: 999px; background: linear-gradient(135deg, #f7c86a, #ffdf9a); color: #000; font-weight: 700; font-size: 18px; text-align: center; box-shadow: 0 0 18px rgba(247, 200, 106, 0.9); margin: 16px 0; text-decoration: none; }
-    .btn-primary small { display: block; font-size: 14px; margin-top: 6px; opacity: 0.9; }
-    .quiz-container { max-width: 500px; margin: 0 auto; }
-    .progress-bar { height: 6px; background: #252530; border-radius: 3px; overflow: hidden; margin: 30px 0; }
-    .progress { height: 100%; background: var(--accent); width: 0%; transition: width .6s ease; }
-    .quiz-screen { display: none; }
+    .most-popular { position: absolute; top: -12px; right: 20px; background: var(--gold); color: #000; padding: 6px 16px; border-radius: 20px; font-size: 14px; font-weight: 600; }
+    svg { width: 100%; max-width: 300px; margin: 20px auto; display: block; }
+    .testimonial-carousel { overflow-x: auto; display: flex; gap: 10px; padding: 10px 0; scrollbar-width: none; }
+    .testimonial-carousel::-webkit-scrollbar { display: none; }
+    .testimonial { min-width: 200px; }
+    .testimonial img { width: 100%; height: auto; max-height: 300px; object-fit: contain; border-radius: 12px; box-shadow: var(--shadow-soft); }
+    .quiz-screen, #sales-page { display: none; min-height: 100vh; }
     #quiz-1 { display: block; }
-    @media (max-width: 768px) { .hero-grid { grid-template-columns: 1fr; } .platform-grid { grid-template-columns: repeat(3,1fr); } .offer-cards { grid-template-columns: 1fr; } .testimonial { min-width: 100%; } }
+    .btn { display: block; width: 100%; padding: 18px; border-radius: 12px; font-weight: 600; font-size: 18px; text-align: center; cursor: pointer; transition: all .3s; margin: 20px 0; }
+    .btn-primary { background: var(--accent); color: #000; }
+    .btn-primary:hover { transform: scale(1.02); }
+    .btn-disabled { background: #333; color: #666; cursor: not-allowed; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin: 30px 0; }
+    .text-center { text-align: center; }
+    .mb-20 { margin-bottom: 20px; }
+    .mb-40 { margin-bottom: 40px; }
+    @media (max-width: 768px) { .hero-grid { grid-template-columns: minmax(0, 1fr); } .platform-grid { grid-template-columns: repeat(3,1fr); } .testimonial { min-width: 80%; } }
   </style>
-  <!-- Facebook Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window,document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
- fbq('init', '1818596368797834');
- fbq('track', 'PageView');
-</script>
-<noscript>
- <img height="1" width="1" 
-src="https://www.facebook.com/tr?id=1818596368797834&ev=PageView
-&noscript=1"/>
-</noscript>
-<!-- End Facebook Pixel Code -->
 </head>
 <body>
 <div class="cyber-bg">
@@ -123,54 +134,63 @@ src="https://www.facebook.com/tr?id=1818596368797834&ev=PageView
       Oferta exclusiva ao vivo
     </div>
   </header>
-
-  <!-- QUIZ -->
+  <!-- QUIZ SECTION -->
   <div id="quiz-section" class="quiz-container">
-    <h1 class="text-center mb-40" style="font-size:28px; color:var(--gold);">Descubra seu potencial com IA Lucrativa</h1>
+    <h1 class="text-center mb-40" style="font-size:28px;">Descubra seu potencial com IA</h1>
+   
     <div class="progress-bar"><div class="progress" id="progress"></div></div>
-
+    <!-- Pergunta 1 -->
     <div class="quiz-screen" id="quiz-1">
       <h2 style="font-size:22px; margin-bottom:30px;">Qual seu principal objetivo usando IA?</h2>
-      <div class="btn-primary" onclick="nextQuiz(2)">Renda extra</div>
-      <div class="btn-primary" onclick="nextQuiz(2)">Negócio online</div>
-      <div class="btn-primary" onclick="nextQuiz(2)">Automatizar trabalho</div>
-      <div class="btn-primary" onclick="nextQuiz(2)">Escalar resultados</div>
+      <div class="btn btn-primary" onclick="nextQuiz(2)">Renda extra</div>
+      <div class="btn btn-primary" onclick="nextQuiz(2)">Negócio online</div>
+      <div class="btn btn-primary" onclick="nextQuiz(2)">Automatizar trabalho</div>
+      <div class="btn btn-primary" onclick="nextQuiz(2)">Escalar resultados</div>
     </div>
-
+    <!-- Pergunta 2 -->
     <div class="quiz-screen" id="quiz-2">
       <h2 style="font-size:22px; margin-bottom:30px;">Quanto tempo por semana você pode dedicar?</h2>
-      <div class="btn-primary" onclick="nextQuiz(3)">Menos de 5h</div>
-      <div class="btn-primary" onclick="nextQuiz(3)">5–10h</div>
-      <div class="btn-primary" onclick="nextQuiz(3)">10h ou mais</div>
+      <div class="btn btn-primary" onclick="nextQuiz(3)">Menos de 5h</div>
+      <div class="btn btn-primary" onclick="nextQuiz(3)">5–10h</div>
+      <div class="btn btn-primary" onclick="nextQuiz(3)">10h ou mais</div>
     </div>
-
+    <!-- Pergunta 3 -->
     <div class="quiz-screen" id="quiz-3">
       <h2 style="font-size:22px; margin-bottom:30px;">Já tentou ganhar dinheiro online antes?</h2>
-      <div class="btn-primary" onclick="nextQuiz(4)">Nunca</div>
-      <div class="btn-primary" onclick="nextQuiz(4)">Já tentei</div>
-      <div class="btn-primary" onclick="nextQuiz(4)">Já ganho algo</div>
+      <div class="btn btn-primary" onclick="nextQuiz(4)">Nunca</div>
+      <div class="btn btn-primary" onclick="nextQuiz(4)">Já tentei</div>
+      <div class="btn btn-primary" onclick="nextQuiz(4)">Já ganho algo</div>
     </div>
-
+    <!-- Pergunta 4 -->
     <div class="quiz-screen" id="quiz-4">
       <h2 style="font-size:22px; margin-bottom:30px;">Qual seu nível de urgência para mudar sua situação financeira?</h2>
-      <div class="btn-primary" onclick="goToSales()">Baixa</div>
-      <div class="btn-primary" onclick="goToSales()">Média</div>
-      <div class="btn-primary" onclick="goToSales()">Alta (preciso agora)</div>
+      <div class="btn btn-primary" onclick="nextQuiz(5)">Baixa</div>
+      <div class="btn btn-primary" onclick="nextQuiz(5)">Média</div>
+      <div class="btn btn-primary" onclick="nextQuiz(5)">Alta (preciso agora)</div>
+    </div>
+    <!-- Pergunta 5 -->
+    <div class="quiz-screen" id="quiz-5">
+      <h2 style="font-size:22px; margin-bottom:30px;">De qual país você é?</h2>
+      <div class="btn btn-primary" onclick="selectCountry('Brasil'); goToSales()">Brasil</div>
+      <div class="btn btn-primary" onclick="selectCountry('EUA'); goToSales()">EUA</div>
+      <div class="btn btn-primary" onclick="selectCountry('Portugal'); goToSales()">Portugal</div>
+      <div class="btn btn-primary" onclick="selectCountry('Espanha'); goToSales()">Espanha</div>
+      <div class="btn btn-primary" onclick="selectCountry('Canadá'); goToSales()">Canadá</div>
     </div>
   </div>
-
   <!-- SALES PAGE -->
   <div id="sales-page" style="display:none;">
     <div class="hero">
       <div class="hero-grid">
         <div>
           <div class="eyebrow">SISTEMA ONLINE · ACESSO IMEDIATO</div>
-          <h1 class="hero-title">Ganhe Dinheiro com <span>IA Lucrativa</span> de Forma Prática e Real</h1>
-          <p class="hero-sub">Estratégias modernas que funcionam hoje para renda extra, automação e escalada com ferramentas gratuitas.</p>
-          <div class="timer-card">
-            <p style="font-size:18px; margin-bottom:10px;">Oferta exclusiva expira em:</p>
+          <h1 class="hero-title" id="hero-title">Ganhe Dinheiro Usando Inteligência Artificial de Forma Prática e Real</h1>
+          <p class="hero-sub" id="hero-sub">Aprenda estratégias modernas que funcionam hoje para criar renda extra, automatizar processos e escalar resultados com ferramentas gratuitas e acessíveis.</p>
+         
+          <div class="card text-center" style="margin:40px 0;">
+            <p style="font-size:18px; margin-bottom:10px;" id="offer-expires">Oferta exclusiva expira em:</p>
             <div class="timer" id="timer">00:00:00</div>
-            <p style="font-size:14px; opacity:0.8; margin-top:10px;">Promoção única para você</p>
+            <p style="font-size:14px; opacity:0.8; margin-top:10px;" id="promo-unique">Esta promoção é única para você</p>
           </div>
         </div>
         <div class="hero-right-card">
@@ -178,116 +198,292 @@ src="https://www.facebook.com/tr?id=1818596368797834&ev=PageView
         </div>
       </div>
     </div>
-
+    <!-- NOTIFICAÇÕES -->
     <div class="notification" id="notification"></div>
-
-    <!-- DEPOIMENTOS CARROSSEL -->
-    <section class="section">
-      <div class="section-header">
-        <div class="section-eyebrow">RESULTADOS REAIS</div>
-        <h2 class="section-title">Alunos faturando e viralizando</h2>
-      </div>
+    <!-- CONTEÚDO DE ALTA PERSUASÃO -->
+    <div class="card">
+      <h2 class="text-center mb-20" style="font-size:26px;" id="content-title">O que muda quando você domina a IA lucrativa</h2>
+      <p id="content-p1">Você para de perder horas criando conteúdo manualmente. A IA gera ideias, textos, imagens e estratégias em minutos.</p>
+      <p class="mb-20" id="content-p2">Você automatiza tarefas repetitivas e foca no que realmente gera dinheiro: vender, conectar e escalar.</p>
+      <p id="content-p3">Você entra em um fluxo constante de oportunidades reais — sem promessas mágicas, apenas métodos testados que funcionam em 2025.</p>
+    </div>
+    <!-- GRÁFICOS VISUAIS -->
+    <div class="card text-center">
+      <h3 style="margin-bottom:30px;" id="graph1-title">Crescimento de produtividade com IA</h3>
+      <svg viewBox="0 0 300 200">
+        <rect x="0" y="150" width="60" height="50" fill="#333"/>
+        <rect x="80" y="100" width="60" height="100" fill="#333"/>
+        <rect x="160" y="40" width="60" height="160" fill="var(--accent)"/>
+        <rect x="240" y="10" width="60" height="190" fill="var(--accent)"/>
+        <text x="30" y="190" fill="#aaa" font-size="12" id="graph1-label1">Sem IA</text>
+        <text x="110" y="190" fill="#aaa" font-size="12" id="graph1-label2">Início</text>
+        <text x="190" y="190" fill="#fff" font-size="12" id="graph1-label3">30 dias</text>
+        <text x="270" y="190" fill="#fff" font-size="12" id="graph1-label4">60 dias</text>
+      </svg>
+    </div>
+    <div class="card text-center">
+      <h3 style="margin-bottom:30px;" id="graph2-title">Comparação: Antes da IA x Depois da IA</h3>
+      <svg viewBox="0 0 300 180">
+        <circle cx="90" cy="90" r="60" fill="#ff3366" opacity="0.3"/>
+        <circle cx="210" cy="90" r="60" fill="var(--accent)" opacity="0.8"/>
+        <text x="90" y="95" fill="#fff" font-size="14" text-anchor="middle" id="graph2-label1">Horas perdidas</text>
+        <text x="210" y="95" fill="#000" font-size="14" text-anchor="middle" id="graph2-label2">Tempo livre</text>
+      </svg>
+    </div>
+    <div class="card text-center">
+      <h3 style="margin-bottom:30px;" id="graph3-title">Evolução de ganhos ao longo do tempo</h3>
+      <svg viewBox="0 0 300 180">
+        <polyline fill="none" stroke="var(--accent)" stroke-width="6" points="20,160 80,130 140,90 200,60 260,30"/>
+        <text x="20" y="175" fill="#aaa" font-size="12" id="graph3-label1">Início</text>
+        <text x="260" y="175" fill="#fff" font-size="12" id="graph3-label2">90 dias</text>
+      </svg>
+    </div>
+    <!-- BÔNUS: IA GRATUITAS -->
+    <div class="card">
+      <h2 class="text-center mb-20" style="font-size:24px;" id="bonus-title">IA GRATUITAS (SEM CUSTO PARA O PRODUTOR)</h2>
       <div class="carousel">
-        <div class="carousel-inner" id="testimonials-carousel">
-          <div class="testimonial"><img src="https://github.com/user-attachments/assets/15de3c5c-7d81-4c19-98dd-add5111257b2" alt="Depoimento 1"></div>
-          <div class="testimonial"><img src="https://github.com/user-attachments/assets/307d0280-b238-4f28-8205-41640ed9ff4a" alt="Depoimento 2"></div>
-          <div class="testimonial"><img src="https://github.com/user-attachments/assets/81148523-7e97-42dc-a921-7f60a1294b5f" alt="Depoimento 3"></div>
-          <div class="testimonial"><img src="https://github.com/user-attachments/assets/ee06909d-81be-4f34-9dc6-9385f7a15469" alt="Depoimento 4"></div>
+        <div class="tool-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT">
+          <p>ChatGPT</p>
+        </div>
+        <div class="tool-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Grok_logo.svg" alt="Grok" style="filter:invert(1);">
+          <p>Grok</p>
+        </div>
+        <div class="tool-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Google_Gemini_logo.svg" alt="Gemini">
+          <p>Gemini</p>
+        </div>
+        <div class="tool-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Claude_AI_logo.svg" alt="Claude">
+          <p>Claude</p>
+        </div>
+        <div class="tool-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Microsoft_Copilot_logo.svg" alt="Copilot">
+          <p>Copilot</p>
+        </div>
+        <div class="tool-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Midjourney_Logo.svg" alt="Midjourney">
+          <p>Midjourney (trial)</p>
+        </div>
+        <div class="tool-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/5a/Canva_Logo.svg" alt="Canva AI">
+          <p>Canva AI</p>
         </div>
       </div>
-    </section>
-
-    <!-- OFERTAS -->
-    <section class="section">
-      <h2 class="text-center mb-40" style="font-size:28px; color:var(--gold);">Escolha seu acesso agora</h2>
-      <div class="offer-cards">
-        <div class="offer-card">
-          <div class="sold-out">ESGOTADA</div>
-          <h3>Básica</h3>
-          <p style="font-size:36px; color:var(--accent);">R$ 9,90</p>
-          <div class="btn-primary" style="opacity:0.5; cursor:not-allowed;">Indisponível</div>
+      <p class="text-center">Deixar claro que são ferramentas usadas como BÔNUS ESTRATÉGICO.</p>
+    </div>
+    <!-- REDES SOCIAIS QUE GERAM DINHEIRO -->
+    <div class="card">
+      <h2 class="text-center mb-20" style="font-size:24px;" id="networks-title">REDES SOCIAIS QUE GERAM DINHEIRO</h2>
+      <div class="platform-grid">
+        <div class="platform-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+          <p>Instagram</p>
         </div>
-        <div class="offer-card">
-          <h3>IA Lucrativa</h3>
-          <p style="font-size:36px; color:var(--accent);">R$ 19,90</p>
-          <p style="opacity:0.9;">✓ Acesso imediato<br>✓ Estratégias práticas<br>✓ Suporte comunitário<br>✓ Ferramentas gratuitas</p>
-          <a href="https://pay.cakto.com.br/4ehcq2y_672236" class="btn-primary" onclick="trackConversion()">🚀 Quero começar agora<br><small>Acesso vitalício • Oferta limitada</small></a>
+        <div class="platform-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/TikTok_logo.svg" alt="TikTok">
+          <p>TikTok</p>
         </div>
-        <div class="offer-card">
-          <div class="most-popular">Mais escolhida</div>
-          <h3>IA Lucrativa Completa</h3>
-          <p style="font-size:36px; color:var(--accent);">R$ 29,90</p>
-          <p style="opacity:0.9;">✓ Tudo + bônus exclusivos<br>✓ Atualizações prioritárias<br>✓ Resultados acelerados<br>✓ Comunidade VIP</p>
-          <a href="https://pay.cakto.com.br/v8k65mm_672262" class="btn-primary" onclick="trackConversion()">🔥 Acesso completo<br><small>Melhor opção • Últimas vagas</small></a>
+        <div class="platform-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon.svg" alt="YouTube">
+          <p>YouTube</p>
+        </div>
+        <div class="platform-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/X_logo_2023_%28black%29.svg" alt="X">
+          <p>X (Twitter)</p>
+        </div>
+        <div class="platform-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
+          <p>Facebook</p>
         </div>
       </div>
-    </section>
+      <p class="text-center">Explicar que a IA é usada para: Criar conteúdo, Viralizar, Vender, Automatizar processos</p>
+    </div>
+    <!-- ÁREA DE OFERTAS -->
+    <h2 class="text-center mb-40" style="font-size:28px;">Escolha seu acesso agora</h2>
+    <div class="offer-cards">
+      <div class="offer-card">
+        <div class="sold-out">ESGOTADA</div>
+        <h3>Básica</h3>
+        <p style="font-size:36px; color:var(--accent);">R$ 9,90</p>
+        <div class="btn btn-disabled">Indisponível no momento</div>
+      </div>
+      <div class="offer-card">
+        <h3>IA Lucrativa</h3>
+        <p style="font-size:36px; color:var(--accent);">R$ 19,90</p>
+        <p style="opacity:0.9;">✓ Acesso imediato<br>✓ Estratégias práticas<br>✓ Suporte comunitário<br>✓ Ferramentas gratuitas<br>✓ Atualizações mensais<br>✓ Guia rápido de início</p>
+        <a href="https://digitalist0728.gumroad.com/l/qryub" class="btn btn-primary">
+          🚀 Quero começar agora<br><small>Acesso vitalício • Oferta limitada • Antes que expire!</small>
+        </a>
+      </div>
+      <div class="offer-card">
+        <div class="most-popular">Mais escolhida</div>
+        <h3>IA Lucrativa Completa</h3>
+        <p style="font-size:36px; color:var(--accent);">R$ 29,90</p>
+        <p style="opacity:0.9;">✓ Tudo da versão padrão<br>✓ Bônus exclusivos<br>✓ Atualizações prioritárias<br>✓ Resultados mais rápidos<br>✓ Comunidade VIP<br>✓ Mentoria básica</p>
+        <a href="https://digitalist0728.gumroad.com/l/yxwyn" class="btn btn-primary">
+          🔥 Quero o acesso completo<br><small>Melhor opção • Últimas vagas • Ação imediata!</small>
+        </a>
+      </div>
+    </div>
+    <div style="height:100px;"></div>
   </div>
 </div>
-
 <script>
   let currentQuiz = 1;
+  let selectedCountry = 'Brasil'; // Default
   function nextQuiz(next) {
     document.getElementById('quiz-' + currentQuiz).style.display = 'none';
     document.getElementById('quiz-' + next).style.display = 'block';
     currentQuiz = next;
-    document.getElementById('progress').style.width = (next / 4 * 100) + '%';
+    document.getElementById('progress').style.width = (next / 5 * 100) + '%';
+  }
+  function selectCountry(country) {
+    selectedCountry = country;
+    goToSales();
   }
   function goToSales() {
     document.getElementById('quiz-section').style.display = 'none';
     document.getElementById('sales-page').style.display = 'block';
+    translatePage();
     startTimer();
     startNotifications();
-    startCarousel();
   }
-
+  // Map country to language
+  const langMap = {
+    'Brasil': 'pt',
+    'Portugal': 'pt',
+    'EUA': 'en',
+    'Canadá': 'en',
+    'Espanha': 'es'
+  };
+  // Translations object (abridged, expand as needed)
+  const translations = {
+    'pt': {
+      'hero-title': 'Ganhe Dinheiro Usando Inteligência Artificial de Forma Prática e Real',
+      'hero-sub': 'Aprenda estratégias modernas que funcionam hoje para criar renda extra, automatizar processos e escalar resultados com ferramentas gratuitas e acessíveis.',
+      'offer-expires': 'Oferta exclusiva expira em:',
+      'promo-unique': 'Esta promoção é única para você',
+      'content-title': 'O que muda quando você domina a IA lucrativa',
+      'content-p1': 'Você para de perder horas criando conteúdo manualmente. A IA gera ideias, textos, imagens e estratégias em minutos.',
+      'content-p2': 'Você automatiza tarefas repetitivas e foca no que realmente gera dinheiro: vender, conectar e escalar.',
+      'content-p3': 'Você entra em um fluxo constante de oportunidades reais — sem promessas mágicas, apenas métodos testados que funcionam em 2025.',
+      'graph1-title': 'Crescimento de produtividade com IA',
+      'graph2-title': 'Comparação: Antes da IA x Depois da IA',
+      'graph3-title': 'Evolução de ganhos ao longo do tempo',
+      'bonus-title': 'IA GRATUITAS (SEM CUSTO PARA O PRODUTOR)',
+      'networks-title': 'REDES SOCIAIS QUE GERAM DINHEIRO',
+      'sold-out': 'ESGOTADA',
+      'notification-text': 'acabou de adquirir'
+    },
+    'en': {
+      'hero-title': 'Make Money Using Artificial Intelligence in a Practical and Real Way',
+      'hero-sub': 'Learn modern strategies that work today to create extra income, automate processes, and scale results with free and accessible tools.',
+      'offer-expires': 'Exclusive offer expires in:',
+      'promo-unique': 'This promotion is unique to you',
+      'content-title': 'What changes when you master profitable AI',
+      'content-p1': 'You stop wasting hours creating content manually. AI generates ideas, texts, images, and strategies in minutes.',
+      'content-p2': 'You automate repetitive tasks and focus on what really makes money: selling, connecting, and scaling.',
+      'content-p3': 'You enter a constant flow of real opportunities — no magic promises, just tested methods that work in 2025.',
+      'graph1-title': 'Productivity growth with AI',
+      'graph2-title': 'Comparison: Before AI x After AI',
+      'graph3-title': 'Earnings evolution over time',
+      'bonus-title': 'FREE AIs (NO COST FOR THE PRODUCER)',
+      'networks-title': 'SOCIAL NETWORKS THAT GENERATE MONEY',
+      'sold-out': 'SOLD OUT',
+      'notification-text': 'just acquired'
+    },
+    'es': {
+      'hero-title': 'Gana Dinero Usando Inteligencia Artificial de Forma Práctica y Real',
+      'hero-sub': 'Aprende estrategias modernas que funcionan hoy para crear ingresos extra, automatizar procesos y escalar resultados con herramientas gratuitas y accesibles.',
+      'offer-expires': 'Oferta exclusiva expira en:',
+      'promo-unique': 'Esta promoción es única para ti',
+      'content-title': 'Qué cambia cuando dominas la IA lucrativa',
+      'content-p1': 'Dejas de perder horas creando contenido manualmente. La IA genera ideas, textos, imágenes y estrategias en minutos.',
+      'content-p2': 'Automatizas tareas repetitivas y te enfocas en lo que realmente genera dinero: vender, conectar y escalar.',
+      'content-p3': 'Entras en un flujo constante de oportunidades reales — sin promesas mágicas, solo métodos probados que funcionan en 2025.',
+      'graph1-title': 'Crecimiento de productividad con IA',
+      'graph2-title': 'Comparación: Antes de IA x Después de IA',
+      'graph3-title': 'Evolución de ganancias a lo largo del tiempo',
+      'bonus-title': 'IAs GRATUITAS (SIN COSTO PARA EL PRODUCTOR)',
+      'networks-title': 'REDES SOCIALES QUE GENERAN DINERO',
+      'sold-out': 'AGOTADA',
+      'notification-text': 'acaba de adquirir'
+    }
+  };
+  // Translate page
+  function translatePage() {
+    const lang = langMap[selectedCountry] || 'pt';
+    document.documentElement.lang = lang === 'pt' ? 'pt-BR' : lang;
+    for (const key in translations[lang]) {
+      const elem = document.getElementById(key);
+      if (elem) elem.innerHTML = translations[lang][key];
+    }
+  }
   // Timer
   function startTimer() {
     const saved = localStorage.getItem('iaLucrativaTimer');
-    let endTime = saved ? parseInt(saved) : Date.now() + (4 + Math.floor(Math.random() * 9)) * 3600000;
-    if (!saved) localStorage.setItem('iaLucrativaTimer', endTime);
-    setInterval(() => {
-      let diff = endTime - Date.now();
-      if (diff <= 0) { document.getElementById('timer').innerText = '00:00:00'; return; }
-      let h = Math.floor(diff / 3600000).toString().padStart(2,'0');
-      let m = Math.floor((diff % 3600000) / 60000).toString().padStart(2,'0');
-      let s = Math.floor((diff % 60000) / 1000).toString().padStart(2,'0');
-      document.getElementById('timer').innerText = h + ':' + m + ':' + s;
+    let endTime;
+    if (saved) {
+      endTime = parseInt(saved);
+    } else {
+      const minutes = 15 + Math.floor(Math.random() * 16); // 15-30 min
+      endTime = Date.now() + minutes * 60000;
+      localStorage.setItem('iaLucrativaTimer', endTime);
+    }
+    const timer = setInterval(() => {
+      const diff = endTime - Date.now();
+      if (diff <= 0) {
+        clearInterval(timer);
+        document.getElementById('timer').innerText = '00:00:00';
+        return;
+      }
+      const m = Math.floor((diff % 3600000) / 60000).toString().padStart(2,'0');
+      const s = Math.floor((diff % 60000) / 1000).toString().padStart(2,'0');
+      document.getElementById('timer').innerText = '00:' + m + ':' + s;
     }, 1000);
   }
-
   // Notifications
-  const names = ['João S.', 'Maria L.', 'Pedro R.', 'Ana C.', 'Lucas M.'];
-  const countries = ['🇧🇷', '🇵🇹', '🇺🇸', '🇪🇸', '🇨🇦'];
+  const names = ['João S.', 'Maria L.', 'Pedro R.', 'Ana C.', 'Lucas M.', 'Carla F.', 'Rafael T.', 'Juliana P.', 'Thiago K.', 'Beatriz O.'];
+  const countries = ['🇧🇷', '🇺🇸', '🇵🇹', '🇪🇸', '🇨🇦'];
   const offers = ['IA Lucrativa', 'IA Lucrativa Completa'];
-  let used = [];
+  let usedNames = [];
   function showNotification() {
-    if (used.length === names.length) used = [];
-    let name = names[Math.floor(Math.random() * names.length)];
-    while (used.includes(name)) name = names[Math.floor(Math.random() * names.length)];
-    used.push(name);
-    let notif = document.getElementById('notification');
-    notif.innerHTML = `<strong>${name}</strong> ${countries[Math.floor(Math.random() * countries.length)]} acabou de adquirir <strong>${offers[Math.floor(Math.random() * offers.length)]}</strong>`;
+    if (usedNames.length === names.length) usedNames = [];
+   
+    let name;
+    do { name = names[Math.floor(Math.random() * names.length)]; }
+    while (usedNames.includes(name));
+    usedNames.push(name);
+    const country = countries[Math.floor(Math.random() * countries.length)];
+    const offer = offers[Math.floor(Math.random() * offers.length)];
+   
+    const notif = document.getElementById('notification');
+    notif.innerHTML = `<strong>${name}</strong> ${country} ${translations[langMap[selectedCountry] || 'pt']['notification-text']} <strong>${offer}</strong>`;
     notif.style.opacity = '1';
-    setTimeout(() => notif.style.opacity = '0', 5000);
+    setTimeout(() => { notif.style.opacity = '0'; }, 5000);
   }
   function startNotifications() {
-    setTimeout(() => { showNotification(); setInterval(showNotification, Math.random() * 20000 + 20000); }, 15000);
+    setTimeout(() => {
+      showNotification();
+      setInterval(showNotification, Math.random() * 20000 + 20000);
+    }, 15000);
   }
-
-  // Carousel auto
+  // Carousel auto-slide for testimonials
   function startCarousel() {
-    let carousel = document.getElementById('testimonials-carousel');
+    const inner = document.getElementById('testimonial-inner');
     let index = 0;
     setInterval(() => {
-      index = (index + 1) % carousel.children.length;
-      carousel.style.transform = `translateX(-${index * 100}%)`;
+      index = (index + 1) % inner.children.length;
+      inner.style.transform = `translateX(-${index * 100}%)`;
     }, 4000);
   }
-
   function trackConversion() {
-    gtag('event', 'conversion', { 'send_to': 'AW-16917756362/COLE_AQUI_O_ID_DO_EVENTO' });
+    gtag('event', 'conversion', {
+      'send_to': 'AW-16917756362/COLE_AQUI_O_ID_DO_EVENTO'
+    });
   }
 </script>
 </body>
-</html> O CORNOMETRO COLOQUE OFERTA RELAMPAGO E POUCO TEMPO E ADSIONE ANIMACOES
+</html>
