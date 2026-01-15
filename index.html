@@ -1,774 +1,250 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Funil de Conteúdo Viral de IA</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Facebook Pixel Code -->
-    <script>
-    !function(f,b,e,v,n,t,s){
-    if(f.fbq)return;
-    n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;
-    n.push=n;
-    n.loaded=!0;
-    n.version='2.0';
-    n.queue=[];
-    t=b.createElement(e);t.async=!0;
-    t.src=v;
-    s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)
-    }(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1818596368797834');
-    fbq('track', 'PageView');
-    </script>
-    <noscript>
-    <img height="1" width="1"
-    src="https://www.facebook.com/tr?id=1818596368797834&ev=PageView&noscript=1"/>
-    </noscript>
-    <!-- End Facebook Pixel Code -->
-    <!-- Google Ads -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16917756362"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'AW-16917756362');
-    </script>
+    <title>BillionMind - Deixe a IA Trabalhar por Você</title>
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #0a0f1e;
+            font-family: 'Arial', sans-serif;
+            background: #000000 url('https://www.shutterstock.com/image-illustration/3d-abstract-background-neon-light-260nw-2314118507.jpg') no-repeat center center fixed;
+            background-size: cover;
             color: #ffffff;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-        #quiz-section {
-            display: block;
-        }
-        #main-section {
-            display: none;
-            animation: fadeIn 1s ease-in-out;
-        }
-        .progress-bar {
-            width: 100%;
-            background-color: #1f2436;
-            height: 6px;
-            margin-bottom: 40px;
-            position: relative;
-            border-radius: 3px;
-            overflow: hidden;
-        }
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(to right, #8b00ff, #00bfff);
-            width: 0;
-            transition: width 0.5s ease-in-out;
-        }
-        .quiz-step {
-            display: none;
-            text-align: center;
-            background-color: #12172b;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        .quiz-step.active {
-            display: block;
-            animation: fadeIn 0.5s ease-in-out;
-        }
-        .quiz-question {
-            font-size: 28px;
-            font-weight: 600;
-            margin-bottom: 30px;
-        }
-        .quiz-options {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        .quiz-option {
-            display: flex;
-            align-items: center;
-            padding: 20px;
-            background-color: #1f2436;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            font-size: 18px;
-            font-weight: 400;
-        }
-        .quiz-option:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(139, 0, 255, 0.3);
-        }
-        .quiz-option i {
-            margin-right: 15px;
-            font-size: 24px;
-        }
-        .quiz-option span.flag {
-            margin-left: 5px;
-        }
-        .headline {
-            font-size: 52px;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .highlight {
-            color: #00bfff;
-            text-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
-        }
-        .subheadline {
-            font-size: 24px;
-            font-weight: 300;
-            text-align: center;
-            margin-bottom: 60px;
             line-height: 1.5;
-            color: #d0d0d0;
         }
-        .bonus-icons {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 60px;
-            flex-wrap: wrap;
-        }
-        .bonus-icon {
+        header {
             text-align: center;
-            transition: transform 0.3s;
+            padding: 40px 20px;
+            background: rgba(10, 10, 10, 0.85);
         }
-        .bonus-icon:hover {
-            transform: scale(1.1);
+        .logo {
+            font-size: 52px;
+            font-weight: bold;
+            color: #00d4ff;
+            text-shadow: 0 0 20px #00d4ff;
+            animation: glow 3s infinite alternate;
         }
-        .bonus-icon i {
-            font-size: 50px;
-            margin-bottom: 10px;
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #00d4ff, 0 0 20px #00d4ff; }
+            to { text-shadow: 0 0 20px #00d4ff, 0 0 40px #00d4ff, 0 0 60px #7f00ff; }
         }
-        .bonus-icon p {
-            font-size: 14px;
-            color: #d0d0d0;
-        }
-        .value-section {
-            margin-bottom: 60px;
-        }
-        .value-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-        .value-card {
-            background-color: #12172b;
-            padding: 30px;
-            border-radius: 15px;
+        .hero {
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s, box-shadow 0.3s;
+            padding: 100px 20px 60px;
+            background: rgba(0, 0, 0, 0.7);
         }
-        .value-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(139, 0, 255, 0.3);
+        .hero h1 {
+            font-size: 58px;
+            margin: 0 0 15px 0;
+            color: #00d4ff;
+            text-shadow: 0 0 15px #00d4ff;
+            animation: slideIn 1.5s;
         }
-        .value-card i {
-            font-size: 40px;
-            color: #00bfff;
-            margin-bottom: 15px;
+        .hero p {
+            font-size: 24px;
+            margin: 0 0 35px 0;
+            color: #e0e0e0;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
-        .value-card h3 {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 10px;
+        @keyframes slideIn {
+            from { transform: translateY(-60px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
-        .value-card p {
-            font-size: 16px;
-            color: #d0d0d0;
-        }
-        .triggers {
-            margin-bottom: 60px;
-            background-color: #12172b;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-        .triggers h2 {
-            font-size: 28px;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-        .triggers p {
-            font-size: 16px;
-            margin-bottom: 10px;
-            color: #d0d0d0;
-        }
-        .timer {
-            text-align: center;
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 30px;
-            color: #ff4500;
-            text-shadow: 0 0 10px rgba(255, 69, 0, 0.5);
-        }
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
-            margin-top: 50px;
-        }
-        /* Estilo dos novos botões inspirados nas imagens */
-        .offer-card {
-            background: rgba(18, 23, 43, 0.8);
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
-            max-width: 380px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-        }
-        .offer-title {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        .offer-badge {
+        .cta-button {
             display: inline-block;
-            background: #ffd700;
+            padding: 18px 50px;
+            font-size: 26px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #00d4ff, #7f00ff);
             color: #000;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-        .offer-price {
-            font-size: 48px;
-            font-weight: 700;
-            color: #00ffff;
-            margin: 15px 0;
-        }
-        .offer-features {
-            text-align: left;
-            margin: 20px 0;
-            color: #ccc;
-            line-height: 1.8;
-        }
-        .offer-features li {
-            margin-bottom: 8px;
-        }
-        .offer-button {
-            background: linear-gradient(to right, #00ffff, #00bfff);
-            color: #000;
-            font-size: 24px;
-            font-weight: 700;
-            padding: 18px;
+            text-decoration: none;
             border-radius: 50px;
-            border: none;
-            width: 100%;
-            cursor: pointer;
-            margin-top: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
+            margin: 15px;
+            box-shadow: 0 0 25px rgba(0, 212, 255, 0.6);
             transition: all 0.3s;
+            animation: pulse 2.5s infinite;
         }
-        .offer-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+        .cta-button:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 40px rgba(0, 212, 255, 0.9);
         }
-        .offer-button.esgotado {
-            background: #555;
-            color: #999;
-            cursor: not-allowed;
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.04); }
+            100% { transform: scale(1); }
         }
-        .offer-button.esgotado:hover {
-            transform: none;
-            box-shadow: none;
-        }
-        .offer-subtext {
-            font-size: 18px;
-            font-weight: 700;
-            margin-top: 10px;
-            background: linear-gradient(to right, #ff4500, #ff8c00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .esgotado-text {
-            font-size: 36px;
-            color: #ff0066;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin: 20px 0;
-        }
-        .esgotado-sub {
-            background: #444;
-            color: #aaa;
-            padding: 15px;
-            border-radius: 10px;
-            font-size: 18px;
-        }
-        .rocket-emoji {
-            font-size: 28px;
-        }
-        .fire-emoji {
-            font-size: 28px;
-        }
-        .notification {
-            position: fixed;
-            bottom: 30px;
-            left: 20px;
-            right: 20px;
-            max-width: 400px;
-            margin: 0 auto;
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(0, 191, 255, 0.2));
-            border: 1px solid rgba(0, 255, 255, 0.4);
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            font-size: 18px;
-            color: #ffffff;
+        .section {
+            padding: 60px 20px;
             text-align: center;
-            backdrop-filter: blur(10px);
+            background: rgba(10, 10, 10, 0.75);
+            margin: 20px auto;
+            max-width: 1200px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(127, 0, 255, 0.3);
         }
-        .notification.show {
-            opacity: 1;
-            transform: translateY(0);
+        .section h2 {
+            font-size: 42px;
+            margin: 0 0 25px 0;
+            color: #00d4ff;
+            text-shadow: 0 0 10px #00d4ff;
         }
-        .notification .flag {
+        .demo-images {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            margin: 30px 0;
+        }
+        .demo-img {
+            width: 320px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+            transition: transform 0.4s;
+        }
+        .demo-img:hover {
+            transform: scale(1.08);
+        }
+        .testimonials {
+            background: rgba(15, 15, 15, 0.8);
+        }
+        .testimonial-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+        }
+        .testimonial-item {
+            background: rgba(20, 20, 20, 0.9);
+            padding: 25px;
+            border-radius: 12px;
+            width: 280px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+        }
+        .stars {
+            color: #ffd700;
+            font-size: 20px;
+            margin: 10px 0;
+        }
+        .premium {
+            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.85), rgba(30, 0, 60, 0.7));
+        }
+        .premium-price {
+            font-size: 68px;
+            margin: 15px 0;
+            color: #00ff9d;
+            text-shadow: 0 0 20px #00ff9d;
+        }
+        .premium ul {
+            list-style: none;
+            padding: 0;
+            font-size: 21px;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        .premium ul li {
+            margin: 12px 0;
+            color: #e0e0e0;
+        }
+        .premium ul li::before {
+            content: '🚀 ';
             font-size: 24px;
-            margin: 0 8px;
         }
-        .separator {
-            height: 1px;
-            background: linear-gradient(to right, transparent, #8b00ff, #00bfff, transparent);
-            margin: 40px 0;
-            border: none;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @media (max-width: 768px) {
-            .headline {
-                font-size: 36px;
-            }
-            .buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            .offer-card {
-                max-width: 100%;
-            }
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.9);
+            color: #888;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <section id="quiz-section">
-            <div class="progress-bar">
-                <div class="progress-fill" id="progress-fill"></div>
+
+    <header>
+        <div class="logo">BillionMind</div>
+        <p>IA que Trabalha por Você: Monetize + Saúde + Bem-Estar Ilimitado</p>
+    </header>
+
+    <section class="hero">
+        <h1>Desbloqueie Sua Mente Bilionária Agora</h1>
+        <p>Deixe a IA gerar ideias de dinheiro online, criar conteúdo viral, planejar sua saúde, fitness, nutrição e desafios diários que te mantêm motivado e rico. Acesso vitalício por apenas um pagamento. Tudo ilimitado. Comece a transformar sua vida HOJE.</p>
+        <a href="https://content-cash-18.preview.emergentagent.com/" class="cta-button">ENTRAR NO APP AGORA</a>
+        <a href="https://content-cash-18.preview.emergentagent.com/" class="cta-button">UPGRADE PREMIUM VITALÍCIO</a>
+    </section>
+
+    <section class="section">
+        <h2>Monetização + Conteúdo com IA Poderosa</h2>
+        <p>Estratégias reais para ganhar dinheiro na internet, chat ilimitado, blueprints de vídeo e imagens geradas por IA avançada.</p>
+        <div class="demo-images">
+            <img src="https://cdn.dribbble.com/userupload/45898340/file/d832a47653921cb5f88ff47133f784ed.png?format=webp&resize=400x300&vertical=center" alt="Dashboard AI Chat Monetização" class="demo-img">
+            <img src="https://www.shutterstock.com/image-vector/futuristic-ai-application-uiux-design-260nw-2629657911.jpg" alt="Interface Futurista AI" class="demo-img">
+            <img src="https://www.shutterstock.com/image-photo/ppc-campaigns-advertisement-concept-glowing-600nw-2590173801.jpg" alt="Ganhando Dinheiro Online com IA" class="demo-img">
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Saúde, Fitness e Bem-Estar 24/7</h2>
+        <p>Coach de IA personalizado, planos de treino, nutrição, relaxamento, foco e ambientes imersivos para você se sentir no auge todos os dias.</p>
+        <div class="demo-images">
+            <img src="https://www.shutterstock.com/image-photo/healthy-natural-lifestyle-woman-celebrating-260nw-2296237505.jpg" alt="Estilo de Vida Saudável" class="demo-img">
+            <img src="https://cdn.dribbble.com/userupload/43230687/file/original-91ec5a5cf09155ed49ad5771f9e71b5b.png?format=webp&resize=400x300&vertical=center" alt="Dashboard Mobile Saúde Dark Mode" class="demo-img">
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Desafios Diários que Mudam Tudo</h2>
+        <p>Ganhe estrelas, mantenha a consistência e veja seu progresso explodir no dashboard completo.</p>
+    </section>
+
+    <section class="section testimonials">
+        <h2>Usuários Estão Transformando Suas Vidas</h2>
+        <div class="testimonial-list">
+            <div class="testimonial-item">
+                <div class="stars">★★★★★</div>
+                <p>"Ganhei R$5k no primeiro mês com as estratégias da IA enquanto melhorei minha forma física. Incrível!"</p>
+                <p><strong>- Bruno S.</strong></p>
             </div>
-            <div class="quiz-step active" data-step="1">
-                <div class="quiz-question" id="quiz-q1" data-translate-key="quizQuestionCountry">De qual país você é?</div>
-                <div class="quiz-options">
-                    <div class="quiz-option" data-next="2" data-lang="pt"><span id="country-br" data-translate-key="countryBr">Brasil</span> <span class="flag">🇧🇷</span></div>
-                    <div class="quiz-option" data-next="2" data-lang="en"><span id="country-us" data-translate-key="countryUs">Estados Unidos</span> <span class="flag">🇺🇸</span></div>
-                    <div class="quiz-option" data-next="2" data-lang="en"><span id="country-ca" data-translate-key="countryCa">Canadá</span> <span class="flag">🇨🇦</span></div>
-                    <div class="quiz-option" data-next="2" data-lang="en"><span id="country-de" data-translate-key="countryDe">Alemanha</span> <span class="flag">🇩🇪</span></div>
-                    <div class="quiz-option" data-next="2" data-lang="en"><span id="country-fr" data-translate-key="countryFr">França</span> <span class="flag">🇫🇷</span></div>
-                    <div class="quiz-option" data-next="2" data-lang="en"><span id="country-uk" data-translate-key="countryUk">Reino Unido</span> <span class="flag">🇬🇧</span></div>
-                </div>
+            <div class="testimonial-item">
+                <div class="stars">★★★★★</div>
+                <p>"Os desafios diários me mantêm motivado e o coach de saúde mudou minha rotina. Vale cada centavo!"</p>
+                <p><strong>- Larissa M.</strong></p>
             </div>
-            <div class="quiz-step" data-step="2">
-                <div class="quiz-question" id="quiz-q2" data-translate-key="quizQuestionSocial">Qual plataforma de mídia social você usa mais?</div>
-                <div class="quiz-options">
-                    <div class="quiz-option" data-next="3"><i class="fab fa-instagram" style="color: #E4405F;"></i><span id="option-ig" data-translate-key="instagram">Instagram</span></div>
-                    <div class="quiz-option" data-next="3"><i class="fab fa-tiktok" style="color: #00F2EA;"></i><span id="option-tt" data-translate-key="tiktok">TikTok</span></div>
-                    <div class="quiz-option" data-next="3"><i class="fab fa-youtube" style="color: #FF0000;"></i><span id="option-yt" data-translate-key="youtube">YouTube</span></div>
-                    <div class="quiz-option" data-next="3"><i class="fab fa-facebook" style="color: #1877F2;"></i><span id="option-fb" data-translate-key="facebook">Facebook</span></div>
-                </div>
+            <div class="testimonial-item">
+                <div class="stars">★★★★★</div>
+                <p>"Acesso vitalício sem mensalidade? Melhor investimento da vida. Conteúdo e saúde ilimitados!"</p>
+                <p><strong>- Rafael T.</strong></p>
             </div>
-            <div class="quiz-step" data-step="3">
-                <div class="quiz-question" id="quiz-q3" data-translate-key="quizQuestionGoal">Qual é o seu objetivo principal?</div>
-                <div class="quiz-options">
-                    <div class="quiz-option" data-next="4"><i class="fas fa-rocket" style="color: #00bfff;"></i><span id="option-viral" data-translate-key="goViral">Viralizar</span></div>
-                    <div class="quiz-option" data-next="4"><i class="fas fa-shopping-cart" style="color: #00bfff;"></i><span id="option-sell" data-translate-key="sellFast">Vender produtos rápido</span></div>
-                    <div class="quiz-option" data-next="4"><i class="fas fa-robot" style="color: #00bfff;"></i><span id="option-auto" data-translate-key="automate">Automatizar conteúdo</span></div>
-                </div>
+            <div class="testimonial-item">
+                <div class="stars">★★★★★</div>
+                <p>"Equilíbrio perfeito entre ganhar dinheiro e cuidar de mim. Recomendo 100%!"</p>
+                <p><strong>- Sofia R.</strong></p>
             </div>
-            <div class="quiz-step" data-step="4">
-                <div class="quiz-question" id="quiz-q4" data-translate-key="quizQuestionReady">Pronto para conteúdo curto impulsionado por IA?</div>
-                <div class="quiz-options">
-                    <div class="quiz-option" data-next="end"><i class="fas fa-check-circle" style="color: #00bfff;"></i><span id="option-yes" data-translate-key="yesShow">Sim, me mostre como!</span></div>
-                </div>
-            </div>
-        </section>
-        <section id="main-section">
-            <h1 class="headline" id="headline" data-translate-key="headline">Viralize, Venda <span class="highlight">Rápido</span>, Automatize com Conteúdo <span class="highlight">Curto</span> de <span class="highlight">IA</span></h1>
-            <p class="subheadline" id="subheadline" data-translate-key="subheadline">Desbloqueie o poder da <span class="highlight">IA</span> para criar shorts <span class="highlight">virais</span> que vendem <span class="highlight">24/7</span>, mesmo enquanto você dorme – perfeito para audiências <span class="highlight">globais</span> no Instagram, TikTok, YouTube e Facebook.</p>
-            <div class="bonus-icons">
-                <div class="bonus-icon">
-                    <i class="fas fa-robot" style="color: #8b00ff;"></i>
-                    <p id="bonus-ai" data-translate-key="aiTools">Ferramentas de IA</p>
-                </div>
-                <div class="bonus-icon">
-                    <i class="fas fa-gift" style="color: #00bfff;"></i>
-                    <p id="bonus-month" data-translate-key="oneMonthBonus">1 Mês de Bônus Grátis</p>
-                </div>
-                <div class="bonus-icon">
-                    <i class="fab fa-instagram" style="color: #E4405F;"></i>
-                    <p id="bonus-ig" data-translate-key="instagram">Instagram</p>
-                </div>
-                <div class="bonus-icon">
-                    <i class="fab fa-tiktok" style="color: #00F2EA;"></i>
-                    <p id="bonus-tt" data-translate-key="tiktok">TikTok</p>
-                </div>
-                <div class="bonus-icon">
-                    <i class="fab fa-youtube" style="color: #FF0000;"></i>
-                    <p id="bonus-yt" data-translate-key="youtube">YouTube</p>
-                </div>
-                <div class="bonus-icon">
-                    <i class="fab fa-facebook" style="color: #1877F2;"></i>
-                    <p id="bonus-fb" data-translate-key="facebook">Facebook</p>
-                </div>
-            </div>
-            <hr class="separator">
-            <div class="value-section">
-                <h2 id="value-h2" data-translate-key="whatYouGet">O Que Você Recebe:</h2>
-                <div class="value-cards">
-                    <div class="value-card">
-                        <i class="fas fa-robot"></i>
-                        <h3 id="value-ai-h3" data-translate-key="aiPowered">Conteúdo Impulsionado por IA</h3>
-                        <p id="value-ai-p" data-translate-key="aiDesc">Ferramentas impulsionadas por IA para gerar conteúdo curto viral instantaneamente.</p>
-                    </div>
-                    <div class="value-card">
-                        <i class="fas fa-bolt"></i>
-                        <h3 id="value-fast-h3" data-translate-key="fastResults">Resultados Rápidos</h3>
-                        <p id="value-fast-p" data-translate-key="fastDesc">Resultados rápidos: Veja vendas e viralidade em dias.</p>
-                    </div>
-                    <div class="value-card">
-                        <i class="fas fa-globe"></i>
-                        <h3 id="value-world-h3" data-translate-key="worksWorld">Funciona Mundialmente</h3>
-                        <p id="value-world-p" data-translate-key="worksDesc">Estratégias que funcionam globalmente, independentemente da sua localização.</p>
-                    </div>
-                    <div class="value-card">
-                        <i class="fas fa-calendar-alt"></i>
-                        <h3 id="value-auto-h3" data-translate-key="automation">Automação 24/7</h3>
-                        <p id="value-auto-p" data-translate-key="autoDesc">Automatize sua criação de conteúdo e vendas o tempo todo.</p>
-                    </div>
-                    <div class="value-card">
-                        <i class="fas fa-gift"></i>
-                        <h3 id="value-bonus-h3" data-translate-key="bonus">1 Mês de Bônus Grátis</h3>
-                        <p id="value-bonus-p" data-translate-key="bonusDesc">Obtenha um mês extra grátis para impulsionar seu sucesso viral.</p>
-                    </div>
-                </div>
-            </div>
-            <hr class="separator">
-            <div class="triggers">
-                <h2 id="triggers-h2" data-translate-key="whyAct">Por Que Agir Agora?</h2>
-                <p id="scarcity" data-translate-key="scarcity"><strong>Escassez:</strong> Vagas limitadas disponíveis – uma oferta já esgotada!</p>
-                <p id="urgency" data-translate-key="urgency"><strong>Urgência:</strong> Essa oferta termina em breve – não perca.</p>
-                <p id="proof" data-translate-key="proof"><strong>Prova Social:</strong> Milhares viralizaram e esgotaram usando isso.</p>
-                <p id="authority" data-translate-key="authority"><strong>Autoridade:</strong> Apoiada por especialistas em IA e mídias sociais.</p>
-                <p id="simplicity" data-translate-key="simplicity"><strong>Simplicidade:</strong> Configuração fácil, sem habilidades técnicas necessárias.</p>
-            </div>
-            <div class="timer" id="timer"></div>
-            <!-- NOVA SEÇÃO DE BOTÕES inspirada exatamente nas imagens -->
-            <div class="buttons">
-                <!-- Oferta Básica R$9,90 - Esgotada -->
-                <div class="offer-card">
-                    <div class="esgotado-text">Esgotada</div>
-                    <div class="esgotado-sub">Indisponível no momento</div>
-                    <div class="offer-price">R$ 9,90</div>
-                </div>
-                <!-- Oferta Intermediária R$19,90 -->
-                <div class="offer-card">
-                    <div class="offer-title">IA Lucrativa</div>
-                    <div class="offer-price">R$ 19,90</div>
-                    <ul class="offer-features">
-                        <li>✓ Acesso imediato</li>
-                        <li>✓ Estratégias práticas</li>
-                        <li>✓ Suporte comunitário</li>
-                        <li>✓ Ferramentas gratuitas</li>
-                        <li>✓ Atualizações mensais</li>
-                        <li>✓ Guia rápido de início</li>
-                    </ul>
-                    <button class="offer-button rocket-emoji" id="buy-1990">
-                        <span class="rocket-emoji">🚀</span> Quero começar agora
-                    </button>
-                    <div>Acesso vitalício • Oferta limitada • Antes que expire!</div>
-                </div>
-                <!-- Oferta Completa R$29,90 - Principal -->
-                <div class="offer-card">
-                    <div class="offer-badge">Mais escolhida</div>
-                    <div class="offer-title">IA Lucrativa</div>
-                    <div class="offer-price">R$ 29,90</div>
-                    <ul class="offer-features">
-                        <li>✓ Tudo da versão padrão</li>
-                        <li>✓ Bônus exclusivos</li>
-                        <li>✓ Atualizações prioritárias</li>
-                        <li>✓ Resultados mais rápidos</li>
-                        <li>✓ Comunidade VIP</li>
-                        <li>✓ Mentoria básica</li>
-                    </ul>
-                    <button class="offer-button" id="buy-2999">
-                        <span class="fire-emoji">🔥</span> Quero o acesso completo
-                    </button>
-                    <div class="offer-subtext">Melhor opção • Últimas vagas • Ação imediata!</div>
-                </div>
-            </div>
-        </section>
-    </div>
-    <!-- Notificação de vendas no estilo das imagens -->
-    <div class="notification" id="notification"></div>
+        </div>
+    </section>
 
-    <script>
-        let currentLang = 'pt';
-        const translations = {
-            pt: {
-                quizQuestionCountry: 'De qual país você é?',
-                countryBr: 'Brasil',
-                countryUs: 'Estados Unidos',
-                countryCa: 'Canadá',
-                countryDe: 'Alemanha',
-                countryFr: 'França',
-                countryUk: 'Reino Unido',
-                quizQuestionSocial: 'Qual plataforma de mídia social você usa mais?',
-                instagram: 'Instagram',
-                tiktok: 'TikTok',
-                youtube: 'YouTube',
-                facebook: 'Facebook',
-                quizQuestionGoal: 'Qual é o seu objetivo principal?',
-                goViral: 'Viralizar',
-                sellFast: 'Vender produtos rápido',
-                automate: 'Automatizar conteúdo',
-                quizQuestionReady: 'Pronto para conteúdo curto impulsionado por IA?',
-                yesShow: 'Sim, me mostre como!',
-                headline: 'Viralize, Venda <span class="highlight">Rápido</span>, Automatize com Conteúdo <span class="highlight">Curto</span> de <span class="highlight">IA</span>',
-                subheadline: 'Desbloqueie o poder da <span class="highlight">IA</span> para criar shorts <span class="highlight">virais</span> que vendem <span class="highlight">24/7</span>, mesmo enquanto você dorme – perfeito para audiências <span class="highlight">globais</span> no Instagram, TikTok, YouTube e Facebook.',
-                aiTools: 'Ferramentas de IA',
-                oneMonthBonus: '1 Mês de Bônus Grátis',
-                whatYouGet: 'O Que Você Recebe:',
-                aiPowered: 'Conteúdo Impulsionado por IA',
-                aiDesc: 'Ferramentas impulsionadas por IA para gerar conteúdo curto viral instantaneamente.',
-                fastResults: 'Resultados Rápidos',
-                fastDesc: 'Resultados rápidos: Veja vendas e viralidade em dias.',
-                worksWorld: 'Funciona Mundialmente',
-                worksDesc: 'Estratégias que funcionam globalmente, independentemente da sua localização.',
-                automation: 'Automação 24/7',
-                autoDesc: 'Automatize sua criação de conteúdo e vendas o tempo todo.',
-                bonus: '1 Mês de Bônus Grátis',
-                bonusDesc: 'Obtenha um mês extra grátis para impulsionar seu sucesso viral.',
-                whyAct: 'Por Que Agir Agora?',
-                scarcity: '<strong>Escassez:</strong> Vagas limitadas disponíveis – uma oferta já esgotada!',
-                urgency: '<strong>Urgência:</strong> Essa oferta termina em breve – não perca.',
-                proof: '<strong>Prova Social:</strong> Milhares viralizaram e esgotaram usando isso.',
-                authority: '<strong>Autoridade:</strong> Apoiada por especialistas em IA e mídias sociais.',
-                simplicity: '<strong>Simplicidade:</strong> Configuração fácil, sem habilidades técnicas necessárias.',
-                timeLeft: 'Tempo restante:',
-                offerExpired: 'Oferta Expirada!',
-                buy1990: 'Obtenha a Oferta de $19.90',
-                buy2999: 'Obtenha a Oferta de $29.99',
-                buy999: 'Obtenha a Oferta de $9.99',
-                soldOut: 'Esgotado',
-                desc1990: 'Inclui ferramentas básicas de IA e bônus de 1 mês grátis.',
-                desc2999: 'Inclui tudo da básica + recursos avançados e suporte prioritário.',
-                desc999: 'A oferta mais barata - Esgotada!',
-                notif: '{name} <span class="flag">{flag}</span> acabou de adquirir IA Lucrativa Completa'
-            },
-            en: {
-                quizQuestionCountry: 'Which country are you from?',
-                countryBr: 'Brazil',
-                countryUs: 'United States',
-                countryCa: 'Canada',
-                countryDe: 'Germany',
-                countryFr: 'France',
-                countryUk: 'United Kingdom',
-                quizQuestionSocial: 'Which social media platform do you use most?',
-                instagram: 'Instagram',
-                tiktok: 'TikTok',
-                youtube: 'YouTube',
-                facebook: 'Facebook',
-                quizQuestionGoal: 'What\'s your main goal?',
-                goViral: 'Go viral',
-                sellFast: 'Sell products fast',
-                automate: 'Automate content',
-                quizQuestionReady: 'Ready for AI-powered short content?',
-                yesShow: 'Yes, show me how!',
-                headline: 'Go <span class="highlight">Viral</span>, Sell <span class="highlight">Fast</span>, Automate with <span class="highlight">AI</span> Short Content',
-                subheadline: 'Unlock the power of <span class="highlight">AI</span> to create <span class="highlight">viral</span> shorts that sell <span class="highlight">24/7</span>, even while you sleep – perfect for <span class="highlight">global</span> audiences on Instagram, TikTok, YouTube, and Facebook.',
-                aiTools: 'AI Tools',
-                oneMonthBonus: '1 Month Free Bonus',
-                whatYouGet: 'What You Get:',
-                aiPowered: 'AI-Powered Content',
-                aiDesc: 'AI-driven tools to generate viral short content instantly.',
-                fastResults: 'Fast Results',
-                fastDesc: 'Quick results: See sales and virality in days.',
-                worksWorld: 'Works Worldwide',
-                worksDesc: 'Strategies that work globally, no matter your location.',
-                automation: '24/7 Automation',
-                autoDesc: 'Automate your content creation and sales around the clock.',
-                bonus: '1 Month Free Bonus',
-                bonusDesc: 'Get an extra month free to boost your viral success.',
-                whyAct: 'Why Act Now?',
-                scarcity: '<strong>Scarcity:</strong> Limited spots available – one offer already sold out!',
-                urgency: '<strong>Urgency:</strong> This deal ends soon – don\'t miss out.',
-                proof: '<strong>Proof Social:</strong> Thousands have gone viral and sold out using this.',
-                authority: '<strong>Authority:</strong> Backed by top AI and social media experts.',
-                simplicity: '<strong>Simplicity:</strong> Easy setup, no tech skills needed.',
-                timeLeft: 'Time left:',
-                offerExpired: 'Offer Expired!',
-                buy1990: 'Get the $19.90 Offer',
-                buy2999: 'Get the $29.99 Offer',
-                buy999: 'Get the $9.99 Offer',
-                soldOut: 'Sold Out',
-                desc1990: 'Includes basic AI tools and 1 month free bonus.',
-                desc2999: 'Includes everything from basic + advanced features and priority support.',
-                desc999: 'The cheapest offer - Sold Out!',
-                notif: '{name} <span class="flag">{flag}</span> just got IA Lucrativa Complete'
-            }
-        };
+    <section class="section premium">
+        <h2>Premium Vitalício - Apenas R$29,98</h2>
+        <div class="premium-price">R$ 29,98</div>
+        <p>Pagamento único. Acesso para sempre. Sem assinaturas. Tudo ilimitado e prioridade total.</p>
+        <ul>
+            <li>Chat IA + Estratégias Monetização Ilimitadas</li>
+            <li>Blueprints de Vídeo e Imagens Avançadas Ilimitadas</li>
+            <li>Coach IA Saúde, Fitness e Nutrição Personalizado</li>
+            <li>Ambientes de Relaxamento e Foco Imersivos</li>
+            <li>Desafios Diários + Estrelas + Dashboard Completo</li>
+            <li>Histórico Total, Conteúdo Salvo e Suporte Prioritário</li>
+            <li>Evolução constante da IA para você ficar sempre à frente</li>
+        </ul>
+        <a href="https://content-cash-18.preview.emergentagent.com/" class="cta-button">ENTRAR NO APP E UPGRADE AGORA</a>
+    </section>
 
-        function setLanguage(lang) {
-            if (lang === currentLang) return;
-            currentLang = lang;
-            document.querySelectorAll('[data-translate-key]').forEach(el => {
-                const key = el.dataset.translateKey;
-                if (translations[lang][key]) {
-                    el.innerHTML = translations[lang][key];
-                }
-            });
-            // Update buttons to keep icon
-            document.getElementById('buy-1990').innerHTML = `${translations[lang].buy1990} <i class="fas fa-arrow-right"></i>`;
-            document.getElementById('buy-2999').innerHTML = `${translations[lang].buy2999} <i class="fas fa-arrow-right"></i>`;
-            document.getElementById('buy-999').innerHTML = `${translations[lang].buy999} <i class="fas fa-arrow-right"></i>`;
-        }
-
-        // Quiz Logic
-        const steps = 4;
-        const quizOptions = document.querySelectorAll('.quiz-option');
-        const progressFill = document.getElementById('progress-fill');
-
-        function updateProgress(step) {
-            const width = (step / steps) * 100;
-            progressFill.style.width = `${width}%`;
-        }
-
-        quizOptions.forEach(option => {
-            option.addEventListener('click', () => {
-                const currentStep = document.querySelector('.quiz-step.active');
-                const nextStep = option.dataset.next;
-                const lang = option.dataset.lang;
-                if (lang) {
-                    setLanguage(lang);
-                }
-                currentStep.classList.remove('active');
-                if (nextStep === 'end') {
-                    document.getElementById('quiz-section').style.display = 'none';
-                    document.getElementById('main-section').style.display = 'block';
-                } else {
-                    document.querySelector(`.quiz-step[data-step="${nextStep}"]`).classList.add('active');
-                    updateProgress(parseInt(nextStep));
-                }
-            });
-        });
-
-        updateProgress(1);
-
-        // Timer Logic
-        const timerKey = 'offerTimer';
-        const timerDuration = 10 * 60 * 1000; // 10 minutes
-        const timerDisplay = document.getElementById('timer');
-
-        function startTimer() {
-            const endTime = localStorage.getItem(timerKey);
-            if (!endTime) {
-                const now = new Date().getTime();
-                localStorage.setItem(timerKey, now + timerDuration);
-            }
-            setInterval(updateTimer, 1000);
-            updateTimer();
-        }
-
-        function updateTimer() {
-            const endTime = parseInt(localStorage.getItem(timerKey));
-            const now = new Date().getTime();
-            const distance = endTime - now;
-            if (distance < 0) {
-                timerDisplay.innerText = 'Offer Expired!';
-                return;
-            }
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            timerDisplay.innerText = `Time left: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-        }
-
-        // Notifications Logic
-        const names = ['Michael', 'Sarah', 'John', 'Emma', 'David', 'Olivia'];
-        const countries = ['USA', 'Canada', 'Brazil', 'Germany', 'France', 'UK'];
-        const flags = {
-            'USA': '🇺🇸',
-            'Canada': '🇨🇦',
-            'Brazil': '🇧🇷',
-            'Germany': '🇩🇪',
-            'France': '🇫🇷',
-            'UK': '🇬🇧'
-        };
-        const offers = ['$19.90', '$29.99'];
-        const notificationEl = document.getElementById('notification');
-
-        function showNotification() {
-            const name = names[Math.floor(Math.random() * names.length)];
-            const country = countries[Math.floor(Math.random() * countries.length)];
-            const offer = offers[Math.floor(Math.random() * offers.length)];
-            const flag = flags[country];
-            notificationEl.innerHTML = `${name} from <span class="flag">${flag}</span> ${country} just purchased the ${offer} offer`;
-            notificationEl.classList.add('show');
-            setTimeout(() => {
-                notificationEl.classList.remove('show');
-            }, 5000);
-        }
-
-        setInterval(showNotification, 10000); // Every 10 seconds
-
-        // Buy Buttons Logic
-        document.getElementById('buy-1990').addEventListener('click', () => {
-            fbq('track', 'InitiateCheckout', {value: 19.90, currency: 'USD'});
-            gtag('event', 'conversion', {
-                'send_to': 'AW-16917756362',
-                'value': 19.90,
-                'currency': 'USD'
-            });
-            window.location.href = 'https://digitalist0728.gumroad.com/l/qryub';
-        });
-
-        document.getElementById('buy-2999').addEventListener('click', () => {
-            fbq('track', 'InitiateCheckout', {value: 29.99, currency: 'USD'});
-            gtag('event', 'conversion', {
-                'send_to': 'AW-16917756362',
-                'value': 29.99,
-                'currency': 'USD'
-            });
-            window.location.href = 'https://digitalist0728.gumroad.com/l/yxwyn';
-        });
-
-        // Start features on main section load (but since it's shown after quiz)
-        startTimer();
-        showNotification(); // Initial notification
-    </script>
+    <footer>
+        <p>Made with Emergent © 2026 BillionMind. Todos os direitos reservados. Transforme sua mente. Transforme sua vida.</p>
+    </footer>
 </body>
 </html>
