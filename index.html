@@ -1,250 +1,410 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BillionMind - Deixe a IA Trabalhar por Você</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Arial', sans-serif;
-            background: #000000 url('https://www.shutterstock.com/image-illustration/3d-abstract-background-neon-light-260nw-2314118507.jpg') no-repeat center center fixed;
-            background-size: cover;
-            color: #ffffff;
-            line-height: 1.5;
-        }
-        header {
-            text-align: center;
-            padding: 40px 20px;
-            background: rgba(10, 10, 10, 0.85);
-        }
-        .logo {
-            font-size: 52px;
-            font-weight: bold;
-            color: #00d4ff;
-            text-shadow: 0 0 20px #00d4ff;
-            animation: glow 3s infinite alternate;
-        }
-        @keyframes glow {
-            from { text-shadow: 0 0 10px #00d4ff, 0 0 20px #00d4ff; }
-            to { text-shadow: 0 0 20px #00d4ff, 0 0 40px #00d4ff, 0 0 60px #7f00ff; }
-        }
-        .hero {
-            text-align: center;
-            padding: 100px 20px 60px;
-            background: rgba(0, 0, 0, 0.7);
-        }
-        .hero h1 {
-            font-size: 58px;
-            margin: 0 0 15px 0;
-            color: #00d4ff;
-            text-shadow: 0 0 15px #00d4ff;
-            animation: slideIn 1.5s;
-        }
-        .hero p {
-            font-size: 24px;
-            margin: 0 0 35px 0;
-            color: #e0e0e0;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        @keyframes slideIn {
-            from { transform: translateY(-60px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        .cta-button {
-            display: inline-block;
-            padding: 18px 50px;
-            font-size: 26px;
-            font-weight: bold;
-            background: linear-gradient(45deg, #00d4ff, #7f00ff);
-            color: #000;
-            text-decoration: none;
-            border-radius: 50px;
-            margin: 15px;
-            box-shadow: 0 0 25px rgba(0, 212, 255, 0.6);
-            transition: all 0.3s;
-            animation: pulse 2.5s infinite;
-        }
-        .cta-button:hover {
-            transform: scale(1.08);
-            box-shadow: 0 0 40px rgba(0, 212, 255, 0.9);
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.04); }
-            100% { transform: scale(1); }
-        }
-        .section {
-            padding: 60px 20px;
-            text-align: center;
-            background: rgba(10, 10, 10, 0.75);
-            margin: 20px auto;
-            max-width: 1200px;
-            border-radius: 15px;
-            box-shadow: 0 0 30px rgba(127, 0, 255, 0.3);
-        }
-        .section h2 {
-            font-size: 42px;
-            margin: 0 0 25px 0;
-            color: #00d4ff;
-            text-shadow: 0 0 10px #00d4ff;
-        }
-        .demo-images {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 25px;
-            margin: 30px 0;
-        }
-        .demo-img {
-            width: 320px;
-            border-radius: 12px;
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
-            transition: transform 0.4s;
-        }
-        .demo-img:hover {
-            transform: scale(1.08);
-        }
-        .testimonials {
-            background: rgba(15, 15, 15, 0.8);
-        }
-        .testimonial-list {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 25px;
-        }
-        .testimonial-item {
-            background: rgba(20, 20, 20, 0.9);
-            padding: 25px;
-            border-radius: 12px;
-            width: 280px;
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
-        }
-        .stars {
-            color: #ffd700;
-            font-size: 20px;
-            margin: 10px 0;
-        }
-        .premium {
-            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.85), rgba(30, 0, 60, 0.7));
-        }
-        .premium-price {
-            font-size: 68px;
-            margin: 15px 0;
-            color: #00ff9d;
-            text-shadow: 0 0 20px #00ff9d;
-        }
-        .premium ul {
-            list-style: none;
-            padding: 0;
-            font-size: 21px;
-            max-width: 600px;
-            margin: 20px auto;
-        }
-        .premium ul li {
-            margin: 12px 0;
-            color: #e0e0e0;
-        }
-        .premium ul li::before {
-            content: '🚀 ';
-            font-size: 24px;
-        }
-        footer {
-            text-align: center;
-            padding: 30px;
-            background: rgba(0, 0, 0, 0.9);
-            color: #888;
-            font-size: 14px;
-        }
-    </style>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NEXORA | Terms of Service</title>
+
+<meta name="description" content="NEXORA Terms of Service">
+<meta name="theme-color" content="#0b0b0b">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Inter,Arial,Helvetica,sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+background:#090909;
+color:#f4f4f4;
+line-height:1.8;
+}
+
+header{
+padding:80px 25px;
+text-align:center;
+background:linear-gradient(180deg,#111,#090909);
+border-bottom:1px solid #222;
+}
+
+header h1{
+font-size:52px;
+color:#d4af37;
+margin-bottom:15px;
+}
+
+header p{
+font-size:18px;
+color:#bbb;
+}
+
+.container{
+max-width:1000px;
+margin:auto;
+padding:60px 25px;
+}
+
+.card{
+background:#111;
+padding:35px;
+border-radius:18px;
+border:1px solid #1f1f1f;
+}
+
+section{
+margin-bottom:50px;
+}
+
+h2{
+font-size:28px;
+margin-bottom:18px;
+color:#d4af37;
+}
+
+p{
+margin-bottom:18px;
+color:#ddd;
+}
+
+ul{
+padding-left:22px;
+}
+
+li{
+margin-bottom:10px;
+color:#ddd;
+}
+
+a{
+color:#d4af37;
+text-decoration:none;
+}
+
+a:hover{
+text-decoration:underline;
+}
+
+footer{
+margin-top:80px;
+padding:35px;
+background:#111;
+text-align:center;
+border-top:1px solid #222;
+color:#888;
+}
+
+</style>
+
 </head>
+
 <body>
 
-    <header>
-        <div class="logo">BillionMind</div>
-        <p>IA que Trabalha por Você: Monetize + Saúde + Bem-Estar Ilimitado</p>
-    </header>
+<header>
 
-    <section class="hero">
-        <h1>Desbloqueie Sua Mente Bilionária Agora</h1>
-        <p>Deixe a IA gerar ideias de dinheiro online, criar conteúdo viral, planejar sua saúde, fitness, nutrição e desafios diários que te mantêm motivado e rico. Acesso vitalício por apenas um pagamento. Tudo ilimitado. Comece a transformar sua vida HOJE.</p>
-        <a href="https://content-cash-18.preview.emergentagent.com/" class="cta-button">ENTRAR NO APP AGORA</a>
-        <a href="https://content-cash-18.preview.emergentagent.com/" class="cta-button">UPGRADE PREMIUM VITALÍCIO</a>
-    </section>
+<h1>NEXORA</h1>
 
-    <section class="section">
-        <h2>Monetização + Conteúdo com IA Poderosa</h2>
-        <p>Estratégias reais para ganhar dinheiro na internet, chat ilimitado, blueprints de vídeo e imagens geradas por IA avançada.</p>
-        <div class="demo-images">
-            <img src="https://cdn.dribbble.com/userupload/45898340/file/d832a47653921cb5f88ff47133f784ed.png?format=webp&resize=400x300&vertical=center" alt="Dashboard AI Chat Monetização" class="demo-img">
-            <img src="https://www.shutterstock.com/image-vector/futuristic-ai-application-uiux-design-260nw-2629657911.jpg" alt="Interface Futurista AI" class="demo-img">
-            <img src="https://www.shutterstock.com/image-photo/ppc-campaigns-advertisement-concept-glowing-600nw-2590173801.jpg" alt="Ganhando Dinheiro Online com IA" class="demo-img">
-        </div>
-    </section>
+<p>Your Personal AI Operating System</p>
 
-    <section class="section">
-        <h2>Saúde, Fitness e Bem-Estar 24/7</h2>
-        <p>Coach de IA personalizado, planos de treino, nutrição, relaxamento, foco e ambientes imersivos para você se sentir no auge todos os dias.</p>
-        <div class="demo-images">
-            <img src="https://www.shutterstock.com/image-photo/healthy-natural-lifestyle-woman-celebrating-260nw-2296237505.jpg" alt="Estilo de Vida Saudável" class="demo-img">
-            <img src="https://cdn.dribbble.com/userupload/43230687/file/original-91ec5a5cf09155ed49ad5771f9e71b5b.png?format=webp&resize=400x300&vertical=center" alt="Dashboard Mobile Saúde Dark Mode" class="demo-img">
-        </div>
-    </section>
+</header>
 
-    <section class="section">
-        <h2>Desafios Diários que Mudam Tudo</h2>
-        <p>Ganhe estrelas, mantenha a consistência e veja seu progresso explodir no dashboard completo.</p>
-    </section>
+<div class="container">
 
-    <section class="section testimonials">
-        <h2>Usuários Estão Transformando Suas Vidas</h2>
-        <div class="testimonial-list">
-            <div class="testimonial-item">
-                <div class="stars">★★★★★</div>
-                <p>"Ganhei R$5k no primeiro mês com as estratégias da IA enquanto melhorei minha forma física. Incrível!"</p>
-                <p><strong>- Bruno S.</strong></p>
-            </div>
-            <div class="testimonial-item">
-                <div class="stars">★★★★★</div>
-                <p>"Os desafios diários me mantêm motivado e o coach de saúde mudou minha rotina. Vale cada centavo!"</p>
-                <p><strong>- Larissa M.</strong></p>
-            </div>
-            <div class="testimonial-item">
-                <div class="stars">★★★★★</div>
-                <p>"Acesso vitalício sem mensalidade? Melhor investimento da vida. Conteúdo e saúde ilimitados!"</p>
-                <p><strong>- Rafael T.</strong></p>
-            </div>
-            <div class="testimonial-item">
-                <div class="stars">★★★★★</div>
-                <p>"Equilíbrio perfeito entre ganhar dinheiro e cuidar de mim. Recomendo 100%!"</p>
-                <p><strong>- Sofia R.</strong></p>
-            </div>
-        </div>
-    </section>
+<div class="card">
 
-    <section class="section premium">
-        <h2>Premium Vitalício - Apenas R$29,98</h2>
-        <div class="premium-price">R$ 29,98</div>
-        <p>Pagamento único. Acesso para sempre. Sem assinaturas. Tudo ilimitado e prioridade total.</p>
-        <ul>
-            <li>Chat IA + Estratégias Monetização Ilimitadas</li>
-            <li>Blueprints de Vídeo e Imagens Avançadas Ilimitadas</li>
-            <li>Coach IA Saúde, Fitness e Nutrição Personalizado</li>
-            <li>Ambientes de Relaxamento e Foco Imersivos</li>
-            <li>Desafios Diários + Estrelas + Dashboard Completo</li>
-            <li>Histórico Total, Conteúdo Salvo e Suporte Prioritário</li>
-            <li>Evolução constante da IA para você ficar sempre à frente</li>
-        </ul>
-        <a href="https://buy.stripe.com/9B614m3NZ47zeEa0nz8so00" class="cta-button">ENTRAR NO APP E UPGRADE AGORA</a>
-    </section>
+<section>
 
-    <footer>
-        <p>Made with Emergent © 2026 BillionMind. Todos os direitos reservados. Transforme sua mente. Transforme sua vida.</p>
-    </footer>
+<h2>Terms of Service</h2>
+
+<p><strong>Effective Date:</strong> July 2026</p>
+
+<p>
+
+Welcome to NEXORA.
+
+These Terms of Service govern your access to and use of the NEXORA application, website, services and all related features.
+
+By creating an account or using NEXORA, you agree to these Terms.
+
+</p>
+
+</section>
+
+<section>
+
+<h2>1. About NEXORA</h2>
+
+<p>
+
+NEXORA is an Artificial Intelligence platform designed to help users organize their personal and professional lives through productivity tools, AI assistants, document management, learning, translation, automation and related services.
+
+</p>
+
+</section>
+
+<section>
+
+<h2>2. Eligibility</h2>
+
+<p>
+
+You must comply with all applicable laws in your jurisdiction.
+
+If required by local law, you must be at least the minimum legal age to create an account.
+
+</p>
+
+</section>
+
+<section>
+
+<h2>3. User Account</h2>
+
+<ul>
+
+<li>You are responsible for maintaining the security of your account.</li>
+
+<li>You must provide accurate information.</li>
+
+<li>You are responsible for all activities performed using your account.</li>
+
+<li>You must keep your password confidential.</li>
+
+</ul>
+
+</section>
+
+<section>
+
+<h2>4. Acceptable Use</h2>
+
+<p>You agree not to use NEXORA to:</p>
+
+<ul>
+
+<li>Violate any law or regulation.</li>
+
+<li>Upload malicious software.</li>
+
+<li>Attempt unauthorized access.</li>
+
+<li>Distribute spam.</li>
+
+<li>Commit fraud.</li>
+
+<li>Infringe intellectual property rights.</li>
+
+<li>Abuse or interfere with platform services.</li>
+
+</ul>
+
+</section>
+
+<section>
+
+<h2>5. Artificial Intelligence Services</h2>
+
+<p>
+
+NEXORA provides AI-powered tools intended to assist users.
+
+AI-generated responses may contain inaccuracies.
+
+Users remain responsible for reviewing and validating any information before making important decisions.
+
+</p>
+
+</section>
+
+<section>
+
+<h2>6. Subscription Plans</h2>
+
+<p>
+
+Some features may require a paid subscription.
+
+Subscription pricing, billing periods and benefits are displayed within the application.
+
+Payments are securely processed through trusted payment providers.
+
+</p>
+
+</section>
+
+<section>
+
+<h2>7. Payments and Refunds</h2>
+
+<p>
+
+Subscriptions automatically renew unless cancelled before the renewal date.
+
+Refund requests are handled according to applicable laws and the payment platform policies.
+
+</p>
+
+</section>
+
+<section>
+
+<h2>8. Intellectual Property</h2>
+
+<p>
+
+All software, branding, interface designs, graphics, logos, trademarks and content related to NEXORA remain the exclusive property of NEXORA or its licensors.
+
+You may not copy, modify, distribute or reproduce any part of the platform without authorization.
+
+</p>
+
+</section>
+
+<section>
+
+<h2>9. User Content</h2>
+
+<p>
+
+You retain ownership of the content you create.
+
+By using NEXORA, you grant the platform the limited rights necessary to process and store your content solely for providing the requested services.
+
+</p>
+
+</section>
+
+<section>
+
+<h2>10. Privacy</h2>
+
+<p>
+
+Your use of NEXORA is also governed by our Privacy Policy.
+
+Please review the Privacy Policy before using the platform.
+
+</p>
+
+</section>
+
+<section>
+
+<h2>11. Availability</h2>
+
+<p>
+
+We strive to maintain uninterrupted service but cannot guarantee continuous availability.
+
+Maintenance, updates or technical issues may temporarily affect access.
+
+</p>
+
+</section>
+
+<section>
+
+<h2>12. Limitation of Liability</h2>
+
+<p>
+
+To the maximum extent permitted by law, NEXORA shall not be liable for indirect, incidental or consequential damages arising from the use of the platform.
+
+</p>
+
+</section>
+
+<section>
+
+<h2>13. Account Suspension</h2>
+
+<p>
+
+We reserve the right to suspend or terminate accounts that violate these Terms or applicable laws.
+
+</p>
+
+</section>
+
+<section>
+
+<h2>14. Modifications</h2>
+
+<p>
+
+These Terms may be updated periodically.
+
+The latest version will always be available on this page.
+
+Continued use of NEXORA after updates constitutes acceptance of the revised Terms.
+
+</p>
+
+</section>
+
+<section>
+
+<h2>15. Governing Law</h2>
+
+<p>
+
+These Terms shall be governed by the applicable laws of the jurisdiction in which NEXORA operates, subject to mandatory consumer protection laws.
+
+</p>
+
+</section>
+
+<section>
+
+<h2>16. Contact</h2>
+
+<p>
+
+If you have questions regarding these Terms of Service, please contact us.
+
+</p>
+
+<p>
+
+Email:<br>
+
+<a href="mailto:mrdigitalvip@gmail.com">
+mrdigitalvip@gmail.com
+</a>
+
+</p>
+
+<p>
+
+Website:<br>
+
+<a href="https://nexora-os-eosin.vercel.app">
+https://nexora-os-eosin.vercel.app
+</a>
+
+</p>
+
+</section>
+
+</div>
+
+</div>
+
+<footer>
+
+© 2026 NEXORA — Your Personal AI Operating System. All Rights Reserved.
+
+</footer>
+
 </body>
+
 </html>
